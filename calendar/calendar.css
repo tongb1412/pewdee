@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+
+.calendar {
+	position:relative; width:100%; top:5px; left:0px; height:auto; z-index:99;
+}

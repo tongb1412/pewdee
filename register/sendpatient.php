@@ -1,0 +1,75 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?
+include('../class/config.php');
+$hn = $_POST['hn'];
+$sd = 'Yes';
+$sql = "select * from tb_vst where hn='$hn' and status not IN('COM','CANCEL')";
+$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+$num = mysql_num_rows($str);
+if($num > 0 ){
+	$sd = 'No';
+	$rs=mysql_fetch_array($str);
+	switch ($rs['status']) {
+	case 'SD'  : $txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้อยู่ระหว่างการซื้อยาหน้าร้าน';
+				 break;
+	case 'DOC' : $txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้อยู่ระหว่างการตรวจ ';
+				 break;
+	}
+
+		
+}
+
+
+$sql = "select * from tb_patient where hn='$hn'";
+$patient_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+$row=mysql_fetch_array($patient_result);
+if($sd=='Yes'){
+	if($row['vn']!='-'){
+		$sd = 'No'; $txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้กำลังซื้อยาหน้าร้าน';
+	}
+
+}
+
+
+
+?>
+
+<div style="width:100%; height:50px; line-height:50px; font-size:18px; background:#f5fffa; border-bottom:#CCCCCC 1px dotted;">
+	<div style="width:40%; height:50px; line-height:50px; text-align:right; float:left;">รหัสคนไข้ : <?=$hn; ?></div>
+	<div style="width:50%; height:50px; padding-left:30px; line-height:50px; text-align:left; float:left; "><?=$row['pname'].$row['fname'].'    '.$row['lname']; ?></div>
+</div>
+<? if($sd=='Yes'){ ?>
+<div style="width:100%; height:100px;">
+	<div class="line" style="margin-top:10px; height:50px; font-size:16px;">
+		<div style="width:25%; float:left; text-align:right; line-height:50px; height:50px;">แพทย์ผู้ตรวจ&nbsp;</div>
+		<div style="width:75%; float:left; line-height:50px; height:50px; padding-top:15px;">
+		<select id="sempid" style="width:330px; font-size:16px;">
+		<option value="00">ไม่ระบุแพทย์</option>
+		<?
+		$sql = "select * from tb_staff where typ = 'D' and eshow='Y' order by typ, fname  ";
+		$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+		while($rs=mysql_fetch_array($result)){
+		?>
+		<option value="<?=$rs['staffid']?>"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></option>
+		<? } ?>		
+		</select>
+		</div>
+    </div>
+</div>
+<div style="width:100%; height:49px; text-align:right;">
+	<input type="button" value="  ส่งเข้าระบบ  " style="font-size:14px; font-weight:bold; height:35px;" onclick="sendadd('register/sendpatientadd.php','<?=$hn?>','')" />&nbsp;
+	<input type="button" value="  ยกเลิก  "  style="font-size:14px; font-weight:bold; height:35px;" onclick="cancelsend()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<? } else { ?>
+<div style="width:100%; height:100px;">
+	<div class="line" style="margin-top:10px; height:50px; font-size:16px;">
+		
+		<div style="width:100%; float:left; line-height:50px; height:50px; padding-top:15px; text-align:center;">
+			<span style="color:#FF0000; font-size:16px; font-weight:bold;"><?=$txt?></span>
+		</div>
+    </div>
+</div>
+<div style="width:100%; height:49px; text-align:right;">
+	<input type="button" value="  ยกเลิก  "  style="font-size:14px; font-weight:bold; height:35px;" onclick="cancelsend()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<? } ?>
