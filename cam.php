@@ -1,5 +1,5 @@
 <?php
-//ออ
+//ออv
 ?>
 <div style="width:100%; height:400px; margin:0px; background:#CCCCCC;">
 <object width="550" height="400">
