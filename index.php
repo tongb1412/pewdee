@@ -1590,20 +1590,24 @@ function data_show(select_id,result){
 					halign : 'center'
 				}
 			)
+			openWhenReady();
 		}
 	);
 
 
+function openWhenReady(){
+	var c = (gWH().width / 2) - 200;
+	document.getElementById('sd').style.marginLeft = c+'px';
+	document.getElementById('login_zone').style.marginLeft = c+'px';
 
-var c = (gWH().width / 2) - 200;
-document.getElementById('sd').style.marginLeft = c+'px';
-document.getElementById('login_zone').style.marginLeft = c+'px';
+	loadlogin();
 
-loadlogin();
+	// var pH1 = $(window).height();
+	// if($(window).height() >= 628){ var pH = $(window).height() - 99; } else { pH = 628 - 99;  }
+	// var pHl= pH - 20;
+}
 
-var pH1 = $(window).height();
-if($(window).height() >= 628){ var pH = $(window).height() - 99; } else { pH = 628 - 99;  }
-var pHl= pH - 20;
+
 
 
 function showIMG(){

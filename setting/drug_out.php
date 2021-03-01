@@ -1,7 +1,7 @@
 <? include('../class/config.php'); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div id="t_main" class="tmain" style="width:100%; margin:auto; height:495px; overflow:hidden;  ">
-	<div class="littleDD" style="font-size:14px; font-weight:bold;" >ยา้นอกระบบ</div>
+	<div class="littleDD" style="font-size:14px; font-weight:bold;" >ยานอกระบบ</div>
 	
 	<div style="width:47%; height:450px;  float:left; margin-left:10px; margin-top:10px; margin-right:10px;  border:<?=$tabcolor?> 1px solid;">
 		<div class="littleDD" style="font-size:14px; font-weight:bold; background:<?=$tabcolor?>;" >ยา้ในระบบ</div>

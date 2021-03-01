@@ -16,7 +16,7 @@ $rmoney = $_POST['rmoney'];
 
 
 $sql = "select * from tb_autonumber where typ='BILL'";
-$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+$result = mysql_query($sql) or die ("Error Query [".$sql."]");
 $rs=mysql_fetch_array($result);
 $x = explode('-',$rs['number']);
 $n = strlen($x[1]);

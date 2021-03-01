@@ -1,8 +1,9 @@
-<?
+<?php
 //$dblink=mysql_connect("localhost","root","02566") or die("cannot connect database");
-$dblink=mysql_connect("127.0.0.1","root","1234") or die("cannot connect database");
+// $dblink=mysql_connect("127.0.0.1","root","1234") or die("cannot connect database");
 //$dblink=mysql_connect("10.255.248.77","dtcsw","1234") or die("cannot connect database");
 //$dblink=mysql_connect("localhost","root","2520m") or die("cannot connect database");
+$dblink = mysql_connect("localhost","user","1234") or die("cannot connect database");
 mysql_select_db("db_clinic");
 mysql_query('SET CHARACTER SET utf8');
 mysql_query("SET character_set_client = utf8");

@@ -425,7 +425,8 @@ function ajaxcallAddpatient(contentType,responseText){
 
 		alert(txt[2]);
 		if(txt[1]=='Yes'){
-		cleartabreg(6,5,8,'register/patient_edit_from.php','content','hn='+txt[3]);
+		// cleartabreg(6,5,8,'register/patient_edit_from.php','content','hn='+txt[3]);
+		cleartabreg(5,6,8,'register/patient_edit_from.php','content','hn='+txt[3]);
 		}
 
 	}
@@ -865,9 +866,9 @@ function getid(id1,id2,txt1,txt2,displayId,data,URL){
 	ajaxLoad('get',URL,data,displayId);
 }
 
-function cleartabreg(id,n,m,URL,displayId,data){
+function cleartabreg(id,n,m,URL,displayId,data){ // ฟังก์ชั่นนี้ คือการปิด และ เปิด Tab ตั้งแต่ Tab ที่ 1 จนถึง Tab ที่เกี่ยวข้องกับตัวฟังก์ชั่น
 	var i = 1; pHN = data;
-	while (i < m+1){
+	while (i < m+1){ 
 		document.getElementById('tab'+i).style.display = 'none';
 		i++;
 	}

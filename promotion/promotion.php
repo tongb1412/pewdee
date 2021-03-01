@@ -31,7 +31,7 @@ $pro .= $t;
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div style="width:99%; margin:auto; margin-top:5px; height:30px;">
-<div style="width:300px; font-size:16px; font-weight:bold;"><img src="../daily_report/images/icon/d_report.png" align="absmiddle" />&nbsp;โปรโมชั่น</div>
+<div style="width:300px; font-size:16px; font-weight:bold;"><img src="images/icon/d_report.png" align="absmiddle" />&nbsp;โปรโมชั่น</div>
 </div>
 <div  style="width:99%; height:auto; margin:auto; margin-top:5px; text-align:center;">
 	<div id="main"  class="main" style="width:30%; margin:auto; height:495px; overflow:hidden; float:left;">
