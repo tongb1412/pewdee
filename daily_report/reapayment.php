@@ -9,10 +9,10 @@ include('../class/config.php');
   <div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:10%; background-color:#FFCC99; overflow:auto; border:<?=$tabcolor?> 1px solid;">
     <div class="line" style="margin-top:5px">
       <div style="width:20%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">วันที่  : </div>
-      <div style="width:30%; float:left; margin-top:10px; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
+      <div style="width:30%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
           <?= date('d/m/Y');?>
       </div>
-      <div style="width:30%; float:left;">
+      <div style="width:30%; float:left;" class="center-line">
         <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printapayment()" value="  พิมพ์รายงาน  " />
       </div>
     </div>

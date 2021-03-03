@@ -304,3 +304,7 @@ position:relative; width:90%; top:-140px; left:30px;  z-index:999;  background:#
 	float:left; background:#f3f1f1;	
 }
 
+.center-line{
+	margin-top: 0.9%;
+}
+

@@ -8,8 +8,8 @@ include('../class/config.php');
   <div class="littleDD" style="font-size:14px; font-weight:bold;" >รายงานการจ่ายยาประจำวัน</div>
   <div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:10%; background-color:#FFCC99; overflow:auto; border:<?=$tabcolor?> 1px solid;">
     <div class="line" style="margin-top:5px">
-      <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">วันที่้  : </div>
-      <div style="width:20%; float:left; margin-top:10px; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
+      <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">วันที่  : </div>
+      <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
           <?= date('d/m/Y');?>
       </div>
 		<div style="width:18%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px; ">เลือกยา : </div>

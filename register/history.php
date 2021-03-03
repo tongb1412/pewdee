@@ -18,7 +18,7 @@ $row=mysql_fetch_array($patient_result);
 	</div>
 </div>
 
-<div id="main" class="main" style="width:99%; margin:auto; margin-top:5px; height:550px; overflow:hidden;">
+<div id="main" class="main" style="width:99%; margin:auto; margin-top:5px; height:500px; overflow:hidden;">
 	<div class="littleDD" style="font-size:18px; font-weight:bold; height:50px;">
 		<div style="width:30%; height:50px; line-height:50px; text-align:right; float:left;">รหัสคนไข้ : <?=$hn;?></div>
 		<div style="width:65%; height:50px; padding-left:30px; line-height:50px; text-align:left; float:left;"><?=$row['pname'] . $row['fname'] . '    ' . $row['lname'];?></div>

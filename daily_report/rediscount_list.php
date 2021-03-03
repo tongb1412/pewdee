@@ -123,8 +123,8 @@ if($rs['recive'] < $rs['total']){
 ?>	
 
 	<div class="line" style="margin-top: 2px;">
-      <div style="width:15%; float:left; text-align:right;">รวมค่ายา :&nbsp;</div>
-      <div style="width:10%; float:left;">
+      <div style="width:14.5%; float:left; text-align:right;">รวมค่ายา :&nbsp;</div>
+      <div style="width:12%; float:left;">
         <input style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12"; value="<?=number_format($dp,'0','.',',')?>"/>   
       </div>
       <div style="width:20%; float:left; text-align:right;">รวมค่่าหัตถการ/แล็บ :&nbsp;</div>
@@ -138,8 +138,8 @@ if($rs['recive'] < $rs['total']){
     </div>	
 	
 	<div class="line">
-      <div style="width:15%; float:left; text-align:right;">รวมค่าคอร์ส :&nbsp;</div>
-      <div style="width:10%; float:left;">
+      <div style="width:14.5%; float:left; text-align:right;">รวมค่าคอร์ส :&nbsp;</div>
+      <div style="width:12%; float:left;">
         <input  style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12"; value="<?=number_format($cp,'0','.',',')?>" />
       </div>
       <div style="width:20%; float:left; text-align:right;">รวมค่่าแพ็คเกจ :&nbsp;</div>

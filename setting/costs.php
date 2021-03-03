@@ -9,7 +9,7 @@ include('../class/config.php');
 		<div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:28%; overflow:auto; border:<?=$tabcolor?> 1px solid;">
 			<div class="line" style="margin-top:5px">
 			   
-				<div style="width:20%; float:left; text-align:right; line-height:20px;">วันที่้ :  </div>
+				<div style="width:20%; float:left; text-align:right; line-height:20px;">วันที่ :  </div>
 				<div style="width:75%; float:left; id='date' ">&nbsp;<?= date('d/m/Y H:i',time());?>  </div>
 			</div>
 			<div class="line " style="height:10px";>&nbsp;</div>

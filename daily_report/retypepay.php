@@ -8,7 +8,7 @@ include('../class/config.php');
   <div class="littleDD" style="font-size:14px; font-weight:bold;" >รายงานรายได้แยกตามการชำระ</div>
   <div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:10%; overflow:auto; border:<?=$tabcolor?> 1px solid; background-color: #FFD1A4;">
     <div class="line" style="margin-top:5px">
-      <div style="width:20%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">วันที่้  : </div>
+      <div style="width:20%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">วันที่  : </div>
       <div style="width:30%; float:left; margin-top:10px; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
           <?= date('d/m/Y',time());?>
       </div>

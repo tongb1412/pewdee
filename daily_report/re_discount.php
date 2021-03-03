@@ -42,34 +42,34 @@ $nn++;
  
 if($s=='y'){ 	
 ?>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">
 	รายงานส่วนลด 100%
+</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
+	ประจำวันที่ <?= date('d/m/Y', time()); ?>
+</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+	<div style="width:50%; float:left; text-align:left;">
+		&nbsp;สาขา <?= $cname ?>
 	</div>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
-	ประจำวันที่  <?=date('d/m/Y',time());?> 
+	<div style="width:50%; float:left; text-align:right;">
+		หน้า : <?= '1'; ?>&nbsp;
 	</div>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
-		<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?=$cname?>
-		</div>
-		<div style="width:50%; float:left; text-align:right;">
-		หน้า : <?='1';?>&nbsp;
-		</div>
-	
-	</div>	
-    <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:12px; font-weight:bold;  float:left; ">
-      <div style="width:4%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-      <div style="width:10%; float:left; border-bottom:#999999 2px solid; overflow:hidden">Crad No.</div>
-      <div style="width:34%; float:left; border-bottom:#999999 2px solid;">ชื่อ-สกุล</div>
-      <div style="width:8%; float:left; border-bottom:#999999 2px solid;">ค่ายา</div>
-      <div style="width:8%; float:left; border-bottom:#999999 2px solid;">หัตถการ</div>
-      <div style="width:8%; float:left; border-bottom:#999999 2px solid;">เลเซอร์</div>
-	  <div style="width:8%; float:left; border-bottom:#999999 2px solid;">คอร์ส</div>
-	  <div style="width:8%; float:left; border-bottom:#999999 2px solid;">แพ็คเกจ</div>
-	  <div style="width:8%; float:left; border-bottom:#999999 2px solid;">รวมเงิน</div>
 
-	</div>		
- <? 
+</div>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:12px; font-weight:bold;  float:left; ">
+	<div style="width:4%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+	<div style="width:10%; float:left; border-bottom:#999999 2px solid; overflow:hidden">Crad No.</div>
+	<div style="width:34%; float:left; border-bottom:#999999 2px solid;">ชื่อ-สกุล</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">ค่ายา</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">หัตถการ</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">เลเซอร์</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">คอร์ส</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">แพ็คเกจ</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">รวมเงิน</div>
+
+</div>
+<? 
  $s='n';
  }
 if( $n > ($m * $x) ){ $m++; }  
@@ -77,27 +77,27 @@ if($m-1 > 1){  $x = 54; }
 if($n == ((($m-1) * $x) + 1) && $m > 1){
  
     ?>
-	<br><br>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
-		<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?=$cname?>
-		</div>
-		<div style="width:50%; float:left; text-align:right;">
-		หน้า : <?=$m;?>&nbsp;
-		</div>
+<br><br>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+	<div style="width:50%; float:left; text-align:left;">
+		&nbsp;สาขา <?= $cname ?>
 	</div>
-    <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:12px; font-weight:bold;  float:left; ">
-      <div style="width:4%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-      <div style="width:10%; float:left; border-bottom:#999999 2px solid;">Crad No.</div>
-      <div style="width:34%; float:left; border-bottom:#999999 2px solid;">ชื่อ-สกุล</div>
-      <div style="width:8%; float:left; border-bottom:#999999 2px solid;">ค่ายา</div>
-      <div style="width:8%; float:left; border-bottom:#999999 2px solid;">หัตถการ</div>
-      <div style="width:8%; float:left; border-bottom:#999999 2px solid;">เลเซอร์</div>
-	  <div style="width:8%; float:left; border-bottom:#999999 2px solid;">คอร์ส</div>
-	  <div style="width:8%; float:left; border-bottom:#999999 2px solid;">แพ็คเกจ</div>
-	  <div style="width:8%; float:left; border-bottom:#999999 2px solid;">รวมเงิน</div>
+	<div style="width:50%; float:left; text-align:right;">
+		หน้า : <?= $m; ?>&nbsp;
+	</div>
+</div>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:12px; font-weight:bold;  float:left; ">
+	<div style="width:4%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+	<div style="width:10%; float:left; border-bottom:#999999 2px solid;">Crad No.</div>
+	<div style="width:34%; float:left; border-bottom:#999999 2px solid;">ชื่อ-สกุล</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">ค่ายา</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">หัตถการ</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">เลเซอร์</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">คอร์ส</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">แพ็คเกจ</div>
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">รวมเงิน</div>
 
-	</div>	
+</div>
 <?
 } 
 $ft = 'N';
@@ -107,25 +107,25 @@ if($empid=='-'){ $dname = 'ซื้อยาหน้าร้าน';  } else 
 if($n>1){
 
 ?>
-<div  style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
+<div style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">
 	<div style="width:4%; float:left; text-align:center;">&nbsp;</div>
 	<div style="width:10%; float:left;">&nbsp;</div>
-	<div style="width:34%; float:left; text-align:center"><?=$h - 1 .'  รายการ';?>&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($dp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($lp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($tp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right;float:left;"><?=number_format($cp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($pp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($tt1,'0','.',',')?>&nbsp;&nbsp;</div>
+	<div style="width:34%; float:left; text-align:center"><?= $h - 1 . '  รายการ'; ?>&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($dp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($lp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($tp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right;float:left;"><?= number_format($cp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($pp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($tt1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 
 </div>
 <? 
  $h=1; $m=1; $n++; 
 $dp1 =0; $lp1=0; $tp1=0; $cp1=0; $pp1=0; $ds1=0; $tt1=0; $re1=0; $aa1=0; $total1 = 0;$cash1 = 0;$credit1 = 0; $ku1 = 0;
 }
-?>	
-<div  style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; ">			
-	&nbsp;<?=$dname?>
+?>
+<div style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; ">
+	&nbsp;<?= $dname ?>
 </div>
 <? 
 }
@@ -183,38 +183,38 @@ if($rs['recive'] < $rs['total']){
 
 
 
-?>	
-	
-	
-<div  style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; overflow:hidden; ">
-	<div style="width:4%; float:left; text-align:center;"><?=$m?></div>
-	<div style="width:10%; float:left;">&nbsp;<?=$rs['cradno']?></div>
-	<div style="width:34%; float:left;"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname'].'  '  ?></div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($rs['dp'],'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($rs['lp'],'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($rs['tp'],'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right;float:left;"><?=number_format($rs['cp'],'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($rs['pp'],'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($rs['total'],'0','.',',')?>&nbsp;&nbsp;</div>
+?>
 
-	
-								
-	
-</div>	
+
+<div style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; overflow:hidden; ">
+	<div style="width:4%; float:left; text-align:center;"><?= $m ?></div>
+	<div style="width:10%; float:left;">&nbsp;<?= $rs['cradno'] ?></div>
+	<div style="width:34%; float:left;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname'] . '  '  ?></div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($rs['dp'], '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($rs['lp'], '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($rs['tp'], '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right;float:left;"><?= number_format($rs['cp'], '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($rs['pp'], '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($rs['total'], '0', '.', ',') ?>&nbsp;&nbsp;</div>
+
+
+
+
+</div>
 <? 
 
 $n++; $h++; $m++;   } 
-?>	
-<div  style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
+?>
+<div style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">
 	<div style="width:4%; float:left; text-align:center;">&nbsp;</div>
 	<div style="width:10%; float:left;">&nbsp;</div>
-	<div style="width:34%; float:left; text-align:center"><?=$h - 1 .'  รายการ';?>&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($dp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($lp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($tp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right;float:left;"><?=number_format($cp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($pp1,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($tt1,'0','.',',')?>&nbsp;&nbsp;</div>
+	<div style="width:34%; float:left; text-align:center"><?= $h - 1 . '  รายการ'; ?>&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($dp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($lp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($tp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right;float:left;"><?= number_format($cp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($pp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($tt1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 
 </div>
 
@@ -224,17 +224,16 @@ $n++; $h++; $m++;   }
 <div style="width:100%; font-size:12px; text-align:left; float:left; font-weight:bold; margin:auto; margin-top:5px;  overflow:hidden;">
 	<div style="width:4%; float:left; text-align:center;">&nbsp;</div>
 	<div style="width:10%; float:left;">รวมทั้งหมด&nbsp;</div>
-	<div style="width:34%; float:left; text-align:center"><?=$nn.'  รายการ';?>&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($dp,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($lp,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($tp,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right;float:left;"><?=number_format($cp,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($pp,'0','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:8%; text-align:right; float:left;"><?=number_format($tt,'0','.',',')?>&nbsp;&nbsp;</div>
+	<div style="width:34%; float:left; text-align:center"><?= $nn . '  รายการ'; ?>&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($dp, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($lp, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($tp, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right;float:left;"><?= number_format($cp, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($pp, '0', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; text-align:right; float:left;"><?= number_format($tt, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 
-	
-								
-	
-</div>	
+
+
+
+</div>
 <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;">&nbsp;</div>
-

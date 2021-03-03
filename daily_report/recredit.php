@@ -9,7 +9,7 @@ include('../class/config.php');
   <div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:10%; background-color:#FFCC99; overflow:auto; border:<?=$tabcolor?> 1px solid;">
     <div class="line" style="margin-top:5px">
       <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">วันที่่  : </div>
-      <div style="width:20%; float:left; margin-top:10px; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
+      <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
           <?= date('d/m/Y');?>
       </div>
 	  <div style="width:15%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">เลือกธนาคาร  : </div>
@@ -19,7 +19,7 @@ include('../class/config.php');
 				$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 				?>
 	  
-      <div style="width:20%; float:left; margin-top:10px; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
+      <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
         <select name="select" id="bk" style="width:117px; height:20px;">
 		  <option value="">ไม่ระบุ</option>
           <? while($rs=mysql_fetch_array($result)){  ?>
@@ -27,7 +27,7 @@ include('../class/config.php');
           <? } ?>
         </select>
       </div>
-      <div style="width:30%; float:left;">
+      <div style="width:30%; float:left; margin-top: 0.9%;">
         <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="loadmodule('d_list','daily_report/recredit_list.php','did='+document.getElementById('bk').value)" value=" แสดงรายงาน " />
 		<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printcredit()" value=" พิมพ์รายงาน " />
       </div>
