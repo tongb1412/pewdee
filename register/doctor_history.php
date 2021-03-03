@@ -31,7 +31,7 @@ $hn = $row['hn'];
 		<div class="line" style="font-size:14px; font-weight:bold; height:20px; line-height:20px;">
 		ประวัติการซื้อทรีทเม้นท์
 		</div>
-		<div style="width:99%; height:380px; float:left; border:#CCCCCC 1px solid;">	
+		<div style="width:99%; height:382px; float:left; border:#CCCCCC 1px solid;">	
 			<div class="line" style="height:25px; line-height:20px; margin-top:5px;">
 				<div style="width:10%; float:left; text-align:right; line-height:20px; font-weight:bold;">วันที่ :&nbsp;</div>
 				<div style="width:70%; float:left; text-align:left; line-height:20px;">
@@ -72,7 +72,7 @@ $hn = $row['hn'];
 		<div class="line" style="font-size:14px; font-weight:bold; height:20px; line-height:20px;">
 		รายละเอียด
 		</div>
-		<div style="width:99%; height:380px; float:left; border:#CCCCCC 1px solid;  ">	
+		<div style="width:99%; height:382px; float:left; border:#CCCCCC 1px solid;  ">	
 				
 		    <div id="d_list" style=" width:99%; margin-left:5px; float:left; height:350px; overflow:auto;">
 				  

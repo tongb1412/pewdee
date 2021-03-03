@@ -26,7 +26,7 @@ $row=mysql_fetch_array($patient_result);
 		<div class="line" style="font-size:14px; font-weight:bold; height:20px; line-height:20px;">
 		ประวัติการซื้อทรีทเม้นท์
 		</div>
-		<div style="width:99%; height:415px; float:left; border:#CCCCCC 1px solid;">	
+		<div style="width:99%; height:382px; float:left; border:#CCCCCC 1px solid;">	
 			<div class="line" style="height:25px; line-height:20px; margin-top:5px;">
 				<div style="width:10%; float:left; text-align:right; line-height:20px; font-weight:bold;">วันที่ :&nbsp;</div>
 				<div style="width:70%; float:left; text-align:left; line-height:20px;">
@@ -66,7 +66,7 @@ $row=mysql_fetch_array($patient_result);
 		<div class="line" style="font-size:14px; font-weight:bold; height:20px; line-height:20px;">
 		ประวัติการทำทรีทเม้นท์
 		</div>
-		<div style="width:99%; height:415px; float:left; border:#CCCCCC 1px solid;">	
+		<div style="width:99%; height:382px; float:left; border:#CCCCCC 1px solid;">	
 			<div style="width:98%; height:20px;padding-top:5px;margin-left:5px;  margin-top:5px; color:#000000; font-weight:bold; float:left; font-size:13px;background:<?=$tabcolor?>;">
 				<div style="width:40%;text-align:left; float:left;">&nbsp;&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รายการ</div>
 				<div style="width:25%;  text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จำนวนทั้งหมด</div>
