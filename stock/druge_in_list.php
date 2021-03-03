@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div style="width:100%; height:370px; float:left;">
-<?
+	<?
 include('../class/config.php');
 $txtserch = $_GET['txt'];
 
@@ -47,26 +47,26 @@ if($cl != $color1){
 
 
 ?>
-<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="background:<?=$cl?>; width:90%; cursor:pointer;" onclick="instock_movetxt('<?=$rs['did']?>','<?=$rs['tname']?>','<?=$rs['unit']?>','I')" >
+	<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:90%; cursor:pointer;" onclick="instock_movetxt('<?= $rs['did'] ?>','<?= $rs['tname'] ?>','<?= $rs['unit'] ?>','I')">
 
-	<div style="width:100%; float:left; font-size:12px;"><?=$rs['tname']?>&nbsp;</div>
+		<div style="width:100%; float:left; font-size:12px;"><?= $rs['tname'] ?>&nbsp;</div>
 
-</div>
-<? } ?>
+	</div>
+	<? } ?>
 
-<? } ?>
+	<? } ?>
 </div>
 <div style="width:98%; margin:auto; margin-top:10px; text-align:right; line-height:20px; float:left;">
- <?=$Num_Rows;?> 
-  รายการ : 
-  <?=$Num_Pages;?> 
-  หน้า :
-  <?
+	<?= $Num_Rows; ?>
+	รายการ :
+	<?= $Num_Pages; ?>
+	หน้า :
+	<?
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('get','stock/druge_in_list.php','txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','p_list')">	
-	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
+	<a href="javascript: ajaxLoad('get','stock/druge_in_list.php','txt=<?= $txtserch ?>&Page=<?= $Prev_Page ?>','p_list')">
+		<img src='images/icon/back.png' border='0' align="absmiddle" />
 	</a>
 	<?
 	}
@@ -77,10 +77,10 @@ if($cl != $color1){
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('get','stock/druge_in_list.php','txt=<?=$txtserch?>&Page=<?=$Next_Page?>','p_list')">	
-	<img src='images/icon/next.png'  border='0' align="absmiddle" />
-	</a>	
-    <?		
+	<a href="javascript: ajaxLoad('get','stock/druge_in_list.php','txt=<?= $txtserch ?>&Page=<?= $Next_Page ?>','p_list')">
+		<img src='images/icon/next.png' border='0' align="absmiddle" />
+	</a>
+	<?		
 	}
 	
 	mysql_close($dblink);

@@ -9,9 +9,9 @@ include('../class/config.php');
   <div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:10%; background-color:#FFCC99; overflow:auto; border:<?=$tabcolor?> 1px solid;">
 	 <div class="line" style="margin-top:5px; width:60%;">
       	<div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;"><!--วันที่ : -->&nbsp;</div>
-      	<div style="width:85%; float:left; margin-top:10px;font-size:15px;"><strong>ระบบจะแจ้งเตือนก่อนยาถึงวันหมดอายุ 150 วัน</strong>&nbsp;<!--<input type="text" id="sdate" size="8" maxlength="10" onkeyup="forDate(this)"   />--></div>
+      	<div style="width:85%; float:left; margin-top:10px;font-size:15px;"><strong>ระบบจะแจ้งเตือนก่อนยาถึงวันหมดอายุ 150 วัน</strong>&nbsp;<!--<input type="text" id="sdate" size="6" maxlength="10" onkeyup="forDate(this)"   />--></div>
 	  	<div style="width:0%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px; ">&nbsp;</div>
-      	<div style="width:0%; float:left; margin-top:10px;">&nbsp;<!--<input type="text" id="edate" size="8" maxlength="10" onkeyup="forDate(this)"   />--></div>
+      	<div style="width:0%; float:left; margin-top:10px;">&nbsp;<!--<input type="text" id="edate" size="6" maxlength="10" onkeyup="forDate(this)"   />--></div>
 		<!-- <div style="width:18%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px; ">เลือกยา : </div> -->
 		 <!-- <?
 				$sql = "select * from tb_druge where status='IN'  ";

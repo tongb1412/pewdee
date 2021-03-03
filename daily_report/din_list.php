@@ -55,57 +55,58 @@ if($cl != $color1){
 
 
 ?>
-<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="background:<?=$cl?>" >
+<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>">
 
-	<div style="width:30%; float:left; cursor:pointer; " >
-	<?=$rs['did']?>&nbsp;
+	<div style="width:30%; float:left; cursor:pointer; ">
+		<?= $rs['did'] ?>&nbsp;
 	</div>
-	<div style="width:60%; float:left; cursor:pointer; " >
-	<?=$rs['tname']?>&nbsp;
+	<div style="width:60%; float:left; cursor:pointer; ">
+		<?= $rs['tname'] ?>&nbsp;
 	</div>
 	<div style="width:10%; float:left; text-align:right;">
-	    &nbsp;<img src="images/icon/export16.png" align="คนไข้นอกระบบ" title="คนไข้นอกระบบ" style="cursor:pointer;" onClick="ajaxEdit('post','daily_report/offdruge.php','did=<?=$rs['did']?>&mode=off','reportpage');"/>
-	
+		&nbsp;<img src="images/icon/export16.png" align="คนไข้นอกระบบ" title="คนไข้นอกระบบ" style="cursor:pointer;" onClick="ajaxEdit('post','daily_report/offdruge.php','did=<?= $rs['did'] ?>&mode=off','reportpage');" />
+
 	</div>
 
 
 </div>
 <? } ?>
 
-<div style="width:99%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
- <?=$Num_Rows;?> 
-  รายการ : 
-  <?=$Num_Pages;?> 
-  หน้า :
-  <?
+<div style="width:99%; margin:auto; margin-top:1%; text-align:right; line-height:20px;">
+	<?= $Num_Rows; ?>
+	รายการ :
+	<?= $Num_Pages; ?>
+	หน้า :
+	<?
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('get','daily_report/din_list.php','txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','p_list')">	
-	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
+	<a href="javascript: ajaxLoad('get','daily_report/din_list.php','txt=<?= $txtserch ?>&Page=<?= $Prev_Page ?>','p_list')">
+		<img src='images/icon/back.png' border='0' align="absmiddle" />
 	</a>
 	<?
 	}
-	for($i=1; $i<=$Num_Pages; $i++){
-		if($i != $Page)
-		{
-	?>		
-	<a href="javascript: ajaxLoad('get','daily_report/din_list.php','txt=<?=$txtserch?>&Page=<?=$i?>','p_list')"><?=$i?></a>	
+	echo " <b>$Page </b>";
+	// for($i=1; $i<=$Num_Pages; $i++){
+	// 	if($i != $Page)
+	// 	{
+	// ?>
+	<!-- <a href="javascript: ajaxLoad('get','daily_report/din_list.php','txt=<?= $txtserch ?>&Page=<?= $i ?>','p_list')"><?= $i ?></a> -->
 	<?
-		}
-		else
-		{ 	
-			if($Num_Pages!= 1){	echo " <b>$i </b>";}			
-		}
-	}
+	// 	}
+	// 	else
+	// 	{ 	
+	// 		if($Num_Pages!= 1){	echo " <b>$i </b>";}			
+	// 	}
+	// }
 	if($Page!=$Num_Pages)
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('get','daily_report/din_list.php','txt=<?=$txtserch?>&Page=<?=$Next_Page?>','p_list')">	
-	<img src='images/icon/next.png'  border='0' align="absmiddle" />
-	</a>	
-    <?		
+	<a href="javascript: ajaxLoad('get','daily_report/din_list.php','txt=<?= $txtserch ?>&Page=<?= $Next_Page ?>','p_list')">
+		<img src='images/icon/next.png' border='0' align="absmiddle" />
+	</a>
+	<?		
 	}
 	
 	mysql_close($dblink);
@@ -114,6 +115,3 @@ if($cl != $color1){
 </div>
 
 <? } ?>
-
-
-

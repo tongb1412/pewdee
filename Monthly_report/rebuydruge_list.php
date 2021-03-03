@@ -1,23 +1,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
-<?
+	<?
 include('../class/config.php');
 $cl = '';
 $did = $_POST['did'];
 
 
 ?>
-    <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
-      <div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
-      <div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
-      <div style="width:22%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ชื่อยา</div>
-      <div style="width:20%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;กลุ่มยา</div>
-      <div style="width:25%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;คงเหลือ</div>
-      <div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จุดสั่งซื้อ</div>
-    </div>
-	
-		
-<? 
+	<div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?= $tabcolor ?>;">
+		<div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
+		<div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
+		<div style="width:22%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ชื่อยา</div>
+		<div style="width:20%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;กลุ่มยา</div>
+		<div style="width:25%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;คงเหลือ</div>
+		<div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จุดสั่งซื้อ</div>
+	</div>
+
+
+	<? 
 $cl = $color1;
 if(empty($did)){
 $sql  = "select * from tb_druge where status='IN' and (sqty > total) ";
@@ -60,38 +60,40 @@ if($cl != $color1){
 	$cl = $color2;
 }
 
-?>	
-		
-<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="width:98%;;background:<?=$cl?>; ">
-	<div style="width:8%; float:left;"><?=$n?></div>
-	<div style="width:15%; float:left;"><?=$rs['did']?></div>
-	<div style="width:22%; float:left;"><?=$rs['tname']?></div>
-	<div style="width:20%; float:left;"><?=$rs['dgroup']?></div>
-	<div style="width:25%; float:left;"><? echo number_format($rs['total'],'0','.',',') ?></div>
-	<div style="width:10%; float:left;">&nbsp;<?=$rs['sqty']?></div>
-								
-	
-</div>
+?>
+
+	<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:98%;;background:<?= $cl ?>; ">
+		<div style="width:8%; float:left;"><?= $n ?></div>
+		<div style="width:15%; float:left;"><?= $rs['did'] ?></div>
+		<div style="width:22%; float:left;"><?= $rs['tname'] ?></div>
+		<div style="width:20%; float:left;"><?= $rs['dgroup'] ?></div>
+		<div style="width:25%; float:left;">
+			<? echo number_format($rs['total'],'0','.',',') ?>
+		</div>
+		<div style="width:10%; float:left;">&nbsp;<?= $rs['sqty'] ?></div>
+
+
+	</div>
 
 
 
 
 
 
-<? $n++; } ?>
-<div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
- <?=$Num_Rows;?> 
-  รายการ : 
-  <?=$Num_Pages;?> 
-  หน้า :
-  <?
+	<? $n++; } ?>
+	<div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
+		<?= $Num_Rows; ?>
+		รายการ :
+		<?= $Num_Pages; ?>
+		หน้า :
+		<?
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge_list.php','Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
-	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
-	</a>
-	<?
+		<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge_list.php','Page=<?= $Prev_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
+			<img src='images/icon/back.png' border='0' align="absmiddle" />
+		</a>
+		<?
 	}
 	
 	echo " <b>$Page </b>";
@@ -100,19 +102,16 @@ if($cl != $color1){
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
-	<img src='images/icon/next.png'  border='0' align="absmiddle" />
-	</a>	
-    <?		
+		<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge_list.php','Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
+			<img src='images/icon/next.png' border='0' align="absmiddle" />
+		</a>
+		<?		
 	}
 	
 	mysql_close($dblink);
 
 ?>
+	</div>
+
+	<? } ?>
 </div>
-
-<? } ?>
-</div>
-
-
-

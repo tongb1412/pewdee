@@ -11,7 +11,7 @@ include('../class/config.php');
     <div class="line" style="margin-top:5px; width:60%;">
       <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">วันที่ : </div>
       <div style="width:19%; float:left; margin-top:10px;">&nbsp;
-          <input name="text" type="text" id="sdate" onkeyup="forDate(this)" size="8" maxlength="10" readonly="readonly" value="<?=$dat?>"  />
+          <input name="text" type="text" id="sdate" onkeyup="forDate(this)" size="6" maxlength="10" readonly="readonly" value="<?=$dat?>"  />
       </div>
 	  <div style="width:3%; float:left; margin-top:10px;">
         		<img src="calendar/calendar.jpg" width="15" onclick="calendar('<?=date('m')?>','<?=date('Y')?>','cl','sdate','cl1')" style="margin-top:5px; cursor:pointer;"  />        
@@ -21,7 +21,7 @@ include('../class/config.php');
 	  
       <div style="width:7%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px; ">ถึง : </div>
       <div style="width:19%; float:left; margin-top:10px;">&nbsp;
-          <input name="text" type="text" id="edate" onkeyup="forDate(this)" size="8" maxlength="10" readonly="readonly" value="<?=$dat?>"  />
+          <input name="text" type="text" id="edate" onkeyup="forDate(this)" size="6" maxlength="10" readonly="readonly" value="<?=$dat?>"  />
       </div>
 	  <div style="width:3%; float:left; margin-top:10px;">
         		<img src="calendar/calendar.jpg" width="15" onclick="calendar('<?=date('m')?>','<?=date('Y')?>','cl1','edate','cl')" style="margin-top:5px; cursor:pointer;"  />        

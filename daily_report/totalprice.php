@@ -234,214 +234,227 @@ if(!empty($num)){
 ?>
 
 <div id="main" class="main" style="width:99%; margin:auto; height:500px; overflow:hidden;">
-  <div class="littleDD" style="font-size:18px; font-weight:bold; height:50px; " align="center"; >
-    <div style="width:30%; height:50px; line-height:50px; text-align:right; float:left;">รายการสรุปยอดเงินประจำวัน
-      
-    </div>
-    <div style="width:50%; height:50px; padding-left:30px; line-height:50px; text-align:left; float:left;">
-      	  
-	  
-    </div>
+	<div class="littleDD" style="font-size:18px; font-weight:bold; height:50px; " align="center" ;>
+		<div style="width:30%; height:50px; line-height:50px; text-align:right; float:left;">รายการสรุปยอดเงินประจำวัน
 
-  </div>
-  
-  
-    <div style="width:40%; height:auto;  float:left; margin-left:10px;">
-      <div class="line" style="height:30px; line-height:30px; font-size:16px; font-weight:bold; border-bottom:#CCCCCC 1px dotted;">
-	  
-	     <div style="width:30%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">วันที่ : </div>
-	  	 <div style="width:40%; float:left;">
-       		 <input type="text" id="dat" size="15" readonly="readonly" value="<?=$dat?>" />
-             
-        </div>
-	     <div style="width:7%; float:left;">
-        <img src="calendar/calendar.jpg" width="16" onclick="calendar('<?=date('m')?>','<?=date('Y')?>','cl','dat','cl1')" style="margin-top:5px; cursor:pointer;"  />        
-        <div id="cl" class="calendar" style="width:152px; height:auto; display:none;"></div>
-		<div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
-        </div>
-	  
-	  
-	  
-	   </div>
-      <div style="width:100%; height:400px; float:left; font-size:14px; background:#fffaf0   ; border-bottom:#CCCCCC 1px dotted  ">
-        <div class="line" style="height:30px; line-height:30px; margin-top:5px;  ">
-          <div style="width:30%; float:left; text-align:right; line-height:30px; ">เงินสด :&nbsp;</div>
-          <div style="width:70%; float:left; text-align:left; line-height:30px;">
-            <input name="text2" type="text" id="cash" value="<?=$cash?>" style="text-align:right; font-size:18px;" onkeyup="changemoney(1)"  size="10"    />
-            &nbsp;&nbsp;บาท </div>
-        </div>
-        <div class="line" style="height:30px; line-height:30px; margin-top:20px; ">
-          <div style="width:30%; float:left; text-align:right; line-height:30px; ">บัตรเครดิต &nbsp;</div>
-          
-        </div>
-		  <div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
-          <div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคารกรุงศรีฯ :&nbsp;</div>
-          <div style="width:50%; float:left; text-align:left; line-height:30px;">
-            <input name="text2" type="text" id="credit" style="text-align:right; font-size:18px;" value="<?=$krungsri?>" onkeyup="changemoney(2)"  size="10" />
-            &nbsp;&nbsp;บาท </div>
-        </div>
-		
-		  <div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
-          <div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคารกสิกร :&nbsp;</div>
-          <div style="width:50%; float:left; text-align:left; line-height:30px;">
-            <input name="text2" type="text" id="credit1" style="text-align:right; font-size:18px;" value="<?=$kasikorn?>" onkeyup="changemoney(2)"  size="10" />
-            &nbsp;&nbsp;บาท </div>
-        </div>
-		
-		  <div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
-          <div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคารไทยพาณิชย์ :&nbsp;</div>
-          <div style="width:50%; float:left; text-align:left; line-height:30px;">
-            <input name="text2" type="text" id="credit2" style="text-align:right;  font-size:18px;" value="<?=$scb?>" onkeyup="changemoney(2)"  size="10" />
-            &nbsp;&nbsp;บาท </div>
-        </div>
-		
-				  <div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
-          <div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคาร Amax :&nbsp;</div>
-          <div style="width:50%; float:left; text-align:left; line-height:30px;">
-            <input name="text2" type="text" id="credit3" style="text-align:right; font-size:18px;" value="<?=$Amax?>" onkeyup="changemoney(2)"  size="10" />
-            &nbsp;&nbsp;บาท </div>
-        </div>
-		
-				  <div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
-          <div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคาร OUB :&nbsp;</div>
-          <div style="width:50%; float:left; text-align:left; line-height:30px;">
-            <input name="text2" type="text" id="credit4" style="text-align:right; font-size:18px;" value="<?=$UOB?>" onkeyup="changemoney(2)"  size="10" />
-            &nbsp;&nbsp;บาท </div>
-        </div>
-        
-        <div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
-          <div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคาร กรุงไทย:&nbsp;</div>
-          <div style="width:50%; float:left; text-align:left; line-height:30px;">
-            <input name="text2" type="text" id="credit5" style="text-align:right; font-size:18px;" value="<?=$ktc?>" onkeyup="changemoney(2)"  size="10" />
-            &nbsp;&nbsp;บาท </div>
-        </div>
-        
-        
-        <div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
-          <div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคาร ธนชาติ :&nbsp;</div>
-          <div style="width:50%; float:left; text-align:left; line-height:30px;">
-            <input name="text2" type="text" id="credit6" style="text-align:right; font-size:18px;"  value="<?=$tana?>" onkeyup="changemoney(2)"  size="10" />
-            &nbsp;&nbsp;บาท </div>
-        </div>
-		
+		</div>
+		<div style="width:50%; height:50px; padding-left:30px; line-height:50px; text-align:left; float:left;">
+
+
 		</div>
 
-       
-
-</div>
-
-<div style="width:50%; height:100px;  float:left; margin-left:10px;  ">
-<div class="line" style="height:30px; line-height:30px; font-size:16px; font-weight:bold; border-bottom:#CCCCCC 1px dotted; background-color:#FFFFFF">
-	<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="loadmodule('reportpage','daily_report/totalprice.php','dd='+document.getElementById('dat').value)" value=" แสดงรายงาน " />
- </div>
-
-	 <div style="width:100%; height:70px; float:left; font-size:14px; background:#fffaf0   ;   ">
-        
-	   	<div class="line" style="height:30px; line-height:30px; margin-top:5px;  ">  
-	   		<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
-          		<div style="width:60%; float:left; text-align:right; line-height:30px; "> ยอดเงินคงเหลือในเครื่อง : &nbsp;</div>
-       		</div>
-	   		<div class="line" style="height:30px; line-height:30px; margin-top:5px; "> 
-		  		<div style="width:50%; float:left; text-align:right; line-height:30px; ">&nbsp;</div>
-          			<div style="width:50%; float:left; text-align:left; line-height:30px;">
-           					 <input name="text2" type="text" id="check" value="<?=$totalcash?>" style="text-align:right; font-size:18px;" onkeyup="changemoney(2)"  size="10" />
-            		&nbsp;&nbsp;บาท </div>
-       		 </div>
-		</div>
-		
 	</div>
-<div class="line" style="height:30px; line-height:30px; font-size:16px; font-weight:bold; border-bottom:#CCCCCC 1px dotted;"> &nbsp;</div>
-	
-    	  
-    
-    
-    
-    
-	<div style="width:100%; height:70px; background-color:#33FF33">
-		<div class="line" style="margin-top:5px; height:30px; font-size:16px;">
-			<div style="width:40%; float:left; text-align:right; line-height:50px; height:30px;">พนักงานผู้บันทึก :&nbsp;</div>
 
-  	  	</div>
-		<div class="line" style=" height:30px; font-size:16px;">
-			<div style="width:25%; float:left; text-align:right; line-height:50px; height:30px;">&nbsp;</div>
-		
-			<div style="width:75%; float:left; line-height:50px; height:30px; padding-top:15px;">
-			<select id="asempid" style="width:300px; font-size:16px;">
-	
-			<?
+
+	<div style="width:40%; height:auto;  float:left; margin-left:10px;">
+		<div class="line" style="height:30px; line-height:30px; font-size:16px; font-weight:bold; border-bottom:#CCCCCC 1px dotted;">
+
+			<div style="width:30%; float:left; margin-top:7px; text-align:right; line-height:20px; font-size:14px;">วันที่ : </div>
+			<div style="width:40%; float:left; margin-top:5px;">
+				<input type="text" id="dat" size="10" readonly="readonly" value="<?= $dat ?>" />
+			</div>
+			<div style="width:7%; float:left; margin-top:3px;">
+				<img src="calendar/calendar.jpg" width="16" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl','dat','cl1')" style="margin-top:5px; cursor:pointer;" />
+				<div id="cl" class="calendar" style="width:152px; height:auto; display:none;"></div>
+				<div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
+			</div>
+
+
+
+		</div>
+		<div style="width:100%; height:400px; float:left; font-size:14px; background:#fffaf0   ; border-bottom:#CCCCCC 1px dotted  ">
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px;  ">
+				<div style="width:30%; float:left; text-align:right; line-height:30px; ">เงินสด :&nbsp;</div>
+				<div style="width:70%; float:left; text-align:left; line-height:30px;">
+					<input name="text2" type="text" id="cash" value="<?= $cash ?>" style="text-align:right; font-size:18px;" onkeyup="changemoney(1)" size="10" />
+					&nbsp;&nbsp;บาท
+				</div>
+			</div>
+			<div class="line" style="height:30px; line-height:30px; margin-top:20px; ">
+				<div style="width:30%; float:left; text-align:right; line-height:30px; ">บัตรเครดิต &nbsp;</div>
+
+			</div>
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+				<div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคารกรุงศรีฯ :&nbsp;</div>
+				<div style="width:50%; float:left; text-align:left; line-height:30px;">
+					<input name="text2" type="text" id="credit" style="text-align:right; font-size:18px;" value="<?= $krungsri ?>" onkeyup="changemoney(2)" size="7.5" />
+					&nbsp;&nbsp;บาท
+				</div>
+			</div>
+
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+				<div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคารกสิกร :&nbsp;</div>
+				<div style="width:50%; float:left; text-align:left; line-height:30px;">
+					<input name="text2" type="text" id="credit1" style="text-align:right; font-size:18px;" value="<?= $kasikorn ?>" onkeyup="changemoney(2)" size="7.5" />
+					&nbsp;&nbsp;บาท
+				</div>
+			</div>
+
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+				<div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคารไทยพาณิชย์ :&nbsp;</div>
+				<div style="width:50%; float:left; text-align:left; line-height:30px;">
+					<input name="text2" type="text" id="credit2" style="text-align:right;  font-size:18px;" value="<?= $scb ?>" onkeyup="changemoney(2)" size="7.5" />
+					&nbsp;&nbsp;บาท
+				</div>
+			</div>
+
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+				<div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคาร Amax :&nbsp;</div>
+				<div style="width:50%; float:left; text-align:left; line-height:30px;">
+					<input name="text2" type="text" id="credit3" style="text-align:right; font-size:18px;" value="<?= $Amax ?>" onkeyup="changemoney(2)" size="7.5" />
+					&nbsp;&nbsp;บาท
+				</div>
+			</div>
+
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+				<div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคาร OUB :&nbsp;</div>
+				<div style="width:50%; float:left; text-align:left; line-height:30px;">
+					<input name="text2" type="text" id="credit4" style="text-align:right; font-size:18px;" value="<?= $UOB ?>" onkeyup="changemoney(2)" size="7.5" />
+					&nbsp;&nbsp;บาท
+				</div>
+			</div>
+
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+				<div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคาร กรุงไทย:&nbsp;</div>
+				<div style="width:50%; float:left; text-align:left; line-height:30px;">
+					<input name="text2" type="text" id="credit5" style="text-align:right; font-size:18px;" value="<?= $ktc ?>" onkeyup="changemoney(2)" size="7.5" />
+					&nbsp;&nbsp;บาท
+				</div>
+			</div>
+
+
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+				<div style="width:50%; float:left; text-align:right; line-height:30px; ">ธนาคาร ธนชาติ :&nbsp;</div>
+				<div style="width:50%; float:left; text-align:left; line-height:30px;">
+					<input name="text2" type="text" id="credit6" style="text-align:right; font-size:18px;" value="<?= $tana ?>" onkeyup="changemoney(2)" size="7.5" />
+					&nbsp;&nbsp;บาท
+				</div>
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+	<div style="width:50%; height:100px;  float:left; margin-left:10px;  ">
+		<div class="line" style="height:30px; line-height:30px; font-size:16px; font-weight:bold; border-bottom:#CCCCCC 1px dotted; background-color:#FFFFFF">
+			<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="loadmodule('reportpage','daily_report/totalprice.php','dd='+document.getElementById('dat').value)" value=" แสดงรายงาน " />
+		</div>
+
+		<div style="width:100%; height:80px; float:left; font-size:14px; background:#fffaf0   ;   ">
+
+			<div class="line" style="height:30px; line-height:30px; margin-top:5px;  ">
+				<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+					<div style="width:60%; float:left; text-align:right; line-height:30px; "> ยอดเงินคงเหลือในเครื่อง : &nbsp;</div>
+				</div>
+				<div class="line" style="height:30px; line-height:30px; margin-top:5px; ">
+					<div style="width:50%; float:left; text-align:right; line-height:30px; ">&nbsp;</div>
+					<div style="width:50%; float:left; text-align:left; line-height:30px;">
+						<input name="text2" type="text" id="check" value="<?= $totalcash ?>" style="text-align:right; font-size:18px;" onkeyup="changemoney(2)" size="10" />
+						&nbsp;&nbsp;บาท
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="line" style="height:30px; line-height:30px; font-size:16px; font-weight:bold; border-bottom:#CCCCCC 1px dotted;"> &nbsp;</div>
+
+
+
+
+
+
+		<div style="width:100%; height:70px; background-color:#33FF33">
+			<div class="line" style="margin-top:5px; height:30px; font-size:16px;">
+				<div style="width:40%; float:left; text-align:right; line-height:50px; height:30px;">พนักงานผู้บันทึก :&nbsp;</div>
+
+			</div>
+			<div class="line" style=" height:30px; font-size:16px;">
+				<div style="width:25%; float:left; text-align:right; line-height:50px; height:30px;">&nbsp;</div>
+
+				<div style="width:75%; float:left; line-height:50px; height:30px; padding-top:15px;">
+					<select id="asempid" style="width:300px; font-size:16px;">
+
+						<?
 			$sql = "select * from tb_staff where  eshow='Y' and typ='E' and eshow='Y' order by fname  ";
 			$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 			while($rs=mysql_fetch_array($result)){
 			?>
-			<option value="<?=$rs['staffid']?>"  <? if($empname==$rs['staffid']){ ?>  selected="selected" <? }?> ><?=$rs['fname'].'    '.$rs['lname']; ?></option>
-			<? } ?>		
-			</select>
+						<option value="<?= $rs['staffid'] ?>" <? if($empname==$rs['staffid']){ ?> selected="selected"
+							<? }?> ><?= $rs['fname'] . '    ' . $rs['lname']; ?>
+						</option>
+						<? } ?>
+					</select>
+				</div>
 			</div>
-		</div>
-   
-        
-		
-		<div class="line" style="margin-top:5px; height:30px; font-size:16px;">
-			<div style="width:40%; float:left; text-align:right; line-height:50px; height:30px;">แคชเขียร์ประจำวัน :&nbsp;</div>
 
-  	  	</div>
-		<div class="line" style=" height:30px; font-size:16px;">
-			<div style="width:25%; float:left; text-align:right; line-height:50px; height:30px;">&nbsp;</div>
-		
-			<div style="width:75%; float:left; line-height:50px; height:30px; padding-top:15px;">
-			<select id="cempid" style="width:300px; font-size:16px;">
-	
-			<?
+
+
+			<div class="line" style="margin-top:5px; height:30px; font-size:16px;">
+				<div style="width:40%; float:left; text-align:right; line-height:50px; height:30px;">แคชเขียร์ประจำวัน :&nbsp;</div>
+
+			</div>
+			<div class="line" style=" height:30px; font-size:16px;">
+				<div style="width:25%; float:left; text-align:right; line-height:50px; height:30px;">&nbsp;</div>
+
+				<div style="width:75%; float:left; line-height:50px; height:30px; padding-top:15px;">
+					<select id="cempid" style="width:300px; font-size:16px;">
+
+						<?
 			$sql = "select * from tb_staff where  eshow='Y' and typ='E'   and eshow='Y' order by fname  ";
 			$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 			while($rs=mysql_fetch_array($result)){
 			?>
-			<option value="<?=$rs['staffid']?>" <? if($cashier==$rs['staffid']){ ?>  selected="selected" <? }?> ><?=$rs['fname'].'    '.$rs['lname']  ?></option>
-			<? } ?>		
-			</select>
+						<option value="<?= $rs['staffid'] ?>" <? if($cashier==$rs['staffid']){ ?> selected="selected"
+							<? }?> ><?= $rs['fname'] . '    ' . $rs['lname']  ?>
+						</option>
+						<? } ?>
+					</select>
+				</div>
 			</div>
-		</div>
-		
-		
-		<div class="line" style="margin-top:10px; height:30px; font-size:16px;">
-			<div style="width:46%; float:left; text-align:right; line-height:50px; height:40px;">พนักงานตรวจสอบยอด :&nbsp;</div>
 
-  	  	</div>
-		<div class="line" style=" height:30px; font-size:16px;">
-			<div style="width:25%; float:left; text-align:right; line-height:50px; height:30px;">&nbsp;</div>
-		
-			<div style="width:75%; float:left; line-height:50px; height:30px; padding-top:15px;">
-			<select id="empid" style="width:300px; font-size:16px;">
-	
-			<?
+
+			<div class="line" style="margin-top:10px; height:30px; font-size:16px;">
+				<div style="width:46%; float:left; text-align:right; line-height:50px; height:40px;">พนักงานตรวจสอบยอด :&nbsp;</div>
+
+			</div>
+			<div class="line" style=" height:30px; font-size:16px;">
+				<div style="width:25%; float:left; text-align:right; line-height:50px; height:30px;">&nbsp;</div>
+
+				<div style="width:75%; float:left; line-height:50px; height:30px; padding-top:15px;">
+					<select id="empid" style="width:300px; font-size:16px;">
+
+						<?
 			$sql = "select * from tb_staff where  eshow='Y' and typ='E'  and eshow='Y' order by fname  ";
 			$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 			while($rs=mysql_fetch_array($result)){
 			?>
-			<option value="<?=$rs['staffid']?>" <? if($cashier_check==$rs['staffid']){ ?>  selected="selected" <? }?>  ><?=$rs['fname'].'    '.$rs['lname']  ?></option>
-			<? } ?>		
-			</select>
+						<option value="<?= $rs['staffid'] ?>" <? if($cashier_check==$rs['staffid']){ ?> selected="selected"
+							<? }?> ><?= $rs['fname'] . '    ' . $rs['lname']  ?>
+						</option>
+						<? } ?>
+					</select>
+				</div>
 			</div>
+
+
+
 		</div>
-		
-	
-	
+
+
+		<div class="line" style="height:30px; line-height:30px; margin-top:50px;  ">
+			<div class="line" style="margin-top:10px; text-align:right; width:90%;">
+				<input type="button" value="  บันทึกข้อมูล  " style="font-size:14px; font-weight:bold; height:30px;" onclick="addtotalprice('daily_report/add_totalprice.php','content')" />
+				<? if($mod!='NEW'){ ?>
+				<input type="button" value="  ลบข้อมูล  " style="font-size:14px; font-weight:bold; height:30px;" onclick="" />
+
+				<? } ?>
+			</div>
+
+
+
+		</div>
+
 	</div>
-	
-
-	<div class="line" style="height:30px; line-height:30px; margin-top:50px;  ">
-		<div class="line" style="margin-top:10px; text-align:right; width:90%;" > 
-   			 <input type="button" value="  บันทึกข้อมูล  " style="font-size:14px; font-weight:bold; height:30px;" onclick="addtotalprice('daily_report/add_totalprice.php','content')" />
-    		<? if($mod!='NEW'){ ?>
-   			 <input type="button" value="  ลบข้อมูล  " style="font-size:14px; font-weight:bold; height:30px;" onclick="" />
-    
-   			 <? } ?>
-  		</div>
-	
-	
-	
-	</div>
-
 </div>
-</div>
-
