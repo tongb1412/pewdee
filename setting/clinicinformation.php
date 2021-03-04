@@ -3,10 +3,16 @@
 <?
 include('../class/config.php');
 
-$sql = "select * from tb_clinicinformation  ";
+$branch_id = $_SESSION['branch_id'];
+
+$sql = "select * from tb_clinicinformation where cn = '$branch_id' ";
 $clinic_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $row=mysql_fetch_array($clinic_result);
-
+$edit = "Y";
+if($row['cn'] == "" || $row['cn'] == null) {
+	$edit = "N";
+	$row['cn'] = $branch_id;
+}
 ?>
 
 <div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden; text-align:center; ">
@@ -25,11 +31,11 @@ $row=mysql_fetch_array($clinic_result);
 
 
   <div class="line" style="height:10px;"></div>
-
+  <input type="hidden" id="edit" value="<?=$edit?>" />
+  <!-- <input type="hidden" id="cn" value="<?=$row['cn']?>" /> -->
   <div class="line">
 		<div style="width:30%; float:left; text-align:right;">รหัสสาขา :&nbsp;</div>
 		<div style="width:70%; float:left;"><input type="text" id="cn" size="15" value="<?=$row['cn']?>" /></div>
-		
   </div>
   
   <div class="line">

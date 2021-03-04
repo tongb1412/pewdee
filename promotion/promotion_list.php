@@ -3,12 +3,18 @@
 include('../class/config.php');
 $txtserch = $_GET['txt'];
 $date = date('Y-m-d');
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
+}else if ($_SESSION['branch_id'] =="") {
+	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
+}
 
 $cl = $color1;
 if(empty($txtserch)){
-	$sql = "select * from promotion where datestop >=  '$date'  ";
+	$sql = "select * from promotion where datestop >=  '$date' $where_branch_id ";
 } else {
-	$sql = "select * from promotion where datestop >= '$date' and proid like '%$txtserch%' or proname like '%$txtserch%'  ";
+	$sql = "select * from promotion where datestop >= '$date' $where_branch_id and proid like '%$txtserch%' or proname like '%$txtserch%'  ";
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);
