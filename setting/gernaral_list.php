@@ -78,7 +78,7 @@ if($cl != $color1){
 
 <div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
  <?=$Num_Rows;?> 
-  รายการ :hh 
+  รายการ : 
   <?=$Num_Pages;?> 
   หน้า :
   <?

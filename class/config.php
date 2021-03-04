@@ -1,4 +1,5 @@
 <?
+session_start();
 //$dblink=mysql_connect("localhost","root","02566") or die("cannot connect database");
 $dblink=mysql_connect("devweb.dtcgps.com","maria1","Dev@web@154") or die("cannot connect database");
 //$dblink=mysql_connect("10.255.248.77","dtcsw","1234") or die("cannot connect database");
