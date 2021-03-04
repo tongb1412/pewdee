@@ -2,8 +2,14 @@
 session_start();
 include('../class/config.php');
 $lno = $_POST['lno'];
+if($_SESSION['branch_id'] !="") {	
+	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
+	$branch_id = $_SESSION['branch_id'];
+}else if ($_SESSION['branch_id'] =="") {	
+	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
+}
 
-$sql1 = "select did from tb_temp_drugeinstock where lno='$lno'";
+$sql1 = "select did from tb_temp_drugeinstock where lno='$lno'" . $where_branch_id;
 $result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
 $n = mysql_num_rows($result);
 if(!empty($n)){
@@ -11,11 +17,11 @@ if(!empty($n)){
      $sid = $_POST['sid'];
 	 $sname = $_POST['sname'];
 	 $dat = date('Y-m-d',time());
-     $sql = "insert into tb_instock  values('$lno','$empid','$dat','$sid','$sname','D')";	
+     $sql = "insert into tb_instock  values('$lno','$empid','$dat','$sid','$sname','D','$branch_id')";
      mysql_query($sql) or die ("Error Querycc ".$sql);
 	 
 	 
-	$sql1 = "select * from tb_temp_drugeinstock where lno='$lno'";
+	$sql1 = "select * from tb_temp_drugeinstock where lno='$lno'" . $where_branch_id;
 	$result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
     while($rs=mysql_fetch_array($result)){
 	   $did = $rs['did'];
@@ -27,7 +33,7 @@ if(!empty($n)){
 	   $bdate = $rs['bdate'];
 	   $edate = $rs['edate'];
 	   
-       $sql = "insert into tb_drugeinstock  values('$lno','$did','$dname','$unit','$qty','$price','$totalprice','$bdate','$edate','$qty')";	
+       $sql = "insert into tb_drugeinstock  values('$lno','$did','$dname','$unit','$qty','$price','$totalprice','$bdate','$edate','$qty','$branch_id')";
        mysql_query($sql) or die ("Error Querycc ".$sql);
 	   
 	   
@@ -43,8 +49,9 @@ if(!empty($n)){
 	   mysql_query($sql) or die ("Error Query [".$sql."]");	
 	    $dat = date('Y-m-d H:i:s');
 	    $pname = $eid.'  รับยาเข้าคลัง';
-		$sql = "insert into drugelog  values('NULL','-','$lno','$did','$dname','$qty','$dtotal','$pname','$dat','I')";
-		mysql_query($sql);		   
+		$sql = "insert into drugelog (vn, lno, did, dname, qty, total, pname, dat, typ, branchid) values('-','$lno','$did','$dname','$qty','$dtotal','$pname','$dat','I','$branch_id')";
+		// echo $sql;exit();
+		mysql_query($sql);
 	   
 	   
 	   
