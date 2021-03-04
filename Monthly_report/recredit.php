@@ -8,7 +8,7 @@ include('../class/config.php');
   <div class="littleDD" style="font-size:14px; font-weight:bold;" >รายงานรายได้แยกตามบัตรเครดิต</div>
 
   <div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:10%; background-color:#FFCC99;  border:<?=$tabcolor?> 1px solid;">
-    <div class="line" style="margin-top:5px; width:60%;">
+    <div class="line" style="margin-top:5px; width:65%;">
       <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">วันที่ : </div>
       <div style="width:19%; float:left; margin-top:10px;">&nbsp;
           <input name="text" type="text" id="sdate" onkeyup="forDate(this)" size="6" maxlength="10" readonly="readonly" value="<?=$dat?>"  />
@@ -34,7 +34,7 @@ include('../class/config.php');
 				$sql = "select * from tb_gernaral where typ='BK' ";
 				$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 				?>
-      <div style="width:25%; float:left; margin-top:10px; font-size:14px; ">&nbsp;&nbsp;
+      <div style="float:left; margin-top:1.7%; margin-right:2%; font-size:14px; ">&nbsp;&nbsp;
           <select name="select2" id="bk" style="width:80px; height:20px;">
             <option value="">ไม่ระบุ</option>
             <? while($rs=mysql_fetch_array($result)){  ?>
@@ -45,7 +45,7 @@ include('../class/config.php');
           </select>
       </div>
     </div>
-    <div style="width:40%; float:left;margin-top:10px;">
+    <div style="width:35%; float:left;margin-top:10px;">
       <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="mcredit('Monthly_report/recredit_list.php','d_list')" value="แสดงรายงาน" />
       <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printmonthcredit()" value="พิมพ์รายงาน" />
       <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="" value="Excel" />

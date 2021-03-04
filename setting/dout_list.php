@@ -70,7 +70,7 @@ if($cl != $color1){
 </div>
 <? } ?>
 
-<div style="width:99%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
+<div style="width:99%; margin:auto; text-align:right; line-height:20px;">
  <?=$Num_Rows;?> 
   รายการ : 
   <?=$Num_Pages;?> 
@@ -79,28 +79,29 @@ if($cl != $color1){
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('get','setting/dout_list.php','txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','p_list')">	
+	<a href="javascript: ajaxLoad('get','setting/dout_list.php','txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','p_list1')">	
 	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
 	}
-	for($i=1; $i<=$Num_Pages; $i++){
-		if($i != $Page)
-		{
-	?>		
-	<a href="javascript: ajaxLoad('get','setting/dout_list.php','txt=<?=$txtserch?>&Page=<?=$i?>','p_list')"><?=$i?></a>	
+	echo " <b>$Page </b>";
+	// for($i=1; $i<=$Num_Pages; $i++){
+	// 	if($i != $Page)
+	// 	{
+	// ?>		
+	<!-- <a href="javascript: ajaxLoad('get','setting/dout_list.php','txt=<?=$txtserch?>&Page=<?=$i?>','p_list')"><?=$i?></a>	 -->
 	<?
-		}
-		else
-		{ 	
-			if($Num_Pages!= 1){	echo " <b>$i </b>";}			
-		}
-	}
+	// 	}
+	// 	else
+	// 	{ 	
+	// 		if($Num_Pages!= 1){	echo " <b>$i </b>";}			
+	// 	}
+	// }
 	if($Page!=$Num_Pages)
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('get','setting/dout_list.php','txt=<?=$txtserch?>&Page=<?=$Next_Page?>','p_list')">	
+	<a href="javascript: ajaxLoad('get','setting/dout_list.php','txt=<?=$txtserch?>&Page=<?=$Next_Page?>','p_list1')">	
 	<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		

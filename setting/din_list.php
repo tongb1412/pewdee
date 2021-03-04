@@ -72,7 +72,7 @@ if($cl != $color1){
 </div>
 <? } ?>
 
-<div style="width:99%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
+<div style="width:99%; margin:auto; text-align:right; line-height:20px;">
  <?=$Num_Rows;?> 
   รายการ : 
   <?=$Num_Pages;?> 
@@ -86,18 +86,19 @@ if($cl != $color1){
 	</a>
 	<?
 	}
-	for($i=1; $i<=$Num_Pages; $i++){
-		if($i != $Page)
-		{
-	?>		
-	<a href="javascript: ajaxLoad('get','setting/din_list.php','txt=<?=$txtserch?>&Page=<?=$i?>','p_list')"><?=$i?></a>	
-	<?
-		}
-		else
-		{ 	
-			if($Num_Pages!= 1){	echo " <b>$i </b>";}			
-		}
-	}
+	echo " <b>$Page </b>";
+	// for($i=1; $i<=$Num_Pages; $i++){
+	// 	if($i != $Page)
+	// 	{
+	// ?>		
+	<!-- <a href="javascript: ajaxLoad('get','setting/din_list.php','txt=<?=$txtserch?>&Page=<?=$i?>','p_list')"><?=$i?></a>	 -->
+	 <?
+	// 	}
+	// 	else
+	// 	{ 	
+	// 		if($Num_Pages!= 1){	echo " <b>$i </b>";}			
+	// 	}
+	// }
 	if($Page!=$Num_Pages)
 	{
 	?>

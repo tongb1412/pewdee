@@ -48,31 +48,31 @@ $lno .= $t;
 		</div>
 
 		<div class="line" style="height:20px;">
-			<div style="width:15%; float:left; text-align:left;">เลขที่บิล &nbsp;</div>
-			<div style="width:35%; float:left; text-align:left;">ชื่อผู้ขาย &nbsp;</div>
-			<div style="width:15%; float:left; text-align:left;">รหัสยา &nbsp;</div>
-			<div style="width:35%; float:left; text-align:left;">ชื่อยา &nbsp;</div>
+			<div style="width:15%; float:left; text-align:left; margin-right: 3%;">เลขที่บิล &nbsp;</div>
+			<div style="width:29%; float:left; text-align:left;">ชื่อผู้ขาย &nbsp;</div>
+			<div style="width:15%; float:left; text-align:left; margin-right: 3%;">รหัสยา &nbsp;</div>
+			<div style="width:31%; float:left; text-align:left;">ชื่อยา &nbsp;</div>
 		</div>
 		<div class="line">
-			<div style="width:15%; float:left;"><input type="text" id="sid" size="10" /></div>
-			<div style="width:35%; float:left;"><input type="text" id="sname" size="30" /></div>
-			<div style="width:15%; float:left;"><input type="text" id="did" size="10" style="border:1px solid #CCCCCC; background:#CCCCCC" /></div>
-			<div style="width:35%; float:left;"><input type="text" id="dname" size="34" style="border:1px solid #CCCCCC; background:#CCCCCC" /></div>
+			<div style="width:15%; float:left; margin-right: 3%;"><input type="text" id="sid" size="10" /></div>
+			<div style="width:29%; float:left;"><input type="text" id="sname" size="20" /></div>
+			<div style="width:15%; float:left; margin-right: 3%;"><input type="text" id="did" size="10" style="border:1px solid #CCCCCC; background:#CCCCCC" /></div>
+			<div style="width:31%; float:left; margin-right: 2%;"><input type="text" id="dname" size="27.5" style="border:1px solid #CCCCCC; background:#CCCCCC" /></div>
 		</div>
 		<div class="line" style="height:20px;">
-			<div style="width:15%; float:left; text-align:left;">จำนวนรับ &nbsp;</div>
-			<div style="width:15%; float:left; text-align:left;">ราคารวม &nbsp;</div>
+			<div style="width:13.5%; float:left; text-align:left; margin-right: 4%;">จำนวนรับ &nbsp;</div>
+			<div style="width:15%; float:left; text-align:left; margin-right: 3%;">ราคารวม &nbsp;</div>
 			<div style="width:20%; float:left; text-align:left;">ราคา / หน่วย &nbsp;</div>
-			<div style="width:15%; float:left; text-align:left;">วันที่ผลิต &nbsp;</div>
+			<div style="width:15%; float:left; text-align:left; margin-right: 3%;">วันที่ผลิต &nbsp;</div>
 			<div style="width:15%; float:left; text-align:left;">วันหมดอายุ &nbsp;</div>
 		</div>
 		<div class="line">
-			<div style="width:15%; float:left;"><input type="text" id="qty" size="4" />&nbsp;<span id="dunit"></span></div>
-			<div style="width:15%; float:left;"><input type="text" id="totalprice" size="10" onblur="divprice(this)" /></div>
+			<div style="width:16%; float:left; margin-right: 1.5%;"><input type="text" id="qty" size="4" />&nbsp;<span id="dunit"></span></div>
+			<div style="width:15%; float:left; margin-right: 3%;"><input type="text" id="totalprice" size="10" onblur="divprice(this)" /></div>
 			<div style="width:20%; float:left;"><input type="text" id="price" size="10" /></div>
-			<div style="width:15%; float:left;"><input type="text" id="bdate" size="10" onkeyup="autoDate(this,'edate')" placeholder="ตย. 01/12/2015" /></div>
+			<div style="width:15%; float:left;  margin-right: 3%;"><input type="text" id="bdate" size="10" onkeyup="autoDate(this,'edate')" placeholder="ตย. 01/12/2015" /></div>
 			<div style="width:15%; float:left;"><input type="text" id="edate" size="10" onkeyup="autoDate(this,'btnadd')" placeholder="ตย. 01/12/2016" /></div>
-			<div style="width:20%; float:left; text-align:right;">
+			<div style="width:11%; float:left; text-align:right;">
 				<input type="button" id="btnadd" value=" เพิ่ม " onclick="add_temp_instock('stock/add_temp_instock.php','dlist')">&nbsp;
 			</div>
 		</div>
