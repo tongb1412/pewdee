@@ -40,14 +40,14 @@ if(!empty($n)){
 
 		$sql = "select sprice from tb_druge where did='$did'";
 	    $str = mysql_query($sql) or die ("Error Query ".$sql); 	 
-		$row=mysql_fetch_array($str);
+		$row = mysql_fetch_array($str);
 		$price = intval($qty) * intval($row['sprice']);
 
 
        $sql = "insert into tb_drugecutstock  values('$lno','$typ','$did','$dname','$unit','$qty','$price','$branchid')";
        mysql_query($sql) or die ("Error Query ".$sql);
 	   
-	   if($typ=='I'){
+	   	if($typ == 'I'){
 	   	   //รับเข้า
 	   		in_stock($vn,$did,$dname,$qty,$branchid);
 
@@ -75,28 +75,25 @@ function in_stock($vn,$did,$dname,$qty,$branchid){
     mysql_query($sql) or die ("Error Query ".$sql);
 
 	$sql1 = "select lno,qty from tb_drugeinstock  where did='$did' and total = 0 " . $where_branch_id ." order by lno desc ";
-	echo $sql1;exit();
+	// echo $sql1;exit();
 	$str1 = mysql_query($sql1) or die ("Error Query [".$sql1."]");
-	while(($rs1=mysql_fetch_array($str1)) && ($qty > 0) ){
+	while(($rs1 = mysql_fetch_array($str1)) && ($qty > 0) ){
 		$lno = $rs1['lno']; 
 		if($rs1['qty'] < $qty ){
 			$qty = $qty - $rs1['qty'];
 			$dqty = $rs1['qty'];
 		   	$sql2 = "Update tb_drugeinstock Set total='$dqty' Where did='$did' and lno='$lno' " . $where_branch_id;
 		    mysql_query($sql2) or die ("Error Query ".$sql2);	
-
 		} else {
 		   	$sql2 = "Update tb_drugeinstock Set total='$qty' Where did='$did' and lno='$lno' " . $where_branch_id;
 		    mysql_query($sql2) or die ("Error Query ".$sql2);	
 			$qty = 0;
 		}
 	}
-
     $dat = date('Y-m-d H:i:s');
     $pname = $eid.' ปรับสต็อค||รับยาเข้าคลัง';
-	$sql = "insert into drugelog (vn, lno, did, dname, qty, total, pname, dat, typ, branchid) values('-','$lno','$did','$dname','$iqty','$dtotal','$pname','$dat','I','$branch_id')";
+	$sql = "insert into drugelog (vn, lno, did, dname, qty, total, pname, dat, typ, branchid) values('-','$lno','$did','$dname','$iqty','$dtotal','$pname','$dat','I','$branchid')";
 	mysql_query($sql);	
-
 }
 
 function cut_stock($vn,$did,$dname,$qty,$branchid){
