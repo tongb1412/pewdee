@@ -13,7 +13,7 @@ $dispg = $_POST['dispg'];
 if($_POST['type']!='edit'){
 
 	$sql1 = "select velname from tb_level where velname='$name'  ";
-	$result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+	$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
 	$n = mysql_num_rows($result);
 	if(empty($n)){
 		$sql = "insert into tb_level  values('NULL','$name','$disdrug','$dislab','$dislaser','$distr','$disco','$dispg')";	

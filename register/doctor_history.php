@@ -7,7 +7,7 @@ $hn = $_POST['hn'];
 
 /*
 $sql = "select * from tb_patient,tb_vst where tb_patient.hn=tb_vst.hn and  tb_vst.vn='$vn'";
-$str = mysql_query($sql) or die ("Error Querycc ".$sql); 
+$str = mysql_query($sql) or die ("Error Query ".$sql); 
 $row=mysql_fetch_array($str);
 $hn = $row['hn'];
 

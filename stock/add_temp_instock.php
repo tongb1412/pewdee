@@ -23,7 +23,7 @@ if($_SESSION['branch_id'] !="") {
 }
 
  $sql1 = "select did from tb_temp_drugeinstock where lno='$lno' and did='$did'";
- $result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+ $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
  $n = mysql_num_rows($result);
  if(empty($n)){
 

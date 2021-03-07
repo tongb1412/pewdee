@@ -33,7 +33,7 @@ if($_POST['mode']=='ADD'){
 
 
  $sql1 = "select gname from tb_druge where did='$did'";
- $result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+ $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
  $n = mysql_num_rows($result);
  if(empty($n)){
  

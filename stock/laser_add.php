@@ -12,7 +12,7 @@ if($_POST['type']=='ADD'){
 
 
  $sql1 = "select lname from tb_laser where lid='$lid'";
- $result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+ $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
  $n = mysql_num_rows($result);
  if(empty($n)){
  
