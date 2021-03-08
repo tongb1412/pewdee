@@ -16,8 +16,14 @@ $dat = date('Y-m-d');
 	
 		
 <? 
+
+$where_branch_id = "";
+if($_SESSION['branch_id'] != "") {	
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
+
 $cl = $color1;
-$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.pdate  from tb_apayment a,tb_patient  b,tb_payment c where (a.hn = b.hn) and (a.billno = c.billno) and (c.pdate like '%$dat%') ";
+$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.pdate  from tb_apayment a,tb_patient  b,tb_payment c where (a.hn = b.hn) and (a.billno = c.billno) and (c.pdate like '%$dat%') $where_branch_id";
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

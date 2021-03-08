@@ -5,10 +5,18 @@ $did = $_GET['did'];
 
 $dat = date('Y-m-d');
 
-//$dat = '2016-10-18';
+// $dat = "2010-10-26";
+
+$where_branch_id_tb_clinicinformation = "";
+$where_branch_id = "";
+if($_SESSION['branch_id'] != "") {	
+	$where_branch_id_tb_clinicinformation = "where cn ='".$_SESSION['branch_id']."'  ";
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
+// $where_branch_id = "";
 
 
-$sqlC .="select clinicname from tb_clinicinformation ";
+$sqlC .="select clinicname from tb_clinicinformation " . $where_branch_id_tb_clinicinformation;
 $strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
 $rs=mysql_fetch_array($strc);
 
@@ -19,9 +27,9 @@ $dname ='';
 $empid = '';
 
 if(empty($did)){
-$sql = "select a.*,SUBSTR(a.pdate,12,5) AS Myti,b.cradno,b.pname,b.fname,b.lname,c.empid,c.empname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%')  and (c.status='COM')  ";
+$sql = "select a.*,SUBSTR(a.pdate,12,5) AS Myti,b.cradno,b.pname,b.fname,b.lname,c.empid,c.empname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%')  and (c.status='COM') $where_branch_id ";
 } else {
-$sql = "select a.*,SUBSTR(a.pdate,12,5) AS Myti,b.cradno,b.pname,b.fname,b.lname,c.empid,c.empname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and (c.empid like '%$did%') and (c.status='COM')  ";
+$sql = "select a.*,SUBSTR(a.pdate,12,5) AS Myti,b.cradno,b.pname,b.fname,b.lname,c.empid,c.empname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and (c.empid like '%$did%') and (c.status='COM') $where_branch_id ";
 }
 
 $sql .="  order by c.empid,a.billno asc ";

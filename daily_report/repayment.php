@@ -31,12 +31,36 @@ include('../class/config.php');
           <? } ?>
         </select>
       </div>
+
+      <?php 
+        if ($_SESSION['branch_id'] == "" || $_SESSION['branch_id'] == "08") {
+            ?>
+          <div style="width:15%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">เลือกสาขา : </div>
+          <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
+            <?php
+              $sql = "select branchid,branchname from tb_branch ";
+            $result = mysql_query($sql) or die("Error Query [".$sql."]"); ?>
+            <select name="select" id="branch_id" style="width:117px;">
+              <option value="00">ทั้งหมด</option>
+              <?php while ($rs=mysql_fetch_array($result)) {  ?>
+                <option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
+                <?php } ?>
+            </select>
+          </div>
+      <?php
+        }
+      ?>
+    
+
       <div style="width:30%; float:left; margin-top: 0.9%;">
         <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="showpayment();" value=" แสดงรายงาน " />
-        <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" value=" พิมพ์รายงาน " onclick="printpaytotal()" />
+        <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printpaytotal()" value=" พิมพ์รายงาน " />
       </div>
     </div>
   </div>
+  
+
+
   <div style="width: auto; margin-top:5px; margin-left:20px; text-align:left; height:80%; border:<?= $tabcolor ?> 1px solid;">
 
 

@@ -5,8 +5,12 @@ include('../class/config.php');
 
 $dat = date('Y-m-d',time());
 
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 $sql = "select b.cradno,b.pname,b.fname,b.lname,substr(c.vdate,12,8) vdate,c.empname,substr(c.ctime,12,8) cdate  ";
-$sql .="from tb_patient  b,tb_vst c where b.hn=c.hn and c.vdate like '%$dat%' and c.status not IN ('CANCEL')  ";
+$sql .="from tb_patient  b,tb_vst c where b.hn=c.hn and c.vdate like '%$dat%' and c.status not IN ('CANCEL')  $where_branch_id";
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

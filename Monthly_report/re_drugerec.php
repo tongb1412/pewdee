@@ -25,8 +25,10 @@ if(!empty($n)){
 
 	
 <? 
-
-
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 if(empty($did)){
 $sql  = "select a.*,b.vdate,c.fname,c.lname,c.cradno from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status = 'COM'  and a.hn=c.hn  and (b.vdate between '$sdate%' and '$edate%')";
 } else {
@@ -34,7 +36,7 @@ $sql  = "select a.*,b.vdate,c.fname,c.lname,c.cradno from tb_drugerec a,tb_vst b
 
 }
 
-$sql .=" order by vdate asc ";
+$sql .=" $where_branch_id order by vdate asc ";
 $result  = mysql_query($sql)or die ("Error Query [".$sql."]"); 
 
 $n=1; $m=1; $s='y'; $x = 81;

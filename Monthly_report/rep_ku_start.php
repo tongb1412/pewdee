@@ -23,8 +23,14 @@ fwrite($objWrite,"\n");
 fwrite($objWrite,"\"no\",\"Date\",\"Name\",\"Card no / Comment\",\"Card TType\",\"Discount\",\"Amount\",\"Patient Type\"");
 fwrite($objWrite,"\n");
 
+
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
+
 $sql  = "select a.vn,b.pname,b.fname,b.lname,b.new,c.* from tb_vst a,tb_patient b,tb_payment c  where  (a.hn=b.hn) and (a.vn=c.vn) and (a.status IN('COM'))    ";
-$sql .= " and (c.total > 0) and  (c.ku > 0)  and (c.pdate between '$sdat' and '$edat')  order by a.vn asc  ";
+$sql .= " and (c.total > 0) and  (c.ku > 0)  and (c.pdate between '$sdat' and '$edat') $where_branch_id order by a.vn asc  ";
 
 
 $str  = mysql_query($sql);

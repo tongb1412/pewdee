@@ -6,8 +6,6 @@ $date = date('Y-m-d');
 $where_branch_id = "";
 if($_SESSION['branch_id'] !="") {
 	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
-}else if ($_SESSION['branch_id'] =="") {
-	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
 }
 
 $cl = $color1;

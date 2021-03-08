@@ -24,7 +24,10 @@ $cname = $rs['clinicname'];
 $dname ='';
 
 $empid = '';
-
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
+}
 if(empty($did)){
 $sql  = "select  empid,empname,tid,tname,sum(totalprice) totalprice,count(*) qty ";
 $sql .= "from tb_pctrec  where   (dat between '$sdate%' and '$edate%') and (typ ='C')  ";
@@ -33,7 +36,7 @@ $sql  = "select  empid,empname,tid,tname,sum(totalprice) totalprice,count(*) qty
 $sql .= "from tb_pctrec  where   (dat between '$sdate%' and '$edate%') and (typ ='C' ) and (empid like '%$did%') ";
 }
 
-$sql .="  group by empid,empname,tid,tname order by empid ";
+$sql .=" $where_branch_id group by empid,empname,tid,tname order by empid ";
 
 $result  = mysql_query($sql)or die ("Error Query [".$sql."]"); 
 

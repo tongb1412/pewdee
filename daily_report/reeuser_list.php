@@ -19,13 +19,17 @@ $did = $_POST['did'];
 	
 		
 <? 
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 $cl = $color1;
 if(empty($did)){
-$sql = "select a.totalprice,b.tid,b.tname,b.qty,b.empid,b.ename,c.cradno,c.pname,c.fname,c.lname,(a.totalprice / a.qty) priceunit,((a.totalprice / a.qty)*b.qty) price";
-$sql .= " from tb_pctrec a,tb_pctuse b,tb_patient c  where (a.hn = c.hn) and  (b.dat like '%$dat%') and (a.vn = b.vn) and (a.tid = b.pid) ";
+	$sql = "select a.totalprice,b.tid,b.tname,b.qty,b.empid,b.ename,c.cradno,c.pname,c.fname,c.lname,(a.totalprice / a.qty) priceunit,((a.totalprice / a.qty)*b.qty) price";
+	$sql .= " from tb_pctrec a,tb_pctuse b,tb_patient c  where (a.hn = c.hn) and  (b.dat like '%$dat%') and (a.vn = b.vn) and (a.tid = b.pid) $where_branch_id";
 } else {
-$sql = "select a.totalprice,b.tid,b.tname,b.qty,b.empid,b.ename,c.cradno,c.pname,c.fname,c.lname,(a.totalprice / a.qty) priceunit,((a.totalprice / a.qty)*b.qty) price";
-$sql .= " from tb_pctrec a,tb_pctuse b,tb_patient c  where (a.hn = c.hn) and  (b.dat like '%$dat%') and (a.vn = b.vn) and (a.tid = b.pid)   and (b.empid like '%$did%') ";
+	$sql = "select a.totalprice,b.tid,b.tname,b.qty,b.empid,b.ename,c.cradno,c.pname,c.fname,c.lname,(a.totalprice / a.qty) priceunit,((a.totalprice / a.qty)*b.qty) price";
+	$sql .= " from tb_pctrec a,tb_pctuse b,tb_patient c  where (a.hn = c.hn) and  (b.dat like '%$dat%') and (a.vn = b.vn) and (a.tid = b.pid)   and (b.empid like '%$did%') $where_branch_id";
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
