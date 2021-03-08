@@ -49,7 +49,7 @@ $sql .=" order by tname asc LIMIT $Page_Start , $Per_Page";
 $result  = mysql_query($sql);
 if($result){
 $n=1;
-while($rs=mysql_fetch_array($result)){  
+while($rs = mysql_fetch_array($result)){  
 	if($cl != $color1){
 		$cl = $color1;
 	} else {
@@ -63,35 +63,63 @@ while($rs=mysql_fetch_array($result)){
 	$num  = mysql_num_rows($rst);
 	$dtotal = 0;
 	if(!empty($num)){
-		$rss=mysql_fetch_array($rst);
+		$rss = mysql_fetch_array($rst);
 		$dtotal = $rss['total'];
 	}
-
 	?>
-	<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:97%; cursor:pointer;" onclick="swabtab(5,5,'stock/druge_edit_from.php','content','did=<?= $rs['did'] ?>')">
-		<div style="width:15%; float:left;"><?= $rs['did'] ?>&nbsp;</div>
-		<div style="width:30%; float:left;"><?= $rs['tname'] ?>&nbsp;</div>
-		<div style="width:21%; float:left;"><?= $rs['dgroup'] ?>&nbsp;</div>
-		<div style="width:10%; float:left; text-align:right">
-			<?php
-				if($selserch == "all" || $selserch == "07" || $selserch == "00"){
-					echo number_format($rs['total'],'0','.',','); 
+
+	<?php
+	if ($_SESSION['branch_id'] == "07" || $_SESSION['branch_id'] == "00") {
+	?>
+		<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:97%; cursor:pointer;" onclick="swabtab(5,5,'stock/druge_edit_from.php','content','did=<?= $rs['did'] ?>')">
+			<div style="width:15%; float:left;"><?= $rs['did'] ?>&nbsp;</div>
+			<div style="width:30%; float:left;"><?= $rs['tname'] ?>&nbsp;</div>
+			<div style="width:15%; float:left;"><?= $rs['dgroup'] ?>&nbsp;</div>
+			<div style="width:11%; float:left; text-align:right; margin-right:3%">
+				<?php
+				echo number_format($rs['total'], '0', '.', ',');
+				?>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			<div style="width:10%; float:left; text-align:right">
+				<?php
+				echo number_format($rss['total'], '0', '.', ',');
+				?>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			<div style="width:5%; float:left; text-align: left; margin-left:6%"><?= $rs['unit'] ?>&nbsp;</div>
+			<div style="width:5%; float:left; text-align: center;">
+				<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('stock/druge_del.php','p_list','id=<?= $rs['did'] ?>')" />
+
+			</div>
+		</div>
+	<?php
+	} else {
+		?>
+		<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:97%; cursor:pointer;" onclick="swabtab(5,5,'stock/druge_edit_from.php','content','did=<?= $rs['did'] ?>')">
+			<div style="width:15%; float:left;"><?= $rs['did'] ?>&nbsp;</div>
+			<div style="width:30%; float:left;"><?= $rs['tname'] ?>&nbsp;</div>
+			<div style="width:15%; float:left;"><?= $rs['dgroup'] ?>&nbsp;</div>
+			<div style="width:14%; float:left; text-align:right;">
+				<?php
+				if ($selserch == "all" || $selserch == "07" || $selserch == "00") {
+					echo number_format($rs['total'], '0', '.', ',');
+				} else {
+					echo number_format($rss['total'], '0', '.', ',');
 				}
-				else{
-					echo number_format($rss['total'],'0','.',','); 
-				}				
-			?>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		</div>
-		<div style="width:10%; float:left;"><?= $rs['unit'] ?>&nbsp;</div>
-		<div style="width:13%; float:left; text-align:right;">
-			<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('stock/druge_del.php','p_list','id=<?= $rs['did'] ?>')" />
+				?>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			<div style="width:10%; float:left;text-align:center; margin-left:4.5%"><?= $rs['unit'] ?>&nbsp;</div>
+			<div style="width:9%; float:left; text-align:right;">
+				<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('stock/druge_del.php','p_list','id=<?= $rs['did'] ?>')" />
 
+			</div>
 		</div>
-	</div>
+		<?php
+	}
+	?>
 	<? } ?>
-
-
 
 	<? } ?>
 </div>
