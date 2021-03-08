@@ -90,7 +90,7 @@ if(!empty($pn)){ $cl = '#FF6600';  }
 	<?
 	}
 
-		echo	" <b>$Page </b>";			
+		echo " <b>$Page </b>";			
 		
 	
 	if($Page!=$Num_Pages)

@@ -34,7 +34,7 @@ $where_branch_id = "and a.branchid = '$branch_id'";
             <div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
         </div>
         <div style="width:14%; float:left;">
-            <input type="button" value="  แสดงข้อมูล " onclick="showapplist('appointment/list_1.php','content')" />
+            <input type="button" value="  แสดงข้อมูล " onclick="showapplist('appointment/appoint_list.php','applist')" />
         </div>
     </div>
 </div>
@@ -55,7 +55,7 @@ $where_branch_id = "and a.branchid = '$branch_id'";
             สาขา
             &nbsp;
         </span>
-        <select name="sel_branchid_app" id="sel_branchid_app" onchange="showapplist('appointment/list_1.php','content')">
+        <select name="sel_branchid_app" id="sel_branchid_app" onchange="showapplist('appointment/appoint_list.php','applist')">
             <?php
             if ($Num_Rows > 0) {
                 $flag = 0;
@@ -87,7 +87,6 @@ $where_branch_id = "and a.branchid = '$branch_id'";
 
 </div>
 <div style=" width:98%; height:25px;; border:<?= $tabcolor ?> 1px solid; background:<?= $tabcolor ?>; margin-left:10px;">
-
     <div style="width:100%; height:20px; padding-top:5px; color:#000000; margin:auto; font-weight:bold; font-size:13px; ">
         <div style="width:8%;  text-align:left; float:left;">
             <img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ
@@ -108,53 +107,11 @@ $where_branch_id = "and a.branchid = '$branch_id'";
             <img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;เวลา
         </div>
 
-
         <div style="width:20%;  text-align:left; float:left;">
             <img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รายละเอียด
         </div>
     </div>
 </div>
 <div id="applist" style=" width:98%; height:400px; border:<?= $tabcolor ?> 1px solid;  margin-left:10px; overflow:auto">
-    <?
-$sql  = "select a.*,concat(b.pname,b.fname) as cname,c.selfphone from tb_appointment a,tb_staff b,tb_patient c ";
-$sql .= "where a.pid=b.staffid and a.hn=c.hn and a.dat like '%$dat%'  and atyp='A' " . $where_branch_id . " order by a.pid,a.atime ";
-$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$n = 1;
-while($rs = mysql_fetch_array($str)){ 
-    if($cl != $color1){
-        $cl = $color1;
-    } else {
-        $cl = $color2;
-    }
-    ?>
-
-    <div style="width:99%; height:25px; line-height:25px; text-align:left; margin-left:1px; border-bottom:#CCCCCC 1px dotted;background:<?= $cl ?>; cursor:pointer; " onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" onclick="cleartabreg(6,4,7,'appointment/new_form.php?an=<?= $rs['an'] ?>','content','')">
-
-        <div style="width:8%; float:left; line-height:25px;text-align:center">
-            <?= $n ?>
-        </div>
-        <div style="width:15%; float:left; line-height:25px; overflow:hidden;">
-            &nbsp;<?= $rs['cname'] ?>
-        </div>
-        <div style="width:10%; float:left; line-height:25px;">
-            &nbsp;<?= $rs['cn'] ?>
-        </div>
-        <div style="width:20%; float:left; line-height:25px;">
-            &nbsp;<?= $rs['pname'] ?>
-        </div>
-        <div style="width:10%; float:left; line-height:25px;">
-            &nbsp;<?= $rs['selfphone'] ?>
-        </div>
-        <div style="width:10%; float:left; line-height:25px;">
-            &nbsp;<?= $rs['atime'] ?>
-        </div>
-
-
-        <div style="width:20%; float:left; line-height:25px;">
-            &nbsp;<?= $rs['mem'] ?>
-        </div>
-    </div>
-    <? $n++; } ?>
-
-    <div style="width:100%; float:left; height:10px;">&nbsp;</div>
+    <?php  require("appoint_list.php");	 ?>
 </div>

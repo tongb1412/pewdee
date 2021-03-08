@@ -19,7 +19,7 @@ if(empty($_GET['dat'])){
 
 ?>
 <div style="width:100%; height:35px;">
-	<div class="line" style="margin-top:10px;" >
+	<div class="line" style="margin-top:0.5%;" >
 		<div style="width:10%; float:left; text-align:right;">วันที่ :&nbsp;</div>
 		<div style="width:14%; float:left;">
         <input type="text" id="dat" size="19" readonly="readonly" value="<?=$sdat?>" />
@@ -30,9 +30,57 @@ if(empty($_GET['dat'])){
 		<div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
         </div>	
         <div style="width:14%; float:left;">
-        <input type="button" value="  แสดงข้อมูล "  onclick="showapplist('appointment/list_2.php','content')" /> 
+        <input type="button" value="  แสดงข้อมูล "  onclick="showapplist('appointment/book_list.php','applist')" /> 
         </div>
      </div>
+</div>
+<div style="position: absolute;left: 40%;top: 16%;">
+    <?php
+    if ($_SESSION['branch_id'] != "") {
+        $branch_id = $_SESSION['branch_id'];
+        $sql = "";
+        if ($branch_id == "00" || $branch_id == "07") {
+            $sql = "select * from tb_branch order by branchid";
+        } else {
+            $sql = "select * from tb_branch where branchid = '$branch_id' order by branchid";
+        }
+        $result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+        $Num_Rows = mysql_num_rows($result);
+    ?>
+        <span>
+            สาขา
+            &nbsp;
+        </span>
+        <select name="sel_branchid_app" id="sel_branchid_app" onchange="showapplist('appointment/book_list.php','applist')">
+            <?php
+            if ($Num_Rows > 0) {
+                $flag = 0;
+                if ($branch_id == "00" || $branch_id == "07") {
+            ?>
+                    <option value="all">ทั้งหมด</option>
+                    <?php
+                }
+                while ($rs = mysql_fetch_array($result)) {
+                    if ($branch_id == $rs['branchid']) {
+                    ?>
+                        <option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname']; ?></option>
+                    <?php
+                    } else {
+                    ?>
+                        <option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname']; ?></option>
+            <?php
+                    }
+                }
+            }
+            ?>
+        </select>
+    <?php
+        mysql_close($dblink);
+        // ajaxLoad('get','stock/druge_list.php','txt=','p_list');
+    } else if ($_SESSION['branch_id'] == "") {
+    }
+    ?>
+
 </div>
 <div style=" width:98%; height:25px;; border:<?=$tabcolor?> 1px solid; background:<?=$tabcolor?>; margin-left:10px;">
 
@@ -61,44 +109,5 @@ if(empty($_GET['dat'])){
     </div>
 </div>
 <div id="applist" style=" width:98%; height:400px; border:<?=$tabcolor?> 1px solid;  margin-left:10px; overflow:auto">
-<?
-$sql  = "select a.*,concat(b.pname,b.fname,b.lname) as cname,c.selfphone from tb_appointment a,tb_staff b,tb_patient c  ";
-$sql .= "where a.pid=b.staffid and a.hn=c.hn and a.dat like '%$dat%'  and atyp='S' " . $where_branch_id . " order by pid,cname   ";
-$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$n = 1;
-while($rs=mysql_fetch_array($str)){ 
-if($cl != $color1){
-	$cl = $color1;
-} else {
-	$cl = $color2;
-}
-?>
-
-<div  style="width:99%; height:25px; line-height:25px; text-align:left; margin-left:1px; border-bottom:#CCCCCC 1px dotted;background:<?=$cl?>;  cursor:pointer;" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" onclick="cleartabreg(6,4,7,'appointment/new_form.php?an=<?=$rs['an']?>','content','')"  >
-
-    <div style="width:6%; float:left; line-height:25px;text-align:center"  >
-	<?=$n?>
-	</div>
-    <div style="width:10%; float:left; line-height:25px;"  >
-	&nbsp;<?=$rs['cn']?>
-	</div>
-    <div style="width:18%; float:left; line-height:25px;"  >
-	&nbsp;<?=$rs['pname']?>
-	</div>   
-    <div style="width:15%; float:left; line-height:25px;"  >
-	&nbsp;<?=$rs['selfphone']?>
-	</div>   
-    <div style="width:18%; float:left; line-height:25px;"  >
-	&nbsp;<?=$rs['cname']?>
-	</div>  
-    <div style="width:13%; float:left; line-height:25px; text-align:center"  >
-	<?=$rs['stim'].'-'.$rs['etim']?>
-	</div>  
-    <div style="width:20%; float:left; line-height:25px;"  >
-	&nbsp;<?=$rs['mem']?>
-	</div> 
-</div>
-<? $n++; } ?>
-
-<div style="width:100%; float:left; height:10px;">&nbsp;</div>
+    <?php  require("book_list.php");	 ?>
 </div>
