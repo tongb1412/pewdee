@@ -260,7 +260,7 @@ $sql1 = "select sum((b.totalprice/b.qty)*a.qty) one from tb_pctuse a,tb_pctrec b
 
 
 
-$str = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+$str = mysql_query($sql1) or die ("Error Query ".$sql1); 
 $row = mysql_fetch_array($str);
 $usetotal = $row['one'];
 

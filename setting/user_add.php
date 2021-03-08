@@ -9,12 +9,12 @@ $price = $_POST['pass'];
 
 if($_POST['type']!='edit'){
 $sql1 = "select empid from tb_user where empid='$id'  ";
-$result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
 $n = mysql_num_rows($result);
 if(empty($n)){
 
  $sql1 = "select username from tb_user where username='$user'";
- $result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+ $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
  $n = mysql_num_rows($result);
  if(empty($n)){
 

@@ -46,12 +46,12 @@ $dat = date('Y-m-d H:i:s');
 
 if($_POST['mode']=='ADD'){
 $sql1 = "select fname from tb_patient where fname='$fname' and lname='$lname' ";
-$result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
 $n = mysql_num_rows($result);
 if(empty($n)){
 
  $sql1 = "select fname from tb_patient where hn='$hn'";
- $result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+ $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
  $n = mysql_num_rows($result);
  if(empty($n)){
  

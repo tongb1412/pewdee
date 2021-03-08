@@ -40,7 +40,7 @@ while($rs=mysql_fetch_array($str)){
 	$tname = 'รับยาคืนจาก'.$cname;
 
 	$sql = "insert into drugelog values('NULL','-','$lno','$did','$dname','$qty','$dtotal','$tname','$dat','I') ";
-	mysql_query($sql)or die ("Error Querycc ".$sql) ;
+	mysql_query($sql)or die ("Error Query ".$sql) ;
 
 
 	$sql1 = "select total from tb_drugeinstock  where did='$did' and lno='$lno' ";

@@ -9,7 +9,7 @@ $unit = $_POST['unit'];
 
 
  $sql1 = "select lid from tb_temp_laserinstock where lno='$lno' and lid='$lid'";
- $result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+ $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
  $n = mysql_num_rows($result);
  if(empty($n)){
 

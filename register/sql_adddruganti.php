@@ -6,7 +6,7 @@ $did = $_POST['did'];
 $dname = $_POST['dname'];
 $url = $_POST['url'];
 $sql1 = "select dname from tb_druganti where hn='$hn' and did='$did' ";
-$result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
 $n = mysql_num_rows($result);
 if(empty($n)){
 	$sql = "insert into tb_druganti  values('$hn','$did','$dname')";

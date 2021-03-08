@@ -11,7 +11,7 @@ if(empty($_POST['hn'])){
 
 
 $sql = "select * from tb_patient where hn = '$hn'";
-$str = mysql_query($sql) or die ("Error Querycc ".$sql); 
+$str = mysql_query($sql) or die ("Error Query ".$sql); 
 $row=mysql_fetch_array($str);
 $pname = $row['pname'].$row['fname'].'   '.$row['lname'];
 

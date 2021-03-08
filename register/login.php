@@ -8,7 +8,7 @@ $pass = $_POST['pass'];
 
 
 $sql1 = "select staffid,pname,fname,lname,user,pass,mode,branchid from tb_staff where user='$user' and pass='$pass' ";
-$result = mysql_query($sql1) or die ("Error Querycc ".$sql1); 
+$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
 $n = mysql_num_rows($result);
 
 if(!empty($n)){

@@ -64,7 +64,6 @@ mysql_query($sql_delete);
 			<div style="width:15%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จำนวน</div>
 			<div style="width:10%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;หน่วย</div>
 			<div style="width:15%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ประเภท</div>
-
 		</div>
 
 	</div>
@@ -115,7 +114,7 @@ mysql_close($dblink);
 	</div>
 	<div style="width:100%; height:auto; float:left;  text-align:right; padding-top:5px;">
 		<div style="width:60%; height:auto; float:left;">
-			<textarea id="cmem" rows="3" style="width:100%"></textarea>
+			<textarea id="cmem" rows="3" style="width:100%" placeholder="รายละเอียดการปรับสต็อค"></textarea>
 		</div>
 		<div style="width:40%; height:auto; float:left;  text-align:right;">
 			<input type="button" value="  ปรับสต็อค " style="font-size:14px; font-weight:bold; height:35px;" onclick="addcutstock('stock/cut_instock.php','content')">
