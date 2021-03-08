@@ -1,6 +1,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+
+$branch_id = "";
+if($_SESSION['branch_id'] != ""){
+	$branch_id = $_SESSION['branch_id'];
+	$where_branch_id = "and a.branchid = '$branch_id'";
+}
+
+
 if(empty($_GET['dat'])){
 	$dat = date('Y-m-d');
 	$sdat = date('d-m-Y');
@@ -55,7 +63,7 @@ if(empty($_GET['dat'])){
 <div id="applist" style=" width:98%; height:400px; border:<?=$tabcolor?> 1px solid;  margin-left:10px; overflow:auto">
 <?
 $sql  = "select a.*,concat(b.pname,b.fname,b.lname) as cname,c.selfphone from tb_appointment a,tb_staff b,tb_patient c  ";
-$sql .= "where a.pid=b.staffid and a.hn=c.hn and a.dat like '%$dat%'  and atyp='S' order by pid,cname   ";
+$sql .= "where a.pid=b.staffid and a.hn=c.hn and a.dat like '%$dat%'  and atyp='S' " . $where_branch_id . " order by pid,cname   ";
 $str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $n = 1;
 while($rs=mysql_fetch_array($str)){ 

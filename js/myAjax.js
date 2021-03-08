@@ -1294,6 +1294,7 @@ function movepname(hn, cn, pname) {
 
 function showapplist(URL, displayId) {
 	var data = 'dat=' + document.getElementById('dat').value;
+	data += '&sel=' + document.getElementById('sel_branchid_app').value;
 	ajaxLoad('get', URL, data, displayId);
 }
 
@@ -1836,10 +1837,21 @@ function switchtime(a) {
 	if (a.value == 'A') {
 		document.getElementById('tl1').style.display = 'none';
 		document.getElementById('tl2').style.display = 'none';
+		document.getElementById('div_atime').style.display = '';
+		document.getElementById('div_atime2').style.display = 'none';
 	} else {
 		document.getElementById('tl1').style.display = '';
 		document.getElementById('tl2').style.display = '';
+		document.getElementById('div_atime').style.display = 'none';
+		document.getElementById('div_atime2').style.display = '';
 	}
+}
+
+function addAppAtimeChange(txt){
+	document.getElementById('atime').value = txt.value;
+}
+function addAppAtimeChange2(txt){
+	document.getElementById('atime2').value = txt.value;
 }
 
 function celpct() {
