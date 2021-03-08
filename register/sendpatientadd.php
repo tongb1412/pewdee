@@ -3,6 +3,11 @@ include('../class/config.php');
 $hn = $_POST['hn'];
 $eid = $_POST['eid'];
 
+$branch_id = "";
+if($_SESSION["branch_id"] != ""){
+	$branch_id = $_SESSION["branch_id"];
+}
+
 $vn = 'VN'.date('ymdHis',time());
 $dat = date('Y-m-d H:i:s',time());
 if($eid!='00'){
@@ -14,10 +19,11 @@ $ename = $rs['pname'].$rs['fname'].'    '.$rs['lname'];
 $ename = 'ไม่ระบุแพทย์';
 }
 
-$sql = "insert into tb_vst  values('$vn','$hn','$dat','DOC','$eid','$ename','00','','')";
+$sql = "insert into tb_vst values('$vn','$hn','$dat','DOC','$eid','$ename','00',NULL,'','$branch_id')";
+// echo $sql;exit();
 mysql_query($sql);	
 
-$sql = "update tb_patient set stayin='DOC',vn='$vn'  where hn='$hn' ";
+$sql = "update tb_patient set stayin='DOC',vn='$vn' where hn='$hn' and branchid = '$branch_id' ";
 mysql_query($sql);
 
 

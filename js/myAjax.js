@@ -740,7 +740,17 @@ function setbtnSetting(n, m) {
 
 function serchtxt(URL, displayId, txt) {
 	var data = 'txt=' + txt.value;
+	// data += '&sel=' + $('#sel_branchid_stock').val();
+	ajaxLoad('get', URL, data, displayId);
+}
+function serchtxtStock(URL, displayId, txt) {
+	var data = 'txt=' + txt.value;
 	data += '&sel=' + $('#sel_branchid_stock').val();
+	ajaxLoad('get', URL, data, displayId);
+}
+function serchtxtPatient(URL, displayId, txt) {
+	var data = 'txt=' + $('#txts').val();
+	data += '&sel=' + $('#sel_branchid_patient').val();
 	ajaxLoad('get', URL, data, displayId);
 }
 

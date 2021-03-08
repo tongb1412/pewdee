@@ -2,12 +2,28 @@
 <?
 include('../class/config.php');
 $txtserch = $_GET['txt'];
+$selserch = $_GET['sel'];
+
+
+if($txtserch == "ค้นหา"){
+	$txtserch = "";
+}
+
+
+if($selserch == ""){
+	$selserch = $_SESSION['branch_id'];
+}
+
+$where_branch_id = "";
+if($selserch != "00" && $selserch != "07" && $selserch != "all"){
+	$where_branch_id = "and branchid = '$selserch'"; 
+}
 
 $cl = $color1;
 if(empty($txtserch)){
 	$sql = "select * from tb_patient where stayin <> 'OFF' ";
 } else {
-	$sql = "select * from tb_patient where (cradno like '%$txtserch%' or hn like '%$txtserch%' or fname like '%$txtserch%' or lname like '%$txtserch%') and (stayin <> 'OFF') ";
+	$sql = "select * from tb_patient where (cradno like '%$txtserch%' or hn like '%$txtserch%' or fname like '%$txtserch%' or lname like '%$txtserch%') and (stayin <> 'OFF') " . $where_branch_id;
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);
@@ -68,7 +84,7 @@ if(!empty($pn)){ $cl = '#FF6600';  }
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('get','register/patient_list.php','txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','p_list')">	
+	<a href="javascript: ajaxLoad('get','register/patient_list.php','sel=<?=$selserch?>&txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','p_list')">	
 	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
@@ -81,7 +97,7 @@ if(!empty($pn)){ $cl = '#FF6600';  }
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('get','register/patient_list.php','txt=<?=$txtserch?>&Page=<?=$Next_Page?>','p_list')">	
+	<a href="javascript: ajaxLoad('get','register/patient_list.php','sel=<?=$selserch?>&txt=<?=$txtserch?>&Page=<?=$Next_Page?>','p_list')">	
 	<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		

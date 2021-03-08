@@ -1,6 +1,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+
+$branch_id = "";
+if($_SESSION["branch_id"] != ""){
+	$branch_id = $_SESSION["branch_id"];
+}
+
 $cardno = $_POST['cardno'];
 $hn = $_POST['hn'];
 $pname = trim($_POST['pname']);
@@ -39,47 +45,36 @@ $other = $_POST['other'];
 
 $dat = date('Y-m-d H:i:s');
 
-
-
-
-
-
 if($_POST['mode']=='ADD'){
-$sql1 = "select fname from tb_patient where fname='$fname' and lname='$lname' ";
-$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
-$n = mysql_num_rows($result);
-if(empty($n)){
+	$sql1 = "select fname from tb_patient where fname='$fname' and lname='$lname' ";
+	$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
+	$n = mysql_num_rows($result);
+	if(empty($n)){
 
- $sql1 = "select fname from tb_patient where hn='$hn'";
- $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
- $n = mysql_num_rows($result);
- if(empty($n)){
- 
- 
- 
- 
- 
- 
- 
-	$sql  = "insert into tb_patient  values('$hn','$cardno','$dat','$level','$pname','$fname','$lname','$sex','$pno'";
-	$sql .= ",'$dob','$bl','$oc','$st','$adderss','$tum','$aum','$province','$country','$post','$tel','$mtel','$email'";
-	$sql .= ",'$facebook','$pass','REG','-','-','-','$mem','$typ','$how','$other')";
-	mysql_query($sql) or die ("Error Query [".$sql."]");
-	
-	$sql  = "update tb_autonumber set last='$hn' where typ='HN'";
-	mysql_query($sql) or die ("Error Query [".$sql."]");	
-	
-	$confirm = 'Yes';
-	$txt = 'บันทึกข้อมูลเรียบร้อยแล้ว';
-	
-  } else {
-	$confirm = 'No';
-	$txt = 'รหัสคนไข้ มีในระบบแล้วไม่สามารถบันทึกได้';  
-  }		
-} else {
-	$confirm = 'No';
-	$txt = 'ชื่อ - สกุล มีในระบบแล้วไม่สามารถบันทึกได้';
-}
+		$sql1 = "select fname from tb_patient where hn='$hn'";
+		$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
+		$n = mysql_num_rows($result);
+		if(empty($n)){
+
+			$sql  = "insert into tb_patient values('$hn','$cardno','$dat','$level','$pname','$fname','$lname','$sex','$pno'";
+			$sql .= ",'$dob','$bl','$oc','$st','$adderss','$tum','$aum','$province','$country','$post','$tel','$mtel','$email'";
+			$sql .= ",'$facebook','$pass','REG','-','-','-','$mem','$typ','$how','$other','$branch_id')";
+			mysql_query($sql) or die ("Error Query [".$sql."]");
+			
+			$sql  = "update tb_autonumber set last='$hn' where typ='HN'";
+			mysql_query($sql) or die ("Error Query [".$sql."]");	
+			
+			$confirm = 'Yes';
+			$txt = 'บันทึกข้อมูลเรียบร้อยแล้ว';
+			
+		} else {
+			$confirm = 'No';
+			$txt = 'รหัสคนไข้ มีในระบบแล้วไม่สามารถบันทึกได้';  
+		}		
+	} else {
+		$confirm = 'No';
+		$txt = 'ชื่อ - สกุล มีในระบบแล้วไม่สามารถบันทึกได้';
+	}
 } else {
 	$sql  = "update tb_patient set cradno='$cardno',level='$level',pname='$pname',fname='$fname',lname='$lname',sex='$sex'";
 	$sql .= ",personalid='$pno',birthday='$dob',blood='$bl',occupation='$oc',state='$st',address='$adderss'";

@@ -4,33 +4,30 @@ include('../class/config.php');
 $hn = $_POST['hn'];
 $sd = 'Yes';
 $sql = "select * from tb_vst where hn='$hn' and status not IN('COM','CANCEL')";
+// echo $sql;exit();
 $str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $num = mysql_num_rows($str);
 if($num > 0 ){
 	$sd = 'No';
-	$rs=mysql_fetch_array($str);
+	echo $sd;
+	$rs = mysql_fetch_array($str);
 	switch ($rs['status']) {
 	case 'SD'  : $txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้อยู่ระหว่างการซื้อยาหน้าร้าน';
 				 break;
 	case 'DOC' : $txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้อยู่ระหว่างการตรวจ ';
 				 break;
 	}
-
-		
 }
-
 
 $sql = "select * from tb_patient where hn='$hn'";
 $patient_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $row=mysql_fetch_array($patient_result);
-if($sd=='Yes'){
-	if($row['vn']!='-'){
-		$sd = 'No'; $txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้กำลังซื้อยาหน้าร้าน';
+if($sd == 'Yes'){
+	if($row['vn'] != '-'){
+		$sd = 'No'; 
+		$txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้กำลังซื้อยาหน้าร้าน';
 	}
-
 }
-
-
 
 ?>
 
@@ -38,7 +35,7 @@ if($sd=='Yes'){
 	<div style="width:40%; height:50px; line-height:50px; text-align:right; float:left;">รหัสคนไข้ : <?=$hn; ?></div>
 	<div style="width:50%; height:50px; padding-left:30px; line-height:50px; text-align:left; float:left; "><?=$row['pname'].$row['fname'].'    '.$row['lname']; ?></div>
 </div>
-<? if($sd=='Yes'){ ?>
+<? if($sd == 'Yes'){ ?>
 <div style="width:100%; height:100px;">
 	<div class="line" style="margin-top:10px; height:50px; font-size:16px;">
 		<div style="width:25%; float:left; text-align:right; line-height:50px; height:50px;">แพทย์ผู้ตรวจ&nbsp;</div>
@@ -48,7 +45,7 @@ if($sd=='Yes'){
 		<?
 		$sql = "select * from tb_staff where typ = 'D' and eshow='Y' order by typ, fname  ";
 		$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-		while($rs=mysql_fetch_array($result)){
+		while($rs = mysql_fetch_array($result)){
 		?>
 		<option value="<?=$rs['staffid']?>"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></option>
 		<? } ?>		
