@@ -47,18 +47,21 @@ $sql  = "select a.*,b.vdate,c.fname,c.lname,c.cradno from tb_drugerec a,tb_vst b
 } else {
 $sql  = "select a.*,b.vdate,c.fname,c.lname,c.cradno from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status <> 'CANCLE'  and a.hn=c.hn and (a.did like '%$did%') ";
 }*/
-
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 if(empty($did)){
 	if($sdate == $edate){
-		$sql = "select a.did,a.dname,sum(a.qty) qty,count(*) count from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status = 'COM'  and a.hn=c.hn  and ( b.vdate like '%$sdate%' ) group by a.did,a.dname  ";	
+		$sql = "select a.did,a.dname,sum(a.qty) qty,count(*) count from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status = 'COM'  and a.hn=c.hn  and ( b.vdate like '%$sdate%' ) $where_branch_id group by a.did,a.dname  ";	
 	} else {	
-		$sql = "select a.did,a.dname,sum(a.qty) qty,count(*) count from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status <> 'COM'  and a.hn=c.hn  and (b.vdate between '$sdate%' and '$edate%') group by a.did,a.dname  ";
+		$sql = "select a.did,a.dname,sum(a.qty) qty,count(*) count from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status <> 'COM'  and a.hn=c.hn  and (b.vdate between '$sdate%' and '$edate%') $where_branch_id group by a.did,a.dname  ";
 	}
 } else {
 	if($sdate == $edate){
-		$sql = "select a.did,a.dname,sum(a.qty) qty,count(*) count from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status <> 'COM'  and a.hn=c.hn  and (b.vdate like '%$sdate%') and (a.did like '%$did%') group by a.did,a.dname";
+		$sql = "select a.did,a.dname,sum(a.qty) qty,count(*) count from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status <> 'COM'  and a.hn=c.hn  and (b.vdate like '%$sdate%') and (a.did like '%$did%') $where_branch_id group by a.did,a.dname";
 	} else {	
-		$sql = "select a.did,a.dname,sum(a.qty) qty,count(*) count from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status <> 'COM'  and a.hn=c.hn and (b.vdate between '$sdate%' and '$edate%') and (a.did like '%$did%')group by a.did,a.dname  ";
+		$sql = "select a.did,a.dname,sum(a.qty) qty,count(*) count from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status <> 'COM'  and a.hn=c.hn and (b.vdate between '$sdate%' and '$edate%') and (a.did like '%$did%') $where_branch_id group by a.did,a.dname  ";
 	
 	}
 }

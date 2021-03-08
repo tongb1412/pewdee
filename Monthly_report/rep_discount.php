@@ -20,13 +20,17 @@ $dname ='';
 
 $empid = '';
 
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 if(empty($did)){
 $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.empid,c.empname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate  between '$sdate%' and '$edate%') and (c.status='COM') and a.discount <> 0 and a.total = a.discount";
 } else {
 $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.empid,c.empname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate  between '$sdate%' and '$edate%') and (c.empid like '%$did%') and c(c.status='COM') and a.discount <> 0 and a.total = a.discount ";
 }
 
-$sql .="  order by c.empid,a.billno asc ";
+$sql .=" $where_branch_id order by c.empid,a.billno asc ";
 $result  = mysql_query($sql)or die ("Error Query [".$sql."]"); 
 
 $n=1; $m=1; $s='y'; $x = 52; $h=1; $nn=0;

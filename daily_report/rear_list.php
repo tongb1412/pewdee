@@ -5,7 +5,7 @@
 include('../class/config.php');
 $cl = '';
 $dat = date('Y-m-d');
-
+// $dat = "2011-03-22";
 ?>
     <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
       <div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
@@ -19,12 +19,15 @@ $dat = date('Y-m-d');
 	
 		
 <? 
-
+$where_branch_id = "";
+if($_SESSION['branch_id'] != "") {	
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 
 $t1 = 0;$t2=0;$t3=0;
 
 $cl = $color1;
-$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient  b where (a.hn = b.hn) and   (a.vn like 'AR%') and   (a.pdate like '%$dat%') ";
+$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient  b where (a.hn = b.hn) and   (a.vn like 'AR%') and   (a.pdate like '%$dat%') $where_branch_id";
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

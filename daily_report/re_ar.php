@@ -2,8 +2,13 @@
 <?
 include('../class/config.php');
 $dat = date('Y-m-d');
+// $dat = "2011-03-22";
+$where_branch_id = "";
+if($_SESSION['branch_id'] != "") {	
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 
-$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient  b where (a.hn = b.hn) and   (a.vn like 'AR%') and   (a.pdate like '%$dat%') ";
+$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient  b where (a.hn = b.hn) and   (a.vn like 'AR%') and   (a.pdate like '%$dat%') $where_branch_id";
 
 //$sql = "select a.pdate,sum(a.cash) s_cash ,sum(a.credit) s_credit,sum(a.total) s_total,b.cradno,b.pname,b.fname,b.lname ";
 //$sql .= "from tb_payment a,tb_patient b, cbil c where (a.hn = b.hn) and (a.billno <> c.bno) and (a.pdate like '%$dat%') and (a.vn like 'AR%') group by 'a.pdate%' ";

@@ -49,19 +49,23 @@ $edate = date("Y-m-d", $t1);
 <? 
 $cl = $color1;
 
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 
 
 if(empty($did)){
 	if($sdate == $edate){
-		$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and ( a.pdate like '%$sdate%' ) and (c.status='COM') and a.discount <> 0 ";	
+		$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and ( a.pdate like '%$sdate%' ) and (c.status='COM') and a.discount <> 0 $where_branch_id";	
 	} else {	
-		$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate between '$sdate%' and '$edate%') and (c.status='COM') and a.discount <> 0  ";
+		$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate between '$sdate%' and '$edate%') and (c.status='COM') and a.discount <> 0 $where_branch_id ";
 	}
 } else {
 	if($sdate == $edate){
-		$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$sdate%') and (c.empid like '%$did%') and (c.status='COM') and a.discount <> 0 ";
+		$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$sdate%') and (c.empid like '%$did%') and (c.status='COM') and a.discount <> 0 $where_branch_id";
 	} else {	
-		$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate between '$sdate%' and '$edate%') and (c.empid like '%$did%') and (c.status='COM') and a.discount <> 0 ";
+		$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate between '$sdate%' and '$edate%') and (c.empid like '%$did%') and (c.status='COM') and a.discount <> 0 $where_branch_id";
 	
 	}
 }

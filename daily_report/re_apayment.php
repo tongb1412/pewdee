@@ -5,9 +5,11 @@ include('../class/config.php');
 $dat = date('d-m-Y',time());
 
 
-
-
-	$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.pdate  from tb_apayment a,tb_patient  b,tb_payment c where (a.hn = b.hn) and (a.billno = c.billno) and (c.pdate like '%$dat%')  ";
+$where_branch_id = "";
+if($_SESSION['branch_id'] != "") {	
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
+$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.pdate  from tb_apayment a,tb_patient  b,tb_payment c where (a.hn = b.hn) and (a.billno = c.billno) and (c.pdate like '%$dat%') $where_branch_id ";
 
 
 $sql .=" order by a.billno asc ";

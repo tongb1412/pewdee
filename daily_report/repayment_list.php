@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div style=" width: 98%; margin-top:5px; overflow:auto; text-align:center; height:290px; ">
-  <?
+<?
 include('../class/config.php');
 
 
@@ -11,8 +11,10 @@ if(!empty($_POST['did'])){
 }
 
 
+
 $cl = '';
 $dat = date('Y-m-d');
+$dat = "2010-10-26";
 
 
 ?>
@@ -36,16 +38,34 @@ $dat = date('Y-m-d');
   </div>
 
 
-  <? 
+<? 
 $cl = $color1;
 
 
+if(!empty($_POST['branchid'])){
+  $branchid = $_POST['branchid'];
+} else {
+  $branchid = '';
+}
+$where_branch_id = "";
+if($branchid != "") {
+  if($branchid != "00"){ 
+    $where_branch_id = " and ( a.branchid ='".$branchid."' or a.branchid is null ) ";
+  } 
+}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
+	$where_branch_id = " and (a.branchid ='".$_SESSION['branch_id']."'  or a.branchid is null ) ";
+}
+
+
+// $where_branch_id = "";
+
 
 if(empty($did)){
-  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and (c.status='COM')   ";
+  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn) and (a.pdate like '%$dat%') and (c.status='COM') $where_branch_id ";
 } else {
-  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and (c.empid like '%$did%')  and (c.status='COM') ";
+  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn) and (a.pdate like '%$dat%') and (c.empid like '%$did%') and (c.status='COM') $where_branch_id";
 }
+echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

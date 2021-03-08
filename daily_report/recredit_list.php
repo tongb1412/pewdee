@@ -24,12 +24,18 @@ $dat = date('d-m-Y',time());
 	
 		
 <? 
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
+
 $cl = $color1;
 if(empty($did)){
 	$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient  b where (a.hn = b.hn) and  (a.pdate like '%$dat%') and (a.credit >0)  ";
 } else {
 	$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient  b where (a.hn = b.hn) and  (a.pdate like '%$dat%') and (credit >0) and (a.creditname like '%$did%') ";
 }
+$sql .= " " .$where_branch_id ;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

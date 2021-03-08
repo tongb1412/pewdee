@@ -19,13 +19,17 @@ $did = $_POST['did'];
 	
 		
 <? 
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 $cl = $color1;
 if(empty($did)){
 $sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat like '%$dat%') and (a.typ ='T' or typ ='L') ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat like '%$dat%') and (a.typ ='T' or typ ='L') $where_branch_id";
 } else {
 $sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat like '%$dat%') and (a.typ ='T' or typ ='L') and (a.empid like '%$did%') ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat like '%$dat%') and (a.typ ='T' or typ ='L') and (a.empid like '%$did%') $where_branch_id";
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 

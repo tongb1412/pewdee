@@ -1862,6 +1862,7 @@ function moveuser(staffid, fname) {
 
 function showpayment() {
 	var data = 'did=' + document.getElementById('repempid').value;
+	var data = 'branchid=' + document.getElementById('branch_id').value;
 
 	loadmodule('d_list', 'daily_report/repayment_list.php', data);
 }

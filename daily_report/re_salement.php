@@ -2,45 +2,36 @@
 <?
 include('../class/config.php');
 $did = $_GET['did'];
-
 $dat = date('Y-m-d');
-
 $sqlC .="select clinicname from tb_clinicinformation ";
 $strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
 $rs=mysql_fetch_array($strc);
 
 $cname = $rs['clinicname'];
-
 $dname ='';
-
 $empid = '';
 
+$where_branch_id = "";
+if($_SESSION['branch_id'] !="") {
+	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+}
 if(empty($did)){
-$sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn)  ";
-$sql .= "and (a.dat like '%$dat%') and (a.typ ='T' or typ ='L') ";
+	$sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
+	$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn)  ";
+	$sql .= "and (a.dat like '%$dat%') and (a.typ ='T' or typ ='L') ";
 } else {
-$sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat like '%$dat%') and (a.typ ='T' or typ ='L') and (a.empid like '%$did%')  ";
+	$sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
+	$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat like '%$dat%') and (a.typ ='T' or typ ='L') and (a.empid like '%$did%')  ";
 }
 
-$sql .=" order by a.empid ";
-
-
+$sql .=" $where_branch_id order by a.empid ";
 $result  = mysql_query($sql)or die ("Error Query [".$sql."]"); 
-
 $n=1; $m=1; $s='y'; $x = 52; $h=1; $nn=0;
-
 $total = 0;
 $total1 = 0;
-
 while($rs=mysql_fetch_array($result)){  
 $nn++;
 
-
-
-
- 
 if($s=='y'){ 	
 ?>
 	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">
