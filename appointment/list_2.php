@@ -109,5 +109,5 @@ if(empty($_GET['dat'])){
     </div>
 </div>
 <div id="applist" style=" width:98%; height:400px; border:<?=$tabcolor?> 1px solid;  margin-left:10px; overflow:auto">
-    <?php  require("book_list.php");	 ?>
+    <?php  require("book_list.php"); ?>
 </div>

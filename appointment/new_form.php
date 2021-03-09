@@ -22,10 +22,14 @@ if(empty($_GET['an'])){
 } else {
     $mod = 'EDIT'; 
 	$an = substr($_GET['an'],0,14);
-	$sql = "select a.*,concat(b.pname,b.fname,b.lname) as cname from tb_appointment a,tb_staff b  where a.pid=b.staffid and a.an='$an'";
-	$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+	$sql = "select a.*, tb.branchname, concat(b.pname,b.fname,b.lname) as cname";
+	$sql .= " from tb_appointment as a";
+	$sql .= " LEFT JOIN tb_staff as b ON a.pid = b.staffid";
+	$sql .= " LEFT JOIN tb_branch as tb ON tb.branchid = a.branchid";
+	$sql .= " where a.pid=b.staffid and a.an='$an'";
+	$str = mysql_query($sql) or die ("Error Query [".$sql."]");
 	$rs = mysql_fetch_array($str); 
-	if($rs['atyp']=='A'){ 
+	if($rs['atyp'] == 'A'){ 
 		$dis = 'none'; 
 		$dis2 = '';  
 	} else { 
@@ -108,7 +112,7 @@ if(empty($_GET['an'])){
 		<div style="width:30%; float:left;"><input type="text" id="an" size="20" readonly="true" value="<?= $an ?>" /> </div>
 		<div style="width:17%; float:left; text-align:right;">สาขา :&nbsp;</div>
 		<div style="width:30%; float:left;">
-			<input type="text" id="branch_id_txt" name="branch_id_txt" size="20" readonly="true"/> 
+			<input type="text" id="branch_id_txt" name="branch_id_txt" size="20" value="<?= $rs['branchname'] ?>" readonly="true"/> 
 		</div>
 	</div>
 	<div class="line" style="margin-top:10px;">

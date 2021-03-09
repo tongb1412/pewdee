@@ -29,6 +29,8 @@ if(empty($_GET['dat'])){
 <?
 $sql  = "select a.*,concat(b.pname,b.fname,b.lname) as cname,c.selfphone from tb_appointment a,tb_staff b,tb_patient c  ";
 $sql .= "where a.pid=b.staffid and a.hn=c.hn and a.dat like '%$dat%'  and atyp='S' " . $where_branch_id . " order by pid,cname   ";
+// echo $sql;exit();
+
 $str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $n = 1;
 while($rs=mysql_fetch_array($str)){ 
