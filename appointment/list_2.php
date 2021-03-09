@@ -57,7 +57,7 @@ if(empty($_GET['dat'])){
                 $flag = 0;
                 if ($branch_id == "00" || $branch_id == "07") {
             ?>
-                    <option value="all">ทั้งหมด</option>
+                    <option value="00">ทั้งหมด</option>
                     <?php
                 }
                 while ($rs = mysql_fetch_array($result)) {

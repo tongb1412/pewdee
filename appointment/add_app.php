@@ -14,10 +14,16 @@ $mem = $_POST['mem'];
 $flag = 0;
 
 $branch_id = "";
-if($_SESSION['branch_id'] != ""){
-	$branch_id = $_SESSION['branch_id'];
-	$where_branch_id = "and branchid = '$branch_id'";
+if(!empty($_POST['bid'])){
+	$branch_id = $_POST['bid'];
+} else {
+	if($_SESSION['branch_id'] != ""){
+		$branch_id = $_SESSION['branch_id'];
+		$where_branch_id = "and branchid = '$branch_id'";
+	}
 }
+
+
 
 $dat = substr($_POST['dat'],6,4).'-'.substr($_POST['dat'],3,2).'-'.substr($_POST['dat'],0,2)  ;
 $mod = 'Y';

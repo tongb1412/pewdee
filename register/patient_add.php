@@ -2,9 +2,15 @@
 <?
 include('../class/config.php');
 
+$bid = $_POST['bid'];
+
 $branch_id = "";
-if($_SESSION["branch_id"] != ""){
-	$branch_id = $_SESSION["branch_id"];
+if($bid == ""){
+	if($_SESSION["branch_id"] != ""){
+		$branch_id = $_SESSION["branch_id"];
+	}
+} else {
+	$branch_id = $bid;
 }
 
 $cardno = $_POST['cardno'];
@@ -62,7 +68,7 @@ if($_POST['mode']=='ADD'){
 			mysql_query($sql) or die ("Error Query [".$sql."]");
 			
 			$sql  = "update tb_autonumber set last='$hn' where typ='HN'";
-			mysql_query($sql) or die ("Error Query [".$sql."]");	
+			mysql_query($sql) or die ("Error Query [".$sql."]");
 			
 			$confirm = 'Yes';
 			$txt = 'บันทึกข้อมูลเรียบร้อยแล้ว';

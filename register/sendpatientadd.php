@@ -2,10 +2,16 @@
 include('../class/config.php');
 $hn = $_POST['hn'];
 $eid = $_POST['eid'];
+$bid = $_POST['bid'];
 
 $branch_id = "";
-if($_SESSION["branch_id"] != ""){
-	$branch_id = $_SESSION["branch_id"];
+if(empty($bid)){
+    if($_SESSION['branch_id'] != ""){
+        $branch_id = $_SESSION['branch_id'];
+    }
+}
+else{
+    $branch_id = $bid;
 }
 
 $vn = 'VN'.date('ymdHis',time());

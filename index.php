@@ -170,6 +170,7 @@ session_start();
 										data += '&level=' + document.getElementById('plevel').value;
 										data += '&st=' + document.getElementById('st').value;
 										data += '&bl=' + document.getElementById('bl').value;
+										data += '&bid=' + document.getElementById('sel_branchid_p_new').value;
 										data += '&oc=' + document.getElementById('oc').value;
 										data += '&pno=' + document.getElementById('pno').value;
 										data += '&pass=' + document.getElementById('pass').value;
@@ -232,8 +233,6 @@ session_start();
 					stime = document.getElementById('fh').value + ':' + document.getElementById('fn').value;
 					etime = document.getElementById('lh').value + ':' + document.getElementById('ln').value;
 				}
-
-
 				var data = 'hn=' + document.getElementById('hn').value;
 				data += '&cn=' + document.getElementById('cn').value;
 				data += '&an=' + document.getElementById('an').value;
@@ -245,10 +244,9 @@ session_start();
 				data += '&etim=' + etime;
 				data += '&atime=' + document.getElementById('atime').value;
 				data += '&mem=' + document.getElementById('mem').value;
+				data += '&bid=' + document.getElementById('branch_id_p').value;
 				console.log(data);
 				ajaxEdit('post', URL, data, displayId);
-
-
 			} else {
 				alert('');
 			}
@@ -753,11 +751,11 @@ session_start();
 
 	}
 
-	function sendadd(URL, hn, displayId) {
+	function sendadd(URL, hn, bid, displayId) {
 
 		var data = 'hn=' + hn;
 		data += '&eid=' + document.getElementById('sempid').value;
-
+		data += '&bid=' + bid;
 		ajaxLoadsend('post', URL, data, displayId)
 
 	}
@@ -1123,7 +1121,7 @@ session_start();
 	}
 
 
-	function loadmodule_druge(divname, url, hn, vn) {
+	function loadmodule_druge(divname, url, hn, vn, bid) {
 		document.getElementById('loading').style.display = '';
 
 		var data = 'hn=' + hn;

@@ -11,20 +11,20 @@ if(empty($_GET['dat'])){
 }
 
 $branch_id = "";
-if(empty($_GET['sel'])){
+$where_branch_id = "";
+if(empty($_GET['bid'])){
     if($_SESSION['branch_id'] != ""){
         $branch_id = $_SESSION['branch_id'];
+        $where_branch_id = "and (a.branchid = '$branch_id' or a.branchid = '' or a.branchid is NULL)";
     }
 }
 else{
-    $branch_id = $_GET['sel'];
+    if($_GET['bid'] != "00"){
+        $branch_id = $_GET['bid'];
+        $where_branch_id = "and (a.branchid = '$branch_id' or a.branchid = '' or a.branchid is NULL)";
+    }
 }
-$where_branch_id = "and a.branchid = '$branch_id'";
 
-?>
-
-
-    <?
 $sql  = "select a.*,concat(b.pname,b.fname) as cname,c.selfphone from tb_appointment a,tb_staff b,tb_patient c ";
 $sql .= "where a.pid=b.staffid and a.hn=c.hn and a.dat like '%$dat%'  and atyp='A' " . $where_branch_id . " order by a.pid,a.atime ";
 $str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
@@ -37,7 +37,7 @@ while($rs = mysql_fetch_array($str)){
     }
     ?>
 
-    <div style="width:99%; height:25px; line-height:25px; text-align:left; margin-left:1px; border-bottom:#CCCCCC 1px dotted;background:<?= $cl ?>; cursor:pointer; " onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" onclick="cleartabreg(6,4,7,'appointment/new_form.php?an=<?= $rs['an'] ?>','content','')">
+    <div style="width:99%; height:25px; line-height:25px; text-align:left; margin-left:1px; border-bottom:#CCCCCC 1px dotted;background:<?= $cl ?>; cursor:pointer; " onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" onclick="cleartabreg(6,4,7,'appointment/new_form.php?bid=<?php echo $branch_id; ?>&an=<?= $rs['an'] ?>','content','')">
 
         <div style="width:8%; float:left; line-height:25px;text-align:center">
             <?= $n ?>

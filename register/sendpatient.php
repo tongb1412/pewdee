@@ -2,6 +2,19 @@
 <?
 include('../class/config.php');
 $hn = $_POST['hn'];
+$bid = $_POST['bid'];
+
+$branch_id = "";
+if(empty($bid)){
+    if($_SESSION['branch_id'] != ""){
+        $branch_id = $_SESSION['branch_id'];
+    }
+}
+else{
+    $branch_id = $bid;
+}
+
+
 $sd = 'Yes';
 $sql = "select * from tb_vst where hn='$hn' and status not IN('COM','CANCEL')";
 // echo $sql;exit();
@@ -20,7 +33,7 @@ if($num > 0 ){
 }
 
 $sql = "select * from tb_patient where hn='$hn'";
-$patient_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+$patient_result = mysql_query($sql) or die ("Error Query [".$sql."]");
 $row=mysql_fetch_array($patient_result);
 if($sd == 'Yes'){
 	if($row['vn'] != '-'){
@@ -43,7 +56,8 @@ if($sd == 'Yes'){
 		<select id="sempid" style="width:330px; font-size:16px;">
 		<option value="00">ไม่ระบุแพทย์</option>
 		<?
-		$sql = "select * from tb_staff where typ = 'D' and eshow='Y' order by typ, fname  ";
+		$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and (branchid is NULL or branchid = '' or branchid = '$branch_id') order by typ, fname ";
+		// echo $sql;exit();
 		$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 		while($rs = mysql_fetch_array($result)){
 		?>
@@ -54,7 +68,7 @@ if($sd == 'Yes'){
     </div>
 </div>
 <div style="width:100%; height:49px; text-align:right;">
-	<input type="button" value="  ส่งเข้าระบบ  " style="font-size:14px; font-weight:bold; height:35px;" onclick="sendadd('register/sendpatientadd.php','<?=$hn?>','')" />&nbsp;
+	<input type="button" value="  ส่งเข้าระบบ  " style="font-size:14px; font-weight:bold; height:35px;" onclick="sendadd('register/sendpatientadd.php','<?=$hn?>','<?php echo $bid ?>','')" />&nbsp;
 	<input type="button" value="  ยกเลิก  "  style="font-size:14px; font-weight:bold; height:35px;" onclick="cancelsend()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <? } else { ?>
