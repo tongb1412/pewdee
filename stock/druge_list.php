@@ -5,7 +5,7 @@
 	<?
 
 $txtserch = $_GET['txt'];
-$selserch = $_GET['sel'];
+$selserch = $_GET['bid'];
 // echo $txtserch;
 
 if($selserch == ""){
@@ -134,7 +134,7 @@ while($rs = mysql_fetch_array($result)){
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('get','stock/druge_list.php','sel=<?php echo $selserch ?>&txt=<?= $txtserch ?>&Page=<?= $Prev_Page ?>','p_list')">
+	<a href="javascript: ajaxLoad('get','stock/druge_list.php','bid=<?php echo $selserch ?>&txt=<?= $txtserch ?>&Page=<?= $Prev_Page ?>','p_list')">
 		<img src='images/icon/back.png' border='0' align="absmiddle" />
 	</a>
 	<?
@@ -147,7 +147,7 @@ while($rs = mysql_fetch_array($result)){
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('get','stock/druge_list.php','sel=<?php echo $selserch ?>&txt=<?= $txtserch ?>&Page=<?= $Next_Page ?>','p_list')">
+	<a href="javascript: ajaxLoad('get','stock/druge_list.php','bid=<?php echo $selserch ?>&txt=<?= $txtserch ?>&Page=<?= $Next_Page ?>','p_list')">
 		<img src='images/icon/next.png' border='0' align="absmiddle" />
 	</a>
 	<?		

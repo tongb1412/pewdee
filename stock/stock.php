@@ -7,11 +7,9 @@
 		<input type="button" value="  รายการทั้งหมด  " onclick="loadmodule('home','stock/stock.php','') " style="height:25px; font-size:13px; line-height:25px;" />
 		<?php
 			session_start();
-			if($_SESSION['branch_id'] == "07"){
+			if($_SESSION['branch_id'] == "07" || $_SESSION['branch_id'] == "00"){
 				?>
-
 				<input type="button" value="  เพิ่มรายการใหม่ " onclick="swabtab(4,6,'stock/druge_new_from.php','content','')" style="height:25px; font-size:13px; line-height:25px; " />
-
 				<?php
 			}
 		?>
