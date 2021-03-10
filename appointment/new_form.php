@@ -13,7 +13,6 @@ if(empty($_GET['an'])){
 	$dat = date('d-m-Y');
 	$hn = $_POST['hn']; 
 	if(!empty($hn)){
-		 
 		$sql = "select concat(pname,fname,'   ',lname) as pname,hn,cn from tb_patient where hn='$hn'";
 		$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 		$rs = mysql_fetch_array($str); 	
@@ -126,7 +125,6 @@ if(empty($_GET['an'])){
 		<div style="width:80%; float:left;">
 			<input type="text" id="pname" size="60" readonly="true" value="<?= $rs['pname'] ?>" />
 		</div>
-
 	</div>
 </div>
 <div style="width:60%; height:275px; margin:auto; margin-top:10px; border:<?= $tabcolor ?> 1px solid; line-height:10px;">

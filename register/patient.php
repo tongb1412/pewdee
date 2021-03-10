@@ -48,7 +48,7 @@
 				?>
 			</select>
 		<?php
-			mysql_close($dblink);
+			// mysql_close($dblink);
 			// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
 		} else if ($_SESSION['branch_id'] == "") {
 		}

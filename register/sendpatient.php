@@ -14,7 +14,6 @@ else{
     $branch_id = $bid;
 }
 
-
 $sd = 'Yes';
 $sql = "select * from tb_vst where hn='$hn' and status not IN('COM','CANCEL')";
 // echo $sql;exit();
