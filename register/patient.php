@@ -8,7 +8,7 @@
 	</div>
 	<div style="position: absolute;left: 35%;top: 15.1%;">
 		<?php
-		if ($_SESSION['branch_id'] != "") {
+		if ($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] == "07" || $_SESSION['branch_id'] == "00") {
 			$branch_id = $_SESSION['branch_id'];
 			$sql = "";
 			if ($branch_id == "00" || $branch_id == "07") {
@@ -50,13 +50,15 @@
 		<?php
 			// mysql_close($dblink);
 			// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
-		} else if ($_SESSION['branch_id'] == "") {
+		} else if ($_SESSION['branch_id'] != "") {
+			?>
+				 <input type="hidden" value="<?php echo $_SESSION['branch_id'] ?>" id="sel_branchid_patient">
+			<?php
 		}
 		?>
 
 	</div>
 </div>
-
 <div style="width:99%; height:20px; padding-top:5px; color:#000000; margin:auto; font-weight:bold; font-size:13px; background:<?=$tabcolor?>;">
     <div style="width:20%;text-align:left; float:left;">&nbsp;&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;Card No.</div>
 	<div style="width:15%;  text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัสคนไข้</div>

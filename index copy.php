@@ -204,76 +204,47 @@ session_start();
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">เมนูการใช้งาน</h4>
+					<h4 class="modal-title">Left Sidebar</h4>
 				</div>
 				<div class="modal-body">
 					<!-- Sidebar Menu -->
-
-					<a href="javascript: loadmodule('home','register/register.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/register.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เวชระเบียน</span>
-					</a>
-					<a href="javascript: loadmodule('home','doctor/doctor.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/doctor.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตรวจรักษา</span>
-					</a>
-
-					<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-						Toggle first element
-					</a>
-					<div class="collapse multi-collapse" id="multiCollapseExample1">
-						<li class="hasSubmenu btn btn-block btn-default btn-lg">
-							<a href="#menu-80dabaa3d570b4fcaf902b2b89a917d5" data-toggle="collapse">
-								<span class="badge pull-right badge-primary">3</span>
-								<i class="fa fa-circle-o"></i>
-								<span>Tables</span>
-							</a>
-							<ul class="collapse" id="menu-80dabaa3d570b4fcaf902b2b89a917d5">
-								<li class="">
-									<a href="tables.html">
-										<span>Tables</span>
+					<div id="menu" class="hidden-print hidden-xs">
+						<div id="sidebar-fusion-wrapper">
+							<!--        <input class="form-control search" type="text" placeholder="Search...">-->
+							<ul class="menu list-unstyled">
+								<li class="active">
+									<a href="index.html" class="index">
+										<i class="fa fa-home"></i>
+										<span>Overview</span>
 									</a>
 								</li>
-								<li class="">
-									<a href="tables_responsive.html">
-										<span>Responsive Tables</span>
+								<li class="hasSubmenu">
+									<a href="#menu-4905a8758e2b9b737de284e3c796cd55" data-toggle="collapse">
+										<i class="fa fa-lock"></i>
+										<span>Access</span>
 									</a>
+									<ul class="collapse" id="menu-4905a8758e2b9b737de284e3c796cd55">
+										<li class="">
+											<a href="login.html" class="no-ajaxify">
+												<i class="fa fa-lock"></i>
+												<span>Login</span>
+											</a>
+										</li>
+										<li class="">
+											<a href="signup.html" class="no-ajaxify">
+												<i class="fa fa-pencil"></i>
+												<span>Sign up</span>
+											</a>
+										</li>
+									</ul>
 								</li>
 							</ul>
-						</li>
+						</div>
 					</div>
-					
-
-					<a href="javascript: loadmodule('home','daily_report/report.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/report.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รายงานประจำวัน</span>
-					</a>
-					<a href="javascript: loadmodule('home','promotion/promotion.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/promotion.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;โปรโมชั่น</span>
-					</a>
-					<a href="javascript: loadmodule('home','stock/stock_show.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/addstock.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ยาคงคลัง</span>
-					</a>
-					<a href="javascript: loadmodule('home','Monthly_report/report.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/Peport_M.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รายงานประจำเดือน</span>
-					</a>
-					<a href="javascript: loadmodule('home','stock/stock.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/stock1.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คลังยา</span>
-					</a>
-					<a href="javascript: loadmodule('home','setting/setting.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/setting.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตั้งค่า</span>
-					</a>
-
 					<!-- // Sidebar Menu END -->
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 	<div id="home" style="width:1003px; margin:auto;">
@@ -291,9 +262,6 @@ session_start();
 				proximity: 30,
 				halign: 'center'
 			});
-			// $(".modal a").not(".dropdown-toggle").on("click", function() {
-			// 	$(".modal").modal("hide");
-			// });
 			// openWhenReady();
 			// document.getElementById('username').focus();
 			// $('#modal-login').modal('show');

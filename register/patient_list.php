@@ -2,24 +2,30 @@
 <?
 include('../class/config.php');
 $txtserch = $_GET['txt'];
-$selserch = $_GET['bid'];
 $user_mode = $_SESSION["mode"];
+// $selserch = $_SESSION['branch_id'];
 
 if($txtserch == "ค้นหา"){
 	$txtserch = "";
 }
-if($selserch == ""){
+
+$selserch = "";
+if(empty($_GET['bid'])){
 	$selserch = $_SESSION['branch_id'];
+}
+else{
+	$selserch = $_GET['bid'];
+
 }
 
 $where_branch_id = "";
 if($user_mode == "A"){
-	if($selserch != "00" && $selserch != "all"){
+	if($selserch != "00" && $selserch != "07"){
 		$where_branch_id = "and (branchid = '$selserch' or branchid is NULL or branchid = '')"; 
 	}
 }
 else{
-		$where_branch_id = "and (branchid = '$selserch' or branchid is NULL or branchid = '')"; 
+		$where_branch_id = ""; 
 }
 
 

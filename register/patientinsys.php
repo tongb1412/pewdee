@@ -4,7 +4,7 @@
 <div style="width:99%; height:auto;  text-align:left; padding-left:5px;">
 	<div style="left: 35%;top: 15.1%;margin: 0.5% 0.5% 0.5% 0.5%">
 		<?php
-		if ($_SESSION['branch_id'] != "") {
+		if ($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] == "07" || $_SESSION['branch_id'] == "00") {
 			$branch_id = $_SESSION['branch_id'];
 			$sql = "";
 			if ($branch_id == "00" || $branch_id == "07") {
@@ -46,7 +46,10 @@
 		<?php
 			
 			// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
-		} else if ($_SESSION['branch_id'] == "") {
+		} else if ($_SESSION['branch_id'] != "") {
+			?>
+			<input type="hidden" value="<?php echo $_SESSION['branch_id'] ?>" id="sel_branchid_ptt_sys">
+	   		<?php
 		}
 		?>
 

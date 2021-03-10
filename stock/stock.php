@@ -40,8 +40,6 @@
 		<div id="tab6" class="tab" style="width:100px; background-color:#FFFFFF; display:none; line-height:30px;">
 			ปรับสต็อค
 		</div>
-
-
 	</div>
 
 
