@@ -740,18 +740,28 @@ function setbtnSetting(n, m) {
 
 function serchtxt(URL, displayId, txt) {
 	var data = 'txt=' + txt.value;
+	ajaxLoad('get', URL, data, displayId);
+}
+function serchtxtStock(URL, displayId, txt) {
+	var data = 'txt=' + txt.value;
 	data += '&sel=' + $('#sel_branchid_stock').val();
+	ajaxLoad('get', URL, data, displayId);
+}
+function serchtxtPatient(URL, displayId, txt) {
+	var data = 'txt=' + $('#txts').val();
+	data += '&bid=' + $('#sel_branchid_patient').val();
 	ajaxLoad('get', URL, data, displayId);
 }
 
 function serchsel(URL, displayId, txt) {
 	var data = 'txt=' + $('#txts').val();
-	data += '&sel=' + txt.value
+	data += '&bid=' + txt.value
 	ajaxLoad('get', URL, data, displayId);
 }
 
 function serchlab(URL, displayId, txt) {
 	var txt = 'txt=' + txt.value;
+	txt += '&bid=' + document.getElementById('sel_branchid_app_new').value;
 	ajaxLoad('get', URL, txt, displayId);
 	if (document.getElementById('lname').value == '') {
 		document.getElementById('THl').style.display = 'none';
@@ -1273,17 +1283,21 @@ function movelab(lid, lname, lprice) {
 	document.getElementById('lqty').focus();
 }
 
-function movepname(hn, cn, pname) {
+function movepname(hn, cn, pname, bName, bid) {
 	document.getElementById('hn').value = hn;
 	document.getElementById('cn').value = cn;
 	document.getElementById('pname').value = pname;
-	serchtxt('appointment/patient_list.php', 'll', '');
+	// serchtxt('appointment/patient_list.php', 'll', '');
+	$('#ll').empty();
+	$('#branch_id_p').val(bid);
 	document.getElementById('txtserch').value = '';
+	document.getElementById('branch_id_txt').value = bName;
 	document.getElementById('atyp').focus();
 }
 
 function showapplist(URL, displayId) {
 	var data = 'dat=' + document.getElementById('dat').value;
+	data += '&bid=' + document.getElementById('sel_branchid_app').value;
 	ajaxLoad('get', URL, data, displayId);
 }
 
@@ -1826,10 +1840,21 @@ function switchtime(a) {
 	if (a.value == 'A') {
 		document.getElementById('tl1').style.display = 'none';
 		document.getElementById('tl2').style.display = 'none';
+		document.getElementById('div_atime').style.display = '';
+		document.getElementById('div_atime2').style.display = 'none';
 	} else {
 		document.getElementById('tl1').style.display = '';
 		document.getElementById('tl2').style.display = '';
+		document.getElementById('div_atime').style.display = 'none';
+		document.getElementById('div_atime2').style.display = '';
 	}
+}
+
+function addAppAtimeChange(txt){
+	document.getElementById('atime').value = txt.value;
+}
+function addAppAtimeChange2(txt){
+	document.getElementById('atime2').value = txt.value;
 }
 
 function celpct() {
