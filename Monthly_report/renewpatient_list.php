@@ -43,10 +43,23 @@ $edate = date("Y-m-d", $t1);
 		
 <? 
 
+if(!empty($_POST['branchid'])){
+	$branchid = $_POST['branchid'];
+} else {
+	$branchid = '';
+}
+$where_branch_id = "";
+if($branchid != "") {
+	if($branchid != "00"){ 
+		$where_branch_id = " and (branchid ='".$branchid."' or branchid is null ) ";
+	} 
+}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
+	$where_branch_id = " and (branchid ='".$_SESSION['branch_id']."'  or branchid is null ) ";
+}
 $cl = $color1;
 $sql = "select * ";
-$sql .="from tb_patient where  (datep between '$sdate%' and '$edate%') and new = 'N' ";
-
+$sql .="from tb_patient where  (datep between '$sdate%' and '$edate%') and new = 'N' $where_branch_id";
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);  
 

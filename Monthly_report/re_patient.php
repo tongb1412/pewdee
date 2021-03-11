@@ -13,10 +13,34 @@ $t1 = strtotime($_GET['edate']) + (1*24*3600);
 $sdate = date("Y-m-d", $t0); 
 $edate = date("Y-m-d", $t1);
 
+if(!empty($_GET['branchid'])){
+	$branchid = $_GET['branchid'];
+} else {
+	$branchid = '';
+}
+$where_branch_id = "";
+if($branchid != "") {
+	if($branchid != "00"){ 
+		$where_branch_id = " and (b.branchid ='".$branchid."' or b.branchid is null ) ";
+	} 
+}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
+	$where_branch_id = " and (b.branchid ='".$_SESSION['branch_id']."'  or b.branchid is null ) ";
+}
+$branchname = "";
+if($branchid != "" && $branchid != "00") {
+	$sql2 = "select branchid,branchname from tb_branch where branchid = '$branchid' ";
+	$result = mysql_query($sql2) or die("Error Query [".$sql2."]"); 
+    while ($rs=mysql_fetch_array($result)) {
+		$branchname = $rs['branchname'];
+    }
+}
+// echo "x" . $branchid . "x" ;
 
-$sql = "select distinct(b.hn) hn, b.cradno,b.pname,b.fname,b.lname,c.vdate,c.empname,c.empid  ";
-$sql .="from tb_patient  b,tb_vst c where b.hn=c.hn and  (c.vdate between '$sdate%' and '$edate%')  and c.status not IN ('CANCEL') ";
+$sql = "select distinct(b.hn) hn, b.cradno,b.pname,b.fname,b.lname,c.vdate,c.empname,c.empid,d.branchname  ";
+$sql .="from tb_patient  b left join tb_vst c on b.hn = c.hn left join tb_branch d on b.branchid = d.branchid ";
+$sql .= " where (c.vdate between '$sdate%' and '$edate%')  and c.status not IN ('CANCEL') $where_branch_id";
 $sql .="  order by c.vdate,c.vn  ";
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 
@@ -34,7 +58,7 @@ case '-' : $t3++; break;
 if($s=='y'){ 	
 ?>
 	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">
-	รายงานคนไข้
+	รายงานคนไข้ <?php if($branchname != "") { echo " (สาขา $branchname)"; } ?>
 	</div>
 	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
 	ประจำวันที่  <?=$_GET['sdate'].'  ถึง  '.$_GET['edate'];?>
@@ -47,12 +71,28 @@ if($s=='y'){
 	
 	</div>	
     <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
+			<?php 
+				if($branchid == "") { ?>
 				<div style="width:8%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;ลำดับ</div>
 				<div style="width:8%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;วันที่</div>
 				<div style="width:16%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;Crad No.</div>
 				<div style="width:11%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;ชื่อ-สกุล</div>
 				<div style="width:47%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;แพทย์</div>
 				<div style="width:10%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;</div>
+			<?php 
+				} else { 
+			?>
+				<div style="width:8%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;ลำดับ</div>
+				<div style="width:8%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;วันที่</div>
+				<div style="width:16%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;Crad No.</div>
+				<div style="width:11%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;ชื่อ-สกุล</div>
+				<div style="width:30%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;แพทย์</div>
+				<div style="width:10%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;สาขา</div>
+				<div style="width:17%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;</div>
+			<?php 		
+				}
+			?>
+			
 	</div>		
  <? 
  $s='n';
@@ -70,12 +110,27 @@ if($n == ((($m-1) * $x) + 1) && $m > 1){
 		
 	</div>
     <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
+			<?php 
+				if($branchid == "") { ?>
 				<div style="width:8%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;ลำดับ</div>
 				<div style="width:8%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;วันที่</div>
 				<div style="width:16%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;Crad No.</div>
 				<div style="width:11%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;ชื่อ-สกุล</div>
 				<div style="width:47%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;แพทย์</div>
 				<div style="width:10%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;</div>
+			<?php 
+				} else { 
+			?>
+				<div style="width:8%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;ลำดับ</div>
+				<div style="width:8%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;วันที่</div>
+				<div style="width:16%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;Crad No.</div>
+				<div style="width:11%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;ชื่อ-สกุล</div>
+				<div style="width:30%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;แพทย์</div>
+				<div style="width:10%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;สาขา</div>
+				<div style="width:17%;float:left; border-bottom:#999999 2px solid;">&nbsp;&nbsp;</div>
+			<?php 
+				} 
+			?>
 	</div>	
 <?
 
@@ -88,12 +143,25 @@ if($n == ((($m-1) * $x) + 1) && $m > 1){
 	
 	
 <div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; overflow:hidden; ">
+		<?php 
+		if($branchid == "") { ?>
 		<div style="width:8%; float:left; text-align:center;"><?=$n?></div>
 		<div style="width:15%; float:left;">&nbsp;<?=$rs['vdate']?></div>
 		<div style="width:10%; float:left;">&nbsp;<?=$rs['cradno']?></div>
 		<div style="width:31%; float:left; text-align:left">&nbsp;<?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
-		<div style="width:31%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['empname']?></div>		
-	
+		<div style="width:31%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['empname']?></div>	
+		<?php 
+			} else { 
+		?>
+		<div style="width:8%; float:left; text-align:center;"><?=$n?></div>
+		<div style="width:15%; float:left;">&nbsp;<?=$rs['vdate']?></div>
+		<div style="width:10%; float:left;">&nbsp;<?=$rs['cradno']?></div>
+		<div style="width:21%; float:left; text-align:left">&nbsp;<?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
+		<div style="width:21%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['empname']?></div>		
+		<div style="width:20%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['branchname']?></div>			
+		<?php 
+			} 
+		?>
 </div>	
 	
 	

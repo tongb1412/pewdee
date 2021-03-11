@@ -6,27 +6,27 @@ include('../class/config.php');
 
 
 if(!empty($_POST['did'])){
-$did = $_POST['did'];
+	$did = $_POST['did'];
 } else {
-$did = '';
+	$did = '';
 }
 
 
 $cl = '';
 if(empty($_POST['sdate'])){
-$sdate ='0000-00-00';
-$edate ='0000-00-00';
+	$sdate ='0000-00-00';
+	$edate ='0000-00-00';
 } else {
 
-//$nd = substr($_POST['edate'],0,2) + 1;
-//if(strlen($nd)==1){ $nd = '0'.$nd; }
-//$sdate = substr($_POST['sdate'],6,4).'-'.substr($_POST['sdate'],3,2).'-'.substr($_POST['sdate'],0,2)  ;
-//$edate = substr($_POST['edate'],6,4).'-'.substr($_POST['edate'],3,2).'-'.$nd ;
+	//$nd = substr($_POST['edate'],0,2) + 1;
+	//if(strlen($nd)==1){ $nd = '0'.$nd; }
+	//$sdate = substr($_POST['sdate'],6,4).'-'.substr($_POST['sdate'],3,2).'-'.substr($_POST['sdate'],0,2)  ;
+	//$edate = substr($_POST['edate'],6,4).'-'.substr($_POST['edate'],3,2).'-'.$nd ;
 
-$t0 = strtotime($_POST['sdate']);
-$t1 = strtotime($_POST['edate']) + (1*24*3600); 
-$sdate = date("Y-m-d", $t0); 
-$edate = date("Y-m-d", $t1); 
+	$t0 = strtotime($_POST['sdate']);
+	$t1 = strtotime($_POST['edate']) + (1*24*3600); 
+	$sdate = date("Y-m-d", $t0); 
+	$edate = date("Y-m-d", $t1); 
 }
 
 ?>
@@ -41,10 +41,26 @@ $edate = date("Y-m-d", $t1);
 		
 <? 
 
+
+if(!empty($_POST['branchid'])){
+	$branchid = $_POST['branchid'];
+} else {
+	$branchid = '';
+}
+$where_branch_id = "";
+if($branchid != "") {
+	if($branchid != "00"){ 
+		$where_branch_id = " and (b.branchid ='".$branchid."' or b.branchid is null ) ";
+	} 
+}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
+	$where_branch_id = " and (b.branchid ='".$_SESSION['branch_id']."'  or b.branchid is null ) ";
+}
+
+
 $cl = $color1;
 $sql = "select distinct(b.hn) hn, b.cradno,b.pname,b.fname,b.lname,c.vdate,c.empname  ";
-$sql .="from tb_patient  b,tb_vst c where b.hn=c.hn and  (c.vdate between '$sdate%' and '$edate%') and c.status not IN ('CANCEL') ";
-
+$sql .="from tb_patient  b,tb_vst c where b.hn=c.hn and  (c.vdate between '$sdate%' and '$edate%') and c.status not IN ('CANCEL') $where_branch_id ";
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);  
 
@@ -71,6 +87,7 @@ else
 		$Num_Pages = (int)$Num_Pages;
 }
 $sql .=" order by c.vdate,c.vn asc LIMIT $Page_Start , $Per_Page";
+// echo $sql;
 $result  = mysql_query($sql);
 if($result){
 $n=1;

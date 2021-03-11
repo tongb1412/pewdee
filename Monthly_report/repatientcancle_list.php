@@ -35,10 +35,23 @@ $edate = date("Y-m-d", $t1);
 		
 <? 
 
+if(!empty($_POST['branchid'])){
+	$branchid = $_POST['branchid'];
+} else {
+	$branchid = '';
+}
+$where_branch_id = "";
+if($branchid != "") {
+	if($branchid != "00"){ 
+		$where_branch_id = " and (a.branchid ='".$branchid."' or a.branchid is null ) ";
+	} 
+}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
+	$where_branch_id = " and (a.branchid ='".$_SESSION['branch_id']."'  or a.branchid is null ) ";
+}
 $cl = $color1;
 $sql = "select a.*,b.fname,b.lname,b.cradno ";
-$sql .="from tb_vst a,tb_patient b where a.hn = b.hn and (a.vdate between '$sdate%' and '$edate%') and a.status = 'CANCEL' ";
-
+$sql .="from tb_vst a,tb_patient b where a.hn = b.hn and (a.vdate between '$sdate%' and '$edate%') and a.status = 'CANCEL' $where_branch_id";
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);  
 

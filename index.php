@@ -1193,6 +1193,7 @@ session_start();
 	function printmonthpatient() {
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
+		data += '&branchid=' + document.getElementById('branchid').value;
 
 		var page = 'Monthly_report/re_patient.php?' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
@@ -1245,7 +1246,7 @@ session_start();
 	function printmonth(url) {
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
-
+		data += '&branchid=' + document.getElementById('branchid').value;
 		var page = url + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}

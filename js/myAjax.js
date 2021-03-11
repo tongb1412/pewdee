@@ -1852,8 +1852,9 @@ function moveuser(staffid, fname) {
 
 function showpayment() {
 	var data = 'did=' + document.getElementById('repempid').value;
-	var data = 'branchid=' + document.getElementById('branch_id').value;
-
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branch_id').value;
+	}
 	loadmodule('d_list', 'daily_report/repayment_list.php', data);
 }
 
@@ -1899,10 +1900,11 @@ function mpatient(URL, displayId) {
 		if (document.getElementById('edate').value != '') {
 			var data = 'sdate=' + document.getElementById('sdate').value;
 			data += '&edate=' + document.getElementById('edate').value;
-
-
+			if(document.getElementById('branchid') != null) {
+				data += '&branchid=' + document.getElementById('branchid').value;
+			}
 			/*alert(data); */
-			alert(data);
+			// alert(data);
 			loadmodule(displayId, URL, data);
 		}
 	}
