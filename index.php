@@ -20,7 +20,7 @@ session_start();
 	<!-- <script type="text/javascript" src="js/bootstrap.js"></script> -->
 
 
-	<link href="css/menu_style.css" rel="stylesheet" type="text/css" />
+
 	<link href="calendar/calendar.css" rel="stylesheet" type="text/css" />
 	<!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css" /> -->
 
@@ -28,7 +28,8 @@ session_start();
 	<link rel="stylesheet" href="assets/css/admin/module.admin.stylesheet-complete.min.css" />
 
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="css/index.css" />
+	<link href="css/menu_style.css" rel="stylesheet" type="text/css" />
+	<link href="css/index.css" rel="stylesheet" type="text/css" />
 
 	<!-- Theme script -->
 	<script src="assets/plugins/core_ajaxify_loadscript/script.min.js?v=v1.0.0-rc1&amp;sv=v0.0.1.2"></script>
@@ -85,7 +86,6 @@ session_start();
 				'assets/components/forms_elements_bootstrap-datepicker/bootstrap-datepicker.init.js?v=v1.0.0-rc1&sv=v0.0.1.2',
 				'assets/components/core/core.init.js?v=v1.0.0-rc1'
 			]
-
 		};
 	</script>
 
@@ -196,89 +196,400 @@ session_start();
 		</div>
 	</div> -->
 
-	<button type="button" data-toggle="modal" data-target="#sidebar-left" class="btn btn-primary navbar-btn">เมนูการใช้งาน</button>
-
 	<!-- Sidebar Left -->
 	<div class="modal fade left" id="sidebar-left" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">เมนูการใช้งาน</h4>
+					<h4 class="modal-title"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;เมนูการใช้งาน</h4>
 				</div>
 				<div class="modal-body">
 					<!-- Sidebar Menu -->
+					<ul class="menu list-unstyled">
 
-					<a href="javascript: loadmodule('home','register/register.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/register.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เวชระเบียน</span>
-					</a>
-					<a href="javascript: loadmodule('home','doctor/doctor.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/doctor.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตรวจรักษา</span>
-					</a>
-
-					<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-						Toggle first element
-					</a>
-					<div class="collapse multi-collapse" id="multiCollapseExample1">
-						<li class="hasSubmenu btn btn-block btn-default btn-lg">
-							<a href="#menu-80dabaa3d570b4fcaf902b2b89a917d5" data-toggle="collapse">
-								<span class="badge pull-right badge-primary">3</span>
-								<i class="fa fa-circle-o"></i>
-								<span>Tables</span>
+						<li>
+							<a href="javascript: loadmodule('home','register/register.php','')" class="btn btn-block btn-default btn-lg">
+								<img src="images/register.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;เวชระเบียน</span>
 							</a>
-							<ul class="collapse" id="menu-80dabaa3d570b4fcaf902b2b89a917d5">
-								<li class="">
-									<a href="tables.html">
-										<span>Tables</span>
+						</li>
+
+						<li>
+							<a href="javascript: loadmodule('home','doctor/doctor.php','')" class="btn btn-block btn-default btn-lg">
+								<img src="images/doctor.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;ตรวจรักษา</span>
+							</a>
+						</li>
+
+						<li class="hasSubmenu btn btn-block btn-default btn-lg" id="daily_report_side_menu">
+							<div id="daily_report_side_menu_btn">
+								<img src="images/report.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;รายงานประจำวัน</span>
+								<i class="fa fa-caret-down" aria-hidden="true"></i>
+							</div>
+							<ul class="collapse sub-menu" id="sub-menu-daily-report-1">
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-daily-report-1-sub-1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>รายงานรายได้</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
 									</a>
+									<ul class="collapse" id="sub-menu-daily-report-1-sub-1">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/repayment.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้ทั้งหมด</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/rear.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้จากค้างชำระ</a>
+										</div>
+
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/reapayment.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้ค้างชำระ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/recredit.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้แยกตามบัตรเครดิต</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/resalement.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้การขายทรีทเมนท์</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/resalecourse.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้การขายคอร์ส</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/resalepg.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้การขายแพ็คเกจ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/reeuser.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้ผู้ทำ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/repatient.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้ประจำวัน</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/rediscount.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานส่วนลด 100%</a>
+										</div>
+									</ul>
 								</li>
-								<li class="">
-									<a href="tables_responsive.html">
-										<span>Responsive Tables</span>
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-daily-report-1-sub-2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>รายงานรวม</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
 									</a>
+									<ul class="collapse" id="sub-menu-daily-report-1-sub-2">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalecourse.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานขายคอร์สรวม</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalepg.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานขายแพ็คเกจรวม</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotaldrugerec.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานการจ่ายยารวม</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rediscounttotal.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานส่วนลดทั้งหมด</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rediscount.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานส่วนลด100%</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repKupong.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคูปอง</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repCbil.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานยกเลิกบิล</a>
+										</div>
+									</ul>
+								</li>
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-daily-report-1-sub-3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>รายงานคนไข้</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
+									</a>
+									<ul class="collapse" id="sub-menu-daily-report-1-sub-3">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repatient.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/renewpatient.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้ใหม่</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repatientcancle.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้ยกเลิก</a>
+										</div>
+									</ul>
+								</li>
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-daily-report-1-sub-4" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>รายงานเกี่ยวกับยา</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
+									</a>
+									<ul class="collapse" id="sub-menu-daily-report-1-sub-4">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/redrugerec.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานการจ่ายยาประจำวัน</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานยาถึงจุดสั่งซื้อ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/reexpiredruge.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานยาใกล้หมดอายุ</a>
+										</div>
+
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/stockcard.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;Stock Card</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/drug_out.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;นำยาออกนอกระบบ</a>
+										</div>
+									</ul>
+								</li>
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-daily-report-1-sub-5" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>อื่น ๆ</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
+									</a>
+									<ul class="collapse" id="sub-menu-daily-report-1-sub-5">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rep_df.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;บัญชีแพทย์</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rep_treatment.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานการใช้ทรีทเม้นท์</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/patient_out.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;คนไข้นอกระบบ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','setting/costs.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;ค่าใช้จ่าย</a>
+										</div>
+										<div class="setting_menu_list" style="display:none;">
+											<a href="javascript: ajaxLoad('post','Monthly_report/restockdruge.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;จำนวนยาคงเหลือ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/totalprice.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;ลงยอดเงินประจำวัน</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/totalcash.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;ลงยอดเงินสดประจำวัน</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','daily_report/dtime.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;ลงเวลาแพทย์</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalprice.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานลงยอดเงิน</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalcash.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานยอดเงินสด</a>
+										</div>
+									</ul>
 								</li>
 							</ul>
 						</li>
-					</div>
-					
 
-					<a href="javascript: loadmodule('home','daily_report/report.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/report.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รายงานประจำวัน</span>
-					</a>
-					<a href="javascript: loadmodule('home','promotion/promotion.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/promotion.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;โปรโมชั่น</span>
-					</a>
-					<a href="javascript: loadmodule('home','stock/stock_show.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/addstock.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ยาคงคลัง</span>
-					</a>
-					<a href="javascript: loadmodule('home','Monthly_report/report.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/Peport_M.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รายงานประจำเดือน</span>
-					</a>
-					<a href="javascript: loadmodule('home','stock/stock.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/stock1.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คลังยา</span>
-					</a>
-					<a href="javascript: loadmodule('home','setting/setting.php','')" class="btn btn-block btn-default btn-lg">
-						<img src="images/setting.png" alt="home" class="side-menu-icon" />
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตั้งค่า</span>
-					</a>
+						<li>
+							<a href="javascript: loadmodule('home','promotion/promotion.php','')" class="btn btn-block btn-default btn-lg">
+								<img src="images/promotion.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;&nbsp;โปรโมชั่น</span>
+							</a>
+						</li>
 
+						<li>
+							<a href="javascript: loadmodule('home','stock/stock_show.php','')" class="btn btn-block btn-default btn-lg">
+								<img src="images/addstock.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;&nbsp;ยาคงคลัง</span>
+							</a>
+						</li>
+
+						<li class="hasSubmenu btn btn-block btn-default btn-lg" id="monthly_report">
+							<!-- <a href="javascript: loadmodule('home','Monthly_report/report.php','')" class="btn btn-block btn-default btn-lg">
+								<img src="images/Peport_M.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รายงานประจำเดือน</span>
+							</a> -->
+							<div id="monthly_report_side_menu_btn">
+								<img src="images/Peport_M.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;&nbsp;รายงานประจำเดือน</span>
+								<i class="fa fa-caret-down" aria-hidden="true"></i>
+							</div>
+							<ul class="collapse sub-menu" id="sub-menu-monthly-report-1">
+
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-monthly-report-1-sub-1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>รายงานคนไข้</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
+									</a>
+									<ul class="collapse" id="sub-menu-monthly-report-1-sub-1">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repatient.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/renewpatient.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้ใหม่</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repatientcancle.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้ยกเลิก</a>
+										</div>
+									</ul>
+								</li>
+
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-monthly-report-1-sub-2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>รายงานรายได้</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
+									</a>
+									<ul class="collapse" id="sub-menu-monthly-report-1-sub-2">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repayment.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้ทั้งหมด</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rear.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้จากค้างชำระ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retypepay.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานแยกตามการชำระ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/recredit.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานแยกตามบัตรเคดิต</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/reapayment.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคนไข้ค้างชำระ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/resalement.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้การขายทรีทเมนท์</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/resalecourse.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้การขายคอร์ส</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/resalepg.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้การขายแพ็คเกจ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/reeuser.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้ผู้ทำ</a>
+										</div>
+										<div class="setting_menu_list" style="display:none">
+											<a href="javascript: ajaxLoad('post','daily_report/resumdr.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานรายได้ตามแพทย์</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rep_doctor.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;บัญชีแพทย์</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalprice.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานสรุปบันทึกยอดรายวัน</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalcash.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานสรุปบันทึกยอดสด</a>
+										</div>
+									</ul>
+								</li>
+
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-monthly-report-1-sub-3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>รายงานยา</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
+									</a>
+									<ul class="collapse" id="sub-menu-monthly-report-1-sub-3">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/restockdruge.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานข้อมูลยาทั้งหมด</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานยาถึงจุดสั่งซื้อ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/reexpiredruge.php','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานยาใกล้หมดอายุ</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/redrugerec.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานการจ่ายยา</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/redrugeinstock.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานการรับยาเข้าสต็อค</a>
+										</div>
+
+									</ul>
+								</li>
+
+
+								<li>
+									<a class="btn btn-block btn-default btn-lg" data-toggle="collapse" href="#sub-menu-monthly-report-1-sub-4" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+										<span>รายงานรวม</span>
+										<i class="fa fa-caret-down" aria-hidden="true"></i>
+									</a>
+									<ul class="collapse" id="sub-menu-monthly-report-1-sub-4">
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานขายทรีทเม้นท์รวม</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalecourse.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานขายคอร์สรวม</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalepg.php	','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานขายแพ็คเกจรวม</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/retotaldrugerec.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานการจ่ายยารวม</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rediscounttotal.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานส่วนลดทั้งหมด</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rediscount.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานส่วนลด100%</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repKupong.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานคูปอง</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repCbil.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานยกเลิกบิล</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/repStock.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;รายงานยาคงคลัง</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rep_df.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;บัญชีแพทย์</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/rep_df_new.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;บัญชีแพทย์ ใหม่</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/stockcard.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;Stock Card</a>
+										</div>
+										<div class="setting_menu_list">
+											<a href="javascript: ajaxLoad('post','Monthly_report/reprint.php ','','reportpage')"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;&nbsp;Reprint</a>
+										</div>
+									</ul>
+								</li>
+
+							</ul>
+						</li>
+
+						<li>
+							<a href="javascript: loadmodule('home','stock/stock.php','')" class="btn btn-block btn-default btn-lg">
+								<img src="images/stock1.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;&nbsp;คลังยา</span>
+							</a>
+						</li>
+
+						<li>
+							<a href="javascript: loadmodule('home','setting/setting.php','')" class="btn btn-block btn-default btn-lg">
+								<img src="images/setting.png" alt="home" class="side-menu-icon" />
+								<span>&nbsp;&nbsp;ตั้งค่า</span>
+							</a>
+						</li>
+
+					</ul>
 					<!-- // Sidebar Menu END -->
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div id="content">
+		<div class="navbar hidden-print main navbar-default" role="navigation">
+			<div class="user-action user-action-btn-navbar pull-right">
+				<button class="btn btn-sm btn-navbar btn-inverse btn-stroke hidden-lg hidden-md"><i class="fa fa-bars fa-2x"></i></button>
+			</div>
+			<a href="../index.php" class="logo" id="title-header">
+				<!-- <img src="../assets/images/logo/logo.jpg" width="32" alt="SMART" /> -->
+				<span class="hidden-xs hidden-sm inline-block"><span>Pewdee Clinic System</span>pro</span>
+			</a>
+		</div>
+		<!-- // END navbar -->
+		<button type="button" data-toggle="modal" data-target="#sidebar-left" class="btn btn-primary navbar-btn"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;เมนูการใช้งาน</button>
+
+		<h3>
+			<img src="images/icon/group.png" align="absmiddle" />&nbsp;&nbsp;คลังยา
+		</h3>
+		<div id="home" class="innerLR">
+		</div>
 	</div>
 
-	<div id="home" style="width:1003px; margin:auto;">
 
-	</div>
 	<div style="width:100%; height:10px; color:#FFFFFF;">&nbsp;</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -291,6 +602,7 @@ session_start();
 				proximity: 30,
 				halign: 'center'
 			});
+			clickEventSideMenu();
 			// $(".modal a").not(".dropdown-toggle").on("click", function() {
 			// 	$(".modal").modal("hide");
 			// });
@@ -309,6 +621,25 @@ session_start();
 			// var pH1 = $(window).height();
 			// if($(window).height() >= 628){ var pH = $(window).height() - 99; } else { pH = 628 - 99;  }
 			// var pHl= pH - 20;
+
+		}
+
+		function clickEventSideMenu() {
+			$('#daily_report_side_menu_btn').click(function() {
+				if ($('#daily_report_side_menu').hasClass('active') == false) {
+					loadmodule('home', 'daily_report/report.php', '');
+				}
+				$('#sub-menu-daily-report-1').collapse('toggle');
+				// return false;
+			});
+
+			$('#monthly_report_side_menu_btn').click(function() {
+				if ($('#monthly_report_side_menu').hasClass('active') == false) {
+					loadmodule('home', 'Monthly_report/report.php', '');
+				}
+				$('#sub-menu-monthly-report-1').collapse('toggle');
+				// return false;
+			});
 		}
 
 		function showIMG() {

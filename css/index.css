@@ -97,3 +97,42 @@
 	min-height:100vh;
 	border:0;
 }
+
+#sidebar-left .btn {
+	text-align: left;
+}
+
+#sidebar-left ul {
+    list-style-type: none;
+}
+
+#sidebar-left ul > li {
+	margin-bottom: 1vh;
+}
+
+#sidebar-left li.hasSubmenu > ul.sub-menu > li{
+	font-size: 1.5rem;
+	margin-left: 2.5em;
+}
+
+#sidebar-left li.hasSubmenu > ul.sub-menu > li > ul{
+	padding: 0;
+    /* margin-left: 1em; */
+}
+
+#sidebar-left .setting_menu_list {
+	height: auto;
+	margin-left: 0px;
+	padding-left: 5px;
+	background:url();
+	background-color: transparent; 
+	background-image: none;
+}
+
+#sidebar-left > .setting_menu_list > .fa{
+	font-size: 0.8em;
+}
+
+.navbar.main #title-header.logo {
+    width: auto;
+}

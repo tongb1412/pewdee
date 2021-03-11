@@ -1,9 +1,19 @@
 <? include('../class/config.php'); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div style="width:99%; height:30px; text-align:left; padding-left:5px;">
-	<div class="txt_serch">
-		<input class="input_serch" type="text" id="txts" size="41" value="ค้นหา" onclick="clickclear(this, 'ค้นหา')" onblur="clickrecall(this,'ค้นหา')" onkeyup="serchtxtStock('stock/druge_list.php','p_list',this)" /><input type="button" class="btn_serch" onclick="ajaxLoad('get','stock/druge_list.php','txt=','p_list')" />
+	<div class="search-wrapper txt_serch">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Search" onkeyup="serchtxtStock('stock/druge_list.php','p_list',this)" >
+			<span class="input-group-btn">
+				<button class="btn btn-inverse" type="button" onclick="ajaxLoad('get','stock/druge_list.php','txt=','p_list')">
+					<i class="fa fa-search"></i>
+				</button>
+			</span>
+		</div><!-- /input-group -->
 	</div>
+	<!-- <div class="txt_serch">
+		<input class="input_serch" type="text" id="txts" size="41" value="ค้นหา" onclick="clickclear(this, 'ค้นหา')" onblur="clickrecall(this,'ค้นหา')" onkeyup="serchtxtStock('stock/druge_list.php','p_list',this)" /><input type="button" class="btn_serch" onclick="ajaxLoad('get','stock/druge_list.php','txt=','p_list')" />
+	</div> -->
 	<div style="position: absolute;left: 35%;top: 18.7%;">
 		<?php
 		if ($_SESSION['branch_id'] != "") {
@@ -84,8 +94,6 @@ if ($_SESSION['branch_id'] == "07" || $_SESSION['branch_id'] == "00") {
 <?php
 }
 ?>
-
-
 
 <div id="p_list" style=" width:100%; margin-top:5px; text-align:center; height:auto;">
 	<?  require("druge_list.php");	 ?>
