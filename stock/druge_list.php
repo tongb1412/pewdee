@@ -13,6 +13,7 @@ if($selserch == ""){
 }
 // echo $selserch;exit();
 $cl = $color1;
+
 if(empty($txtserch)){
 	$sql = "select * from tb_druge where status='IN'";
 } else {

@@ -1,138 +1,232 @@
-
-
 #menu > div > ul {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    z-index: 2;
-    padding-bottom: 100px;
-  }
-
-.side-menu-icon{
-    width: 8vh;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 2;
+  padding-bottom: 100px;
 }
 
-  .pen body {
-	padding-top:50px;
+.side-menu-icon {
+  width: 4vh;
+}
+
+.pen body {
+  padding-top: 50px;
 }
 
 /* Social Buttons - Twitter, Facebook, Google Plus */
 .btn-twitter {
-	background: #00acee;
-	color: #fff
+  background: #00acee;
+  color: #fff;
 }
-.btn-twitter:link, .btn-twitter:visited {
-	color: #fff
+.btn-twitter:link,
+.btn-twitter:visited {
+  color: #fff;
 }
-.btn-twitter:active, .btn-twitter:hover {
-	background: #0087bd;
-	color: #fff
+.btn-twitter:active,
+.btn-twitter:hover {
+  background: #0087bd;
+  color: #fff;
 }
 
 .btn-instagram {
-	color:#fff;
-	background-color:#3f729b;
-	border-color:rgba(0,0,0,0.2);
+  color: #fff;
+  background-color: #3f729b;
+  border-color: rgba(0, 0, 0, 0.2);
 }
-.btn-instagram:focus,.btn-instagram.focus {
-	color:#fff;
-	background-color:#305777;
-	border-color:rgba(0,0,0,0.2);
+.btn-instagram:focus,
+.btn-instagram.focus {
+  color: #fff;
+  background-color: #305777;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 .btn-instagram:hover {
-	color:#fff;
-	background-color:#305777;
-	border-color:rgba(0,0,0,0.2);
+  color: #fff;
+  background-color: #305777;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .btn-github {
-	color:#fff;
-	background-color:#444;
-	border-color:rgba(0,0,0,0.2);
+  color: #fff;
+  background-color: #444;
+  border-color: rgba(0, 0, 0, 0.2);
 }
-.btn-github:focus,.btn-github.focus {
-	color:#fff;
-	background-color:#2b2b2b;
-	border-color:rgba(0,0,0,0.2);
+.btn-github:focus,
+.btn-github.focus {
+  color: #fff;
+  background-color: #2b2b2b;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 .btn-github:hover {
-	color:#fff;
-	background-color:#2b2b2b;
-	border-color:rgba(0,0,0,0.2);
+  color: #fff;
+  background-color: #2b2b2b;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 /* MODAL FADE LEFT RIGHT BOTTOM */
 .modal.fade:not(.in).left .modal-dialog {
-	-webkit-transform: translate3d(-25%, 0, 0);
-	transform: translate3d(-25%, 0, 0);
+  -webkit-transform: translate3d(-25%, 0, 0);
+  transform: translate3d(-25%, 0, 0);
 }
 .modal.fade:not(.in).right .modal-dialog {
-	-webkit-transform: translate3d(25%, 0, 0);
-	transform: translate3d(25%, 0, 0);
+  -webkit-transform: translate3d(25%, 0, 0);
+  transform: translate3d(25%, 0, 0);
 }
 .modal.fade:not(.in).bottom .modal-dialog {
-	-webkit-transform: translate3d(0, 25%, 0);
-	transform: translate3d(0, 25%, 0);
+  -webkit-transform: translate3d(0, 25%, 0);
+  transform: translate3d(0, 25%, 0);
 }
 
 .modal.right .modal-dialog {
-	position:absolute;
-	top:0;
-	right:0;
-	margin:0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
 }
 
 .modal.left .modal-dialog {
-	position:absolute;
-	top:0;
-	left:0;
-	margin:0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
 }
 
 .modal.left .modal-dialog.modal-sm {
-	max-width:300px;
+  max-width: 300px;
 }
 
-.modal.left .modal-content, .modal.right .modal-content {
-	min-height:100vh;
-	border:0;
+.modal.left .modal-content,
+.modal.right .modal-content {
+  min-height: 100vh;
+  border: 0;
+}
+
+#sidebar-left {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
 }
 
 #sidebar-left .btn {
-	text-align: left;
+  text-align: left;
 }
 
 #sidebar-left ul {
-    list-style-type: none;
+	list-style-type: none;
+  }
+
+#sidebar-left ul.menu {
+  /* padding-left: 1em; */
 }
 
 #sidebar-left ul > li {
-	margin-bottom: 1vh;
+  margin-bottom: 1vh;
+  padding-left: 1em
 }
 
-#sidebar-left li.hasSubmenu > ul.sub-menu > li{
-	font-size: 1.5rem;
-	margin-left: 2.5em;
+#sidebar-left > ul > li:hover {
+  /* color: #818181; */
+  background: lightgray;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
-#sidebar-left li.hasSubmenu > ul.sub-menu > li > ul{
-	padding: 0;
-    /* margin-left: 1em; */
+#sidebar-left li a:hover{
+	cursor: pointer;
+	color: black;
+}
+
+#sidebar-left li.hasSubmenu > div span{
+	color: black;
+  }
+
+#sidebar-left li.hasSubmenu > ul.sub-menu > li {
+  font-size: 1.5rem;
+  /* margin-left: .5em; */
+}
+
+#sidebar-left a.sub-menu-btn:hover{
+	color: #2f65a7;
+}
+
+#sidebar-left li.hasSubmenu > ul.sub-menu > li > ul {
+  padding: 0;
+  /* margin-left: 1em; */
 }
 
 #sidebar-left .setting_menu_list {
-	height: auto;
-	margin-left: 0px;
-	padding-left: 5px;
-	background:url();
-	background-color: transparent; 
-	background-image: none;
+  height: auto;
+  margin-left: 0px;
+  padding-left: 5px;
+  background: url();
+  background-color: transparent;
+  background-image: none;
 }
 
-#sidebar-left > .setting_menu_list > .fa{
-	font-size: 0.8em;
+#sidebar-left .setting_menu_list > a:hover{
+	color: #2f65a7;
+}
+
+#sidebar-left > .setting_menu_list > .fa {
+  font-size: 0.8em;
 }
 
 .navbar.main #title-header.logo {
-    width: auto;
+  width: auto;
+}
+
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 250px; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #f1f1f1; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  /* padding-top: 60px; Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#content {
+  margin-left: 250px;
+  transition: margin-left 0.5s;
+  padding: 20px;
+  height: auto;
+}
+
+#side_menu_header_title {
+  color:black;
+  font-weight: bold;
+}
+
+.brand {
+  width: 100%;
+  height: 55px;
+  display: block;
+  clear: both;
+  background: #FFACAA;
+  margin-bottom: 17.5px;
+}
+
+.brand .brand-logo {
+  margin-top: 17.5px;
+  margin-bottom: 17.5px;
+  float: left;
+  padding: 0 25px;
+  -moz-opacity: 0.9;
+  -khtml-opacity: 0.9;
+  -webkit-opacity: 0.9;
+  opacity: 0.9;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.9 * 100);
+  filter: alpha(opacity=0.9 * 100);
+}
+
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+  background-color: #f1b9b8;
 }

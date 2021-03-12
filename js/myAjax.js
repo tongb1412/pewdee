@@ -2029,3 +2029,37 @@ function goAppointment(hn, vn) {
 	var data = 'hn=' + hn + '&an=';
 	loadmodule('home', 'appointment/new_form.php', data);
 }
+
+function getDrugeData(){
+
+	$.ajax({
+		type : 'POST',
+		url : 'script/stock.php',
+		dataType : 'json',
+		data: { 
+			FN : "get_druge_data",
+		},
+		success : function(data){
+			drugeData = data;
+			var stock_druge_table = $('#stock_druge_table').DataTable();
+			stock_druge_table.destroy();
+			if(data){
+				table = $('#stock_druge_table').DataTable({
+					"data":data,
+					"columns": [
+						{ "data": "did" },
+						{ "data": "tname" },
+						{ "data": "dgroup" },
+						{ "data": "total" },
+						{ "data": "total_branch" },
+						{ "data": "unit" },
+					],
+					"order": [[ 0, "asc" ]] //order by crime_start_date_time desc
+				});
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log(errorThrown)
+		}
+	});
+}

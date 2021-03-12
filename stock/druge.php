@@ -97,5 +97,4 @@ if ($_SESSION['branch_id'] == "07" || $_SESSION['branch_id'] == "00") {
 
 <div id="p_list" style=" width:100%; margin-top:5px; text-align:center; height:auto;">
 	<?  require("druge_list.php");	 ?>
-
 </div>
