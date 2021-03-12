@@ -2,12 +2,10 @@
 session_start();
 include('../class/config.php');
 $lno = $_POST['lno'];
-if($_SESSION['branch_id'] !="") {	
-	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
-	$branch_id = $_SESSION['branch_id'];
-}else if ($_SESSION['branch_id'] =="") {	
-	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
-}
+
+
+
+if
 
 $sql1 = "select did from tb_temp_drugeinstock where lno='$lno'" . $where_branch_id;
 $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
@@ -23,7 +21,7 @@ if(!empty($n)){
 	 
 	$sql1 = "select * from tb_temp_drugeinstock where lno='$lno'" . $where_branch_id;
 	$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
-    while($rs=mysql_fetch_array($result)){
+    while($rs = mysql_fetch_array($result)){
 	   $did = $rs['did'];
 	   $dname = $rs['dname'];
 	   $unit = $rs['unit'];
@@ -38,7 +36,7 @@ if(!empty($n)){
 
 	   $sql = "select total from tb_druge where did='$did'";
 	   $str = mysql_query($sql) or die ("Error Query ".$sql); 	 
-	   $row=mysql_fetch_array($str);
+	   $row = mysql_fetch_array($str);
 	   $dtotal = intval($qty) + intval($row['total']);
 	   
 	   $sql = "Update tb_druge Set total='$dtotal' Where did='$did'";
@@ -60,4 +58,9 @@ if(!empty($n)){
 }
 
 echo '||stock/instock_show.php'.'||STOCK||'.$lno.'||'.$txt.'||'.$con;
+
+
+
+
+
 ?>

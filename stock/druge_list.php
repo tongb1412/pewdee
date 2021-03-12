@@ -9,9 +9,15 @@ $selserch = $_GET['bid'];
 // echo $txtserch;
 
 if($selserch == ""){
-	$selserch = $_SESSION['branch_id'];
+	// $selserch = $_SESSION['branch_id'];
+
 }
-// echo $selserch;exit();
+$where_user_data = set_where_user_data("07","1");
+$where_branch_id = $where_user_data['where_branch_id'];
+$where_company_code = $where_user_data['where_company_code'];
+
+echo "555";exit();
+
 $cl = $color1;
 if(empty($txtserch)){
 	$sql = "select * from tb_druge where status='IN'";
@@ -57,7 +63,7 @@ while($rs = mysql_fetch_array($result)){
 	}
 
 	$did = $rs['did'];
-	$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 and branchid ='$selserch'";
+	$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 " . $where_branch_id;
 
 	$rst = mysql_query($sql1) or die ("Error Query [".$sql1."]"); 
 	$num  = mysql_num_rows($rst);
@@ -151,6 +157,40 @@ while($rs = mysql_fetch_array($result)){
 		<img src='images/icon/next.png' border='0' align="absmiddle" />
 	</a>
 	<?		
+	}
+
+	function set_where_user_data($branch_id, $company_code){
+
+		$data = array();
+		$data_array = array();
+		$where_branch_id = "";
+		$where_company_code = "";
+
+		if($branch_id != ""){
+			$where_branch_id = " and branchid ='".$branch_id."'  ";
+		}
+		else{
+			if($_SESSION['branch_id'] !="") {	
+				$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
+				$branch_id = $_SESSION['branch_id'];
+			}
+		}
+	
+		if($company_code != ""){
+			$where_company_code = " and company_code ='".$company_code."'  ";
+		}
+		else{
+			if($_SESSION['company_code'] !="") {	
+				$where_company_code = " and company_code ='".$_SESSION['company_code']."'  ";
+				$company_code = $_SESSION['company_code'];
+			}
+		}
+		$data['where_branch_id'] = $where_branch_id;
+		$data['where_company_code'] = $where_company_code;
+	
+		array_push($data_array, $data);
+		return $data_array;
+	
 	}
 	
 	mysql_close($dblink);

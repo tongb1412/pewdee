@@ -6,7 +6,7 @@
 	</div>
 	<div style="position: absolute;left: 35%;top: 18.7%;">
 		<?php
-		if ($_SESSION['branch_id'] != "") {
+		if ($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] == "07") {
 			$branch_id = $_SESSION['branch_id'];
 			include('../class/config.php');
 			$sql = "";

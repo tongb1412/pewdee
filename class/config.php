@@ -1,14 +1,15 @@
-<?
+<?php
+
 session_start();
 //$dblink=mysql_connect("localhost","root","02566") or die("cannot connect database");
-$dblink=mysql_connect("devweb.dtcgps.com","maria1","Dev@web@154") or die("cannot connect database");
+$dblink = mysql_connect("devweb.dtcgps.com","maria1","Dev@web@154") or die("cannot connect database");
 //$dblink=mysql_connect("10.255.248.77","dtcsw","1234") or die("cannot connect database");
 //$dblink=mysql_connect("localhost","root","2520m") or die("cannot connect database");
 mysql_select_db("pewdee");
 mysql_query('SET CHARACTER SET utf8');
 mysql_query("SET character_set_client = utf8");
 mysql_query("SET character_set_connection = utf8");
-
+ 
 date_default_timezone_set('Asia/Bangkok');
 $tabcolor = '#EEF2F7';
 $color1 = '#FFFFFF';
@@ -19,4 +20,6 @@ $tgrp_1000000 = array("PD0098"=>30,"PDC244x"=>30,"PDC264"=>30, "PDC354"=>30, "PD
 "PDC400"=>30,"PDC500"=>30,"PDC501"=>30,
 "PDC503"=>30,"PDC506"=>30,"PDC502"=>30,   
 "PDC504"=>30,"PDC505"=>30,"PDC507"=>30,"PDC508"=>30);
+
+
 ?>

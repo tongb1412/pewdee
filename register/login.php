@@ -20,10 +20,10 @@ if(!empty($n)){
 	$_SESSION["mode"] = $rs['mode']; 
 	$_SESSION["branch_id"] = $rs['branchid']; 
 	$_SESSION["company_code"] = $rs['company_code']; 
-	$SYS_EID= $_SESSION["SYS_EID"] ;
-	$SYS_ENAME= $_SESSION["SYS_ENAME"] ;
-	$branch_id= $_SESSION["branch_id"] ;
-	$company_code= $_SESSION["company_code"] ;
+	$SYS_EID = $_SESSION["SYS_EID"] ;
+	$SYS_ENAME = $_SESSION["SYS_ENAME"] ;
+	$branch_id = $_SESSION["branch_id"] ;
+	$company_code = $_SESSION["company_code"] ;
 	$dat = date('Y-m-d');
 	$tim = date('H:i:s');
 	print_r($rs);

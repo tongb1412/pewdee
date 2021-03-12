@@ -46,8 +46,6 @@
 
 
 	<div id="content" style=" width:100%; margin-top:5px; text-align:center; height:auto;">
-
 		<?  require("druge.php");	 ?>
-
 	</div>
 </div>
