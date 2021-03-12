@@ -6,6 +6,7 @@ $lno = $_GET['mode'];
 
 $cl = $color1;
 $sql = "select * from tb_temp_drugeinstock where lno='$lno' order by dname";
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);
 

@@ -21,19 +21,21 @@ if($_SESSION['branch_id'] !="") {
 }else if ($_SESSION['branch_id'] =="") {	
 	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
 }
+$company_code = $_SESSION['company_code'];
 
- $sql1 = "select did from tb_temp_drugeinstock where lno='$lno' and did='$did'";
- $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
- $n = mysql_num_rows($result);
- if(empty($n)){
+$sql1 = "select did from tb_temp_drugeinstock where lno='$lno' and did='$did'";
+$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
+$n = mysql_num_rows($result);
+if(empty($n)){
 
-	$sql = "insert into tb_temp_drugeinstock  values('$lno','$did','$dname','$unit','$qty','$price','$totalprice','$bdate','$edate','$branch_id')";	
+$sql = "insert into tb_temp_drugeinstock  values('$lno','$did','$dname','$unit','$qty','$price','$totalprice','$bdate','$edate','$branch_id' , '$company_code')";	
 
- } else {
- 
- 	$sql = "Update tb_temp_drugeinstock Set qty='$qty',price='$price',totalprice='$totalprice',bdate='$bdate',edate='$edate' Where lno='$lno' and did='$did'";
- }
- mysql_query($sql);
+} else {
+
+$sql = "Update tb_temp_drugeinstock Set qty='$qty',price='$price',totalprice='$totalprice',bdate='$bdate',edate='$edate' Where lno='$lno' and did='$did'";
+}
+echo $sql;
+mysql_query($sql);
 
 echo '||stock/temp_instock_list.php'.'||'.$lno.'||DEL||บันทึกข้อมูลเรียบร้อยแล้ว';
 ?>
