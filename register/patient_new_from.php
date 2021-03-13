@@ -170,45 +170,46 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 		<div style="width:20%; float:left; text-align:right;">สาขา :&nbsp;</div>
 		<div style="width:30%; float:left;">
 			<?php
-				if ($_SESSION['branch_id'] != "") {
-					$branch_id = $_SESSION['branch_id'];
-					$sql = "";
-					if ($branch_id == "00" || $branch_id == "07") {
-						$sql = "select * from tb_branch order by branchid";
-					} else {
-						$sql = "select * from tb_branch where branchid = '$branch_id' order by branchid";
-					}
-					$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
-					$Num_Rows = mysql_num_rows($result);
-				?>
-					<select name="sel_branchid_p_new" id="sel_branchid_p_new">
-						<?php
-						if ($Num_Rows > 0) {
-							$flag = 0;
-							if ($branch_id == "00" || $branch_id == "07") {
-						?>
-								<option value="00">ทั้งหมด</option>
-								<?php
-							} 
-							while ($rs = mysql_fetch_array($result)) {
-								if($branch_id == $rs['branchid']){
-									?>
-									<option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname'];?></option>
+				if($_SESSION['company_data'] == "1"){
+					if ($_SESSION['branch_id'] != "") {
+						$branch_id = $_SESSION['branch_id'];
+						$sql = "";
+						if ($branch_id == "00" || $branch_id == "07") {
+							$sql = "select * from tb_branch order by branchid";
+						} else {
+							$sql = "select * from tb_branch where branchid = '$branch_id' order by branchid";
+						}
+						$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+						$Num_Rows = mysql_num_rows($result);
+					?>
+						<select name="sel_branchid_p_new" id="sel_branchid_p_new">
+							<?php
+							if ($Num_Rows > 0) {
+								$flag = 0;
+								if ($branch_id == "00" || $branch_id == "07") {
+							?>
+									<option value="00">ทั้งหมด</option>
 									<?php
-								}
-								else{
-									?>
-									<option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname'];?></option>
-								<?php
+								} 
+								while ($rs = mysql_fetch_array($result)) {
+									if($branch_id == $rs['branchid']){
+										?>
+										<option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname'];?></option>
+										<?php
+									}
+									else{
+										?>
+										<option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname'];?></option>
+									<?php
+									}
 								}
 							}
-						}
-						?>
-					</select>
-				<?php
-					// mysql_close($dblink);
-					// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
-				} else if ($_SESSION['branch_id'] == "") {
+							?>
+						</select>
+					<?php
+						// mysql_close($dblink);
+						// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
+					} 
 				}
 				?>
 		</div>

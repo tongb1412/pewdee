@@ -3,17 +3,18 @@
 include('../class/config.php');
 $txtserch = $_GET['txt'];
 $selserch = $_GET['bid'];
-$user_mode = $_SESSION["mode"];
+$company_data = $_SESSION["company_data"];
+$company_code = $_SESSION["company_code"];
 
 if($txtserch == "ค้นหา"){
 	$txtserch = "";
 }
-if($selserch == ""){
+if($selserch == "" || $selserch == undefined || $selserch == null){
 	$selserch = $_SESSION['branch_id'];
 }
 
 $where_branch_id = "";
-if($user_mode == "A"){
+if($company_data == "1"){
 	if($selserch != "00" && $selserch != "all"){
 		$where_branch_id = "and (branchid = '$selserch' or branchid is NULL or branchid = '')"; 
 	}
@@ -25,11 +26,12 @@ else{
 
 $cl = $color1;
 if(empty($txtserch) && $selserch == "00"){
-	$sql = "select * from tb_patient where stayin <> 'OFF' ";
+	$sql = "select * from tb_patient where stayin <> 'OFF' and company_code = '$company_code' ";
 } else if(empty($txtserch) && $selserch != "") {
-	$sql = "select * from tb_patient where stayin <> 'OFF' " . $where_branch_id;
+	$sql = "select * from tb_patient where stayin <> 'OFF' and company_code = '$company_code' " . $where_branch_id;
 } else {
-	$sql = "select * from tb_patient where (cradno like '%$txtserch%' or hn like '%$txtserch%' or fname like '%$txtserch%' or lname like '%$txtserch%') and (stayin <> 'OFF') " . $where_branch_id;
+	$sql = "select * from tb_patient where (cradno like '%$txtserch%' or hn like '%$txtserch%' or fname like '%$txtserch%' or lname like '%$txtserch%') and (stayin <> 'OFF') " . $where_branch_id . "and company_code = '$company_code' ";
+
 }
 
 // echo $sql;exit();

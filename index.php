@@ -1,7 +1,7 @@
 <?
 session_start();
 //;
-
+include('class/permission_user.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -170,7 +170,15 @@ session_start();
 										data += '&level=' + document.getElementById('plevel').value;
 										data += '&st=' + document.getElementById('st').value;
 										data += '&bl=' + document.getElementById('bl').value;
-										data += '&bid=' + document.getElementById('sel_branchid_p_new').value;
+
+										sel_branch = document.getElementById('sel_branchid_p_new');
+										if(sel_branch != null){
+											data += '&bid=' + sel_branch.value;
+										}
+										else{
+											data += '&bid=""';
+										}
+										
 										data += '&oc=' + document.getElementById('oc').value;
 										data += '&pno=' + document.getElementById('pno').value;
 										data += '&pass=' + document.getElementById('pass').value;
@@ -1735,10 +1743,6 @@ session_start();
 
 
 	<div id="home" style="width:1003px; margin:auto;">
-
-
-
-
 
 	</div>
 	<div style="width:100%; height:10px; color:#FFFFFF;">&nbsp;</div>

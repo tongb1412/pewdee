@@ -1,4 +1,9 @@
-<? include('../class/config.php'); ?>
+<?php 
+
+include('../class/config.php'); 
+require('../class/permission_user.php'); 
+
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div style="width:99%; margin:auto; height:390px; float:left; margin-left:5px; margin-top:-5px; border:<?= $tabcolor ?> 1px solid;">
 
@@ -9,14 +14,16 @@ $selserch = $_GET['bid'];
 // echo $txtserch;
 
 if($selserch == ""){
-	// $selserch = $_SESSION['branch_id'];
+	$selserch = $_SESSION['branchid'];
+} 
 
-}
-$where_user_data = set_where_user_data("07","1");
-$where_branch_id = $where_user_data['where_branch_id'];
-$where_company_code = $where_user_data['where_company_code'];
 
-echo "555";exit();
+$where_user_data = set_where_user_data('',$selserch, $_SESSION['company_code'], $_SESSION['company_data']);
+
+// echo $where_user_data['where_branch_id'];
+// echo $where_user_data['where_company_code'];
+// echo $where_user_data['where_company_data'];
+
 
 $cl = $color1;
 if(empty($txtserch)){
@@ -54,76 +61,72 @@ $sql .=" order by tname asc LIMIT $Page_Start , $Per_Page";
 
 $result  = mysql_query($sql);
 if($result){
-$n=1;
-while($rs = mysql_fetch_array($result)){  
-	if($cl != $color1){
-		$cl = $color1;
-	} else {
-		$cl = $color2;
-	}
+	$n=1;
+	while($rs = mysql_fetch_array($result)){  
+		if($cl != $color1){
+			$cl = $color1;
+		} else {
+			$cl = $color2;
+		}
 
-	$did = $rs['did'];
-	$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 " . $where_branch_id;
-
-	$rst = mysql_query($sql1) or die ("Error Query [".$sql1."]"); 
-	$num  = mysql_num_rows($rst);
-	$dtotal = 0;
-	if(!empty($num)){
-		$rss = mysql_fetch_array($rst);
-		$dtotal = $rss['total'];
-	}
-	?>
-
-	<?php
-	if ($_SESSION['branch_id'] == "07" || $_SESSION['branch_id'] == "00") {
-	?>
-		<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:97%; cursor:pointer;" onclick="swabtab(5,5,'stock/druge_edit_from.php','content','did=<?= $rs['did'] ?>')">
-			<div style="width:15%; float:left;"><?= $rs['did'] ?>&nbsp;</div>
-			<div style="width:30%; float:left;"><?= $rs['tname'] ?>&nbsp;</div>
-			<div style="width:15%; float:left;"><?= $rs['dgroup'] ?>&nbsp;</div>
-			<div style="width:11%; float:left; text-align:right; margin-right:3%">
-				<?php
-				echo number_format($rs['total'], '0', '.', ',');
-				?>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</div>
-			<div style="width:10%; float:left; text-align:right">
-				<?php
-				echo number_format($rss['total'], '0', '.', ',');
-				?>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</div>
-			<div style="width:5%; float:left; text-align: left; margin-left:6%"><?= $rs['unit'] ?>&nbsp;</div>
-			<div style="width:5%; float:left; text-align: center;">
-				<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('stock/druge_del.php','p_list','id=<?= $rs['did'] ?>')" />
-
-			</div>
-		</div>
-	<?php
-	} else {
+		$did = $rs['did'];
+		$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 " . $where_user_data['where_branch_id'];
+		// echo $sql1;exit();
+		$rst = mysql_query($sql1) or die ("Error Query [".$sql1."]"); 
+		$num  = mysql_num_rows($rst);
+		$dtotal = 0;
+		if(!empty($num)){
+			$rss = mysql_fetch_array($rst);
+			$dtotal = $rss['total'];
+		}
 		?>
-		<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:97%; cursor:pointer;" onclick="swabtab(5,5,'stock/druge_edit_from.php','content','did=<?= $rs['did'] ?>')">
-			<div style="width:15%; float:left;"><?= $rs['did'] ?>&nbsp;</div>
-			<div style="width:30%; float:left;"><?= $rs['tname'] ?>&nbsp;</div>
-			<div style="width:15%; float:left;"><?= $rs['dgroup'] ?>&nbsp;</div>
-			<div style="width:14%; float:left; text-align:right;">
-				<?php
-				if ($selserch == "all" || $selserch == "07" || $selserch == "00") {
-					echo number_format($rs['total'], '0', '.', ',');
-				} else {
-					echo number_format($rss['total'], '0', '.', ',');
-				}
-				?>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</div>
-			<div style="width:10%; float:left;text-align:center; margin-left:4.5%"><?= $rs['unit'] ?>&nbsp;</div>
-			<div style="width:9%; float:left; text-align:right;">
-				<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('stock/druge_del.php','p_list','id=<?= $rs['did'] ?>')" />
 
-			</div>
-		</div>
 		<?php
-	}
+		if ($_SESSION['company_data'] == "1") {
+		?>
+			<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:97%; cursor:pointer;" onclick="swabtab(5,5,'stock/druge_edit_from.php','content','did=<?= $rs['did'] ?>')">
+				<div style="width:15%; float:left;"><?= $rs['did'] ?>&nbsp;</div>
+				<div style="width:30%; float:left;"><?= $rs['tname'] ?>&nbsp;</div>
+				<div style="width:15%; float:left;"><?= $rs['dgroup'] ?>&nbsp;</div>
+				<div style="width:11%; float:left; text-align:right; margin-right:3%">
+					<?php
+					echo number_format($rs['total'], '0', '.', ',');
+					?>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+				<div style="width:10%; float:left; text-align:right">
+					<?php
+					echo number_format($rss['total'], '0', '.', ',');
+					?>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+				<div style="width:5%; float:left; text-align: left; margin-left:6%"><?= $rs['unit'] ?>&nbsp;</div>
+				<div style="width:5%; float:left; text-align: center;">
+					<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('stock/druge_del.php','p_list','id=<?= $rs['did'] ?>')" />
+
+				</div>
+			</div>
+		<?php
+		} else {
+			?>
+			<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:97%; cursor:default;" onclick="">
+				<div style="width:15%; float:left;"><?= $rs['did'] ?>&nbsp;</div>
+				<div style="width:30%; float:left;"><?= $rs['tname'] ?>&nbsp;</div>
+				<div style="width:15%; float:left;"><?= $rs['dgroup'] ?>&nbsp;</div>
+				<div style="width:14%; float:left; text-align:right;">
+					<?php
+					echo number_format($rss['total'], '0', '.', ',');
+					?>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+				<div style="width:10%; float:left;text-align:center; margin-left:4.5%"><?= $rs['unit'] ?>&nbsp;</div>
+				<div style="width:9%; float:left; text-align:right;">
+					<!-- <img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('stock/druge_del.php','p_list','id=<?= $rs['did'] ?>')" /> -->
+
+				</div>
+			</div>
+			<?php
+		}
 	?>
 	<? } ?>
 
@@ -157,40 +160,6 @@ while($rs = mysql_fetch_array($result)){
 		<img src='images/icon/next.png' border='0' align="absmiddle" />
 	</a>
 	<?		
-	}
-
-	function set_where_user_data($branch_id, $company_code){
-
-		$data = array();
-		$data_array = array();
-		$where_branch_id = "";
-		$where_company_code = "";
-
-		if($branch_id != ""){
-			$where_branch_id = " and branchid ='".$branch_id."'  ";
-		}
-		else{
-			if($_SESSION['branch_id'] !="") {	
-				$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
-				$branch_id = $_SESSION['branch_id'];
-			}
-		}
-	
-		if($company_code != ""){
-			$where_company_code = " and company_code ='".$company_code."'  ";
-		}
-		else{
-			if($_SESSION['company_code'] !="") {	
-				$where_company_code = " and company_code ='".$_SESSION['company_code']."'  ";
-				$company_code = $_SESSION['company_code'];
-			}
-		}
-		$data['where_branch_id'] = $where_branch_id;
-		$data['where_company_code'] = $where_company_code;
-	
-		array_push($data_array, $data);
-		return $data_array;
-	
 	}
 	
 	mysql_close($dblink);
