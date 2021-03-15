@@ -14,11 +14,22 @@ function set_where_user_data($as ,$branch_id, $company_code, $company_data){
         $table_as = $as . ".";
     }
 
-    if($branch_id != "" && $branch_id != "00"){
-        $where_branch_id = " and " . $table_as . "branchid ='".$branch_id."'  ";
+    // $where_branch_id = "";
+    // if($branchid != "") {
+    //     if($branchid != "00"){ 
+    //         $where_branch_id = " and (b.branchid ='".$branchid."' or b.branchid is null ) ";
+    //     } 
+    // }else if($_SESSION['branch_id'] != "") {	
+    //     $where_branch_id = " and (b.branchid ='".$_SESSION['branch_id']."'  or b.branchid is null ) ";
+    // }
+
+    if($branch_id != "" ){
+        if($branch_id != "00") {
+            $where_branch_id = " and ( " . $table_as . "branchid ='".$branch_id."'  or " . $table_as . "branchid is null )";
+        }
     } else if($branch_id != "00"){
         if($_SESSION['branch_id'] !="") {	
-            $where_branch_id = " and " . $table_as . "branchid ='".$_SESSION['branch_id']."'  ";
+            $where_branch_id = " and (" . $table_as . "branchid ='".$_SESSION['branch_id']."' or " . $table_as . "branchid is null ) ";
             $branch_id = $_SESSION['branch_id'];
         }
     }
@@ -55,7 +66,8 @@ function set_where_user_data($as ,$branch_id, $company_code, $company_data){
 
     // array_push($data_array, $data);
     $json_data = json_encode($data);
-    return $json_data;
+    // return $json_data;
+    return $data;
 
     // EX to user func
     // $where_user_data = json_decode(set_where_user_data('ตัวย่อ table','รหัสสาขา','รหัสบริษัท','เช็คสิทธิ์ user'),true);
