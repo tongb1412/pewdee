@@ -16,8 +16,8 @@ if($bid == "" || $bid == undefined || $bid == null){
 }
 
 $where_user_data = set_where_user_data('',$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
-$company_data = $_SESSION['company_data']
-$company_code = $_SESSION['company_code']
+$company_data = $_SESSION['company_data'];
+$company_code = $_SESSION['company_code'];
 
 $cardno = $_POST['cardno'];
 $hn = $_POST['hn'];

@@ -18,10 +18,10 @@ $hn = $_POST['hn'];
 	<div style="width:100%; height:auto; float:left; margin-top:10px;">
 
 		<form action="upload.php" target="up_iframe" method="post" enctype="multipart/form-data" name="form1" id="form1">
-			<input type="file" size="5" name="filUpload" id="filUpload" value="" style="display: none;"/>&nbsp;&nbsp;
+			<input type="file" size="5" name="filUpload" id="filUpload" value="" style="display: none;" />&nbsp;&nbsp;
 			<input type="hidden" id="phn" name="phn" value="<?= $hn ?>" />
 			<button id="b_file" name="b_file" onclick="thisFileUpload();">เลือกรูป</button>
-			<br/><span id="file_upload_name">ไม่มีไฟล์</span><br/>
+			<br /><span id="file_upload_name">ไม่มีไฟล์</span><br />
 			<input type="submit" id="iSubmit" value=" Upload " style="cursor:pointer;" />
 		</form>
 
@@ -198,6 +198,44 @@ $news = array('ไม่ระบุ','นิตยสาร','เวปไซ�
 
 	</div>
 
+	<div class="line">
+		<div style="width:20%; float:left; text-align:right;"><?php if($_SESSION['company_data'] == "1"){echo "สาขา :&nbsp;";} ?></div>
+		<div style="width:30%; float:left;">
+			<?php
+				if($_SESSION['company_data'] == "1"){
+					if ($_SESSION['branch_id'] != "") {
+						$branch_id = $_SESSION['branch_id'];
+						$sql = "";
+						$sql = "select * from tb_branch order by branchid";
+						$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+						$Num_Rows = mysql_num_rows($result);
+			?>
+						<select name="sel_branchid_p_new" id="sel_branchid_p_new">
+							<?php
+							if ($Num_Rows > 0) {
+								while ($rs = mysql_fetch_array($result)) {
+									if($row['branchid'] == $rs['branchid']){
+										?>
+										<option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname'];?></option>
+										<?php
+									}
+									else{
+										?>
+										<option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname'];?></option>
+									<?php
+									}
+								}
+							}
+							?>
+						</select>
+					<?php
+						// mysql_close($dblink);
+						// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
+					} 
+				}
+				?>
+		</div>
+	</div>
 
 
 

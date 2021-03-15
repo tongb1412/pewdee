@@ -8,11 +8,7 @@
 				if ($_SESSION['branch_id'] != "") {
 					$branch_id = $_SESSION['branch_id'];
 					$sql = "";
-					if ($branch_id == "00" || $branch_id == "07") {
-						$sql = "select * from tb_branch order by branchid";
-					} else {
-						$sql = "select * from tb_branch where branchid = '$branch_id' order by branchid";
-					}
+					$sql = "select * from tb_branch order by branchid";
 					$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
 					$Num_Rows = mysql_num_rows($result);
 				?>
@@ -24,7 +20,7 @@
 						<?php
 						if ($Num_Rows > 0) {
 							$flag = 0;
-							if ($branch_id == "00" || $branch_id == "07") {
+							if ($branch_id != "") {
 						?>
 								<option value="00">ทั้งหมด</option>
 								<?php

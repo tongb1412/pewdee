@@ -3,8 +3,9 @@
 include('../class/config.php');
 $cl = $color1;
 $txt = $_GET['txt'];
+$company_code = $_SESSION['company_code'];
 if(! empty($txt)){
-$sql = "select * from tb_gernaral where name like '%$txt%' and typ ='LB'   order by name asc   limit 10";
+$sql = "select * from tb_gernaral where name like '%$txt%' and typ ='LB' and company_code = '$company_code' order by name asc limit 10 ";
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $n = mysql_num_rows($result);
 if(! empty($n)){
@@ -13,11 +14,8 @@ if(! empty($n)){
 
 <div style="width:100%; height:20px; padding-top:5px; color:#000000; margin:auto; font-weight:bold; font-size:13px; background:<?=$tabcolor?>;">    
 	<div style="width:85%;  text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รายการ</div>
-
 	<div style="width:15%;text-align:left; float:left;">&nbsp;</div>
 </div>
-
-
 
 <?
 

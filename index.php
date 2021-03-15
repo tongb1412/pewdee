@@ -173,10 +173,10 @@ include('class/permission_user.php');
 
 										sel_branch = document.getElementById('sel_branchid_p_new');
 										if(sel_branch != null){
-											data += '&bid=' + sel_branch.value;
+											data += "&bid=" + sel_branch.value;
 										}
 										else{
-											data += '&bid=""';
+											data += "&bid=''";
 										}
 										
 										data += '&oc=' + document.getElementById('oc').value;

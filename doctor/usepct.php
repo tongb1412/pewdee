@@ -1,6 +1,191 @@
-<?php 
-/*
-Encoder : AROHA PHPencoder ver. 1.11
-WEB : http://phpencoder.aroha.sk/
-*/
-$Q63F0A9A1CEC09A5459926B213EFC0736="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";eval(base64_decode(gzuncompress(base64_decode($Q63F0A9A1CEC09A5459926B213EFC0736))));?>
+<?php ?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?
+include('../class/config.php');
+include('../class/permission_user.php');
+
+$hn = $_POST['hn'];
+$pvn = $_POST['pvn'];
+$uvn = $_POST['vn'];
+$tid = $_POST['tid'];
+$eid = $_POST['eid'];
+$ename = $_POST['ename'];
+
+$eid1 = $_POST['eid1'];
+$eid2 = $_POST['eid2'];
+
+$qty = $_POST['qty'];
+$stqty = $_POST['tqty'];
+$dat = date('Y-m-d');
+
+$branch_id = $_SESSION['branch_id'];
+$company_code = $_SESSION['company_code'];
+$company_data = $_SESSION['company_data'];
+$where_data =  set_where_user_data('',$branch_id, $company_code, $company_data);
+
+$sql = "select * from tb_pctrec  where hn='$hn' and  tid='$tid' and vn='$pvn' and typ IN ('T','L')  and total > 0 " . $where_data['where_branch_id'] . $where_data['where_company_code'] . " order by vn asc ";
+$str = mysql_query($sql) or die ("Error Query [".$sql."]");
+$txtddd = $sql;
+while(($rs = mysql_fetch_array($str)) && ($qty > 0)){
+  //$vn = $rs['vn'];
+	$type = $rs['typ'];
+	$unit = $rs['unit'];
+	$tname = $rs['tname'];
+	$sqls = "select sum(qty) as total from tb_pctuse  where vn='$pvn' and uvn='$uvn'  and hn='$hn' and pid='$tid' and tid='$tid'  and ftyp='T' ";
+	$strs = mysql_query($sqls) or die ("Error Query [".$sqls."]");
+	$rss = mysql_fetch_array($strs);
+	$sum = $rss['total'];
+	if($sum < $qty){
+		if($rs_pct['total'] >= $qty ){
+			$total =  $rs['total'] - $qty;
+			$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$tid','$tid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','T','$uvn','$eid1','$eid2','$stqty','$branch_id','$company_code')";
+			mysql_query($sql_in);
+			$sql_in = "Update tb_pctrec Set total='$total' Where vn='$vn' and tid='$tid' and hn='$hn' and typ='$type' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
+			mysql_query($sql_in);
+			$qty = 0;
+		} else {
+			$total = $rs['total'];
+			$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$tid','$tid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','T','$uvn','$eid1','$eid2','0','$branch_id','$company_code')";
+			mysql_query($sql_in);
+			$sql_in = "Update tb_pctrec Set total='0' Where vn='$vn' and tid='$tid' and hn='$hn' and typ='$type' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
+			mysql_query($sql_in);
+			$qty = $qty - $total;
+		}
+	}
+}
+
+$sql = "select * from tb_pctrec  where hn='$hn' and vn='$pvn' and typ='C' and total > 0 order by vn asc ";
+$str = mysql_query($sql) or die ("Error Query [".$sql."]");
+
+while( ($rs=mysql_fetch_array($str)) && ($qty > 0)){
+  //  $vn = $rs['vn'];
+
+	$cid = $rs['tid'];
+	$tqty = $rs['qty'];
+	$total = $rs['total'];
+
+	$sqlc  = "select  tb_course_detail.*,tb_treatment.unit,tb_treatment.typ from tb_course_detail,tb_treatment  ";
+	$sqlc .= "where tb_course_detail.tid=tb_treatment.tid  and  tb_course_detail.cid='$cid' and tb_course_detail.tid='$tid'  ";
+	$strc = mysql_query($sqlc) or die ("Error Query [".$sqlc."]");
+	$n = mysql_num_rows($strc);
+    if(!empty($n)){
+		$rc=mysql_fetch_array($strc);
+		$tname = $rc['tname'];
+		$type = $rc['typ'];
+		$unit = $rc['unit'];
+		$tqty = $tqty * $rc['qty'];
+
+
+
+		$sqls = "select sum(qty) as total from tb_pctuse  where vn='$pvn' and hn='$hn' and pid='$cid' and tid='$tid'  and ftyp='C' ";
+		$strs = mysql_query($sqls) or die ("Error Query [".$sqls."]");
+		$rss=mysql_fetch_array($strs);
+		$sum = $rss['total'];
+		if($sum < $tqty){
+			if($tqty >= $qty ){
+
+				$sql_in = "insert into tb_pctuse  values('NULL','$pvn','$hn','$cid','$cid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','C','$uvn','$eid1','$eid2','$stqty')";
+				mysql_query($sql_in);
+				$total = $total - $qty;
+				$sql_in = "Update tb_pctrec Set total='$total' Where vn='$pvn' and tid='$cid' and hn='$hn' and typ='C' ";
+				mysql_query($sql_in);
+				$qty = 0;
+			} else {
+				$total = $rs['total'];
+				$sql_in = "insert into tb_pctuse  values('NULL','$pvn','$hn','$cid','$cid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','C','$uvn','$eid1','$eid2','0')";
+				mysql_query($sql_in);
+				$sql_in = "Update tb_pctrec Set total='0' Where vn='$pvn' and tid='$cid' and hn='$hn' and typ='C' ";
+				mysql_query($sql_in);
+				$qty = $qty - $total;
+			}
+		}
+
+	}
+
+}
+
+$sql = "select * from tb_pctrec  where hn = '$hn' and typ='P' and total > 0 " . $where_data['where_branch_id'] . $where_data['where_company_code'] . " order by vn asc ";
+$str = mysql_query($sql) or die ("Error Query [".$sql."]");
+
+while( ($rs = mysql_fetch_array($str)) && ($qty > 0)){
+    $vn = $rs['vn'];
+	$pid = $rs['tid'];
+	$tqty = $rs['qty'];
+	$total = $rs['total'];
+
+
+	$sqlt = "select tb_package_detail.*,tb_treatment.unit,tb_treatment.typ from tb_package_detail,tb_treatment  where tb_package_detail.id = tb_treatment.tid ";
+	$sqlt .= "and tb_package_detail.pid='$pid' and tb_package_detail.id='$tid' and tb_package_detail.typ IN('T','L') and tb_package_detail.company_code = '$company_code'";
+	$strt = mysql_query($sqlt) or die ("Error Query [".$sqlt."]");
+	$rt = mysql_fetch_array($strt);
+	$tname =  $rt['name'];
+	$unit =  $rt['unit'];
+	$type =  $rt['typ'];
+	$nqty =  $rt['qty'] * $tqty;
+	$sqls = "select sum(qty) as total from tb_pctuse  where vn='$vn' and hn='$hn' and pid='$pid' and tid='$tid'  and ftyp='PT' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
+	$strs = mysql_query($sqls) or die ("Error Query [".$sqls."]");
+	$rss = mysql_fetch_array($strs);
+	$sum = $rss['total'];
+	if($sum < $nqty){
+		if($nqty >= $qty ){
+			$sum =  $nqty - $qty;
+			$sql_in = "insert into tb_pctuse values('NULL','$vn','$hn','$pid','$pid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','PT','$uvn','$eid1','$eid2','$stqty','$branch_id','$company_code')";
+			mysql_query($sql_in);
+			$total = $total - $qty;
+			$sql_in = "Update tb_pctrec Set total='$total' Where vn='$vn' and tid='$pid' and hn='$hn' and typ='P' " . $where_data['where_branch_id'] . $where_data['where_company_code'];
+			mysql_query($sql_in);
+			$qty = 0;
+		} else {
+			$total = $rs['total'];
+			$sql_in = "insert into tb_pctuse values('NULL','$vn','$hn','$pid','$pid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','PT','$uvn','$eid1','$eid2','0','$branch_id','$company_code')";
+			mysql_query($sql_in);
+			$sql_in = "Update tb_pctrec Set total='0' Where vn='$vn' and tid='$pid' and hn='$hn' and typ='P' " . $where_data['where_branch_id'] . $where_data['where_company_code'];
+			mysql_query($sql_in);
+			$qty = $qty - $total;
+		}
+	}
+
+	$sqly = "select id,qty from tb_package_detail  where pid='$pid' and typ = 'C' ";
+	$stry = mysql_query($sqly) or die ("Error Query [".$sqly."]");
+	while($ry=mysql_fetch_array($stry)){
+		$cid = $ry['id'];
+	    $cqty = $ry['qty'];
+		$sqlc  = "select  tb_course_detail.*,tb_treatment.unit,tb_treatment.typ from tb_course_detail,tb_treatment  ";
+		$sqlc .= "where tb_course_detail.tid=tb_treatment.tid  and  tb_course_detail.cid='$cid' and tb_course_detail.tid='$tid' tb_course_detail.company_code = '$company_code'";
+		$strc = mysql_query($sqlc) or die ("Error Query [".$sqlc."]");
+		$n = mysql_num_rows($strc);
+		if(!empty($n)){
+			$rc=mysql_fetch_array($strc);
+			$tname = $rc['tname'];
+			$type = $rc['typ'];
+			$unit = $rc['unit'];
+			$tcqty = ($cqty * $rc['qty']) * $tqty;
+			$sqls = "select sum(qty) as total from tb_pctuse  where vn='$vn' and hn='$hn' and pid='$pid' and cid='$cid' and tid='$tid'  and ftyp='PC' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
+			$strs = mysql_query($sqls) or die ("Error Query [".$sqls."]");
+			$rss=mysql_fetch_array($strs);
+			$sum = $rss['total'];
+			if($sum < $tcqty){
+				if($tcqty >= $qty ){
+					$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$pid','$cid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','PC','$uvn','$eid1','$eid2','$stqty')";
+					mysql_query($sql_in);
+					$total = $total - $qty;
+					$sql_in = "Update tb_pctrec Set total='$total' Where vn='$vn' and tid='$pid' and hn='$hn' and typ='P' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
+					mysql_query($sql_in);
+					$qty = 0;
+				} else {
+					$total = $rs['total'];
+					$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$pid','$cid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','PC','$uvn','$eid1','$eid2','0','$branch_id','$company_code')";
+					mysql_query($sql_in);
+					$sql_in = "Update tb_pctrec Set total='0' Where vn='$vn' and tid='$pid' and hn='$hn' and typ='P' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
+					mysql_query($sql_in);
+					$qty = $qty - $total;
+				}
+			}
+		}
+	}
+}
+
+
+echo '||doctor/doctor_form.php'.'||'.$_POST['vn'].'||DEL||'.$txtddd;
+
+?>
