@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $hn = $_POST['hn'];
 $bid = $_POST['bid'];
 
@@ -13,9 +14,12 @@ if(empty($bid)){
 else{
     $branch_id = $bid;
 }
+$company_code = $_SESSION['company_code'];
+$company_data = $_SESSION['company_data'];
+$where_user =  set_where_user_data('',$branch_id, $company_code, $company_data);
 
 $sd = 'Yes';
-$sql = "select * from tb_vst where hn='$hn' and status not IN('COM','CANCEL')";
+$sql = "select * from tb_vst where hn='$hn' and status not IN('COM','CANCEL') " . $where_user['where_company_code'];
 // echo $sql;exit();
 $str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $num = mysql_num_rows($str);
@@ -31,9 +35,9 @@ if($num > 0 ){
 	}
 }
 
-$sql = "select * from tb_patient where hn='$hn'";
+$sql = "select * from tb_patient where hn='$hn'" . $where_user['where_company_code'];
 $patient_result = mysql_query($sql) or die ("Error Query [".$sql."]");
-$row=mysql_fetch_array($patient_result);
+$row = mysql_fetch_array($patient_result);
 if($sd == 'Yes'){
 	if($row['vn'] != '-'){
 		$sd = 'No'; 
@@ -55,7 +59,7 @@ if($sd == 'Yes'){
 		<select id="sempid" style="width:330px; font-size:16px;">
 		<option value="00">ไม่ระบุแพทย์</option>
 		<?
-		$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and (branchid is NULL or branchid = '' or branchid = '$branch_id') order by typ, fname ";
+		$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and (branchid is NULL or branchid = '' or branchid = '$branch_id')" . $where_user['where_company_code'] . " order by typ, fname ";
 		// echo $sql;exit();
 		$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 		while($rs = mysql_fetch_array($result)){

@@ -4,11 +4,14 @@
 include('../class/config.php');
 $txtserch = $_GET['txt'];
 
+$branch_id = $_SESSION['branch_id'];
+$company_code = $_SESSION['company_code'];
+
 $cl = $color1;
 if(empty($txtserch)){
-	$sql = "select * from tb_druge where status='IN' ";
+	$sql = "select * from tb_druge where status='IN' and company_code = '$company_code' ";
 } else {
-	$sql = "select * from tb_druge where (did like '%$txtserch%'  or gname like '%$txtserch%' or tname like '%$txtserch%'  or dgroup like '%$txtserch%') and (status='IN') ";
+	$sql = "select * from tb_druge where (did like '%$txtserch%'  or gname like '%$txtserch%' or tname like '%$txtserch%'  or dgroup like '%$txtserch%') and (status='IN') and company_code = '$company_code' ";
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);

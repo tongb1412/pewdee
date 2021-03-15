@@ -1640,7 +1640,6 @@ include('class/permission_user.php');
 
 <body onload="lll();">
 
-
 	<div id="dialog-overlay"></div>
 	<div id="dialog-box"></div>
 

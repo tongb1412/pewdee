@@ -1,4 +1,10 @@
-<? include('../class/config.php');?>
+<?php
+
+
+include('../class/config.php');
+
+
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <div style="width:99%; height:auto;  text-align:left; padding-left:5px;">

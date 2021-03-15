@@ -167,7 +167,7 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 
 	</div>
 	<div class="line">
-		<div style="width:20%; float:left; text-align:right;">สาขา :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><?php if($_SESSION['company_data'] == "1"){echo "สาขา :&nbsp;";} ?></div>
 		<div style="width:30%; float:left;">
 			<?php
 				if($_SESSION['company_data'] == "1"){

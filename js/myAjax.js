@@ -744,7 +744,12 @@ function serchtxt(URL, displayId, txt) {
 }
 function serchtxtStock(URL, displayId, txt) {
 	var data = 'txt=' + txt.value;
-	data += '&sel=' + $('#sel_branchid_stock').val();
+	var branch_id = $('#sel_branchid_stock').val();
+	if(branch_id == undefined || branch_id == null || branch_id === null || branch_id == ""){
+		data += '&bid=' + $('#branch_id_val').val();
+	} else {
+		data += '&bid=' + branch_id;
+	}
 	ajaxLoad('get', URL, data, displayId);
 }
 function serchtxtPatient(URL, displayId, txt) {

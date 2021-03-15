@@ -1,7 +1,6 @@
 <?php 
 
 include('../class/config.php'); 
-require('../class/permission_user.php'); 
 
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,30 +8,28 @@ require('../class/permission_user.php');
 
 	<?
 
-$txtserch = $_GET['txt'];
-$selserch = $_GET['bid'];
-// echo $txtserch;
+$txtserch = "";
+$selserch = "";
 
-if($selserch == ""){
-	$selserch = $_SESSION['branchid'];
-} 
+if(empty($_GET['bid'])){
+	if($selserch == ""){
+		$selserch = $_SESSION['branch_id'];
+	} 
+}
+else{
+	$selserch = $_GET['bid'];
+}
 
+$company_code = $_SESSION['company_code'];
 
-$where_user_data = set_where_user_data('',$selserch, $_SESSION['company_code'], $_SESSION['company_data']);
-
-// echo $where_user_data['where_branch_id'];
-// echo $where_user_data['where_company_code'];
-// echo $where_user_data['where_company_data'];
-
+// $where_user_data = set_where_user_data('',$selserch, $_SESSION['company_code'], $_SESSION['company_data']);
 
 $cl = $color1;
-if(empty($txtserch)){
-	$sql = "select * from tb_druge where status='IN'";
+if(empty($_GET['txt'])){
+	$sql = "select * from tb_druge where status='IN' and company_code = '$company_code'";
 } else {
-	if($txtserch == "ค้นหา"){
-		$txtserch = "";
-	}
-	$sql = "select * from tb_druge where (did like '%$txtserch%'  or gname like '%$txtserch%' or tname like '%$txtserch%'  or dgroup like '%$txtserch%') and (status='IN')";
+	$txtserch = $_GET['txt'];
+	$sql = "select * from tb_druge where (did like '%$txtserch%'  or gname like '%$txtserch%' or tname like '%$txtserch%'  or dgroup like '%$txtserch%') and (status='IN') and company_code = '$company_code'";
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);
@@ -70,7 +67,12 @@ if($result){
 		}
 
 		$did = $rs['did'];
-		$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 " . $where_user_data['where_branch_id'];
+		if($selserch == '00'){
+			$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 and company_code = '$company_code' ";
+		} else {
+			$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 and branchid = '$selserch' and company_code = '$company_code' ";
+		}
+		
 		// echo $sql1;exit();
 		$rst = mysql_query($sql1) or die ("Error Query [".$sql1."]"); 
 		$num  = mysql_num_rows($rst);

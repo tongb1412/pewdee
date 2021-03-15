@@ -16,6 +16,7 @@ $sql1 = "select did from tb_temp_drugecutstock where lno='NO' " . $where_branch 
 $result = mysql_query($sql1) or die ("Error Query ".$sql1); 
 $n = mysql_num_rows($result);
 if(!empty($n)){
+	$SYS_EID = $_SESSION["SYS_EID"];
     $empid = $SYS_EID;
     $mem = $_POST['cmem'];
     
@@ -24,7 +25,6 @@ if(!empty($n)){
     $sql = "insert into tb_cutstock  values('$lno','$empid','$dat','$mem','$branch_id','$company_code')";
     mysql_query($sql) or die ("Error Query ".$sql);	 
 	
-
 	$sql1 = "select * from tb_temp_drugecutstock where lno='NO' " . $where_branch . $where_company;
 	// echo $sql1;exit();
 	$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
@@ -38,7 +38,7 @@ if(!empty($n)){
 	   $branchid = $rs['branchid'];
 	   $company_code_temp = $rs['company_code'];
 
-		$sql = "select sprice from tb_druge where did='$did'" . $where_company;
+		$sql = "select sprice from tb_druge where did = '$did'" . $where_company;
 	    $str = mysql_query($sql) or die ("Error Query ".$sql); 	 
 		$row = mysql_fetch_array($str);
 		$price = intval($qty) * intval($row['sprice']);
@@ -65,7 +65,7 @@ echo '||stock/cutstock.php'.'||ADJSTOCK||'.$lno.'||'.$txt.'||'.$con;
 
 function in_stock($vn,$did,$dname,$qty,$branchid,$company_code_temp){
 	$iqty = $qty;
-    $sql = "select total from tb_druge where did='$did' and company_code = ".$company_code_temp;
+    $sql = "select total from tb_druge where did = '$did' and company_code = ".$company_code_temp;
 	// echo $sql;exit();
     $str = mysql_query($sql) or die ("Error Query ".$sql); 	 
     $row = mysql_fetch_array($str);
