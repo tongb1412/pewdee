@@ -2,6 +2,7 @@
 <div style="width:auto; margin:auto; height:auto;">
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 
 
 //$nd = substr($_GET['edate'],0,2) + 1;
@@ -23,17 +24,18 @@ if($branchid != "") {
 	if($branchid != "00"){ 
 		$where_branch_id = " and (b.branchid ='".$branchid."' or b.branchid is null ) ";
 	} 
-}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
+}else if($_SESSION['branch_id'] != "") {	
 	$where_branch_id = " and (b.branchid ='".$_SESSION['branch_id']."'  or b.branchid is null ) ";
 }
-$branchname = "";
-if($branchid != "" && $branchid != "00") {
-	$sql2 = "select branchid,branchname from tb_branch where branchid = '$branchid' ";
-	$result = mysql_query($sql2) or die("Error Query [".$sql2."]"); 
-    while ($rs=mysql_fetch_array($result)) {
-		$branchname = $rs['branchname'];
-    }
-}
+// $branchname = "";
+// if($branchid != "" && $branchid != "00") {
+// 	$sql2 = "select branchid,branchname from tb_branch where branchid = '$branchid' and company_code ='".$_SESSION['company_code']."' ";
+// 	$result = mysql_query($sql2) or die("Error Query [".$sql2."]"); 
+//     while ($rs=mysql_fetch_array($result)) {
+// 		$branchname = $rs['branchname'];
+//     }
+// }
+$branchname = get_branch_name($branchid,$_SESSION['company_code']);
 // echo "x" . $branchid . "x" ;
 
 $sql = "select distinct(b.hn) hn, b.cradno,b.pname,b.fname,b.lname,c.vdate,c.empname,c.empid,d.branchname  ";

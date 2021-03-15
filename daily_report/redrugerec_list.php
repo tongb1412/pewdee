@@ -2,11 +2,12 @@
 <div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 $dat = date('Y-m-d');
 $did = $_POST['did'];
 
-
+// $dat = "2020-03-01";
 ?>
     <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
       <div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
@@ -19,11 +20,23 @@ $did = $_POST['did'];
 	
 		
 <? 
+
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "a";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 $cl = $color1;
 if(empty($did)){
-$sql  = "select a.did,a.dname,sum(a.qty) qty,a.unit from tb_drugerec a,tb_vst b where a.vn = b.vn and b.status = 'COM'   and (b.vdate like '%$dat%') group by a.did,a.dname,a.unit ";
+$sql  = "select a.did,a.dname,sum(a.qty) qty,a.unit from tb_drugerec a,tb_vst b where a.vn = b.vn and b.status = 'COM'   and (b.vdate like '%$dat%') $where_branch_id group by a.did,a.dname,a.unit ";
 } else {
-$sql  = "select a.did,a.dname,sum(a.qty) qty,a.unit from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status = 'COM'  and a.hn=c.hn  and ( b.vdate like '%$dat%' )and (a.did like '%$did%') group by a.did,a.dname,a.unit ";
+$sql  = "select a.did,a.dname,sum(a.qty) qty,a.unit from tb_drugerec a,tb_vst b,tb_patient c where a.vn = b.vn and b.status = 'COM'  and a.hn=c.hn  and ( b.vdate like '%$dat%' )and (a.did like '%$did%') $where_branch_id group by a.did,a.dname,a.unit ";
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 

@@ -4,7 +4,15 @@ include('../class/config.php');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;">
 	<div class="littleDD" style="font-size:14px; font-weight:bold;">รายงานคนไข้ยกเลิก</div>
-	<div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:10%; background-color:#FFCC99;  border:<?= $tabcolor ?> 1px solid;">
+	<?php
+		$css_height = "10";
+		$margin_left = "";
+		if ($_SESSION['company_data'] == "1") {
+		$css_height = "16";
+		$margin_left = "margin-left:55px;"; 
+		}
+	?>
+	<div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:<?=$css_height?>%; background-color:#FFCC99;  border:<?= $tabcolor ?> 1px solid;">
 		<div class="line" style="margin-top:5px; width:60%;">
 			<!--     <div style="width:30%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">ระหว่างวันที่ : </div>
       <div style="width:30%; float:left; margin-top:10px;">&nbsp;<input type="text" id="sdate" size="10" maxlength="10" onkeyup="forDate(this)"   /></div>
@@ -28,7 +36,7 @@ include('../class/config.php');
 		</div>
 
 		<?php 
-			if ($_SESSION['branch_id'] == "" || $_SESSION['branch_id'] == "07") {
+			if ($_SESSION['company_data'] == "1" ) {
 				?>
 				<div style="width:10%; float:left; margin-top:16px; text-align:right; line-height:20px; font-size:14px; font-weight:bold;">เลือกสาขา : </div>
 			
@@ -48,7 +56,7 @@ include('../class/config.php');
 				echo " <input type='hidden' id='branchid' value ='' />";
 			}
 		?>
-		<div style="width:40%; float:left;margin-top:10px;">
+		<div style="width:40%; float:left;margin-top:10px;<?=$margin_left?>">
 			<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="mpatient('Monthly_report/repatientcancle_list.php','pa_list')" value=" แสดงรายงาน " />
 			<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printmonth('Monthly_report/re_patientcancle.php?')" value=" พิมพ์รายงาน " />
 			<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="" value=" Excel " />

@@ -1,8 +1,15 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;   text-align:center; height:345px; ">
+	<?php	
+	$body_height = "345";
+    if ($_SESSION['company_data'] == "1") {
+        $body_height = "325";
+    }
+	?>
+<div style=" width: 98%; margin-top:5px;   text-align:center; height:<?=$body_height?>px; ">
 
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 //$sdate = $_POST['sdate'];
 //$edate = $_POST['edate'];
@@ -35,19 +42,17 @@ $edate = date("Y-m-d", $t1);
 		
 <? 
 
-if(!empty($_POST['branchid'])){
-	$branchid = $_POST['branchid'];
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
 } else {
 	$branchid = '';
 }
+$as = "a";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
 $where_branch_id = "";
-if($branchid != "") {
-	if($branchid != "00"){ 
-		$where_branch_id = " and (a.branchid ='".$branchid."' or a.branchid is null ) ";
-	} 
-}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
-	$where_branch_id = " and (a.branchid ='".$_SESSION['branch_id']."'  or a.branchid is null ) ";
-}
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
 $cl = $color1;
 $sql = "select a.*,b.fname,b.lname,b.cradno ";
 $sql .="from tb_vst a,tb_patient b where a.hn = b.hn and (a.vdate between '$sdate%' and '$edate%') and a.status = 'CANCEL' $where_branch_id";
@@ -172,7 +177,7 @@ $doc = mysql_num_rows($s_result);
 
 	<div class="line" style="margin-top: 4px;">
 
-      <div style="width:15%; float:left; text-align:right;">จำนวนคนไข้ยกเลิก่ :&nbsp;</div>
+      <div style="width:15%; float:left; text-align:right;">จำนวนคนไข้ยกเลิก :&nbsp;</div>
       <div style="width:10%; float:left;">
         <input style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12"; value="<?=number_format($total,'0','.',',')?> &nbsp;"/>
       </div>

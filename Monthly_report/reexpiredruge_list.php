@@ -2,6 +2,7 @@
 <div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 $did = $_POST['did'];
 
@@ -18,13 +19,29 @@ $did = $_POST['did'];
     </div>
 		
 <? 
+
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "";
+// echo "x".$branchid."x";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+
 $cl = $color1;
 $datenow=date("Y-m-d");
 if(empty($did)){
-$sql  = "select * from tb_temp_drugeinstock where bdate !='' and edate !='' and edate >= '$datenow' " ;
+$sql  = "select * from tb_temp_drugeinstock where bdate !='' and edate !='' and edate >= '$datenow' $where_branch_id" ;
 }else {
-$sql  = "select * from tb_temp_drugeinstock where bdate !='' and edate !='' and edate >= '$datenow' ";
+$sql  = "select * from tb_temp_drugeinstock where bdate !='' and edate !='' and edate >= '$datenow' $where_branch_id";
 }
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

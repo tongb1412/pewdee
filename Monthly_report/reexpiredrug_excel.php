@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 mysql_query('SET CHARACTER SET Tis620');
 mysql_query("SET character_set_client = Tis620");
 mysql_query("SET character_set_connection = Tis620");
@@ -17,13 +18,36 @@ $color2 = '#FFFFFF';
 </head>
 <body>
 <?
+
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "a";
+// echo "x".$branchid."x";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+
+
+
 $filName = "reexpiredrug.csv";
 $objWrite = fopen("reexpiredrug.csv", "w");
 $objDB = mysql_select_db("$db_clinic");
 $datenow= date("Y-m-d");
-$strSQL= " select * from tb_temp_drugeinstock where bdate !='' and edate !='' and edate >= '$datenow'  ";
+$strSQL= " select a.*,branchname from tb_temp_drugeinstock a LEFT JOIN tb_branch b ON a.branchid = b.branchid  where bdate !='' and edate !='' and edate >= '$datenow'  $where_branch_id";
+// echo $strSQL;
 $objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]");
-fwrite($objWrite, "\"Lot\",\"name drug\",\"qty\",\"expire date\",\"day to expire\" \n");
+
+if ($branchid == "") {
+    fwrite($objWrite, "\"Lot\",\"name drug\",\"qty\",\"expire date\",\"day to expire\" \n");
+}else {
+	fwrite($objWrite, "\"Lot\",\"name drug\",\"qty\",\"expire date\",\"day to expire\",\"branch name\" \n");
+}
 while($objResult = mysql_fetch_array($objQuery))
 {	
 	$str_date = $objResult['edate'];
@@ -38,10 +62,14 @@ while($objResult = mysql_fetch_array($objQuery))
 		$expire = gregoriantojd($expire_month,$expire_day,$expire_year);
 		$today = gregoriantojd($today_month,$today_day,$today_year);
 		$date_current = $expire-$today; //หาวันที่ยังเหลืออยู่
-
+		$branchname = $objResult['branchname'];
 		if($date_current<=150){
+            if ($branchid == "") {
 				fwrite($objWrite, "\"$objResult[lno]\",\"$objResult[dname]\",\"$objResult[qty]\",\"$objResult[edate]\",\"$date_current\" \n");
+            }else {
+				fwrite($objWrite, "\"$objResult[lno]\",\"$objResult[dname]\",\"$objResult[qty]\",\"$objResult[edate]\",\"$date_current\",\"$branchname\" \n");
 			}
+		}
 	}
 }
 				fclose($objWrite);
