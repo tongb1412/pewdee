@@ -30,7 +30,7 @@ if(empty($txtserch)){
 	$sql = "select * from tb_druge where (did like '%$txtserch%'  or gname like '%$txtserch%' or tname like '%$txtserch%'  ) and ( status ='IN') $where_branch_id ";
 }
 
-// echo $sql;
+// echo $sql; 
 
 
 
