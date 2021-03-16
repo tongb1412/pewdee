@@ -2,6 +2,7 @@
 <div style=" width: 98%; margin-top:5px; overflow:auto; text-align:center; height:290px; ">
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 
 
 if(!empty($_POST['did'])){
@@ -42,19 +43,18 @@ $dat = "2010-10-26";
 $cl = $color1;
 
 
-if(!empty($_POST['branchid'])){
-  $branchid = $_POST['branchid'];
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
 } else {
-  $branchid = '';
+	$branchid = '';
 }
+$as = "a";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
 $where_branch_id = "";
-if($branchid != "") {
-  if($branchid != "00"){ 
-    $where_branch_id = " and ( a.branchid ='".$branchid."' or a.branchid is null ) ";
-  } 
-}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
-	$where_branch_id = " and (a.branchid ='".$_SESSION['branch_id']."'  or a.branchid is null ) ";
-}
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
 
 
 // $where_branch_id = "";

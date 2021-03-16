@@ -1199,20 +1199,28 @@ include('class/permission_user.php');
 	function printmonthpatient() {
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
-		data += '&branchid=' + document.getElementById('branchid').value;
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 
 		var page = 'Monthly_report/re_patient.php?' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
 
+	
+	function reexpiredrug_excel() {
+		branchid = $("#branchid").val()
+		window.open('Monthly_report/reexpiredrug_excel.php?branchid='+branchid,'blank')
+	}
 
 	function printmonthpayment(url) {
 
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
 		data += '&did=' + document.getElementById('repempid').value;
-
-
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 
 		var page = url + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
@@ -1252,7 +1260,9 @@ include('class/permission_user.php');
 	function printmonth(url) {
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
-		data += '&branchid=' + document.getElementById('branchid').value;
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 		var page = url + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
@@ -1276,7 +1286,9 @@ include('class/permission_user.php');
 
 	function printdrug(url) {
 		var data = 'did=' + document.getElementById('repempid').value;
-
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 		var page = url + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}

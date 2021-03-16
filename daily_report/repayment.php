@@ -33,14 +33,14 @@ include('../class/config.php');
       </div>
 
       <?php 
-        if ($_SESSION['branch_id'] == "" || $_SESSION['branch_id'] == "08") {
+        if ($_SESSION['company_data'] == "1") {
             ?>
           <div style="width:15%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">เลือกสาขา : </div>
           <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
             <?php
               $sql = "select branchid,branchname from tb_branch ";
             $result = mysql_query($sql) or die("Error Query [".$sql."]"); ?>
-            <select name="select" id="branch_id" style="width:117px;">
+            <select name="select" id="branchid" style="width:117px;">
               <option value="00">ทั้งหมด</option>
               <?php while ($rs=mysql_fetch_array($result)) {  ?>
                 <option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
@@ -48,6 +48,8 @@ include('../class/config.php');
             </select>
           </div>
       <?php
+        } else {  
+          echo " <input type='hidden' value='branchid' id= '' />";
         }
       ?>
     

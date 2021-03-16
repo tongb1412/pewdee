@@ -1,8 +1,15 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;   text-align:center; height:345px; ">
+	<?php
+	$body_height = "345";
+    if ($_SESSION['company_data'] == "1") {
+        $body_height = "325";
+    }
+	?>
+<div style=" width: 98%; margin-top:5px;   text-align:center; height:<?=$body_height?>px; ">
 
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 //$sdate = $_POST['sdate'];
 //$edate = $_POST['edate'];
@@ -43,19 +50,35 @@ $edate = date("Y-m-d", $t1);
 		
 <? 
 
-if(!empty($_POST['branchid'])){
-	$branchid = $_POST['branchid'];
+// if(!empty($_REQUEST['branchid'])){
+// 	$branchid = $_REQUEST['branchid'];
+// } else {
+// 	$branchid = '';
+// }
+// $where_branch_id = "";
+// if($branchid != "") {
+// 	if($branchid != "00"){ 
+// 		$where_branch_id = " and (branchid ='".$branchid."' or branchid is null ) ";
+// 	} 
+// }else if($_SESSION['branch_id'] != "") {	
+// 	$where_branch_id = " and (branchid ='".$_SESSION['branch_id']."'  or branchid is null ) ";
+// }
+
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
 } else {
 	$branchid = '';
 }
+$as = "";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
 $where_branch_id = "";
-if($branchid != "") {
-	if($branchid != "00"){ 
-		$where_branch_id = " and (branchid ='".$branchid."' or branchid is null ) ";
-	} 
-}else if($_SESSION['branch_id'] != "" && $_SESSION['branch_id'] != "07") {	
-	$where_branch_id = " and (branchid ='".$_SESSION['branch_id']."'  or branchid is null ) ";
-}
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+
+
+
 $cl = $color1;
 $sql = "select * ";
 $sql .="from tb_patient where  (datep between '$sdate%' and '$edate%') and new = 'N' $where_branch_id";

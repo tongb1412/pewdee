@@ -24,8 +24,8 @@ $branch = $row['branchid'];
 	<div style="width:21%; float:left; text-align:right;">รหัสพนักงาน :&nbsp;</div>
 	<div style="width:25%; float:left;"><input type="text" id="staffid" size="15" value="<?= $SID ?>" /></div>
 
-	<?
-				$sql = "select branchid,branchname from tb_branch where branchid = '$branch' ";
+	<?	
+				$sql = "select branchid,branchname from tb_branch where branchid = '$branchid' and company_code ='".$_SESSION['company_code']."' ";
 				$result = mysql_query($sql) or die ("Error Query [".$sql."]");
 				$roww=mysql_fetch_array($result);
 				?>
@@ -34,7 +34,7 @@ $branch = $row['branchid'];
 		<select id="branch" style="width:117px;">
 			<option value="<?= $roww['branchid'] ?>"><?= $roww['branchname'] ?></option>
 			<? 
-				$sql = "select branchid,branchname from tb_branch where branchid <> '$branch' ";
+				$sql = "select branchid,branchname from tb_branch where branchid <> '$branch' and company_code ='".$_SESSION['company_code']."' ";
 				$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 				
 				while($rs=mysql_fetch_array($result)){  
 				

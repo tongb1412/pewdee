@@ -2,6 +2,7 @@
 <div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
 	<?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 $did = $_POST['did'];
 
@@ -18,12 +19,28 @@ $did = $_POST['did'];
 
 
 	<? 
+
+
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+
 $cl = $color1;
 if(empty($did)){
-$sql  = "select * from tb_druge where status='IN' and (sqty > total) ";
+$sql  = "select * from tb_druge where status='IN' and (sqty > total) $where_branch_id";
 } else {
-$sql  = "select * from tb_druge where status='IN' and (did like '%$did%') and (sqty > total) ";
+$sql  = "select * from tb_druge where status='IN' and (did like '%$did%') and (sqty > total) $where_branch_id";
 }
+// echo $sql ;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

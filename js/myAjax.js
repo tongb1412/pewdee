@@ -1895,7 +1895,7 @@ function moveuser(staffid, fname) {
 function showpayment() {
 	var data = 'did=' + document.getElementById('repempid').value;
 	if(document.getElementById('branchid') != null) {
-		data += '&branchid=' + document.getElementById('branch_id').value;
+		data += '&branchid=' + document.getElementById('branchid').value;
 	}
 	loadmodule('d_list', 'daily_report/repayment_list.php', data);
 }
@@ -1921,6 +1921,9 @@ function printdiscount() {
 
 function printdrec() {
 	var data = 'did=' + document.getElementById('empid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
 	var page = 'daily_report/re_drugerec.php?' + data;
 	window.open(page, 'Patients', 'width=1003, height=500,resizable=yes, scrollbars=yes');
 }
@@ -2019,12 +2022,27 @@ function repStock(URL, displayId) {
 
 
 function mdrug(URL, displayId) {
-
-	var data = 'did=' + document.getElementById('repempid').value;
+	var data = ""
+	// var data = 'did=' + document.getElementById('repempid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
 
 	loadmodule(displayId, URL, data);
 }
 
+function mdrug2(URL, displayId) {
+	var data = ""
+	// var data = 'did=' + document.getElementById('repempid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
+
+	loadmodule('p_list', "daily_report/din_list.php", data);
+	setTimeout(function (){
+		loadmodule('p_list1', "daily_report/dout_list.php", data);
+	},300)
+}
 
 
 
