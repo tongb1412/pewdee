@@ -1,6 +1,82 @@
 <?php 
-/*
-Encoder : AROHA PHPencoder ver. 1.11
-WEB : http://phpencoder.aroha.sk/
-*/
-$Q04E2C302E4A3BE481CE90EA41533ABED="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";eval(base64_decode(gzuncompress(base64_decode($Q04E2C302E4A3BE481CE90EA41533ABED))));?>
+    include('../class/config.php');
+?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div style="width:99%; margin:auto; height:25px;">
+    <div style="width:20%; font-size:16px; font-weight:bold; float:left; line-height:20px;">
+        <img src="images/icon/group.png" align="absmiddle" />&nbsp;ตรวจรักษา
+    </div>
+    <div style="width:78%; text-align:right; float:left;">
+
+    </div>
+</div>
+<div id="main" class="main" style="width:99%; margin:auto;  height:500px; overflow:hidden;">
+    <div class="littleDD">
+        <div id="tab1" class="tab" style="width:150px; background-color:#FFFFFF; display:;  line-height:30px;">
+        รอตรวจรักษา
+        </div>
+        <div id="tab2" class="tab" style="width:150px; background-color:#FFFFFF; display:none; line-height:20px;">
+            <a href="javascript: doctorClick('F','doctor/doctor_form.php','content')">การรักษา</a>
+        </div>
+        <div id="tab3" class="tab" style="width:150px;  display:none; line-height:20px;">
+            <a href="javascript: doctorClick('T','doctor/doctor_history.php','content')">ประวัติการซื้อทรีทเม้นท์</a>
+        </div>
+    </div>
+    <div id="content" style=" width:100%; margin-top:5px; text-align:center; height:auto;">
+        <div class="txt_serch" style="margin-left:5px; margin-top:5px;">
+            <input class="input_serch" type="text" id="txts" size="41" value="" placeholder="ค้นหา" onkeyup="serchtxtDoctor('doctor/wait_list.php','wlist','')" /><input type="button" class="btn_serch" onclick="serchtxtDoctor('doctor/wait_list.php','wlist','')" />
+        </div>
+        <div style="position: absolute;left: 35%;top: 14.5%;">
+		<?php
+			if($_SESSION['company_data'] == "1"){
+				if ($_SESSION['branch_id'] != "") {
+					$branch_id = $_SESSION['branch_id'];
+					$sql = "";
+					$sql = "select * from tb_branch order by branchid";
+					
+					$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+					$Num_Rows = mysql_num_rows($result);
+				?>
+					<span>
+						สาขา
+						&nbsp;
+					</span>
+					<select name="sel_branch_id_doctor" id="sel_branch_id_doctor" onchange="serchtxtDoctor('doctor/wait_list.php','wlist',this)">
+						<?php
+						if ($Num_Rows > 0) {
+							$flag = 0;
+							if ($branch_id != "") {
+						?>
+								<!-- <option value="00">ทั้งหมด</option> -->
+								<?php
+							} 
+							while ($rs = mysql_fetch_array($result)) {
+								if($branch_id == $rs['branchid']){
+									?>
+									<option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname'];?></option>
+									<?php
+								}
+								else{
+									?>
+									<option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname'];?></option>
+								<?php
+								}
+							}
+						}
+						?>
+					</select>
+				<?php
+					// mysql_close($dblink);
+					// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
+				} 
+			}
+		?>
+
+	</div>
+        <div id="wlist" style="width:100%; height:auto;">
+            <?php  
+                require("wait_list.php");	 
+            ?>
+        </div>
+    </div>
+</div>

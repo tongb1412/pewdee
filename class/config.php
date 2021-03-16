@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 //$dblink=mysql_connect("localhost","root","02566") or die("cannot connect database");
 $dblink = mysql_connect("devweb.dtcgps.com","maria1","Dev@web@154") or die("cannot connect database");
@@ -20,6 +19,7 @@ $tgrp_1000000 = array("PD0098"=>30,"PDC244x"=>30,"PDC264"=>30, "PDC354"=>30, "PD
 "PDC400"=>30,"PDC500"=>30,"PDC501"=>30,
 "PDC503"=>30,"PDC506"=>30,"PDC502"=>30,   
 "PDC504"=>30,"PDC505"=>30,"PDC507"=>30,"PDC508"=>30);
+
 
 
 ?>

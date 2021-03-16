@@ -3,7 +3,7 @@
 <?
 $sql = "select * from tb_autonumber where typ='LT'";
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$rs=mysql_fetch_array($result);
+$rs = mysql_fetch_array($result);
 $x = explode('-',$rs['number']);
 $n = strlen($x[1]);
 $lno = $x[0].'-' ;
@@ -26,7 +26,7 @@ $lno .= $t;
 
 	<div style="width:98%; height:auto; margin:auto; margin-top:10px;">
 		<div class="txt_serch" style="width:260px">
-			<input class="input_serch" type="text" id="txts" size="30" value="ค้นหา" onclick="clickclear(this, 'ค้นหา')" onblur="clickrecall(this,'ค้นหา')" onkeyup="serchtxt('stock/druge_in_list.php','p_list',this)" /><input type="button" class="btn_serch" onclick="ajaxLoad('get','stock/druge_in_list.php','txt=','p_list')" />
+			<input class="input_serch" type="text" id="txts" size="30" value="" placeholder="ค้นหา" onkeyup="serchtxt('stock/druge_in_list.php','p_list',this)" /><input type="button" class="btn_serch" onclick="ajaxLoad('get','stock/druge_in_list.php','txt=','p_list')" />
 		</div>
 	</div>
 	<div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto; margin-top:5px; font-weight:bold; font-size:13px; background:<?= $tabcolor ?>;">
@@ -140,7 +140,7 @@ mysql_close($dblink);
 		</div>
 		<div style="width:50%; float:left; text-align:right;">
 			<input type="button" value="  นำยาเข้าคลัง  " style="font-size:14px; font-weight:bold; height:35px;" onclick="addinstock('stock/add_instock.php','content')">
-			<input type="button" value="  รายการใหม่  " style="font-size:14px; font-weight:bold; height:35px;" onclick="swabtab(3,5,'stock/instock.php','content','')">
+			<input type="button" value="  รายการใหม่  " style="font-size:14px; font-weight:bold; height:35px;" onclick="loadmodule('home','stock/stock_show.php','')">
 		</div>
 
 

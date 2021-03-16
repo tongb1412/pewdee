@@ -1,19 +1,28 @@
-<? include('../class/config.php'); ?>
+<?php 
+
+include('../class/config.php'); 
+require('../class/permission_user.php'); 
+
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
+$branch_id = $_SESSION['branch_id'];
+$company_code = $_SESSION['company_code'];
+$where_user_data = set_where_user_data('',$branch_id, $company_code, $_SESSION['company_data']);
+$where_branch = $where_user_data['where_branch_id'];
+$where_company = $where_user_data['where_company_code'];
+
 $did = $_GET['did'];
-$sql = "select * from tb_druge where did='$did'";
+$sql = "select * from tb_druge where did = '$did' " . $where_company;
 $patient_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$row=mysql_fetch_array($patient_result);
+$row = mysql_fetch_array($patient_result);
 
-
-$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 ";
-
+$sql1 = "select sum(total) as total from tb_drugeinstock where did = '$did' and total > 0 ". $where_company;
 $rst = mysql_query($sql1) or die ("Error Query [".$sql1."]"); 
 $num  = mysql_num_rows($rst);
 $dtotal = 0;
 if(!empty($num)){
-	$rss=mysql_fetch_array($rst);
+	$rss = mysql_fetch_array($rst);
 	$dtotal = $rss['total'];
 }
 
@@ -179,22 +188,22 @@ $result = mysql_query($sql) or die ("Error Query [".$sql."]");
 		</div>
 		<div id="dlist" style="width:100%; height:410px; float:left; overflow:auto; border:<?= $tabcolor ?> 1px solid;">
 			<? 
-include('../class/config.php');	
-$cl = $color1;
-$sql = "select * from tb_drugeinstock,tb_instock where tb_drugeinstock.lno = tb_instock.lno and tb_drugeinstock.did='$did' and tb_drugeinstock.total > 0 order by tb_drugeinstock.lno asc, tb_drugeinstock.dname asc";
-$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$Num_Rows = mysql_num_rows($result);
+			include('../class/config.php');	
+			$cl = $color1;
+			$sql = "select * from tb_drugeinstock, tb_instock where tb_drugeinstock.lno = tb_instock.lno and tb_drugeinstock.did = '$did' and tb_drugeinstock.total > 0 and tb_drugeinstock.company_code = '$company_code' order by tb_drugeinstock.lno asc, tb_drugeinstock.dname asc";
+			$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+			$Num_Rows = mysql_num_rows($result);
 
 if($result){
 
-while($rs=mysql_fetch_array($result)){  
-if($cl != $color1){
-	$cl = $color1;
-} else {
-	$cl = $color2;
-}
+	while($rs = mysql_fetch_array($result)){  
+		if($cl != $color1){
+			$cl = $color1;
+		} else {
+			$cl = $color2;
+		}
 
-?>
+		?>
 
 
 			<div style="width:95%; height:20px; line-height:20px; text-align:left; padding-left:20px; border-bottom:#CCCCCC 1px dotted;background:<?= $cl ?>;" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')">
@@ -210,13 +219,11 @@ if($cl != $color1){
 				<div style="width:20%; float:left; line-height:20px; text-align:right">
 					<? echo number_format($rs['price'],'2','.',',') ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</div>
-
-
-
+				
 			</div>
 			<? 
 
-} 
+	} 
 }
 mysql_close($dblink);
 ?>

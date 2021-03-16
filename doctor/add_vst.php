@@ -1,6 +1,10 @@
-<?php 
-/*
-Encoder : AROHA PHPencoder ver. 1.11
-WEB : http://phpencoder.aroha.sk/
-*/
-$Q36DDB5086198BAADCC6550907954E8B5="eNptlMmaozgQhB9oDi1k01N1LIyEWSSMNkA3QB5jEDblDczTD92H6cvc8/szMjMy/Oz6ik8gZrnb1ZDZ5vz1M0SYC9B6IfZCGahnCT97XYQnM6h3cv6akw7NfjYWTIan9OxdzZ5N6fnj1QTtpP/juG0zfF5L7i7V+4PuzteXn11/HLrpx6+68AvEyftKd/0f/sryZP8ZZtzLOPZsPdCXDtQ73OuVtz0Rvp1JBmIF1C70r6dqz0DjX1/Jxrs2f3Q+yyJ6VQF6NvD+q+d3MoE4wgikIgPMP0HSlU7qI8g6sk1ROaUoXBgKXYbIm4Bwpgs4a+lOJnjciGWvo8SetF836eDpiFxUX1RUL9qrlb1lIHKZoAGDNqN7WtXBI5V+A2vL1v6RTfNsKfkdEuiUZWdE4uAnLcKFC/pIFjOkSPUsD2cpJ6CknlOfPZivXxIQh0oT0o1ZOHATnW8nMTh7UqisRqyMQXTjPpOiYMz0oyMGnJAlm410DiRg4dE3w7ErN5lVN/X+eKVq3HDfJg1a5xM4LOF1ay6jU/tfb7JYKJSqqNCcgXaXW/ysZXTmwTworKpc6a0SCJiiTVhhknRvSdbjuwCfMgHqkgamVSjqSO/MDKENK5Q1MmI1PK181eYoemaQ8QrNlxjqTYMsVApfmdMiXkSRFhqsd+/S3WfE8JjLxcvzXls+PLYEtj+VGverxwpysVtTXF2Koy1d1u1s7JP3wDGYHXjg5nVhR955STOMB9LhPZWfZXWhDsf4yeGDl4CWudAXAsc467wit5FKUXRI0QmW8GErHPHaUsDw6S3zqDLFeNYbHGQQD2mudxQ5S2Vb1QjlkQvOcqSfVBkhlxUUsKTGkSO6EPBAxaqzWBS2SqWJ2WIFHxq39q1QCB+Momcz0DEGZmPyNqRdVAnf3omMHsT3DiWwi/ZtTKCrlK/jfI9xld8XIq+zFmZf+dbhUGuzlI7IXZTmbCd7K+uFXqgqp0zqO7HUqt5xm6EF3ImcvLNRNrRDjfX3EWtf4qioIR6PQk/M8b4lbFMzmFkAdTB7PNVwfFTBIyJKzU1h+qMot3Xu3PMLm/mFZhQ+XNH1sJJY6kK96RLd6KqRSxuWwOSNfOBS3mEmojjHpVMFVlaX6NIMkctz1WpBsQpsUjnjgw0sXJVrFkhXLFYerXyzvQqOF+/J/OyV92ZXwU9rer2vLxplNvqu95odlfXFXoVErb9nvQPL75CiKMz6cBJSveONoip3dwqWy/oP63zjtHrtZgR61QqzKti+lDRLgzJAJL0kgCneY68GxtUbdGucr4krk7JOFUcknaawUx7MVdWZOy1YX/vhi7wfvoFzm22Ud+Dh37rQbb1rz2VBLe3YP2t+/c7DODA/ze9sdKZmUEvz/p+aHWPU7wFF2ZZ2IaTiNNO+XFK/DYjf7ghgu1Qyn3R0R0Qzxrwf0+Xjr38BuePuDg==";eval(base64_decode(gzuncompress(base64_decode($Q36DDB5086198BAADCC6550907954E8B5))));?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?
+include('../class/config.php');
+$vn = $_POST['vn'];
+$hn = $_POST['hn'];
+
+$txt = '';
+
+echo '||doctor/payment.php'.'||'.$vn.'||DEL||'.$txt;
+?>

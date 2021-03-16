@@ -18,6 +18,8 @@ $duse = $_POST['duse'];
 $wuse = $_POST['wuse'];
 $huse = $_POST['huse'];
 
+$company_code = $_SESSION['company_code'];
+
 $sql = "select name from tb_gernaral where id='$dgid' ";
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $rs=mysql_fetch_array($result);
@@ -54,7 +56,7 @@ if($_POST['mode']=='ADD'){
 
 } else {
 	$sql  = "update tb_druge set barcode='$bcode',gname='$gname',tname='$tname',unit='$unit',dgid='$dgid',wuse='$wuse',huse='$huse'";
-	$sql .= ",dgroup='$dgname',sprice='$sprice',sqty='$sqty',tid='$tid',typname='$dtname',duse='$duse'  where did='$did' ";
+	$sql .= ",dgroup='$dgname',sprice='$sprice',sqty='$sqty',tid='$tid',typname='$dtname',duse='$duse'  where did='$did' and company_code = '$company_code'";
 	mysql_query($sql) or die ("Error Query [".$sql."]");
 	$confirm = 'Yes';
 	$txt = 'แก้ไขข้อมูลเรียบร้อยแล้ว';	

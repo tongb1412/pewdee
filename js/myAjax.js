@@ -742,9 +742,20 @@ function serchtxt(URL, displayId, txt) {
 	var data = 'txt=' + txt.value;
 	ajaxLoad('get', URL, data, displayId);
 }
+function serchtxtDoctor(URL, displayId, txt) {
+	var data = 'txt=' + $('#txts').val();
+	data += '&bid=' + txt.value
+	ajaxLoad('get', URL, data, displayId);
+}
+
 function serchtxtStock(URL, displayId, txt) {
 	var data = 'txt=' + txt.value;
-	data += '&sel=' + $('#sel_branchid_stock').val();
+	var branch_id = $('#sel_branchid_stock').val();
+	if(branch_id == undefined || branch_id == null || branch_id === null || branch_id == ""){
+		data += '&bid=' + $('#branch_id_val').val();
+	} else {
+		data += '&bid=' + branch_id;
+	}
 	ajaxLoad('get', URL, data, displayId);
 }
 function serchtxtPatient(URL, displayId, txt) {
@@ -761,7 +772,13 @@ function serchsel(URL, displayId, txt) {
 
 function serchlab(URL, displayId, txt) {
 	var txt = 'txt=' + txt.value;
-	txt += '&bid=' + document.getElementById('sel_branchid_app_new').value;
+	var branchid_app_new = document.getElementById('sel_branchid_app_new');
+	if(branchid_app_new != null){
+		txt += '&bid=' + branchid_app_new.value;
+	}
+	else{
+		txt += "&bid=''"
+	}
 	ajaxLoad('get', URL, txt, displayId);
 	if (document.getElementById('lname').value == '') {
 		document.getElementById('THl').style.display = 'none';

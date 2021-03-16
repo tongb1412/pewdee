@@ -71,7 +71,7 @@ function set_where_user_data($as ,$branch_id, $company_code, $company_data){
     return $data;
 
     // EX to user func
-    // $where_user_data = json_decode(set_where_user_data('ตัวย่อ table','รหัสสาขา','รหัสบริษัท','เช็คสิทธิ์ user'),true);
+    // $where_user_data = set_where_user_data('ตัวย่อ table','รหัสสาขา','รหัสบริษัท','เช็คสิทธิ์ user');
     // echo $where_user_data['where_branch_id'];
     // echo $where_user_data['where_company_code'];
     // echo $where_user_data['where_company_data'];
