@@ -7,11 +7,13 @@ $where_user_data = set_where_user_data('',$_SESSION['branch_id'], $_SESSION['com
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <input type="hidden" id="branch_id_val" name="branch_id_val" value="<?php echo $_SESSION['branch_id'] ?>" />
-<div style="width:99%; height:30px; text-align:left; padding-left:5px;">
+<div style="width: 99%; display:inline-flex;">
+<div style="width:35%; height:30px; text-align:left; padding-left:5px;">
 	<div class="txt_serch">
 		<input class="input_serch" type="text" id="txts" size="41" value="" placeholder="ค้นหา" onkeyup="serchtxtStock('stock/druge_list.php','p_list',this)" /><input type="button" class="btn_serch" onclick="serchtxtStock('stock/druge_list.php','p_list',this)" />
 	</div>
-	<div style="position: absolute;left: 35%;top: 18.7%;">
+</div>
+<div style="width: 49%; height: auto; text-align: left;padding-left: 5px;">
 		<?php
 		if($_SESSION['company_data'] == "1"){
 			if ($_SESSION['branch_id'] != "") {
@@ -30,11 +32,9 @@ $where_user_data = set_where_user_data('',$_SESSION['branch_id'], $_SESSION['com
 					<?php
 					if ($Num_Rows > 0) {
 						$flag = 0;
-						if ($branch_id != "") {
 					?>
 							<option value="00">ทั้งหมด</option>
 							<?php
-						} 
 						while ($rs = mysql_fetch_array($result)) {
 							if($branch_id == $rs['branchid']){
 								?>
@@ -56,10 +56,9 @@ $where_user_data = set_where_user_data('',$_SESSION['branch_id'], $_SESSION['com
 			} 
 		}
 		?>
-
 	</div>
-
 </div>
+
 
 <?php
 if ($_SESSION['company_data'] == "1") {
@@ -76,15 +75,14 @@ if ($_SESSION['company_data'] == "1") {
 <?php
 } else {
 	?>
-<div style="width:99%; height:20px; margin-top:15px; color:#000000; margin:auto; font-weight:bold; font-size:13px; background:<?= $tabcolor ?>;">
-	<div style="width:15%;text-align:left; float:left; line-height:20px;">&nbsp;&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
-	<div style="width:30%;text-align:left; float:left; line-height:20px;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ชื่อยา</div>
-	<div style="width:20%;text-align:left; float:left; line-height:20px;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;กลุ่มยา</div>
-	<div style="width:10%;  text-align:left; float:left; line-height:20px;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;คงเหลือ</div>
-	<div style="width:15%;  text-align:center; float:left; line-height:20px;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;หน่วย</div>
-	<div style="width:10%;text-align:left; float:left; line-height:20px;">&nbsp;</div>
-</div>
-
+	<div style="width:99%; height:20px; margin-top:15px; color:#000000; margin:auto; font-weight:bold; font-size:13px; background:<?= $tabcolor ?>;">
+		<div style="width:15%;text-align:left; float:left; line-height:20px;">&nbsp;&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
+		<div style="width:30%;text-align:left; float:left; line-height:20px;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ชื่อยา</div>
+		<div style="width:20%;text-align:left; float:left; line-height:20px;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;กลุ่มยา</div>
+		<div style="width:10%;  text-align:left; float:left; line-height:20px;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;คงเหลือ</div>
+		<div style="width:15%;  text-align:center; float:left; line-height:20px;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;หน่วย</div>
+		<div style="width:10%;text-align:left; float:left; line-height:20px;">&nbsp;</div>
+	</div>
 <?php
 }
 ?>

@@ -205,25 +205,25 @@ include('class/permission_user.php');
 										ajaxAddpatient('post', 'register/patient_add.php', data)
 
 									} else {
-										alert(' ');
+										alert('กรุณาระบบว่า รู้จักผิวดีจากที่ใด ');
 									}
 								} else {
-									alert('Email ');
+									alert('กรุณากรอก Email ');
 								}
 							} else {
-								alert(' ');
+								alert('กรุณาเลือก จังหวัด');
 							}
 						} else {
-							alert(' ');
+							alert('กรุณากรอก ที่อยู่');
 						}
 					} else {
-						alert(' ');
+						alert('กรุณากรอก ชื่อ - นามสกุล ');
 					}
 				} else {
-					alert(' ');
+					alert('กรุณากรอก ชื่อ - นามสกุล ');
 				}
 			} else {
-				alert(' ');
+				alert('กรุณากรอก รหัสคนไข้ ');
 			}
 		} else {
 			alert('Card No. ');

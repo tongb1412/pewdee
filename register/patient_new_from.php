@@ -58,7 +58,7 @@ $hn .= $t;
 	<div class="line">
 		<div style="width:20%; float:left; text-align:right;">รหัสคนไข้ :&nbsp;</div>
 		<div style="width:30%; float:left;"><input type="text" id="hn" size="15" value="<?= $hn ?>" disabled="disabled" /></div>
-		<div style="width:20%; float:left; text-align:right;">Card No :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>Card No :&nbsp;</div>
 		<div style="width:30%; float:left;"><input type="text" id="cn" size="15" /></div>
 	</div>
 	<?
@@ -84,10 +84,10 @@ $result = mysql_query($sql) or die ("Error Query [".$sql."]");
 
 	</div>
 	<div class="line">
-		<div style="width:20%; float:left; text-align:right;">ชื่อ :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>ชื่อ :&nbsp;</div>
 
 		<div style="width:30%; float:left;"><input type="text" id="fname" size="15" /></div>
-		<div style="width:20%; float:left; text-align:right;">สกุล :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>สกุล :&nbsp;</div>
 		<div style="width:30%; float:left;"><input type="text" id="lname" size="15" /></div>
 	</div>
 	<?
@@ -183,11 +183,6 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 							<?php
 							if ($Num_Rows > 0) {
 								$flag = 0;
-								if ($branch_id != "") {
-							?>
-									<option value="00">ทั้งหมด</option>
-									<?php
-								} 
 								while ($rs = mysql_fetch_array($result)) {
 									if($branch_id == $rs['branchid']){
 										?>
@@ -221,11 +216,11 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 	<!-- <div class="line">&nbsp;</div> -->
 
 	<div class="line">
-		<div style="width:20%; float:left; text-align:right;">ที่อยู่ :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>ที่อยู่ :&nbsp;</div>
 		<div style="width:80%; float:left;"><input type="text" id="address" size="45" /></div>
 	</div>
 	<div class="line">
-		<div style="width:20%; float:left; text-align:right;">จังหวัด :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>จังหวัด :&nbsp;</div>
 		<div style="width:30%; float:left;">
 			<select name='province' id='province' onchange="data_show(this.value,'amphur');" style="width:117px;">
 				<option value="">-- เลือกจังหวัด --</option>
@@ -279,7 +274,7 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 		<div style="width:30%; float:left;"><input type="text" id="mtel" size="15" /></div>
 	</div>
 	<div class="line">
-		<div style="width:20%; float:left; text-align:right;">E-mail :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>E-mail :&nbsp;</div>
 		<div style="width:80%; float:left;"><input type="text" id="email" size="45" /></div>
 
 	</div>
@@ -372,7 +367,7 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 	</div>
 
 	<div class="line" style="border-bottom:#CCCCCC 1px dotted;">
-		<div style="width:20%; float:left; text-align:right;">รู้จักผิวดีจาก :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>รู้จักผิวดีจาก :&nbsp;</div>
 		<div style="width:80%; float:left;">
 			<select id="how" style="width:117px;">
 				<option value="">--- เลือกหัวข้อ ---</option>

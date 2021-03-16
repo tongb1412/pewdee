@@ -36,51 +36,47 @@ $where_branch_id = "and a.branchid = '$branch_id'";
         <div style="width:14%; float:left;">
             <input type="button" value="  แสดงข้อมูล " onclick="showapplist('appointment/appoint_list.php','applist')" />
         </div>
-    </div>
-</div>
-<div style="position: absolute;left: 40%;top: 16%;">
-    <?php
-    if ($_SESSION['branch_id'] != "") {
-        $branch_id = $_SESSION['branch_id'];
-        $sql = "";
-        $sql = "select * from tb_branch order by branchid";
-        
-        $result = mysql_query($sql) or die("Error Query [" . $sql . "]");
-        $Num_Rows = mysql_num_rows($result);
-    ?>
-        <span>
-            สาขา
-            &nbsp;
-        </span>
-        <select name="sel_branchid_app" id="sel_branchid_app" onchange="showapplist('appointment/appoint_list.php','applist')">
+        <div style="">
             <?php
-            if ($Num_Rows > 0) {
-                $flag = 0;
-                if ($branch_id != "") {
+            if ($_SESSION['company_data'] == "1") {
+                $branch_id = $_SESSION['branch_id'];
+                $sql = "";
+                $sql = "select * from tb_branch order by branchid";
+                $result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+                $Num_Rows = mysql_num_rows($result);
             ?>
-                    <option value="00">ทั้งหมด</option>
+                <span>
+                    สาขา
+                    &nbsp;
+                </span>
+                <select name="sel_branchid_app" id="sel_branchid_app" onchange="showapplist('appointment/appoint_list.php','applist')">
                     <?php
-                }
-                while ($rs = mysql_fetch_array($result)) {
-                    if ($branch_id == $rs['branchid']) {
+                    if ($Num_Rows > 0) {
+                        $flag = 0;
                     ?>
-                        <option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname']; ?></option>
+                            <option value="00">ทั้งหมด</option>
+                            <?php
+                        while ($rs = mysql_fetch_array($result)) {
+                            if ($branch_id == $rs['branchid']) {
+                            ?>
+                                <option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname']; ?></option>
+                            <?php
+                            } else {
+                            ?>
+                                <option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname']; ?></option>
                     <?php
-                    } else {
-                    ?>
-                        <option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname']; ?></option>
-            <?php
+                            }
+                        }
                     }
-                }
-            }
+                    ?>
+                </select>
+            <?php
+                // ajaxLoad('get','stock/druge_list.php','txt=','p_list');
+            } 
             ?>
-        </select>
-    <?php
-        // ajaxLoad('get','stock/druge_list.php','txt=','p_list');
-    } else if ($_SESSION['branch_id'] == "") {
-    }
-    ?>
 
+        </div>
+    </div>
 </div>
 <div style=" width:98%; height:25px;; border:<?= $tabcolor ?> 1px solid; background:<?= $tabcolor ?>; margin-left:10px;">
     <div style="width:100%; height:20px; padding-top:5px; color:#000000; margin:auto; font-weight:bold; font-size:13px; ">

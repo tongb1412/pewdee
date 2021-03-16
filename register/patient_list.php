@@ -15,15 +15,21 @@ if($selserch == "" || $selserch == undefined || $selserch == null){
 
 $where_branch_id = "";
 if($company_data == "1"){
-	if($selserch != "00" && $selserch != "all"){
-		$where_branch_id = "and (branchid = '$selserch' or branchid is NULL or branchid = '')"; 
+	if($selserch != "00" && $selserch != "all" && empty($txtserch)){
+		$where_branch_id = "and branchid = '$selserch' or branchid is NULL or branchid = '' "; 
+	}
+	else if($selserch != "00" && $selserch != "all"){
+		$where_branch_id = "and branchid = '$selserch' "; 
+	}
+	else{
+		$where_branch_id = "";
 	}
 }
 else{
-		$where_branch_id = "and (branchid = '$selserch' or branchid is NULL or branchid = '')"; 
+		$where_branch_id = "and branchid = '$selserch' "; 
 }
 
-
+// echo $where_branch_id;
 $cl = $color1;
 if(empty($txtserch) && $selserch == "00"){
 	$sql = "select * from tb_patient where stayin <> 'OFF' and company_code = '$company_code' ";
