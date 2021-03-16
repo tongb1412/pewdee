@@ -1487,6 +1487,7 @@ include('class/permission_user.php');
 	function loadlogin() {
 		document.getElementById('bg').style.display = '';
 		document.getElementById('login_zone').style.display = '';
+		mdrug('Monthly_report/rebuydruge_list.php','d_list');
 	}
 
 	function login() {
@@ -1497,10 +1498,10 @@ include('class/permission_user.php');
 
 				ajaxLogin('post', 'register/login.php', data, 'dock');
 			} else {
-				alert(' Password');
+				alert('กรุณากรอก Password');
 			}
 		} else {
-			alert(' Username');
+			alert('กรุณากรอก Username');
 		}
 	}
 
