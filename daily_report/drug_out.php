@@ -1,7 +1,32 @@
 <? include('../class/config.php'); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div id="t_main" class="tmain" style="width:100%; margin:auto; height:495px; overflow:hidden;  ">
-	<div class="littleDD" style="font-size:14px; font-weight:bold;">ยานอกระบบ</div>
+	<?php 
+        if ($_SESSION['company_data'] == "1" ) {
+          ?>
+
+          <div class="littleDD" style="width:24%; float:left;text-align:right; line-height:20px; font-size:14px;"></div>
+          <div class="littleDD" style="width:40%; float:left;font-weight:bold;text-align:center; line-height:20px; font-size:14px;">ยานอกระบบ</div>
+          <div class="littleDD" style="width:10%; float:left;text-align:right; line-height:20px; font-size:14px;">เลือกสาขา : </div>
+        
+          <div class="littleDD" style="width:20%; float:left;">&nbsp;&nbsp;
+          <?php
+            $sql = "select branchid,branchname from tb_branch ";
+          $result = mysql_query($sql) or die("Error Query [".$sql."]"); ?>
+          <select name="select" id="branchid" style="width:117px;height: 21px;" onchange="mdrug2('daily_report/din_list.php','d_list')">
+            <option value="00">ทั้งหมด</option>
+            <?php while ($rs=mysql_fetch_array($result)) {  ?>
+            <option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
+            <?php } ?>
+          </select>
+          </div>
+
+	<?php
+        }else { 
+			echo '<div class="littleDD" style="font-size:14px; font-weight:bold;">ยานอกระบบ </div>';
+			echo " <input type='hidden' id='branchid' value ='' />";
+        }
+	?>   
 
 	<div style="width:47%; height:450px;  float:left; margin-left:10px; margin-top:10px; margin-right:10px;  border:<?= $tabcolor ?> 1px solid;">
 		<div class="littleDD" style="font-size:14px; font-weight:bold; background:<?= $tabcolor ?>;">ยาในระบบ</div>
