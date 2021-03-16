@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
 <?
+session_start();
 include('../class/config.php');
 include('../class/permission_user.php');
 $cl = '';

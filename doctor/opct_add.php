@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <?
+session_start();
 include('../class/config.php');
 include('../class/permission_user.php');
 $vn = 'VN09'.date('mdHis',time());

@@ -1,5 +1,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<?php
+	session_start();
 	$body_height = "345";
     if ($_SESSION['company_data'] == "1") {
         $body_height = "325";

@@ -1,10 +1,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<?php
+	
+	
+	session_start();
 	$body_height = "345";
     if ($_SESSION['company_data'] == "1") {
         $body_height = "325";
-    }
+	}
 	?>
 <div style=" width: 98%; margin-top:5px;   text-align:center; height:<?=$body_height?>px; ">
 

@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 include('../class/config.php');
 include('../class/permission_user.php');
 
