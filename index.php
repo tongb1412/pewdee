@@ -922,7 +922,6 @@ include('class/permission_user.php');
 					ajaxEdit('post', URL, data, displayId);
 					document.getElementById('pid').value = '';
 					document.getElementById('pname').value = '';
-
 					document.getElementById('pqty').value = '';
 					document.getElementById('pprice').value = '';
 					document.getElementById('puprice').value = '';
@@ -932,13 +931,13 @@ include('class/permission_user.php');
 					document.getElementById('npsename').value = '';
 					document.getElementById('pname').focus();
 				} else {
-					alert('');
+					alert('โปรดใส่ ผู้ขาย');
 				}
 			} else {
-				alert('');
+				alert('โปรดใส่ จำนวน');
 			}
 		} else {
-			alert('');
+			alert('โปรดใส่ รายการ');
 		}
 	}
 
@@ -1463,8 +1462,6 @@ include('class/permission_user.php');
 
 					data += '&qty=' + document.getElementById('pctqty').value;
 					data += '&tqty=' + document.getElementById('pctTqty').value;
-
-
 
 					ajaxEdit('post', URL, data, displayId);
 				} else {

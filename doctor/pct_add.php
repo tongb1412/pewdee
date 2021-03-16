@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+
 $vn = $_POST['vn'];
 $hn = $_POST['hn'];
 $pid = $_POST['pid'];
@@ -105,19 +106,18 @@ if($type=='P'){
 			$sqld = "Update tb_drugerec Set qty='$dqty' Where vn='$vn' and tid='$pid' and hn='$hn' and typ='$type' and ftyp='T' ". $where_branch . $where_company;
 			mysql_query($sqld);
 			
-		}
-							
+		}				
 	}
 } 
 		
 if($type=='T' || $type=='L') {	
-    $sql = "delete from tb_pctuse where vn='$vn' and pid='$pid' and ftyp='T' ";
+    $sql = "delete from tb_pctuse where vn='$vn' and pid='$pid' and ftyp='T' ". $where_branch . $where_company;
 	mysql_query($sql) or die ("Error Query [".$sql."]");	
 					
 	$eid = $_POST['eid'];
 	$ename = $_POST['ename'];
 	if(! empty($ename)){
-		$sql = "insert into tb_pctuse values('NULL','$vn','$hn','$pid','$pid','$pid','$dat','$eid','$ename','$pname','$qty','$unit','$type','T','$vn','$ncid','','$stqty')";
+		$sql = "insert into tb_pctuse values('NULL','$vn','$hn','$pid','$pid','$pid','$dat','$eid','$ename','$pname','$qty','$unit','$type','T','$vn','$ncid','','$stqty','$branch_id','$company_code')";
 		mysql_query($sql);
 		$sql = "Update tb_pctrec Set total='0' Where vn='$vn' and tid='$pid' and hn='$hn' and typ='$type' ". $where_branch . $where_company;
 		mysql_query($sql);	

@@ -1,0 +1,95 @@
+# Query: insert
+# Including: ./doctor
+# ContextLines: 1
+
+21 results - 6 files
+
+doctor\doctor_form2.php:
+  587  							$tqty = $qty  -  $uqty;
+  588: 							$sql = "insert into tb_pctlist  values('$pvn','$hn','$pid','$pname','$tqty','$unit','$type')";
+  589  							mysql_query($sql);
+
+  619  									$tqty = $tqty  -  $uqty;
+  620: 									$sql = "insert into tb_pctlist  values('$pvn','$hn','$tid','$tname','$tqty','$tunit','$ttype')";
+  621  									mysql_query($sql);
+
+  657  									$tqty = $tqty  -  $uqty;
+  658: 									$sql = "insert into tb_pctlist  values('$pvn','$hn','$tid','$tname','$tqty','$tunit','$ttype')";
+  659  									mysql_query($sql);
+
+  694  									$tqty = $tqty  -  $uqty;
+  695: 									$sql = "insert into tb_pctlist  values('$pvn','$hn','$tid','$tname','$tqty','$tunit','$ttype')";
+  696  									mysql_query($sql);
+
+doctor\druge_add.php:
+  29  	if(empty($Num_Rows)){
+  30: 		$sql = "insert into tb_drugerec  values('$vn','$hn','$did','$dname','$qty','$unit','$price','$duse','$typ','$fis','-','$branch_id','$company_code')";
+  31  		mysql_query($sql);	   		
+
+doctor\lab_add.php:
+  21  	if(empty($Num_Rows)){
+  22: 		$sql = "insert into tb_labrec  values('$vn','$hn','$lid','$lname','$qty','$price','$eid','$ename','$mem','$branch_id','$company_code')";
+  23  		mysql_query($sql);	   		
+
+doctor\opct_add.php:
+   58  
+   59: $sql = "insert into pctlog  values('$hvn','$pid','$pname','$qty','$dat','$type','$vn')";
+   60  mysql_query($sql);			   		
+
+   67  if(empty($Num_Rows)){
+   68: 	$sql = "insert into tb_pctrec  values('$vn','$hn','$pid','$pname','$type','$qty','$unit','$price','$tprice','$dat','$total','$seid','$sename','$ncid','$ncname')";
+   69  	mysql_query($sql)or die ("Error Query [".$sql."]");				   		
+
+   99  					if(empty($Num_Rows)){										
+  100: 						$sql_in = "insert into tb_drugerec  values('$vn','$hn','$did','$dname','$dqty','$dunit','$dprice','$duse','55','N','$pid')";
+  101  						mysql_query($sql_in) or die ("Error Query [".$sql_in."]");	
+
+  119  	if(! empty($ename)){
+  120: 		$sql = "insert into tb_pctuse  values('NULL','$vn','$hn','$pid','$pid','$pid','$dat','$eid','$ename','$pname','$qty','$unit','$type','T','$vn')";
+  121  		mysql_query($sql);
+
+doctor\pct_add.php:
+   65  if(empty($Num_Rows)){
+   66: 	$sql = "insert into tb_pctrec values('$vn','$hn','$pid','$pname','$type','$qty','$unit','$price','$tprice','$dat','$total','$seid','$sename','','','$branch_id','$company_code')";
+   67  	mysql_query($sql);		   		
+
+   99  		if(empty($Num_Rows)){										
+  100: 			$sql_in = "insert into tb_drugerec  values('$vn','$hn','$did','$dname','$dqty','$dunit','$dprice','$duse','55','N','$pid','$branch_id','$company_code')";
+  101  			mysql_query($sql_in) or die ("Error Query [".$sql_in."]");	
+
+  119  	if(! empty($ename)){
+  120: 		$sql = "insert into tb_pctuse values('NULL','$vn','$hn','$pid','$pid','$pid','$dat','$eid','$ename','$pname','$qty','$unit','$type','T','$vn','$ncid','','$stqty')";
+  121  		mysql_query($sql);
+
+doctor\usepct.php:
+   40  			$total =  $rs['total'] - $qty;
+   41: 			$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$tid','$tid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','T','$uvn','$eid1','$eid2','$stqty','$branch_id','$company_code')";
+   42  			mysql_query($sql_in);
+
+   47  			$total = $rs['total'];
+   48: 			$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$tid','$tid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','T','$uvn','$eid1','$eid2','0','$branch_id','$company_code')";
+   49  			mysql_query($sql_in);
+
+   86  
+   87: 				$sql_in = "insert into tb_pctuse values('NULL','$pvn','$hn','$cid','$cid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','C','$uvn','$eid1','$eid2','$stqty')";
+   88  				mysql_query($sql_in);
+
+   94  				$total = $rs['total'];
+   95: 				$sql_in = "insert into tb_pctuse values('NULL','$pvn','$hn','$cid','$cid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','C','$uvn','$eid1','$eid2','0')";
+   96  				mysql_query($sql_in);
+
+  131  			$sum =  $nqty - $qty;
+  132: 			$sql_in = "insert into tb_pctuse values('NULL','$vn','$hn','$pid','$pid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','PT','$uvn','$eid1','$eid2','$stqty','$branch_id','$company_code')";
+  133  			mysql_query($sql_in);
+
+  139  			$total = $rs['total'];
+  140: 			$sql_in = "insert into tb_pctuse values('NULL','$vn','$hn','$pid','$pid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','PT','$uvn','$eid1','$eid2','0','$branch_id','$company_code')";
+  141  			mysql_query($sql_in);
+
+  168  				if($tcqty >= $qty ){
+  169: 					$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$pid','$cid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','PC','$uvn','$eid1','$eid2','$stqty')";
+  170  					mysql_query($sql_in);
+
+  176  					$total = $rs['total'];
+  177: 					$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$pid','$cid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','PC','$uvn','$eid1','$eid2','0','$branch_id','$company_code')";
+  178  					mysql_query($sql_in);

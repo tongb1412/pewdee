@@ -23,7 +23,7 @@ $company_code = $_SESSION['company_code'];
 $company_data = $_SESSION['company_data'];
 $where_data =  set_where_user_data('',$branch_id, $company_code, $company_data);
 
-$sql = "select * from tb_pctrec  where hn='$hn' and  tid='$tid' and vn='$pvn' and typ IN ('T','L')  and total > 0 " . $where_data['where_branch_id'] . $where_data['where_company_code'] . " order by vn asc ";
+$sql = "select * from tb_pctrec  where hn='$hn' and  tid='$tid' and vn='$pvn' and typ IN ('T','L')  and total > 0 " . $where_data['where_company_code'] . " order by vn asc ";
 $str = mysql_query($sql) or die ("Error Query [".$sql."]");
 $txtddd = $sql;
 while(($rs = mysql_fetch_array($str)) && ($qty > 0)){
@@ -84,17 +84,17 @@ while( ($rs=mysql_fetch_array($str)) && ($qty > 0)){
 		if($sum < $tqty){
 			if($tqty >= $qty ){
 
-				$sql_in = "insert into tb_pctuse  values('NULL','$pvn','$hn','$cid','$cid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','C','$uvn','$eid1','$eid2','$stqty')";
+				$sql_in = "insert into tb_pctuse values('NULL','$pvn','$hn','$cid','$cid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','C','$uvn','$eid1','$eid2','$stqty','$branch_id','$company_code')";
 				mysql_query($sql_in);
 				$total = $total - $qty;
-				$sql_in = "Update tb_pctrec Set total='$total' Where vn='$pvn' and tid='$cid' and hn='$hn' and typ='C' ";
+				$sql_in = "Update tb_pctrec Set total='$total' Where vn='$pvn' and tid='$cid' and hn='$hn' and typ='C' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
 				mysql_query($sql_in);
 				$qty = 0;
 			} else {
 				$total = $rs['total'];
-				$sql_in = "insert into tb_pctuse  values('NULL','$pvn','$hn','$cid','$cid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','C','$uvn','$eid1','$eid2','0')";
+				$sql_in = "insert into tb_pctuse values('NULL','$pvn','$hn','$cid','$cid','$tid','$dat','$eid','$ename','$tname','$total','$unit','$type','C','$uvn','$eid1','$eid2','0','$branch_id','$company_code')";
 				mysql_query($sql_in);
-				$sql_in = "Update tb_pctrec Set total='0' Where vn='$pvn' and tid='$cid' and hn='$hn' and typ='C' ";
+				$sql_in = "Update tb_pctrec Set total='0' Where vn='$pvn' and tid='$cid' and hn='$hn' and typ='C' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
 				mysql_query($sql_in);
 				$qty = $qty - $total;
 			}
@@ -113,7 +113,6 @@ while( ($rs = mysql_fetch_array($str)) && ($qty > 0)){
 	$tqty = $rs['qty'];
 	$total = $rs['total'];
 
-
 	$sqlt = "select tb_package_detail.*,tb_treatment.unit,tb_treatment.typ from tb_package_detail,tb_treatment  where tb_package_detail.id = tb_treatment.tid ";
 	$sqlt .= "and tb_package_detail.pid='$pid' and tb_package_detail.id='$tid' and tb_package_detail.typ IN('T','L') and tb_package_detail.company_code = '$company_code'";
 	$strt = mysql_query($sqlt) or die ("Error Query [".$sqlt."]");
@@ -123,6 +122,7 @@ while( ($rs = mysql_fetch_array($str)) && ($qty > 0)){
 	$type =  $rt['typ'];
 	$nqty =  $rt['qty'] * $tqty;
 	$sqls = "select sum(qty) as total from tb_pctuse  where vn='$vn' and hn='$hn' and pid='$pid' and tid='$tid'  and ftyp='PT' ". $where_data['where_branch_id'] . $where_data['where_company_code'];
+	// echo $sqls;exit();
 	$strs = mysql_query($sqls) or die ("Error Query [".$sqls."]");
 	$rss = mysql_fetch_array($strs);
 	$sum = $rss['total'];
@@ -151,7 +151,7 @@ while( ($rs = mysql_fetch_array($str)) && ($qty > 0)){
 		$cid = $ry['id'];
 	    $cqty = $ry['qty'];
 		$sqlc  = "select  tb_course_detail.*,tb_treatment.unit,tb_treatment.typ from tb_course_detail,tb_treatment  ";
-		$sqlc .= "where tb_course_detail.tid=tb_treatment.tid  and  tb_course_detail.cid='$cid' and tb_course_detail.tid='$tid' tb_course_detail.company_code = '$company_code'";
+		$sqlc .= "where tb_course_detail.tid=tb_treatment.tid  and  tb_course_detail.cid='$cid' and tb_course_detail.tid='$tid' and tb_course_detail.company_code = '$company_code'";
 		$strc = mysql_query($sqlc) or die ("Error Query [".$sqlc."]");
 		$n = mysql_num_rows($strc);
 		if(!empty($n)){
@@ -166,7 +166,7 @@ while( ($rs = mysql_fetch_array($str)) && ($qty > 0)){
 			$sum = $rss['total'];
 			if($sum < $tcqty){
 				if($tcqty >= $qty ){
-					$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$pid','$cid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','PC','$uvn','$eid1','$eid2','$stqty')";
+					$sql_in = "insert into tb_pctuse  values('NULL','$vn','$hn','$pid','$cid','$tid','$dat','$eid','$ename','$tname','$qty','$unit','$type','PC','$uvn','$eid1','$eid2','$stqty','$branch_id','$company_code')";
 					mysql_query($sql_in);
 					$total = $total - $qty;
 					$sql_in = "Update tb_pctrec Set total='$total' Where vn='$vn' and tid='$pid' and hn='$hn' and typ='P' ". $where_data['where_branch_id'] . $where_data['where_company_code'];

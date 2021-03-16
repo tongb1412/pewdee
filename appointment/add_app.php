@@ -23,6 +23,9 @@ if(!empty($_POST['bid'])){
 	}
 }
 
+$company_code = $_SESSION['company_code'];
+$where_company = "and company_code = '$company_code' ";
+
 
 
 $dat = substr($_POST['dat'],6,4).'-'.substr($_POST['dat'],3,2).'-'.substr($_POST['dat'],0,2)  ;
@@ -56,13 +59,13 @@ if($mod=='Y'){
 	$str = mysql_query($sql) or die ("Error Query [".$sql."]");
 	$n = mysql_num_rows($str);
 	if(empty($n)){
-		$sql = "insert into tb_appointment  values('$an','$hn','$cn','$pname','$pid','$atyp','$dat','$stim','$etim','$atime','$mem','NONE','$branch_id')";
+		$sql = "insert into tb_appointment  values('$an','$hn','$cn','$pname','$pid','$atyp','$dat','$stim','$etim','$atime','$mem','NONE','$branch_id','$company_code')";
 		$result = mysql_query($sql) or die ("Error Query [".$sql."]");
 		if($result){
 			$flag = 1;
 		}
 	} else {
-		$sql = "Update tb_appointment Set atyp='$atyp',dat='$dat',stim='$stim',etim='$etim',atime='$atime',pid='$pid',mem='$mem' Where an='$an' " . $where_branch_id;
+		$sql = "Update tb_appointment Set atyp='$atyp',dat='$dat',stim='$stim',etim='$etim',atime='$atime',pid='$pid',mem='$mem' Where an='$an' " . $where_branch_id . $where_company;
 		$result = mysql_query($sql) or die ("Error Query [".$sql."]");
 		if($result){
 			$flag = 1;
