@@ -26,7 +26,7 @@ $str = mysql_query($sql) or die ("Error Query [".$sql."]");
 $num = mysql_num_rows($str);
 if($num > 0 ){
 	$sd = 'No';
-	echo $sd;
+	// echo $sd;
 	$rs = mysql_fetch_array($str);
 	switch ($rs['status']) {
 	case 'SD'  : $txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้อยู่ระหว่างการซื้อยาหน้าร้าน';

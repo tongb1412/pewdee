@@ -66,7 +66,7 @@ if(empty($did)){
 } else {
   $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn) and (a.pdate like '%$dat%') and (c.empid like '%$did%') and (c.status='COM') $where_branch_id";
 }
-echo $sql;
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 
