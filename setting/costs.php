@@ -32,13 +32,13 @@ include('../class/config.php');
 			<div style="width:70%; float:left; text-align:right;">&nbsp;</div>
 			<div style="width:30%; float:left;">
 				<input type="button" value="  เพิ่มรายการ  " style="font-size:12px; font-weight:bold; height:28px;" onclick="addcosts('setting/costs_add.php','d_list')" />
-				<input type="button" value="  รายการใหม่  " style="font-size:12px; font-weight:bold; height:28px;" onclick="ajaxLoad('post','setting/costs.php','','settingpage')" />
+				<input type="button" value="  รายการใหม่  " style="font-size:12px; font-weight:bold; height:28px;" onclick="ajaxLoad('post','setting/costs.php','','t_main')" />
 			</div>
 		</div>
 	</div>
 
 	<div style="width:95%; margin-top:5px; margin-left:20px; text-align:left; height:60%; overflow:auto; border:<?= $tabcolor ?> 1px solid;">
-		<div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto; font-weight:bold; font-size:12px; background:<?= $tabcolor ?>;">
+		<div style="width:100%; height:20px; padding-top:5px; color:#000000; margin:auto; font-weight:bold; font-size:12px; background:<?= $tabcolor ?>;">
 			<div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
 			<div style="width:50%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รายการ</div>
 			<div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จำนวน</div>

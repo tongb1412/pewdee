@@ -1,12 +1,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<? include('../class/config.php'); ?>
-
-
+<? 
+include('../class/config.php'); 
+include_once('../class/permission_user.php');
+?>
 
 
 <?
+session_start();
 $txtserch = $_GET['txt'];
 $cl = $color1;
+
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "";
+// echo "x".$branchid."x";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
 
 if(empty($txtserch)){

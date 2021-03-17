@@ -1102,7 +1102,7 @@ include('class/permission_user.php');
 			data += '&total=' + document.getElementById('total').value;
 			data += '&id=' + document.getElementById('id').value;
 			data += '&type=' + document.getElementById('typ').value;
-			alert(data);
+			// alert(data);
 
 			ajaxEdit('post', URL, data, displayId);
 			document.getElementById('name').value = '';
@@ -1112,7 +1112,7 @@ include('class/permission_user.php');
 			document.getElementById('price').value = '0';
 			document.getElementById('total').value = '0';
 		} else {
-			alert('');
+			alert('กรุณากรอก รายการค่าใช้จ่าย');
 		}
 	}
 
@@ -1150,6 +1150,9 @@ include('class/permission_user.php');
 
 	function printcredit() {
 		var data = 'did=' + document.getElementById('bk').value;
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 		var page = 'daily_report/re_credit.php?' + data;
 		window.open(page, 'Patients', 'width=1003, height=500,resizable=yes, scrollbars=yes');
 	}
@@ -1514,7 +1517,7 @@ include('class/permission_user.php');
 			data += '&mode=add';
 			ajaxLoad('post', 'daily_report/dtime.php', data, 'reportpage')
 		} else {
-			alert(' ');
+			alert('กรุณาเลือกแพทย์');
 		}
 
 	}
@@ -1525,7 +1528,7 @@ include('class/permission_user.php');
 			data += '&mode=del';
 			ajaxLoad('post', 'daily_report/dtime.php', data, 'reportpage')
 		} else {
-			alert(' ');
+			alert('กรุณาเลือกแพทย์');
 		}
 
 	}

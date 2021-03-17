@@ -12,6 +12,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </HEAD>
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 
 $sdat = substr($_GET['sdate'],6,4).'-'.substr($_GET['sdate'],3,2).'-'.substr($_GET['sdate'],0,2);
 $edat  = date('Y-m-d',mktime(0, 0, 0, substr($_GET['edate'],3,2)  , substr($_GET['edate'],0,2)+1, substr($_GET['edate'],6,4)));
@@ -26,13 +27,38 @@ $endLine = 33;
 //$did = '';
 //}
 
-$sqlC .="select clinicname from tb_clinicinformation ";
-$strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]");
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "a";
+// echo "x".$branchid."x";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+$branchname = get_branch_name($branchid,$_SESSION['company_code']);
+
+$where_branch_id2 = "";
+if($branchid == "") {
+	$where_branch_id2 = " where cn = '".$_SESSION["branch_id"] ."' and company_code ='".$_SESSION['company_code']."'  ";
+}else {
+	$where_branch_id2 = " where cn = '".$branchid ."' and company_code ='".$_SESSION['company_code']."' ";
+}
+$sqlC ="select clinicname from tb_clinicinformation $where_branch_id2";
+// echo $sqlC;
+$strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
 $rs=mysql_fetch_array($strc);
 
 $cname = $rs['clinicname'];
 
-$txt1 = ' วันที่ '.$_GET['sdate'].'  ถึง  '.$_GET['edate'].' สาขา  '.$rs['clinicname'];
+$cname = $rs['clinicname'];
+if($cname =="") {
+	$cname = "ทั้งหมด";
+}
+
+$txt1 = ' วันที่ '.$_GET['sdate'].'  ถึง  '.$_GET['edate'].' สาขา  '.$cname;
 
 
 
@@ -50,7 +76,13 @@ $txt1 = ' วันที่ '.$_GET['sdate'].'  ถึง  '.$_GET['edate'].' �
 //	$sql  = "select *  from drugelog   where (dat between '$sdat' and '$edat') and (did = '$did') order by did,dat  ";
 //}
 
-$sql = "select a.*,b.fname efname,b.lname elname ,c.fname cfname,c.lname clname,d.fname ckfname ,d.lname cklname from tb_totalcash a,tb_staff b,tb_staff c,tb_staff d where a.empname = b.staffid and a.cashier = c.staffid and a.cashier_check = d.staffid and (a.date between '$sdat%' and '$edat%') ";
+$sql = "select a.*,b.fname efname,b.lname elname ,c.fname cfname,c.lname clname,d.fname ckfname ,d.lname cklname 
+from tb_totalprice a
+left join tb_staff b on a.empname = b.staffid
+left join tb_staff c on a.cashier = c.staffid
+left join tb_staff d on a.cashier_check = d.staffid
+left join tb_branch f ON a.branchid = f.branchid
+where  (a.date between '$sdat%' and '$edat%')  $where_branch_id";
 
 $str = mysql_query($sql) or die($sql);
 
@@ -79,7 +111,12 @@ $str = mysql_query($sql) or die($sql);
         <td align="center" style="background:#CCCCCC">แคชเขียร์ประจำวัน</td>
         <td align="center" style="background:#CCCCCC">พนักงานตรวจ</td>
         <td align="center" style="background:#CCCCCC">เวลาบันทึก</td>
-
+        <?php 
+            if($branchid != "") { ?>  
+                <td align="center" style="background:#CCCCCC">สาขา</td>     
+        <?php 
+            } 
+        ?> 
 
 </TR>
 
@@ -111,6 +148,7 @@ $dat = substr($rs['date'],8,2).'-'.substr($rs['date'],5,2).'-'. (substr($rs['dat
 			$t13 = $rs['cfname'].'    '.$rs['clname'];
 			$t14 = $rs['ckfname'].'    '.$rs['cklname'];
 			$t15 = $rs['datenow'];
+			$t16 = $rs['branchname'];
 
 
 
@@ -132,7 +170,12 @@ $dat = substr($rs['date'],8,2).'-'.substr($rs['date'],5,2).'-'. (substr($rs['dat
     <TD align="left" ><?=$t13?></TD>
     <TD align="left" ><?=$t14?></TD>
     <TD align="left" ><?=$t15?></TD>
-
+    <?php 
+        if($branchid != "") { ?>  
+            <TD align="left" ><?=$t16?></TD>    
+    <?php 
+        } 
+    ?> 
 
 </TR>
 

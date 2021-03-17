@@ -49,11 +49,11 @@ if($cl != $color1){
 		
 <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="width:99%;background:<?=$cl?>; ">
 	<div style="width:10%; float:left;"><?=$n?></div>
-	<div style="width:50%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['name']?></div>
+	<div style="width:48%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['name']?></div>
 	<div style="width:10%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=$rs['unit']?></div>
 	<div style="width:15%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=$rs['price']?></div>
 	<div style="width:10%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=$rs['total']?></div>
-	<div style="width:5%; float:left; text-align:right "  >
+	<div style="width:7%; float:left; text-align:right "  >
     <img src="images/icon/pedit.png" align="แก้ไขข้อมูล" title="แก้ไขข้อมูล" style="cursor:pointer;" onClick="editcosts('<?=$rs['name']?>','<?=$rs['id']?>','<?=$rs['unit']?>','<?=$rs['price']?>','<?=$rs['total']?>');" />
 	<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('setting/costs_del.php','d_list','id=<?=$rs['id']?>')" />																									  
 	</div>

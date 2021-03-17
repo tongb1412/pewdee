@@ -1,5 +1,7 @@
 <?php
+	session_start();
 	include('../class/config.php');
+	include('../class/permission_user.php');
 	ini_set('max_execution_time', 36000);
 	header("content-type: application/vnd.ms-excel");
 	header('content-disposition: attachment; filename="report2.xls"');
@@ -16,9 +18,41 @@
 	</head>
 
 <?php
-	$sqlc ="SELECT clinicname FROM tb_clinicinformation";
-	$rs = mysql_fetch_array(mysql_query($sqlc));
-	$cname = $cname1 = $rs['clinicname'];
+
+	
+	if(!empty($_REQUEST['branchid'])){
+		$branchid = $_REQUEST['branchid'];
+	} else {
+		$branchid = '';
+	}
+	$as = "a";
+	// echo "x".$branchid."x";
+	$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+	$where_branch_id = "";
+	$where_branch_id .= $data['where_branch_id'];
+	$where_branch_id .= $data['where_company_code'];
+	$branchname = get_branch_name($branchid,$_SESSION['company_code']);
+
+	$where_branch_id2 = "";
+	if($branchid == "") {
+		$where_branch_id2 = " where cn = '".$_SESSION["branch_id"] ."' and company_code ='".$_SESSION['company_code']."'  ";
+	}else {
+		$where_branch_id2 = " where cn = '".$branchid ."' and company_code ='".$_SESSION['company_code']."' ";
+	}
+	$sqlC ="select clinicname from tb_clinicinformation $where_branch_id2";
+	// echo $sqlC;
+	$strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
+	$rs=mysql_fetch_array($strc);
+
+	$cname = $rs['clinicname'];
+
+	$cname = $rs['clinicname'];
+	if($cname =="") {
+		$cname = "ทั้งหมด";
+	}
+
+
+
 	$sempid = $_POST['sempid'];
 	$sdat = substr($_POST['sdate'],6,4).'-'.substr($_POST['sdate'],3,2).'-'.substr($_POST['sdate'],0,2);
 	$edat  = date('Y-m-d',mktime(0, 0, 0, substr($_POST['edate'],3,2)  , substr($_POST['edate'],0,2)+1, substr($_POST['edate'],6,4)));
@@ -44,7 +78,7 @@
 <body>
 	<table border="1">
 		<tr>
-			<td colspan="<?php print $num_cols + $static_cols; ?>" align="center"><b>รายงานการใช้ทรีทเม้นท์</b></td>
+			<td colspan="<?php print $num_cols + $static_cols; ?>" align="center"><b>รายงานการใช้ทรีทเม้นท์ <?php if($branchname != "") { echo " (สาขา $branchname)"; } ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="<?php print $num_cols + $static_cols; ?>" align="center"><b><?php print $txt1; ?></b></td>
@@ -77,12 +111,15 @@
 			SUM(lp) med_proc_total,
 			SUM(dp) drg_total,
 			(SUM(ku) + SUM(discount)) discount, 
-			SUM(c.total) grand_total
-			FROM tb_vst a LEFT JOIN tb_staff b ON (a.empid = b.staffid) LEFT JOIN tb_payment c ON (a.vn = c.vn)	
-			WHERE a.status = 'COM' AND (a.vdate between '$sdat%' and '$edat%') " . ($sempid!=""?" AND a.empid = '$sempid'":"") . "
-			GROUP BY a.empname, a.empid, DATE(vdate) ORDER BY a.empname, a.empid, DATE(vdate)"; 
+			SUM(c.total) grand_total,	branchname
+			FROM tb_vst a 
+			LEFT JOIN tb_staff b ON (a.empid = b.staffid)
+			LEFT JOIN tb_payment c ON (a.vn = c.vn)	
+			LEFT JOIN tb_branch d ON a.branchid = d.branchid 
+			WHERE a.status = 'COM' AND (a.vdate between '$sdat%' and '$edat%') " . ($sempid!=""?" AND a.empid = '$sempid'":"") . " $where_branch_id
+			GROUP BY a.empname, a.empid, DATE(vdate) ORDER BY a.empname, a.empid, DATE(vdate),branchname"; 
 
-			//print $sql;
+			// echo $sql;
 			$str  = mysql_query($sql);
 			while($rs = mysql_fetch_array($str))
 			{		
@@ -92,12 +129,27 @@
 				$drg_total = round($rs['drg_total'] * $percent_drg_total, 2);
 				$med_proc_total = round($rs['med_proc_total'] * $percent_med_proc_total, 2);	
 				$gran_total = $drg_total + $med_proc_total;
-		?>
+
+				
+				$clinic_name = $rs['branchname'];
+			?>
 			<tr valign="top" >
-				<td align="left"><?php print $cname1; ?></td> 
+
+			<?php 
+				if ($branchid != "") {
+			?>
+				<td align="left" ><?=$clinic_name?></td>
+			<?php
+				} else { 
+			?>
+				<td align="left" ><?=$cname1?></td>
+			<?php
+				}
+			?>
+ 
 				<td align="left"><?php print $doc_name; ?></td> 	
 				<td align="center"><?php print date_format(date_create($vdate), "d/m/Y"); ?></td>
-		<?php
+			<?php
 			for($i=0; $i<count($gname); $i++)
 			{
 				$tgid = $gid[$i] ;  

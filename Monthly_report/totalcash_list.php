@@ -1,8 +1,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;  overflow:auto;  text-align:center; height:400px; ">
+<?
+
+  session_start();
+	$body_height = "400";
+    if ($_SESSION['company_data'] == "1") {
+        $body_height = "370";
+	}
+?>
+<div style=" width: 98%; margin-top:5px;  overflow:auto;  text-align:center; height:<?=$body_height?>px; ">
 
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 /*$sdate = $_POST['sdate'];
 $edate = $_POST['edate'];*/
@@ -47,8 +56,21 @@ $edate = date("Y-m-d", $t1);
 
 
 
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "b";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+
+
 $cl = $color1;
-$sql = "select a.*,b.fname efname,b.lname elname ,c.fname cfname,c.lname clname,d.fname ckfname ,d.lname cklname from tb_totalcash a,tb_staff b,tb_staff c,tb_staff d where a.empname = b.staffid and a.cashier = c.staffid and a.cashier_check = d.staffid and (a.date between '$sdate%' and '$edate%') ";
+$sql = "select a.*,b.fname efname,b.lname elname ,c.fname cfname,c.lname clname,d.fname ckfname ,d.lname cklname from tb_totalcash a,tb_staff b,tb_staff c,tb_staff d where a.empname = b.staffid and a.cashier = c.staffid and a.cashier_check = d.staffid and (a.date between '$sdate%' and '$edate%') $where_branch_id";
 
 $result = mysql_query($sql) or die ("Error Query [".$sql."]");
 $Num_Rows = mysql_num_rows($result);

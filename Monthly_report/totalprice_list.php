@@ -1,8 +1,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;  overflow:auto;  text-align:center; height:300px; ">
+<?
+
+  session_start();
+	$body_height = "300";
+    if ($_SESSION['company_data'] == "1") {
+        $body_height = "285";
+	}
+?>
+<div style=" width: 98%; margin-top:5px;  overflow:auto;  text-align:center; height:<?=$body_height?>px; ">
 
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 /*$sdate = $_POST['sdate'];
 $edate = $_POST['edate'];*/
@@ -25,21 +34,21 @@ $edate = date("Y-m-d", $t1);
 
 ?>
     <div style="width:2000px; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
-      <div style="width:3%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
-      <div style="width:5%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;วันที่</div>
-      <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;เงินสด</div>
-      <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารกรุงศรีฯ </div>
-      <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารกสิกร </div>
-      <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารไทยพาณิชย์ </div>
+    <div style="width:3%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
+    <div style="width:5%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;วันที่</div>
+    <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;เงินสด</div>
+    <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารกรุงศรีฯ </div>
+    <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารกสิกร </div>
+    <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารไทยพาณิชย์ </div>
 	  <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคาร Amax</div>
 	  <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคาร OUB</div>
-      <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารกรุงไทย</div>
-      <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารธนชาต</div>
+    <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารกรุงไทย</div>
+    <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ธนาคารธนชาต</div>
 	  <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;คงเหลือ</div>
 	  <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ผู้บันทึก</div>
 	  <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;แคชเขียร์ประจำวัน </div>
 	  <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;พนักงานตรวจ</div>
-      <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;เวลาบันทึก</div>
+    <div style="width:7%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;เวลาบันทึก</div>
     </div>
 	
 		
@@ -48,9 +57,22 @@ $edate = date("Y-m-d", $t1);
 
 
 
-$cl = $color1;
-$sql = "select a.*,b.fname efname,b.lname elname ,c.fname cfname,c.lname clname,d.fname ckfname ,d.lname cklname from tb_totalprice a,tb_staff b,tb_staff c,tb_staff d where a.empname = b.staffid and a.cashier = c.staffid and a.cashier_check = d.staffid and (a.date between '$sdate%' and '$edate%') ";
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "b";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
+
+
+$cl = $color1;
+$sql = "select a.*,b.fname efname,b.lname elname ,c.fname cfname,c.lname clname,d.fname ckfname ,d.lname cklname from tb_totalprice a,tb_staff b,tb_staff c,tb_staff d where a.empname = b.staffid and a.cashier = c.staffid and a.cashier_check = d.staffid and (a.date between '$sdate%' and '$edate%') $where_branch_id";
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 
@@ -92,19 +114,19 @@ if($cl != $color1){
 <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="width:2000px; background:<?=$cl?>; ">
 	<div style="width:3%; float:left;"><?=$n?></div>
 	<div style="width:5%; float:left;">&nbsp;<?=$rs['date']?></div>
-    <div style="width:7%; float:left;"><?=number_format($rs['cash'],'0','.',',')?></div>
-    <div style="width:7%; float:left;"><?=number_format($rs['k_krungsri'],'0','.',',')?></div>
-    <div style="width:7%; float:left;"><?=number_format($rs['k_kasikorn'],'0','.',',')?></div>
-    <div style="width:7%; float:left;"><?=number_format($rs['k_thai'],'0','.',',')?></div>
-    <div style="width:7%; float:left;"><?=number_format($rs['k_amax'],'0','.',',')?></div>
+  <div style="width:7%; float:left;"><?=number_format($rs['cash'],'0','.',',')?></div>
+  <div style="width:7%; float:left;"><?=number_format($rs['k_krungsri'],'0','.',',')?></div>
+  <div style="width:7%; float:left;"><?=number_format($rs['k_kasikorn'],'0','.',',')?></div>
+  <div style="width:7%; float:left;"><?=number_format($rs['k_thai'],'0','.',',')?></div>
+  <div style="width:7%; float:left;"><?=number_format($rs['k_amax'],'0','.',',')?></div>
 	<div style="width:7%; float:left;"><?=number_format($rs['k_uob'],'0','.',',')?></div>
-    <div style="width:7%; float:left;"><?=number_format($rs['k_ktc'],'0','.',',')?></div>
+  <div style="width:7%; float:left;"><?=number_format($rs['k_ktc'],'0','.',',')?></div>
 	<div style="width:7%; float:left;"><?=number_format($rs['k_tana'],'0','.',',')?></div>
 	<div style="width:7%; float:left;"><?=number_format($rs['total'],'0','.',',')?></div>
 	<div style="width:7%; float:left;"><?=$rs['efname'].'    '.$rs['elname']  ?></div>
-    <div style="width:7%; float:left;"><?=$rs['cfname'].'    '.$rs['clname']  ?></div>
-    <div style="width:7%; float:left;"><?=$rs['ckfname'].'    '.$rs['cklname']  ?></div>
-    <div style="width:7%; float:left;">&nbsp;<?=$rs['datenow']?></div>
+  <div style="width:7%; float:left;"><?=$rs['cfname'].'    '.$rs['clname']  ?></div>
+  <div style="width:7%; float:left;"><?=$rs['ckfname'].'    '.$rs['cklname']  ?></div>
+  <div style="width:7%; float:left;">&nbsp;<?=$rs['datenow']?></div>
 	
 								
 	

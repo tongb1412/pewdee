@@ -1,40 +1,51 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $dat = date('Y-m-d');
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "";
+// echo "x".$branchid."x";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
 
 if($_POST['mode']=='add'){
 
-if(!empty($_POST['eid'])){
-     
-
-   
-	$sql  = "select empid from doctor where (empid='$eid') and (dat = '$dat') "; 
-	$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-	if (mysql_num_rows($str)) {
-		$ee = trim($_POST['eid']);
-		$tin = trim($_POST['tin']);
-		$tout = trim($_POST['tout']);
-		$mem = trim($_POST['mem']);	  
-		$txt  = "update doctor set tin='$tin',tout='$tout',mem='$mem' where  empid='$eid' and dat='$dat' ";
-
-	} else {
-		$ee = trim($_POST['eid']);
-		$tin = trim($_POST['tin']);
-		$tout = trim($_POST['tout']);
-		$mem = trim($_POST['mem']);			
-		$eid = $ee;	
-		$txt = "insert into doctor values('".$eid."','$dat','$tin','$tout','$mem')";
+	if(!empty($_POST['eid'])){
 		
-		
+		$sql  = "select empid from doctor where (empid='$eid') and (dat = '$dat') "; 
+		$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+		if (mysql_num_rows($str)) {
+			$ee = trim($_POST['eid']);
+			$tin = trim($_POST['tin']);
+			$tout = trim($_POST['tout']);
+			$mem = trim($_POST['mem']);	  
+			$txt  = "update doctor set tin='$tin',tout='$tout',mem='$mem' where  empid='$eid' and dat='$dat' ";
+
+		} else {
+			$ee = trim($_POST['eid']);
+			$tin = trim($_POST['tin']);
+			$tout = trim($_POST['tout']);
+			$mem = trim($_POST['mem']);			
+			$eid = $ee;	
+			$txt = "insert into doctor values('".$eid."','$dat','$tin','$tout','$mem')";
+			
+			
+		}
+		mysql_query($txt);	
+		$eid = '';
+		$tin = '';
+		$tout = '';
+		$mem = '';	
 	}
-	mysql_query($txt);	
-	$eid = '';
-	$tin = '';
-	$tout = '';
-	$mem = '';	
-}
 
 }
 
@@ -59,8 +70,8 @@ if($_POST['mode']=='show'){
 		<div style="width:30%; height:50px; line-height:50px; text-align:left; float:left;">ลงเวลาแพทย์ </div>
 	</div>
 	<div style="width:100%; height:180px;">
-		<?
-	$sql = "select staffid,pname,fname,lname from tb_staff where typ='D'    ";
+	<?
+	$sql = "select staffid,pname,fname,lname from tb_staff where typ='D' $where_branch_id";
 	$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 	?>
 
