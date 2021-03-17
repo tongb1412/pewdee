@@ -26,7 +26,7 @@ $did = $_POST['did'];
 if(!empty($_REQUEST['branchid'])){
 	$branchid = $_REQUEST['branchid'];
 } else {
-	$branchid = '';
+	$branchid = "";
 }
 $as = "";
 $data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);

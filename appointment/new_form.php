@@ -44,7 +44,7 @@ if(empty($_GET['an'])){
 ?>
 
 <div style="width:60%; height:65px; margin:auto; margin-top:10px; border:<?= $tabcolor ?> 1px solid; line-height:20px;">
-
+	<input type="hidden" id="branch_id_data" value="<?php echo $_SESSION['branch_id']; ?>" >
 	<div class="line" style="margin-top:10px;">
 		<div style="width:20%; float:left; text-align:right; font-weight:bold;">ค้นคนไข้ :&nbsp;&nbsp;</div>
 		<div style="width:70%; float:left;">
@@ -55,10 +55,9 @@ if(empty($_GET['an'])){
 	</div>
 	<div class="line">
 		<input type="hidden" id="branch_id_p" name="branch_id_p">
-		<div style="width:20%; float:left; text-align:right; font-weight:bold;">เลือกสาขา :&nbsp;&nbsp;</div>
-		<div style="width:70%; float:left;">
+
 		<?php
-			if ($_SESSION['branch_id'] != "") {
+			if ($_SESSION['company_data'] == "1") {
 				$branch_id = $_SESSION['branch_id'];
 				$sql = "";
 				$sql = "select * from tb_branch order by branchid";
@@ -67,6 +66,8 @@ if(empty($_GET['an'])){
 				$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
 				$Num_Rows = mysql_num_rows($result);
 			?>
+				<div style="width:20%; float:left; text-align:right; font-weight:bold;">เลือกสาขา :&nbsp;&nbsp;</div>
+				<div style="width:70%; float:left;">
 				<select name="sel_branchid_app_new" id="sel_branchid_app_new" onchange="cleartabreg(6,4,7,'appointment/new_form.php','content','bid=' + this.value)">
 					<?php
 					if ($Num_Rows > 0) {

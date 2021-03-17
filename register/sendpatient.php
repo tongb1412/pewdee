@@ -26,7 +26,7 @@ $str = mysql_query($sql) or die ("Error Query [".$sql."]");
 $num = mysql_num_rows($str);
 if($num > 0 ){
 	$sd = 'No';
-	echo $sd;
+	// echo $sd;
 	$rs = mysql_fetch_array($str);
 	switch ($rs['status']) {
 	case 'SD'  : $txt = 'ไม่สามารถส่งคนไข้เข้าระบบได้ เนื่องจากคนไข้อยู่ระหว่างการซื้อยาหน้าร้าน';
@@ -60,12 +60,17 @@ if($sd == 'Yes'){
 		<select id="sempid" style="width:330px; font-size:16px;">
 		<option value="00">ไม่ระบุแพทย์</option>
 		<?
-		$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and (branchid is NULL or branchid = '' or branchid = '$branch_id')" . $where_user['where_company_code'] . " order by typ, fname ";
+		if($_SESSION['company_code'] == 1){
+			$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and (branchid is NULL or branchid = '' or branchid = '$branch_id')" . $where_user['where_company_code'] . " order by typ, fname ";
+		}
+		else{
+			$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and branchid = '$branch_id' " . $where_user['where_company_code'] . " order by typ, fname ";
+		}
 		// echo $sql;exit();
 		$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 		while($rs = mysql_fetch_array($result)){
-		?>
-		<option value="<?=$rs['staffid']?>"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></option>
+			?>
+			<option value="<?=$rs['staffid']?>"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></option>
 		<? } ?>		
 		</select>
 		</div>

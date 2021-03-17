@@ -620,6 +620,7 @@ function ajaxcallLogin(contentType, displayId, responseText) {
 			document.getElementById('login_zone').style.display = 'none';
 			document.getElementById('username').value = '';
 			document.getElementById('password').value = '';
+			lll();
 		}
 
 
@@ -777,7 +778,7 @@ function serchlab(URL, displayId, txt) {
 		txt += '&bid=' + branchid_app_new.value;
 	}
 	else{
-		txt += "&bid=''"
+		txt += "&bid=" + document.getElementById('branch_id_data').value;
 	}
 	ajaxLoad('get', URL, txt, displayId);
 	if (document.getElementById('lname').value == '') {
