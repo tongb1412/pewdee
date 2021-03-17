@@ -7,13 +7,13 @@ $where_branch_id = "";
 if(empty($_GET['bid'])){
     if($_SESSION['branch_id'] != ""){
         $branch_id = $_SESSION['branch_id'];
-        $where_branch_id = "and (a.branchid = '$branch_id' or a.branchid = '' or a.branchid is NULL)";
+        $where_branch_id = "and a.branchid = '$branch_id'";
     }
 }
 else{
     if($_GET['bid'] != "00"){
         $branch_id = $_GET['bid'];
-        $where_branch_id = "and (a.branchid = '$branch_id' or a.branchid = '' or a.branchid is NULL)";
+        $where_branch_id = "and a.branchid = '$branch_id'";
     }
 }
 

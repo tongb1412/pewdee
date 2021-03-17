@@ -175,9 +175,6 @@ include('class/permission_user.php');
 										if(sel_branch != null){
 											data += "&bid=" + sel_branch.value;
 										}
-										else{
-											data += "&bid=''";
-										}
 										
 										data += '&oc=' + document.getElementById('oc').value;
 										data += '&pno=' + document.getElementById('pno').value;
@@ -1495,8 +1492,8 @@ include('class/permission_user.php');
 			if (document.getElementById('password').value != '') {
 				var data = 'user=' + document.getElementById('username').value;
 				data += '&pass=' + document.getElementById('password').value;
-
 				ajaxLogin('post', 'register/login.php', data, 'dock');
+				ajaxLoad('post', 'Monthly_report/rebuydruge.php', '', 'home')
 			} else {
 				alert('กรุณากรอก Password');
 			}
@@ -1648,7 +1645,7 @@ include('class/permission_user.php');
 
 
 
-<body onload="lll();">
+<body>
 
 	<div id="dialog-overlay"></div>
 	<div id="dialog-box"></div>

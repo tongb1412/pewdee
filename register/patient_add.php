@@ -3,15 +3,14 @@
 include('../class/config.php');
 require('../class/permission_user.php'); 
 
-$bid = $_POST['bid'];
-
 
 $branch_id = "";
-if($bid == "" || $bid == undefined || $bid == null){
+if(empty($_REQUEST['bid'])){
 	if($_SESSION["branch_id"] != ""){
 		$branch_id = $_SESSION["branch_id"];
 	}
 } else {
+	$bid = $_REQUEST['bid'];
 	$branch_id = $bid;
 }
 
