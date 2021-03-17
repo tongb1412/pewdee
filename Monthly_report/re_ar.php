@@ -1,17 +1,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 /*$sdate = $_GET['sdate'];
 $edate = $_GET['edate'];*/
 
 $t0 = strtotime($_GET['sdate']);
 $t1 = strtotime($_GET['edate']) + (1*24*3600); 
 $sdate = date("Y-m-d", $t0); 
-$edate = date("Y-m-d", $t1); 
+$edate = date("Y-m-d", $t1);
+
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = $_SESSION['branch_id'];
+}
+$as = "a";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
 $c =0; $d=0; $t=0;
 $sql = "select a.*,(a.cash+a.credit) total1,b.cradno,b.pname,b.fname,b.lname  ";
-$sql .="from tb_payment a,tb_patient b where (a.hn = b.hn)  and (a.vn like 'AR%') and (a.pdate between '$sdate%' and '$edate%') ";
+$sql .="from tb_payment a,tb_patient b where (a.hn = b.hn)  and (a.vn like 'AR%') and (a.pdate between '$sdate%' and '$edate%') " . $where_branch_id;
 $sql .="  order by a.pdate  ";
 
 

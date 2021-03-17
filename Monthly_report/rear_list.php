@@ -3,6 +3,7 @@
 
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 /*$sdate = $_POST['sdate'];
 $edate = $_POST['edate'];*/
@@ -19,6 +20,16 @@ $sdate = date("Y-m-d", $t0);
 $edate = date("Y-m-d", $t1); 
 }
 
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = $_SESSION['branch_id'];
+}
+$as = "a";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
 ?>
     <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
@@ -38,7 +49,8 @@ $edate = date("Y-m-d", $t1);
 
 
 $cl = $color1;
-$sql = "select a.*,(a.cash+a.credit) total1,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b where (a.hn = b.hn)  and (a.vn like 'AR%') and (a.pdate between '$sdate%' and '$edate%')  ";
+$sql = "select a.*,(a.cash+a.credit) total1,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b where (a.hn = b.hn)  and (a.vn like 'AR%') and (a.pdate between '$sdate%' and '$edate%') " . $where_branch_id;
+// echo $sql;exit();
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

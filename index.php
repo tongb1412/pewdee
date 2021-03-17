@@ -257,7 +257,7 @@ include('class/permission_user.php');
 				alert('');
 			}
 		} else {
-			alert('');
+			alert('กรุณากรอก รหัสคนไข้');
 		}
 	}
 
