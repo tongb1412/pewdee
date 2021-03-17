@@ -18,6 +18,7 @@ include('class/permission_user.php');
 
 	<link href="css/menu_style.css" rel="stylesheet" type="text/css" />
 	<link href="calendar/calendar.css" rel="stylesheet" type="text/css" />
+	<link href="css/monthly_report.css" rel="stylesheet" type="text/css" />
 	<!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css" /> -->
 	<title>Pewdee Clinic System</title>
 </head>

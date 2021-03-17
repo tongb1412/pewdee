@@ -1,0 +1,44 @@
+
+div#t_main_monthly.tmain{
+    width:100%;  
+    overflow:hidden;
+}
+
+.monthly-main{
+    width:20%; 
+    margin:auto;  
+    overflow:hidden; 
+    float:left;
+}
+
+div#reportpage{
+    float:left; 
+    margin:auto; 
+    width:79%;  
+    margin-left:5px;
+}
+
+.full{
+    height:545px;
+}
+
+.small{
+    height:495px;
+}
+
+.h-100{
+    height: 100%;
+}
+
+.line > .line-item{
+    width:auto; 
+    float:left; 
+    margin-top:10px;
+    margin-left: 2%;
+}
+
+.line > .line-item.title{
+    text-align:right;
+    line-height:20px; 
+    font-size:14px;
+}

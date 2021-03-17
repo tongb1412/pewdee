@@ -1,15 +1,23 @@
+<?php
+include('../class/config.php');
+?>
+  
+<?php
+if(!empty($_SESSION['company_data'])){
+	$company_data = $_SESSION['company_data'];
+	$style = "full";
+} else {
+	$style = "small";
+}
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<input type="hidden" id="brunch_id_data" value="<?php echo $_SESSION['brunch_id'] ?>">
 <div style="width:99%; margin:auto; margin-top:5px; height:30px;">
 	<div style="width:100px; font-size:16px; font-weight:bold;"><img src="images/icon/setting.png" align="absmiddle" />&nbsp;ตั้งค่า</div>
 </div>
 <div style="width:99%; height:auto; margin:auto; margin-top:5px; text-align:center;">
-	<div id="main" class="main" style="width:20%; margin:auto; height:495px; overflow:hidden; float:left;">
+	<div id="main" class="main monthly-main <?php echo $style ?>">
 		<div class="littleDD" style="font-size:14px; font-weight:bold;">เมนู </div>
-
-
-
-
-
 		<div class="setting_menu" onClick="setbtnSetting(1,4)">รายงานคนไข้</div>
 		<div id="ST1" style="height:auto;">
 			<div class="setting_menu_list">
@@ -22,7 +30,6 @@
 				<a href="javascript: ajaxLoad('post','Monthly_report/repatientcancle.php','','reportpage')">รายงานคนไข้ยกเลิก</a>
 			</div>
 		</div>
-
 		<div class="setting_menu" onClick="setbtnSetting(2,4)">รายงานรายได้</div>
 		<div id="ST2" style="display:none; height:auto;">
 			<div class="setting_menu_list">
@@ -131,7 +138,7 @@
 
 
 	</div>
-	<div id="reportpage" style="float:left; margin:auto; width:79%; height:auto;  margin-left:5px;">
+	<div id="reportpage" class="<?php echo $style ?>">
 		<?php include('repatient.php'); ?>
 	</div>
 </div>

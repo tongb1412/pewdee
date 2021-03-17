@@ -1962,12 +1962,52 @@ function mpayment(URL, displayId) {
 			var data = 'sdate=' + document.getElementById('sdate').value;
 			data += '&edate=' + document.getElementById('edate').value;
 			data += '&did=' + document.getElementById('repempid').value;
-
+			if(document.getElementById('branchid') != null) {
+				data += '&branchid=' + document.getElementById('branchid').value;
+			}
 			/*alert(data); */
 			loadmodule(displayId, URL, data);
 		}
 	}
 }
+
+function doctor_list(data){
+	var branch_id = "";
+	if(data != null) {
+		branch_id = data.value;
+	}
+	// console.log("load_already" + branch_id);
+	$.ajax({
+		type : 'POST',
+		url : 'script/doctor_list.php',
+		dataType : 'json',
+		data: { 
+			FN : "get_doctor_data",
+			branch_id : branch_id,
+		},
+		success : function(data){
+			// console.log(data);
+			var doctor_str = "";
+		  	if(data){	
+				doctor_str += "<option value=\"\">ทั้งหมด</option>";	
+				doctor_str += "<option value=\"00\">ไม่ระบุแพทย์</option>";	
+				for(var i = 0; i < data.length; i++){
+					doctor_str += "<option value=\"" + data[i].staffid + "\"> " + data[i].pname + data[i].fname +"</option>";
+				}											
+		  	}
+			else{	
+				doctor_str += "<option value=\"\">ทั้งหมด</option>";	
+				doctor_str += "<option value=\"00\">ไม่ระบุแพทย์</option>";							
+		  	}
+		  	$('#repempid').empty().append(doctor_str);
+		  
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log(errorThrown)
+		}
+	});
+}
+
 
 function repDoctor(URL, displayId) {
 	if (document.getElementById('sdate').value != '') {
