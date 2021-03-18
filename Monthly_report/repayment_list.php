@@ -91,69 +91,66 @@ $sql .=" order by a.billno asc ";
 // echo $sql;exit();
 $result  = mysql_query($sql);
 if($result){
-$n=1;
-$dp =0; $lp=0; $tp=0; $cp=0; $pp=0; $ds=0; $tt=0; $re=0; $aa=0;
-while($rs=mysql_fetch_array($result)){  
-if($cl != $color1){
-	$cl = $color1;
-} else {
-	$cl = $color2;
-}
+  $n=1;
+  $dp =0; $lp=0; $tp=0; $cp=0; $pp=0; $ds=0; $tt=0; $re=0; $aa=0;
+  while($rs=mysql_fetch_array($result)){  
+  if($cl != $color1){
+    $cl = $color1;
+  } else {
+    $cl = $color2;
+  }
 
- 
-$dp = $dp + $rs['dp'];
-$lp = $lp + $rs['lp'];
-$tp = $tp + $rs['tp'];
-$cp = $cp + $rs['cp'];
-$pp = $pp + $rs['pp'];
-$ds = $ds + $rs['discount'];
-$tt = $tt + $rs['total'];
+  
+  $dp = $dp + $rs['dp'];
+  $lp = $lp + $rs['lp'];
+  $tp = $tp + $rs['tp'];
+  $cp = $cp + $rs['cp'];
+  $pp = $pp + $rs['pp'];
+  $ds = $ds + $rs['discount'];
+  $tt = $tt + $rs['total'];
 
-if($rs['recive'] < $rs['total']){	
-	$recive = $rs['cash'] + $rs['credit'] + $rs['ku'];
-	$re = $re + $recive;
-	$aa = $aa + (($rs['total'] - $rs['discount']) - $recive);
-	$ar = ($rs['total'] - $rs['discount']) - $recive;
-} else {
-	$re = $re + ($rs['total'] -  $rs['discount']);
-	$recive = $rs['total'] - $rs['discount'];
-	$ar = 0;
-}
-
-
+  if($rs['recive'] < $rs['total']){	
+    $recive = $rs['cash'] + $rs['credit'] + $rs['ku'];
+    $re = $re + $recive;
+    $aa = $aa + (($rs['total'] - $rs['discount']) - $recive);
+    $ar = ($rs['total'] - $rs['discount']) - $recive;
+  } else {
+    $re = $re + ($rs['total'] -  $rs['discount']);
+    $recive = $rs['total'] - $rs['discount'];
+    $ar = 0;
+  }
 
 
 
-?>
-
-  <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:2500px; background:<?= $cl ?>; ">
-    <div style="width:4%; float:left;"><?= $n ?></div>
-    <div style="width:4%; float:left;">&nbsp;<?= $rs['cradno'] ?></div>
-    <div style="width:10%; float:left;"><?= $rs['fname'] . '    ' . $rs['lname'] ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['dp'], '0', '.', ',') ?></div>
-    <div style="width:7%; float:left;"><?= number_format($rs['lp'], '0', '.', ',') ?></div>
-    <div style="width:7%; float:left;"><?= number_format($rs['tp'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['cp'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['pp'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['total'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['discount'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['total'] -  $rs['discount'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($recive, '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($ar, '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['cash'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['credit'], '0', '.', ',') ?></div>
-    <div style="width:7%; float:left;"><?= number_format($rs['ku'], '0', '.', ',') ?></div>
 
 
+  ?>
 
-  </div>
+    <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:2500px; background:<?= $cl ?>; ">
+      <div style="width:4%; float:left;"><?= $n ?></div>
+      <div style="width:4%; float:left;">&nbsp;<?= $rs['cradno'] ?></div>
+      <div style="width:10%; float:left;"><?= $rs['fname'] . '    ' . $rs['lname'] ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['dp'], '0', '.', ',') ?></div>
+      <div style="width:7%; float:left;"><?= number_format($rs['lp'], '0', '.', ',') ?></div>
+      <div style="width:7%; float:left;"><?= number_format($rs['tp'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['cp'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['pp'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['total'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['discount'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['total'] -  $rs['discount'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($recive, '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($ar, '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['cash'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['credit'], '0', '.', ',') ?></div>
+      <div style="width:7%; float:left;"><?= number_format($rs['ku'], '0', '.', ',') ?></div>
+    </div>
 
 
 
 
 
 
-  <? $n++; } ?>
+    <? $n++; } ?>
 
 
   <? } ?>
@@ -199,10 +196,6 @@ if($rs['recive'] < $rs['total']){
       <input style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12" ; value="<?= number_format($ds, '0', '.', ',') ?>" />
     </div>
   </div>
-
-
-
-
 
   <div class="line" style="font-weight:bold;">
     <div style="width:15%; float:left; text-align:right;">รวมเงินทั้งหมด :&nbsp;</div>

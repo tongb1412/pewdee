@@ -22,7 +22,7 @@ include('../class/config.php');
         <div id="cl" class="calendar" style="width:152px; height:auto; display:none;"></div>
       </div>
 
-      <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px; font-weight:bold;">ถึง : </div>
+      <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">ถึง : </div>
       <!--    <div style="width:25%; float:left; margin-top:10px;">&nbsp;<input type="text" id="edate" size="13" maxlength="10" onkeyup="forDate(this)"   /></div> -->
       <div style="width:25%; float:left; margin-top:10px;">&nbsp;<input type="text" id="edate" size="9.5" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
       <div style="width:3%; float:left; margin-top:10px;">

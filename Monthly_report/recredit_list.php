@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 if(!empty($_POST['did'])){
 $did = $_POST['did'];
 } else {
@@ -28,7 +29,16 @@ $sdate = date("Y-m-d", $t0);
 $edate = date("Y-m-d", $t1); 
 }
 
-
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
 
 ?>
@@ -46,9 +56,9 @@ $edate = date("Y-m-d", $t1);
 <? 
 $cl = $color1;
 if(empty($did)){
-	$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient  b where (a.hn = b.hn) and  (a.pdate between '$sdate%' and '$edate%') and (a.credit >0)  ";
+	$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient  b where (a.hn = b.hn) and  (a.pdate between '$sdate%' and '$edate%') and (a.credit >0)  " . $where_branch_id;
 } else {
-	$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient  b where (a.hn = b.hn) and  (a.pdate between '$sdate%' and '$edate%') and (credit >0) and (a.creditname like '%$did%') ";
+	$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient  b where (a.hn = b.hn) and  (a.pdate between '$sdate%' and '$edate%') and (credit >0) and (a.creditname like '%$did%') " . $where_branch_id;
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
@@ -80,31 +90,23 @@ $result  = mysql_query($sql);
 if($result){
 $n=1;
 while($rs=mysql_fetch_array($result)){  
-if($cl != $color1){
-	$cl = $color1;
-} else {
-	$cl = $color2;
-}
+	if($cl != $color1){
+		$cl = $color1;
+	} else {
+		$cl = $color2;
+	}
 
-?>	
-		
-<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="width:98%;;background:<?=$cl?>; ">
-	<div style="width:8%; float:left;"><?=$n?></div>
-	<div style="width:10%; float:left;"><?=$rs['cradno']?></div>
-	<div style="width:22%; float:left;"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
-	<div style="width:15%; float:left;">&nbsp;<?=$rs['creditname']?></div>
-	<div style="width:15%; float:left;">&nbsp;<?=$rs['credittype']?></div>
-	<div style="width:15%; float:left;">&nbsp;<?=number_format($rs['credit'],'2','.',',')?></div>
-	<div style="width:15%; float:left;"><?=$rs['billno']?></div>
-	
-
-	
-</div>
-
-
-
-
-
+	?>	
+			
+	<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="width:98%;;background:<?=$cl?>; ">
+		<div style="width:8%; float:left;"><?=$n?></div>
+		<div style="width:10%; float:left;"><?=$rs['cradno']?></div>
+		<div style="width:22%; float:left;"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
+		<div style="width:15%; float:left;">&nbsp;<?=$rs['creditname']?></div>
+		<div style="width:15%; float:left;">&nbsp;<?=$rs['credittype']?></div>
+		<div style="width:15%; float:left;">&nbsp;<?=number_format($rs['credit'],'2','.',',')?></div>
+		<div style="width:15%; float:left;"><?=$rs['billno']?></div>
+	</div>
 
 <? $n++; } ?>
 <div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
@@ -116,7 +118,7 @@ if($cl != $color1){
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('post','Monthly_report/recredit_list.php','Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
+	<a href="javascript: ajaxLoad('post','Monthly_report/recredit_list.php','branchid=<?php echo $branch_id; ?>&did=<?php echo $did; ?>&Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
 	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
@@ -128,7 +130,7 @@ if($cl != $color1){
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('post','Monthly_report/recredit_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
+	<a href="javascript: ajaxLoad('post','Monthly_report/recredit_list.php','branchid=<?php echo $branch_id; ?>&did=<?php echo $did; ?>&Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
 	<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		

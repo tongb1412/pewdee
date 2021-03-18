@@ -1,44 +1,107 @@
-
-div#t_main_monthly.tmain{
-    width:100%;  
-    overflow:hidden;
+div#t_main_monthly.tmain {
+  width: 100%;
+  overflow: hidden;
 }
 
-.monthly-main{
-    width:20%; 
-    margin:auto;  
-    overflow:hidden; 
-    float:left;
+.monthly-main {
+  width: 20%;
+  margin: auto;
+  overflow: hidden;
+  float: left;
 }
 
-div#reportpage{
-    float:left; 
-    margin:auto; 
-    width:79%;  
-    margin-left:5px;
+div#reportpage {
+  float: left;
+  margin: auto;
+  width: 79%;
+  margin-left: 5px;
 }
 
-.full{
-    height:545px;
+.full {
+  height: 545px;
 }
 
-.small{
-    height:495px;
+.small {
+  height: 495px;
 }
 
-.h-100{
-    height: 100%;
+.h-100 {
+  height: 100%;
 }
 
-.line > .line-item{
-    width:auto; 
-    float:left; 
-    margin-top:10px;
-    margin-left: 2%;
+.line > .line-item {
+  width: auto;
+  float: left;
+  margin-top: 10px;
+  margin-left: 2%;
 }
 
-.line > .line-item.title{
-    text-align:right;
-    line-height:20px; 
-    font-size:14px;
+.line > .line-item.title {
+  text-align: right;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+.line > .line-item.sel {
+  margin-left: 1%;
+}
+
+.report {
+  width: 12%;
+  float: left;
+  border-bottom: #999999 2px solid;
+  /* margin-left: 12%; */
+}
+
+.report-data {
+  width: 12%;
+  float: left;
+  /* font-size:12px; */
+}
+
+.report-data {
+  width: 12%;
+  float: left;
+  /* font-size:12px; */
+}
+
+.report-no {
+  width: 6%;
+}
+
+.report-num {
+  width: 5%;
+}
+
+.report-name {
+  width: 16%;
+}
+
+.report-bill {
+  width: 14%;
+}
+
+.monthly-list {
+  width: 100%;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.list-full {
+  height: 370px;
+}
+.list-small {
+  height: 345px;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
 }

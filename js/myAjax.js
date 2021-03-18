@@ -2108,8 +2108,10 @@ function mcredit(URL, displayId) {
 			var data = 'sdate=' + document.getElementById('sdate').value;
 			data += '&edate=' + document.getElementById('edate').value;
 			data += '&did=' + document.getElementById('bk').value;
-
-
+			if(document.getElementById('branchid') != null) {
+				data += '&branchid=' + document.getElementById('branchid').value;
+			}
+			
 			loadmodule(displayId, URL, data);
 		}
 	}

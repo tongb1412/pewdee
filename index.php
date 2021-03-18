@@ -1276,9 +1276,9 @@ include('class/permission_user.php');
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
 		data += '&did=' + document.getElementById('bk').value;
-
-
-
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 		var page = 'Monthly_report/re_credit.php?' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}

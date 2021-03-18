@@ -69,7 +69,7 @@ if(!empty($_SESSION['branch_id'])){
 						$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 					?>
 				<div style="width:25%; float:left; margin-top:10px; font-size:14px; ">&nbsp;&nbsp;
-					<select name="select" id="repempid" style="width:auto;" >
+					<select name="select" id="repempid" style="width:143px;" >
 						<option value="">ทั้งหมด</option>
 						<option value="00">ไม่ระบุแพทย์</option>
 						<? while($rs = mysql_fetch_array($result)){  ?>
