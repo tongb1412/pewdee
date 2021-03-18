@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 $did = $_POST['did'];
 //$sdate = $_POST['sdate'];
@@ -26,9 +26,26 @@ $edate = date("Y-m-d", $t1);
  $total = 0;
 }
 
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
+if (!empty($_SESSION['company_data'])) {
+	$company_data = $_SESSION['company_data'];
+	$style = "list-full";
+} else {
+	$style = "list-small";
+}
 
 ?>
+<div class="monthly-list <?php echo $style; ?>">
     <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
       <div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
       <div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
@@ -43,10 +60,10 @@ $edate = date("Y-m-d", $t1);
 $cl = $color1;
 if(empty($did)){
 $sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and (a.dat between '$sdate' and '$edate') and (a.typ ='C' ) ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and (a.dat between '$sdate' and '$edate') and (a.typ ='C' ) " . $where_branch_id;
 } else {
 $sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='C') and (a.empid like '%$did%') ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='C') and (a.empid like '%$did%') " . $where_branch_id;
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
@@ -112,7 +129,7 @@ $total = $total + $rs['totalprice'];
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('post','Monthly_report/resalecourse_list.php','Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
+	<a href="javascript: ajaxLoad('post','Monthly_report/resalecourse_list.php','branchid=<?php echo $branch_id; ?>&Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
 	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
@@ -124,7 +141,7 @@ $total = $total + $rs['totalprice'];
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('post','Monthly_report/resalecourse_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
+	<a href="javascript: ajaxLoad('post','Monthly_report/resalecourse_list.php','branchid=<?php echo $branch_id; ?>&Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
 	<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		
@@ -144,10 +161,10 @@ $total = $total + $rs['totalprice'];
 <?
 if(empty($did)){
 $sql  = "select sum(a.totalprice) total ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and (a.dat between '$sdate%' and '$edate%') and (a.typ ='C' ) ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and (a.dat between '$sdate%' and '$edate%') and (a.typ ='C' ) " . $where_branch_id;
 } else {
 $sql  = "select sum(a.totalprice) total ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='C') and (a.empid like '%$did%') ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='C') and (a.empid like '%$did%') " . $where_branch_id;
 }
 $str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $rt=mysql_fetch_array($str);

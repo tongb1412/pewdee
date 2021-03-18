@@ -1,7 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
+
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 
 $did = $_POST['did'];
@@ -26,10 +27,28 @@ $edate = date("Y-m-d", $t1);
  $total = 0;
 }
 
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+if (!empty($_SESSION['company_data'])) {
+	$company_data = $_SESSION['company_data'];
+	$style = "list-full";
+} else {
+	$style = "list-small";
+}
 
 
 
 ?>
+<div class="monthly-list <?php echo $style ?>">
     <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
       <div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
       <div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
@@ -44,10 +63,10 @@ $edate = date("Y-m-d", $t1);
 $cl = $color1;
 if(empty($did)){
 $sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='T' or typ ='L') ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='T' or typ ='L') " . $where_branch_id;
 } else {
 $sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='T' or typ ='L') and (a.empid like '%$did%')  ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='T' or typ ='L') and (a.empid like '%$did%') " . $where_branch_id;
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
@@ -89,19 +108,14 @@ $total = $total + $rs['totalprice'];
 		
 <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="width:98%;;background:<?=$cl?>; ">
 	<div style="width:8%; float:left;"><?=$n?></div>
-	<div style="width:10%; float:left;"><?=$rs['tid']?></div>
-	<div style="width:22%; float:left;"><?=$rs['tname']?></div>
-	<div style="width:25%; float:left;"><?=$rs['empname']?></div>
-	<div style="width:25%; float:left;"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
+	<div style="width:10%; float:left;">&nbsp;<?=$rs['tid']?></div>
+	<div style="width:22%; float:left;">&nbsp;<?=$rs['tname']?></div>
+	<div style="width:25%; float:left;">&nbsp;<?=$rs['empname']?></div>
+	<div style="width:25%; float:left;">&nbsp;<?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
 	<div style="width:10%; float:left;">&nbsp;<?=number_format($rs['totalprice'],'0','.',',')?></div>
 								
 	
 </div>
-
-
-
-
-
 
 <? $n++; } ?>
 <div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
@@ -113,7 +127,7 @@ $total = $total + $rs['totalprice'];
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('post','Monthly_report/resalement_list.php','Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
+	<a href="javascript: ajaxLoad('post','Monthly_report/resalement_list.php','branchid=<?php echo $branch_id ?>&Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
 	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
@@ -125,7 +139,7 @@ $total = $total + $rs['totalprice'];
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('post','Monthly_report/resalement_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
+	<a href="javascript: ajaxLoad('post','Monthly_report/resalement_list.php','branchid=<?php echo $branch_id ?>&Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
 	<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		
@@ -169,18 +183,14 @@ $edate = date("Y-m-d", $t1);
 
 if(empty($did)){
 $sql  = "select sum(a.totalprice) total ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='T' or typ ='L') ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='T' or typ ='L') " . $where_branch_id;
 } else {
 $sql  = "select sum(a.totalprice) total ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='T' or typ ='L') and (a.empid like '%$did%')  ";
+$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='T' or typ ='L') and (a.empid like '%$did%') " . $where_branch_id;
 }
-
-
 
 $str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $rt=mysql_fetch_array($str);
-
-
 
 
 ?>

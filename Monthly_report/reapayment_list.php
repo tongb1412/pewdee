@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $mode = $_GET['mode'];
 $cl = '';
 //$sdate = $_POST['sdate'];
@@ -9,7 +10,6 @@ if(empty($_POST['sdate'])){
 $sdate ='0000-00-00';
 $edate ='0000-00-00';
 } else {
-
 
 $t0 = strtotime($_POST['sdate']);
 $t1 = strtotime($_POST['edate']) + (1*24*3600); 
@@ -22,19 +22,31 @@ if(strlen($nd)==1){ $nd = '0'.$nd; }
 $sdate = substr($_POST['sdate'],6,4).'-'.substr($_POST['sdate'],3,2).'-'.substr($_POST['sdate'],0,2)  ;
 $edate = substr($_POST['edate'],6,4).'-'.substr($_POST['edate'],3,2).'-'.$nd ;*/
 
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
 ?>
-    <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
-      <div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
-      <div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;Crad No.</div>
-      <div style="width:30%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ชื่อ-สกุล</div>
-      <div style="width:20%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รวมเงิน</div>
-	  <div style="width:30%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;เลขที่ใบเสร็จ</div>
-    </div>
-	
-		
+<div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?= $tabcolor ?>;">
+	<div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
+	<div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;Crad No.</div>
+	<div style="width:30%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ชื่อ-สกุล</div>
+	<div style="width:20%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รวมเงิน</div>
+	<div style="width:30%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;เลขที่ใบเสร็จ</div>
+</div>
+
+
 <? 
 $cl = $color1;
-$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.pdate  from tb_apayment a,tb_patient  b,tb_payment c where (a.hn = b.hn) and (a.billno = c.billno) and (c.pdate between '$sdate%' and '$edate%')  ";
+$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.pdate  from tb_apayment a,tb_patient  b,tb_payment c where (a.hn = b.hn) and (a.billno = c.billno) and (c.pdate between '$sdate%' and '$edate%')  " . $where_branch_id;
+// echo $sql;exit();
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 
@@ -71,17 +83,14 @@ if($cl != $color1){
 	$cl = $color2;
 }
 
-?>	
-		
-<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="width:98%;;background:<?=$cl?>; ">
-	<div style="width:10%; float:left;"><?=$n?></div>
-	<div style="width:10%; float:left;"><?=$rs['cradno']?></div>
-	<div style="width:30%; float:left;"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
-	<div style="width:20%; float:left;"><?=number_format($rs['total'],'0','.',',')?></div>
-	<div style="width:30%; float:left;"><?=$rs['billno']?></div>
-	
-								
-	
+?>
+
+<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:98%;;background:<?= $cl ?>; ">
+	<div style="width:10%; float:left;"><?= $n ?></div>
+	<div style="width:10%; float:left;"><?= $rs['cradno'] ?></div>
+	<div style="width:30%; float:left;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
+	<div style="width:20%; float:left;"><?= number_format($rs['total'], '0', '.', ',') ?></div>
+	<div style="width:30%; float:left;"><?= $rs['billno'] ?></div>
 </div>
 
 
@@ -91,16 +100,16 @@ if($cl != $color1){
 
 <? $n++; } ?>
 <div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
- <?=$Num_Rows;?> 
-  รายการ : 
-  <?=$Num_Pages;?> 
-  หน้า :
-  <?
+	<?= $Num_Rows; ?>
+	รายการ :
+	<?= $Num_Pages; ?>
+	หน้า :
+	<?
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('post','Monthly_report/reapayment_list.php','Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
-	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
+	<a href="javascript: ajaxLoad('post','Monthly_report/reapayment_list.php','branchid=<?php echo $branch_id ?>&Page=<?= $Prev_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
+		<img src='images/icon/back.png' border='0' align="absmiddle" />
 	</a>
 	<?
 	}
@@ -111,10 +120,10 @@ if($cl != $color1){
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('post','Monthly_report/reapayment_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
-	<img src='images/icon/next.png'  border='0' align="absmiddle" />
-	</a>	
-    <?		
+	<a href="javascript: ajaxLoad('post','Monthly_report/reapayment_list.php','branchid=<?php echo $branch_id ?>&Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
+		<img src='images/icon/next.png' border='0' align="absmiddle" />
+	</a>
+	<?		
 	}
 	
 	mysql_close($dblink);

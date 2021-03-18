@@ -5,7 +5,7 @@
 function set_where_user_data($as ,$branch_id, $company_code, $company_data){
 
     $data = array();
-    $data_array = array();
+    // $data_array = array();
     $where_branch_id = "";
     $where_company_code = "";
     $table_as = "";
@@ -66,7 +66,7 @@ function set_where_user_data($as ,$branch_id, $company_code, $company_data){
     $data['where_company_data'] = $where_company_data;
 
     // array_push($data_array, $data);
-    $json_data = json_encode($data);
+    // $json_data = json_encode($data);
     // return $json_data;
     return $data;
 
