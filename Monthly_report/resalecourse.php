@@ -108,12 +108,9 @@ include('../class/config.php');
 	?>
 	<div style="width: auto; margin-top:5px; margin-left:20px; text-align:left; height:80%; border:<?= $tabcolor ?> 1px solid;">
 
-
-
 		<div id="d_list" style=" width: 100%; margin-top:5px; text-align:center; height:290px; ">
 			<?  require("resalecourse_list.php");	 ?>
 		</div>
 
 	</div>
 </div>
-

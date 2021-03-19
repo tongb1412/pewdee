@@ -1206,7 +1206,6 @@ include('class/permission_user.php');
 		var page = 'Monthly_report/re_patient.php?' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
-
 	
 	function reexpiredrug_excel() {
 		branchid = $("#branchid").val()
@@ -1217,7 +1216,9 @@ include('class/permission_user.php');
 
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
-		data += '&did=' + document.getElementById('repempid').value;
+		if(document.getElementById('repempid') != null) {
+			data += '&did=' + document.getElementById('repempid').value;
+		}
 		if(document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}

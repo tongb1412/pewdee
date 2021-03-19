@@ -72,7 +72,7 @@ $result = mysql_query($sql) or die ("Error Query [".$sql."]");
 $Num_Rows = mysql_num_rows($result); 
 
 
-
+// echo $sql;exit();
 $Per_Page = 14;   // Per Page
 
 $Page = $_POST["Page"];

@@ -1,6 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../css/monthly_report.css" rel="stylesheet" type="text/css" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $did = $_GET['did'];
 
 $t0 = strtotime($_GET['sdate']);
@@ -54,30 +56,30 @@ $nn++;
  
 if($s=='y'){ 	
 ?>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">
 	รายงานรวมการขายทรีทเมนท์/เลเซอร์
+</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
+	ประจำวันที่ <?= $_GET['sdate']; ?> ถึง <?= $_GET['edate']; ?>
+</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+	<div style="width:50%; float:left; text-align:left;">
+		&nbsp;สาขา <?= $cname ?>
 	</div>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
-	ประจำวันที่  <?=$_GET['sdate'];?> ถึง  <?=$_GET['edate'];?> 
+	<div style="width:50%; float:left; text-align:right;">
+		หน้า : <?= '1'; ?>&nbsp;
 	</div>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
-		<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?=$cname?>
-		</div>
-		<div style="width:50%; float:left; text-align:right;">
-		หน้า : <?='1';?>&nbsp;
-		</div>
-	
-	</div>	
-    <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
-      <div style="width:8%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-    
-      <div style="width:20%; float:left; border-bottom:#999999 2px solid;">รหัส</div>
-      <div style="width:30%; float:left; border-bottom:#999999 2px solid;">รายการ</div>      
-      <div style="width:20%; float:left; border-bottom:#999999 2px solid;">จำนวนเงิน</div>
-	  <div style="width:22%; float: left; border-bottom:#999999 2px solid;">จำนวนคนไข้</div> 
-	</div>			
- <? 
+
+</div>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
+	<div style="width:8%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+
+	<div style="width:20%; float:left; border-bottom:#999999 2px solid;">รหัส</div>
+	<div style="width:30%; float:left; border-bottom:#999999 2px solid;">รายการ</div>
+	<div style="width:20%; float:left; border-bottom:#999999 2px solid;">จำนวนเงิน</div>
+	<div style="width:22%; float: left; border-bottom:#999999 2px solid;">จำนวนคนไข้</div>
+</div>
+<? 
  $s='n';
  }
 if( $n > ($m * $x) ){ $m++; }  
@@ -85,23 +87,23 @@ if($m-1 > 1){  $x = 54; }
 if($n == ((($m-1) * $x) + 1) && $m > 1){
  
     ?>
-	<br><br>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
-		<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?=$cname?>
-		</div>
-		<div style="width:50%; float:left; text-align:right;">
-		หน้า : <?=$m;?>&nbsp;
-		</div>
+<br><br>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+	<div style="width:50%; float:left; text-align:left;">
+		&nbsp;สาขา <?= $cname ?>
 	</div>
-    <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
-      <div style="width:10%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-    
-      <div style="width:20%; float:left; border-bottom:#999999 2px solid;">รหัส</div>
-      <div style="width:30%; float:left; border-bottom:#999999 2px solid;">รายการ</div>      
-      <div style="width:20%; float:left; border-bottom:#999999 2px solid;">จำนวนเงิน</div>
-	  <div style="width:20%; float:left; border-bottom:#999999 2px solid;">จำนวนคนไข้</div> 
-	</div>	
+	<div style="width:50%; float:left; text-align:right;">
+		หน้า : <?= $m; ?>&nbsp;
+	</div>
+</div>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
+	<div style="width:10%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+
+	<div style="width:20%; float:left; border-bottom:#999999 2px solid;">รหัส</div>
+	<div style="width:30%; float:left; border-bottom:#999999 2px solid;">รายการ</div>
+	<div style="width:20%; float:left; border-bottom:#999999 2px solid;">จำนวนเงิน</div>
+	<div style="width:20%; float:left; border-bottom:#999999 2px solid;">จำนวนคนไข้</div>
+</div>
 <?
 } 
 $ft = 'N';
@@ -111,22 +113,22 @@ $dname = $rs['empname'];
 if($n>1){
 
 ?>
-<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">
 	<div style="width:10%; float:left;">&nbsp;</div>
-   
+
 	<div style="width:20%; float:left;">&nbsp;</div>
-	<div style="width:30%; float:left; text-align:right">รวม</div>	
-    <div style="width:20%; float:left; text-align:right">&nbsp;<?=number_format($total,'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-	<div style="width:20%; float:left; text-align:right"><?=number_format($qty,'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>		
+	<div style="width:30%; float:left; text-align:right">รวม</div>
+	<div style="width:20%; float:left; text-align:right">&nbsp;<?= number_format($total, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+	<div style="width:20%; float:left; text-align:right"><?= number_format($qty, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
 </div>
 <? 
  $h=1; $m=1; $n++; 
  $total = 0;
  
 }
-?>	
-<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; ">			
-	&nbsp;<?=$dname?>
+?>
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; ">
+	&nbsp;<?= $dname ?>
 </div>
 <? 
 }
@@ -139,29 +141,29 @@ $qty = $m;
 
 
 
-?>	
-	
-	
-<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; overflow:hidden;  ">
-	<div style="width:10%; float:left;"><?=$m?></div>
-	<div style="width:20%; float:left;"><?=$rs['tid']?></div>
-	<div style="width:30%; float:left;"><?=$rs['tname']?></div>
-    <div style="width:20%; float:left; text-align:right"><?=number_format($rs['totalprice'],'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-	<div style="width:20%; float:left; text-align:right"><?=number_format($rs['qty'],'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-	
+?>
 
-</div>	
+
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; overflow:hidden;  ">
+	<div style="width:10%; float:left;"><?= $m ?></div>
+	<div style="width:20%; float:left;"><?= $rs['tid'] ?></div>
+	<div style="width:30%; float:left;"><?= $rs['tname'] ?></div>
+	<div style="width:20%; float:left; text-align:right"><?= number_format($rs['totalprice'], '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+	<div style="width:20%; float:left; text-align:right"><?= number_format($rs['qty'], '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+
+
+</div>
 <? 
 	
 $n++; $h++; $m++;   } 
-?>	
-<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
+?>
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">
 	<div style="width:10%; float:left;">&nbsp;</div>
-    
+
 	<div style="width:20%; float:left;">&nbsp;</div>
-	<div style="width:30%; float:left; text-align:right">รวม</div>	
-    <div style="width:20%; float:left; text-align:right"><?=number_format($total,'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-	<div style="width:20%; float:left; text-align:right"><?=number_format($qty,'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
+	<div style="width:30%; float:left; text-align:right">รวม</div>
+	<div style="width:20%; float:left; text-align:right"><?= number_format($total, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+	<div style="width:20%; float:left; text-align:right"><?= number_format($qty, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
 </div>
 
 
@@ -171,9 +173,8 @@ $n++; $h++; $m++;   }
 
 	<div style="width:10%; float:left;">&nbsp;</div>
 	<div style="width:20%; float:left;">รวมทั้งหมด</div>
-	<div style="width:30%; float:left; text-align:right"><?=$nn.'  รายการ';?></div>	
-    <div style="width:20%; float:left; text-align:right">&nbsp;<?=number_format($total1,'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-	<div style="width:20%; float:left; text-align:right"><?=$nn.'  รายการ';?></div>		
-</div>	
+	<div style="width:30%; float:left; text-align:right"><?= $nn . '  รายการ'; ?></div>
+	<div style="width:20%; float:left; text-align:right">&nbsp;<?= number_format($total1, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+	<div style="width:20%; float:left; text-align:right"><?= $nn . '  รายการ'; ?></div>
+</div>
 <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;">&nbsp;</div>
-

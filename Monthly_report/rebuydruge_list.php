@@ -108,7 +108,7 @@ if($cl != $color1){
 	if($Prev_Page)
 	{
 	?>
-		<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge_list.php','Page=<?= $Prev_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
+		<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge_list.php','branchid=<?php echo $branchid; ?>&Page=<?= $Prev_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
 			<img src='images/icon/back.png' border='0' align="absmiddle" />
 		</a>
 		<?
@@ -119,8 +119,7 @@ if($cl != $color1){
 	if($Page!=$Num_Pages)
 	{
 	?>
-
-		<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge_list.php','Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
+		<a href="javascript: ajaxLoad('post','Monthly_report/rebuydruge_list.php','branchid=<?php echo $branchid; ?>&Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
 			<img src='images/icon/next.png' border='0' align="absmiddle" />
 		</a>
 		<?		

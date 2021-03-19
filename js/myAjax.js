@@ -1961,7 +1961,9 @@ function mpayment(URL, displayId) {
 		if (document.getElementById('edate').value != '') {
 			var data = 'sdate=' + document.getElementById('sdate').value;
 			data += '&edate=' + document.getElementById('edate').value;
-			data += '&did=' + document.getElementById('repempid').value;
+			if(document.getElementById('repempid') != null) {
+				data += '&did=' + document.getElementById('repempid').value;
+			}
 			if(document.getElementById('branchid') != null) {
 				data += '&branchid=' + document.getElementById('branchid').value;
 			}

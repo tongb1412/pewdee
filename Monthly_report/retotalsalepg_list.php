@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
-<?
+	<?
 include('../class/config.php');
 $cl = '';
 
@@ -30,17 +30,17 @@ $edate = date("Y-m-d", $t1);
 
 
 ?>
-    <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
-      <div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
-	  <div style="width:30%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ผู้ขาย</div>
-      <div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
-      <div style="width:22%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รายการ</div>
-      <div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ราคา</div>
-	  <div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จำนวนคนไข้</div>
-    </div>
-	
-		
-<?  
+	<div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?= $tabcolor ?>;">
+		<div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
+		<div style="width:30%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ผู้ขาย</div>
+		<div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
+		<div style="width:22%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รายการ</div>
+		<div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ราคา</div>
+		<div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จำนวนคนไข้</div>
+	</div>
+
+
+	<?  
 $where_branch_id = "";
 if($_SESSION['branch_id'] !="") {
 	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
@@ -58,7 +58,7 @@ $result = mysql_query($sql) or die ("Error Query [".$sql."]");
 $Num_Rows = mysql_num_rows($result); 
 
 
-
+// echo $sql;
 $Per_Page = 14;   // Per Page
 
 $Page = $_POST["Page"];
@@ -90,38 +90,38 @@ if($cl != $color1){
 	$cl = $color2;
 }
 $total = $total + $rs['totalprice'];
-?>	
-		
-<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="width:98%;;background:<?=$cl?>; ">
-	<div style="width:8%; float:left;"><?=$n?></div>
-	<div style="width:30%; float:left;"><?=$rs['empname']?></div>
-	<div style="width:10%; float:left;"><?=$rs['tid']?></div>
-	<div style="width:22%; float:left;"><?=$rs['tname']?></div>
-	<div style="width:15%; float:left;">&nbsp;<?=number_format($rs['totalprice'],'0','.',',')?></div>
-	<div style="width:15%; float:left;">&nbsp;<?=number_format($rs['qty'],'0','.',',')?></div>
-								
-	
-</div>
+?>
+
+	<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:98%;;background:<?= $cl ?>; ">
+		<div style="width:8%; float:left;"><?= $n ?></div>
+		<div style="width:30%; float:left;"><?= $rs['empname'] ?></div>
+		<div style="width:10%; float:left;"><?= $rs['tid'] ?></div>
+		<div style="width:22%; float:left;"><?= $rs['tname'] ?></div>
+		<div style="width:15%; float:left;">&nbsp;<?= number_format($rs['totalprice'], '0', '.', ',') ?></div>
+		<div style="width:15%; float:left;">&nbsp;<?= number_format($rs['qty'], '0', '.', ',') ?></div>
+
+
+	</div>
 
 
 
 
 
 
-<? $n++; } ?>
-<div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
- <?=$Num_Rows;?> 
-  รายการ : 
-  <?=$Num_Pages;?> 
-  หน้า :
-  <?
+	<? $n++; } ?>
+	<div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
+		<?= $Num_Rows; ?>
+		รายการ :
+		<?= $Num_Pages; ?>
+		หน้า :
+		<?
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
-	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
-	</a>
-	<?
+		<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
+			<img src='images/icon/back.png' border='0' align="absmiddle" />
+		</a>
+		<?
 	}
 	
 	echo " <b>$Page </b>";
@@ -130,18 +130,18 @@ $total = $total + $rs['totalprice'];
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
-	<img src='images/icon/next.png'  border='0' align="absmiddle" />
-	</a>	
-    <?		
+		<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $_POST['edate'] ?>','d_list')">
+			<img src='images/icon/next.png' border='0' align="absmiddle" />
+		</a>
+		<?		
 	}
 	
 	
 
 ?>
-</div>
+	</div>
 
-<? } ?>
+	<? } ?>
 </div>
 
 
@@ -150,7 +150,7 @@ $total = $total + $rs['totalprice'];
 
 <div id="d_list2" style=" width: 99%; margin-top:10px;   text-align:center; height:30px; background-color:#FFCC99;  ">
 
-<?
+	<?
 
 
 
@@ -181,7 +181,7 @@ $sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between 
 }
 
 
-
+// echo $sql;
 $str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $rt=mysql_fetch_array($str);
 
@@ -195,13 +195,13 @@ $rt=mysql_fetch_array($str);
 
 
 	<div class="line" style="margin-top: 4px;">
-	  <div style="width:20%; float:left; text-align:right;">รวมทั้งหมด :&nbsp;</div>
-      <div style="width:10%; float:left;">
-        <input  style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12"; value="<?=number_format($rt['total'],'0','.',',')?>" />
-      </div>
-    </div>	
-	
-	
-	
-	
+		<div style="width:20%; float:left; text-align:right;">รวมทั้งหมด :&nbsp;</div>
+		<div style="width:10%; float:left;">
+			<input style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12" ; value="<?= number_format($rt['total'], '0', '.', ',') ?>" />
+		</div>
 	</div>
+
+
+
+
+</div>

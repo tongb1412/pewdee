@@ -1,7 +1,8 @@
-<meta http-equiv="Content-Type" content="text/html; charset=tis620"> 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta http-equiv="Content-Type" content="text/html; charset=tis620">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 
 if(empty($_POST['sdate'])){
 	$sdate ='0000-00-00';
@@ -17,12 +18,12 @@ if(empty($_POST['sdate'])){
 }
 mysql_query("SET NAMES tis620");
 $sql = "select tid,tname from tb_treatment order by tname";
-$str  = mysql_query($sql)or die ("Error Query [".$sql."]");
+$str = mysql_query($sql)or die ("Error Query [".$sql."]");
 $nTr = mysql_num_rows($str); 
 $n = 1;
 $tnid[0] = '';
 $tname[0] = 'Doctor Name';
-while ($rs=mysql_fetch_array($str)){
+while ($rs = mysql_fetch_array($str)){
 	$tnid[$n] = $rs['tid'];
 	$tname[$n] = $rs['tname'];	
 	$n++;
@@ -38,10 +39,6 @@ while($rs=mysql_fetch_array($str)){
 	$did[$n] = $rs['empid'];
 	$n++; 
 }
-
-
-
-
 
 $filName = "Rep_Doctor.csv";
 $objWrite = fopen("Rep_Doctor.csv", "w");
@@ -93,22 +90,21 @@ for($i = 0;$i < $rd; $i++){
 								$tid = $row['id'];  
 								$t_sql = "select b.qty from tb_package_detail a,tb_course_detail b where a.id=b.cid and a.pid='$pid'  and b.tid='$cid' ";
 								$str  = mysql_query($t_sql)or die ("Error Query [".$t_sql."]"); 
-								
 								$row=mysql_fetch_array($str);
 								$qty = $qty * $row['qty'];
 								if( $qty > 0){
-								$price = ( $rs['totalprice'] / $qty ) * $rs['qty']; 
+									$price = ( $rs['totalprice'] / $qty ) * $rs['qty']; 
 								} else {
-								$price = $rs['totalprice'];
+									$price = $rs['totalprice'];
 								}			
 							} else {
 								$t_sql = "select qty from tb_package_detail where pid='$pid' and id='$cid' ";
 								$str  = mysql_query($t_sql)or die ("Error Query [".$t_sql."]"); 
 								$row=mysql_fetch_array($str);
 								if($qty > 0){
-								$price = ( $rs['totalprice'] / $qty ) * $rs['qty'];	
+									$price = ( $rs['totalprice'] / $qty ) * $rs['qty'];	
 								} else {
-								$price = $rs['totalprice'];
+									$price = $rs['totalprice'];
 								}	
 								//$price =  $rs['price']; 			
 							}
@@ -267,17 +263,15 @@ for($i = 0;$i < $number; $i++){
 		fwrite($objWrite,",\"$l1\"");
 		fwrite($objWrite,"\n");	
 	}
-	
 }
 
 fclose($objWrite);
 
 ?>
 <div style="width:100%; height:100px; text-align:center; font-size:20px; margin-top:100px;">
-เตรียมข้อมูลเรียบร้อยแล้ว
-<br />
-<a href="Monthly_report/<?=$filName?>" target="_blank">Export File To Excel บัญชีแพทย์</a>
-<br />
-<a href="Monthly_report/<?=$filName1?>" target="_blank">Export File To Excel DF</a>
+	เตรียมข้อมูลเรียบร้อยแล้ว
+	<br />
+	<a href="Monthly_report/<?= $filName ?>" target="_blank">Export File To Excel บัญชีแพทย์</a>
+	<br />
+	<a href="Monthly_report/<?= $filName1 ?>" target="_blank">Export File To Excel DF</a>
 </div>
-
