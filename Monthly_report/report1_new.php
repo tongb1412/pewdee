@@ -12,13 +12,41 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </HEAD>
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $charset = "SET NAMES 'utf8'";
 ini_set('max_execution_time',36000);
 
-$sqlC .="select clinicname from tb_clinicinformation ";
-$strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]");
-$rs=mysql_fetch_array($strc);
-$cname1 = $rs['clinicname'];
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "a";
+// echo "x".$branchid."x";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+$branchname = get_branch_name($branchid,$_SESSION['company_code']);
+
+// $where_branch_id2 = "";
+// if($branchid == "") {
+// 	$where_branch_id2 = " where cn = '".$_SESSION["branch_id"] ."' and company_code ='".$_SESSION['company_code']."'  ";
+// } else {
+// 	$where_branch_id2 = " where cn = '".$branchid ."' and company_code ='".$_SESSION['company_code']."' ";
+// }
+// $sqlC ="select clinicname from tb_clinicinformation $where_branch_id2";
+// // echo $sqlC;
+// $strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
+// $rs=mysql_fetch_array($strc);
+
+// $cname = $rs['clinicname'];
+
+// $cname = $rs['clinicname'];
+// if($cname =="") {
+// 	$cname = "ทั้งหมด";
+// }
+// $cname1 = $cname;
 
 $sdat = substr($_POST['sdate'],6,4).'-'.substr($_POST['sdate'],3,2).'-'.substr($_POST['sdate'],0,2);
 $edat  = date('Y-m-d',mktime(0, 0, 0, substr($_POST['edate'],3,2)  , substr($_POST['edate'],0,2)+1, substr($_POST['edate'],6,4)));
@@ -51,7 +79,10 @@ $sn = $sn + ($cnum * 2);
 <BODY>
 <TABLE  x:str BORDER="1">
 	<TR x:str BORDER="0">
-	    <TD colspan="<?=$sn?>" align="center"><b>รายงานบัญชีแพทย์</b></TD>
+	    <!-- <TD colspan="<?=$sn?>" align="center"><b>รายงานบัญชีแพทย์</b></TD> -->
+		<TD colspan="<?= $sn ?>" align="center"><b>รายงานบัญชีแพทย์ <?php if ($branchname != "") {
+																			echo " (สาขา $branchname)";
+																		} ?></b></TD>
 	</TR>
 	<TR x:str BORDER="0">
 	    <TD colspan="<?=$sn?>" align="center"><b><?=$txt1?> </b></TD>
@@ -154,32 +185,38 @@ $sn = $sn + ($cnum * 2);
 
 	</TR>
 <?
-$sql = "select distinct a.empid,a.empname, b.typ,b.mode from tb_vst a,tb_staff b where (a.empid=b.staffid)  and (a.status='COM') and (b.typ='D') and (a.vdate between '$sdat%' and '$edat%')   order by a.vn asc ";
-
+$sql = "select distinct a.empid,a.empname, b.typ,b.mode , c.cn, c.clinicname
+		from tb_vst a,tb_staff b, tb_clinicinformation c
+		where (a.empid=b.staffid) and (a.status='COM') and (b.typ='D') and (a.vdate between '$sdat%' and '$edat%') and a.branchid = c.cn
+		" . $where_branch_id . "  
+		order by a.vn asc ";
+// echo $sql;exit();
 $str  = mysql_query($sql)or die ("Error Query [".$sql."]");
 $number = mysql_num_rows($str);
 $n=0;
-while($rs=mysql_fetch_array($str)){
+while($rs = mysql_fetch_array($str)){
     $con ='Y';
 	for($i = 0;$i < $n; $i++){
-		if($rs['empid']==$did[$i]){ $con='N';  }
+		if($rs['empid'] == $did[$i]){ $con='N';  }
 	}
-	if($con=='Y'){
+	if($con == 'Y'){
 		$dname[$n] = $rs['empname'];
 		$did[$n] = $rs['empid'];
 		$dmode[$n] = $rs['mode'];
+		$branch_name[$n] = $rs['clinicname'];
 		$n++;
 	}
 }
 $j = 0;
 for($i = 0;$i < $n; $i++){
-    $empid = $did[$i]; $dcmode = $dmode[$i];
-	$sql = "select distinct vn,vdate,hn from tb_vst where (empid='$empid') and (status='COM')   and (vdate between '$sdat%' and '$edat%')";
-	$str  = mysql_query($sql)or die ("Error Query [".$sql."]");
-	$rd= mysql_num_rows($str);
+    $empid = $did[$i]; 
+	$dcmode = $dmode[$i];
+	$sql = "select distinct vn,vdate,hn from tb_vst where (empid='$empid') and (status='COM') and (vdate between '$sdat%' and '$edat%')";
+	$str = mysql_query($sql)or die ("Error Query [".$sql."]");
+	$rd = mysql_num_rows($str);
     $dtotal = 0;
 	$dp = 0; $lp = 0; $total = 0; $dis = 0;  $t1 = 0; $t2 = 0; $t3 = 0; $tka =0;
-	while($rs=mysql_fetch_array($str)){
+	while($rs = mysql_fetch_array($str)){
 	    $j++;
 		$vn = $rs['vn'];
 		$dat = substr($rs['vdate'],0,10);
@@ -223,7 +260,7 @@ for($i = 0;$i < $n; $i++){
 		$c1 = $a[0]; // ส่วนลด
 		?>
         <TR valign="top" >
-		<TD align="center" align="left" ><?=$cname1?></TD>
+		<TD align="center" align="left" ><?=$branch_name[$i]?></TD>
         <TD align="center" align="center" ><?=$j?></TD>
         <TD align="center" align="left" ><?=$dname[$i]?></TD>
         <TD align="center" align="center" ><?=$dat?></TD>

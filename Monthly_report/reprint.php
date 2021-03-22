@@ -2,7 +2,8 @@
 include('../class/config.php');
 
 ?>
-<div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;">
+<!-- <div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;"> -->
+<div id="t_main_monthly" class="tmain h-100">
 	<div class="littleDD" style="font-size:14px; font-weight:bold;">Reprint</div>
 	<div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:35%;  border:<?= $tabcolor ?> 1px solid; background-color: #FFD1A4;">
 

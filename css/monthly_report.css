@@ -77,6 +77,10 @@ div#reportpage {
   width: 16%;
 }
 
+.report-big {
+  width: 20%;
+}
+
 .report-bill {
   width: 14%;
 }

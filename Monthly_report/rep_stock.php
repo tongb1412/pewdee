@@ -3,15 +3,21 @@ session_start();
 include('../class/config.php');
 include('../class/permission_user.php');
 
-$sqlC .= "select clinicname from tb_clinicinformation ";
-$strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
-$rs = mysql_fetch_array($strc);
-
-$cname = $rs['clinicname']; 
-
 $sql  = "select * from tb_druge where status = 'IN' order by dgid,tname ";
 $str  = mysql_query($sql);
 $num = mysql_num_rows($str);
+
+
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+
+$sqlC .= "select clinicname from tb_clinicinformation where cn = '$branch_id'";
+$strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
+$rs = mysql_fetch_array($strc);
+$cname = $rs['clinicname']; 
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -225,10 +231,17 @@ function showDetail($Page_Start,$Per_Page){
 				<td class="tr" width="40">ขาดเกิน</td>
 			</tr>
 			<? 
-			$branch_id = $_SESSION['branch_id'];
-			$company_code = $_SESSION['company_code'];
-			$company_data = $_SESSION['company_data'];
-			$where_user = set_where_user_data('', $branch_id, $company_code, $company_data);
+			if(!empty($_REQUEST['branchid'])) {
+				$branch_id = $_REQUEST['branchid'];
+			} else {
+				$branch_id = $_SESSION['branch_id'];
+			}
+			$as = "";
+			$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+			$where_branch_id = "";
+			$where_branch_id .= $data['where_branch_id'];
+			$where_branch_id .= $data['where_company_code'];
+
 
 			$n = 1;
 			$sql = "select did,tname,total,unit,sprice,status from tb_druge where status = 'IN'  order by dgid,tname asc  LIMIT $Page_Start , $Per_Page";
@@ -237,7 +250,7 @@ function showDetail($Page_Start,$Per_Page){
 			
 
 				$did = $rs['did'];
-				$sql1 = "select sum(total) as total from tb_drugeinstock where did = '$did' and total > 0 and branchid = '$branch_id' "  . $where_user['where_company_code'];
+				$sql1 = "select sum(total) as total from tb_drugeinstock where did = '$did' and total > 0 " . $where_branch_id;
 				// echo $sql1;exit();
 				$rst = mysql_query($sql1) or die ("Error Query [".$sql1."]");
 				$num  = mysql_num_rows($rst);

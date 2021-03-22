@@ -2,7 +2,8 @@
 include('../class/config.php');
 ?>
 
-	<div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;">
+	<!-- <div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;"> -->
+	<div id="t_main_monthly" class="tmain h-100">
 		<form action="Monthly_report/report1.php" method="post" target="_blank">
 			<div class="littleDD" style="font-size:14px; font-weight:bold;" >บัญชีแพทย์</div>
 
@@ -10,8 +11,8 @@ include('../class/config.php');
 				$css_width = "330px";
 				$margin_left = "";
 				if ($_SESSION['company_data'] == "1") {
-				$css_width = "150px";
-				$margin_left = "margin-left:55px;"; 
+					$css_width = "150px";
+					$margin_left = "margin-left:55px;"; 
 				}
 			?>
 

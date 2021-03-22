@@ -1191,7 +1191,11 @@ include('class/permission_user.php');
 	}
 
 	function repstock1() {
-		var page = 'Monthly_report/rep_stock1.php';
+		var data = "";
+		if(document.getElementById('branchid') != null) {
+			data += 'branchid=' + document.getElementById('branchid').value;
+		}
+		var page = 'Monthly_report/rep_stock1.php?' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
 
@@ -1269,7 +1273,12 @@ include('class/permission_user.php');
 	}
 
 	function printmonthD(url) {
-		var page = url;
+		var data = "";
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
+		var page = url + data;
+		// var page = url;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
 

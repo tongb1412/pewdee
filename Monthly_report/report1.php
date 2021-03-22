@@ -1,14 +1,13 @@
 <?php
 header("Content-Type: application/vnd.ms-excel");
-header('Content-Disposition: attachment; filename="Report1.xls"');# ????????
+header('Content-Disposition: attachment; filename="Report1.xls"'); # ????????
 ?>
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:x="urn:schemas-microsoft-com:office:excel"
-xmlns="http://www.w3.org/TR/REC-html40">
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <HTML>
+
 <HEAD>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </HEAD>
 <?
 session_start();
@@ -93,47 +92,54 @@ $cnum = $n ;
 $sn = $sn + ($cnum * 2);
 $sn += 4;
 ?>
+
 <BODY>
-<TABLE  x:str BORDER="1">
-<TR x:str BORDER="0">
-    <TD colspan="<?=$sn?>" align="center"><b>รายงานบัญชีแพทย์ <?php if($branchname != "") { echo " (สาขา $branchname)"; } ?></b></TD>
+	<TABLE x:str BORDER="1">
+		<TR x:str BORDER="0">
+			<TD colspan="<?= $sn ?>" align="center"><b>รายงานบัญชีแพทย์ <?php if ($branchname != "") {
+																			echo " (สาขา $branchname)";
+																		} ?></b></TD>
 
-</TR>
-<TR x:str BORDER="0">
-    <TD colspan="<?=$sn?>" align="center"><b><?=$txt1?></b></TD>
+		</TR>
+		<TR x:str BORDER="0">
+			<TD colspan="<?= $sn ?>" align="center"><b><?= $txt1 ?></b></TD>
 
-</TR>
-
-
-
-<TR valign="bottom">
-	<TD align="center" rowspan="2"><b>สาขา</b></TD>
-    <TD align="center" rowspan="2"><b>ลำดับ</b></TD>
-    <TD align="center" rowspan="2"><b>ชื่อแพทย์</b></TD>
-    <TD align="center" rowspan="2"><b>วันที่</b></TD>
-    <TD align="center" rowspan="2"><b>Billno</b></TD>
-    <TD align="center" rowspan="2"><b>รวมยอด</b></TD>
-    <TD align="center" rowspan="2"><b>ค่าตรวจ</b></TD>
-    <TD align="center" rowspan="2"><b>ส่วนลด</b></TD>
-    <TD align="center" rowspan="2"><b>KA</b></TD>
-    <? for($i=0; $i<$gnum; $i++){ ?>  <TD align="center" colspan="3" align="center"><b><?=$gname[$i]?></b></TD> <? } ?>
-    <? for($i=0; $i<$cnum; $i++){ ?>  <TD align="center" colspan="2" align="center" bgcolor="#FFCC00"><b><?=$cname[$i]?></b></TD> <? } ?>
-
-</TR>
-<TR>
- 	<? for($i=0; $i<$gnum; $i++){ ?>
-    <TD align="center" align="center"><b>ครั้ง</b></TD>
-    <TD align="center" align="center"><b>ใช้คอร์ส</b></TD>
-    <TD align="center" align="center"><b>ทำ</b></TD>
-	<? } ?>
-	<? for($i=0; $i<$cnum; $i++){ ?>
-    <TD align="center" align="center" bgcolor="#FFCC00"><b>ครั้ง</b></TD>
-    <TD align="center" align="center" bgcolor="#FFCC00"><b>ราคา</b></TD>
-    <? } ?>
-</TR>
+		</TR>
 
 
-<?
+
+		<TR valign="bottom">
+			<TD align="center" rowspan="2"><b>สาขา</b></TD>
+			<TD align="center" rowspan="2"><b>ลำดับ</b></TD>
+			<TD align="center" rowspan="2"><b>ชื่อแพทย์</b></TD>
+			<TD align="center" rowspan="2"><b>วันที่</b></TD>
+			<TD align="center" rowspan="2"><b>Billno</b></TD>
+			<TD align="center" rowspan="2"><b>รวมยอด</b></TD>
+			<TD align="center" rowspan="2"><b>ค่าตรวจ</b></TD>
+			<TD align="center" rowspan="2"><b>ส่วนลด</b></TD>
+			<TD align="center" rowspan="2"><b>KA</b></TD>
+			<? for($i=0; $i<$gnum; $i++){ ?>
+			<TD align="center" colspan="3" align="center"><b><?= $gname[$i] ?></b></TD>
+			<? } ?>
+			<? for($i=0; $i<$cnum; $i++){ ?>
+			<TD align="center" colspan="2" align="center" bgcolor="#FFCC00"><b><?= $cname[$i] ?></b></TD>
+			<? } ?>
+
+		</TR>
+		<TR>
+			<? for($i=0; $i<$gnum; $i++){ ?>
+			<TD align="center" align="center"><b>ครั้ง</b></TD>
+			<TD align="center" align="center"><b>ใช้คอร์ส</b></TD>
+			<TD align="center" align="center"><b>ทำ</b></TD>
+			<? } ?>
+			<? for($i=0; $i<$cnum; $i++){ ?>
+			<TD align="center" align="center" bgcolor="#FFCC00"><b>ครั้ง</b></TD>
+			<TD align="center" align="center" bgcolor="#FFCC00"><b>ราคา</b></TD>
+			<? } ?>
+		</TR>
+
+
+		<?
 
 
 $sql = "select distinct a.empid,a.empname ,branchname
@@ -224,29 +230,29 @@ for($i = 0;$i < $n; $i++){
 		$clinic_name = $rs['branchname'];
 
 		?>
-        <TR valign="top" >
+		<TR valign="top">
 
-		<?php 
-        	if ($branchid != "") {
-		?>
-        	<TD align="center" align="left" ><?=$clinic_name?></TD>
-		<?php
-			} else { 
-		?>
-			<TD align="center" align="left" ><?=$cname1?></TD>
-		<?php
+			<?php
+			if ($branchid != "") {
+			?>
+				<TD align="center" align="left"><?= $clinic_name ?></TD>
+			<?php
+			} else {
+			?>
+				<TD align="center" align="left"><?= $cname1 ?></TD>
+			<?php
 			}
-		?>
+			?>
 
-        <TD align="center" align="center" ><?=$j?></TD>
-        <TD align="center" align="left" ><?=$dname[$i]?></TD>
-        <TD align="center" align="center" ><?=$dat?></TD>
-        <TD align="center" align="center" ><?= $row['billno']?></TD>
-        <TD align="center" align="center" ><?=$t1?></TD>
-        <TD align="center" align="center" ><?=$d1?></TD>
-        <TD align="center" align="center" ><?=$c1?></TD>
-        <TD align="center" align="center" ><?=$k1?></TD>
-        <?
+			<TD align="center" align="center"><?= $j ?></TD>
+			<TD align="center" align="left"><?= $dname[$i] ?></TD>
+			<TD align="center" align="center"><?= $dat ?></TD>
+			<TD align="center" align="center"><?= $row['billno'] ?></TD>
+			<TD align="center" align="center"><?= $t1 ?></TD>
+			<TD align="center" align="center"><?= $d1 ?></TD>
+			<TD align="center" align="center"><?= $c1 ?></TD>
+			<TD align="center" align="center"><?= $k1 ?></TD>
+			<?
 
 		for($l = 0;$l < $gnum; $l++){
 
@@ -285,10 +291,10 @@ for($i = 0;$i < $n; $i++){
 			if(empty($t1)){ $t1 =' '; }
 			if(empty($t3)){ $t3 =' '; }
 			?>
-            <TD align="center" align="center" ><?=$t1;?></TD>
-            <TD align="center" align="right" ><?=$t2;?></TD>
-            <TD align="center" align="right" ><?=$t3;?></TD>
-            <?
+			<TD align="center" align="center"><?= $t1; ?></TD>
+			<TD align="center" align="right"><?= $t2; ?></TD>
+			<TD align="center" align="right"><?= $t3; ?></TD>
+			<?
         }
 
 
@@ -314,16 +320,16 @@ for($i = 0;$i < $n; $i++){
 			if(empty($t1)){ $t1 =' '; }
 			if(empty($t2)){ $t2 =' '; }
 			?>
-            <TD align="center" align="center" bgcolor="#FFCC00"><?=$t1?></TD>
-            <TD align="center" align="right" bgcolor="#FFCC00"><?=$t2?></TD>
+			<TD align="center" align="center" bgcolor="#FFCC00"><?= $t1 ?></TD>
+			<TD align="center" align="right" bgcolor="#FFCC00"><?= $t2 ?></TD>
 
-            <?
+			<?
 
 		}
 
 	?>
-     </TR>
-	<?
+		</TR>
+		<?
 	}
 
 }
@@ -332,6 +338,7 @@ for($i = 0;$i < $n; $i++){
 
 
 
-</TABLE>
+	</TABLE>
 </BODY>
+
 </HTML>

@@ -1,7 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
+
 	<?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 
 $did = $_POST['did'];
@@ -14,8 +15,8 @@ $sdate = substr($_POST['sdate'],6,4).'-'.substr($_POST['sdate'],3,2).'-'.substr(
 $edate = substr($_POST['edate'],6,4).'-'.substr($_POST['edate'],3,2).'-'.$nd ;*/
 
 if(empty($_POST['sdate'])){
-$sdate ='0000-00-00';
-$edate ='0000-00-00';
+	$sdate ='0000-00-00';
+	$edate ='0000-00-00';
 } else {
 
 
@@ -27,9 +28,26 @@ $edate = date("Y-m-d", $t1);
 }
 
 
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
 
+$as = "";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+if (!empty($_SESSION['company_data'])) {
+	$style = "list-full";
+} else {
+	$style = "list-small";
+}
 
 ?>
+<div class="monthly-list <?php echo $style; ?>">
 	<div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?= $tabcolor ?>;">
 		<div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
 		<div style="width:30%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ผู้ขาย</div>
@@ -41,10 +59,7 @@ $edate = date("Y-m-d", $t1);
 
 
 	<?  
-$where_branch_id = "";
-if($_SESSION['branch_id'] !="") {
-	$where_branch_id = " and branchid ='".$_SESSION['branch_id']."'  ";
-}
+
 $cl = $color1;
 if(empty($did)){
 $sql  = "select  empid,empname,tid,tname,sum(totalprice) totalprice,count(*) qty ";
@@ -99,8 +114,6 @@ $total = $total + $rs['totalprice'];
 		<div style="width:22%; float:left;"><?= $rs['tname'] ?></div>
 		<div style="width:15%; float:left;">&nbsp;<?= number_format($rs['totalprice'], '0', '.', ',') ?></div>
 		<div style="width:15%; float:left;">&nbsp;<?= number_format($rs['qty'], '0', '.', ',') ?></div>
-
-
 	</div>
 
 
@@ -118,7 +131,7 @@ $total = $total + $rs['totalprice'];
 	if($Prev_Page)
 	{
 	?>
-		<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
+		<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','branchid=<?php echo $branch_id ?>&Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $edate ?>','d_list')">
 			<img src='images/icon/back.png' border='0' align="absmiddle" />
 		</a>
 		<?
@@ -130,7 +143,7 @@ $total = $total + $rs['totalprice'];
 	{
 	?>
 
-		<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $_POST['edate'] ?>','d_list')">
+		<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','branchid=<?php echo $branch_id ?>&Page=<?= $Next_Page ?>&sdate=<?= $sdate ?>&edate=<?= $_POST['edate'] ?>','d_list')">
 			<img src='images/icon/next.png' border='0' align="absmiddle" />
 		</a>
 		<?		
@@ -170,20 +183,23 @@ $edate = date("Y-m-d", $t1);
 
 }
 
-
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
 if(empty($did)){
-$sql  = "select sum(a.totalprice) total ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='P' ) ";
+	$sql  = "select sum(a.totalprice) total ";
+	$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='P' ) " . $where_branch_id;
 } else {
-$sql  = "select sum(a.totalprice) total ";
-$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='P' ) and (a.empid like '%$did%')  ";
+	$sql  = "select sum(a.totalprice) total ";
+	$sql .= "from tb_pctrec a,tb_patient  b where (a.hn = b.hn) and  (a.dat between '$sdate%' and '$edate%') and (a.typ ='P' ) and (a.empid like '%$did%') " . $where_branch_id;
 }
 
 
-// echo $sql;
-$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$rt=mysql_fetch_array($str);
+$str = mysql_query($sql) or die ("Error Query [".$sql."]");
+$rt = mysql_fetch_array($str);
 
 
 

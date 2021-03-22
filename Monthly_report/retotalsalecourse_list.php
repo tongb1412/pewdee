@@ -130,7 +130,7 @@ $total = $total + $rs['totalprice'];
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','branchid=<?php echo $branch_id ?>&Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
+	<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalecourse_list.php','branchid=<?php echo $branch_id ?>&Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$edate?>','d_list')">	
 	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
@@ -142,7 +142,7 @@ $total = $total + $rs['totalprice'];
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalement_list.php','branchid=<?php echo $branch_id ?>&Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
+	<a href="javascript: ajaxLoad('post','Monthly_report/retotalsalecourse_list.php','branchid=<?php echo $branch_id ?>&Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">	
 	<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		

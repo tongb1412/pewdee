@@ -13,7 +13,7 @@ if(!empty($_SESSION['company_data'])){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <input type="hidden" id="brunch_id_data" value="<?php echo $_SESSION['brunch_id'] ?>">
 <div style="width:99%; margin:auto; margin-top:5px; height:30px;">
-	<div style="width:100px; font-size:16px; font-weight:bold;"><img src="images/icon/setting.png" align="absmiddle" />&nbsp;ตั้งค่า</div>
+	<div style="width:300px; font-size:16px; font-weight:bold;"><img src="images/icon/d_report.png" align="absmiddle" />&nbsp;รายงานประจำเดือน</div>
 </div>
 <div style="width:99%; height:auto; margin:auto; margin-top:5px; text-align:center;">
 	<div id="main" class="main monthly-main <?php echo $style ?>">

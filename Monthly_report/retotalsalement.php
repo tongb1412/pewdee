@@ -39,20 +39,20 @@ $branch_id = $_SESSION['branch_id'];
 					</select>
 				</div>
 				<div class="line-item title">ผู้ขาย : </div>
-					<?
+				<?
 						$sql = "select staffid,pname,fname from tb_staff";
 						$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 						?>
 
-					<div class="line-item">&nbsp;&nbsp;
-						<select name="select" id="repempid" style="width:90px;">
-							<option value="">ทั้งหมด</option>
-							<option value="00">ไม่ระบุแพทย์</option>
-							<? while($rs=mysql_fetch_array($result)){  ?>
-							<option value="<?= $rs['staffid'] ?>"> <?= $rs['pname'] . $rs['fname'] ?></option>
-							<? } ?>
-						</select>
-					</div>
+				<div class="line-item">&nbsp;&nbsp;
+					<select name="select" id="repempid" style="width:90px;">
+						<option value="">ทั้งหมด</option>
+						<option value="00">ไม่ระบุแพทย์</option>
+						<? while($rs=mysql_fetch_array($result)){  ?>
+						<option value="<?= $rs['staffid'] ?>"> <?= $rs['pname'] . $rs['fname'] ?></option>
+						<? } ?>
+					</select>
+				</div>
 			</div>
 
 
@@ -83,30 +83,28 @@ $branch_id = $_SESSION['branch_id'];
 					<img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','edate','cl')" style="margin-top:5px; cursor:pointer;" />
 					<div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
 				</div>
-			</div>
-			<div style="width:14%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px; ">ผู้ขาย : </div>
-			<?
+				<div style="width:14%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px; ">ผู้ขาย : </div>
+				<?
 				$sql = "select staffid,pname,fname from tb_staff  ";
 				$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 				?>
-
-			<div style="width:25%; float:left; margin-top:10px; font-size:14px; ">&nbsp;&nbsp;
-				<select name="select" id="repempid" style="width:90px;">
-					<option value="">ทั้งหมด</option>
-					<option value="00">ไม่ระบุแพทย์</option>
-					<? while($rs=mysql_fetch_array($result)){  ?>
-					<option value="<?= $rs['staffid'] ?>"> <?= $rs['pname'] . $rs['fname'] ?></option>
-					<? } ?>
-				</select>
+				<div style="width:25%; float:left; margin-top:10px; font-size:14px; ">&nbsp;&nbsp;
+					<select name="select" id="repempid" style="width:90px;">
+						<option value="">ทั้งหมด</option>
+						<option value="00">ไม่ระบุแพทย์</option>
+						<? while($rs=mysql_fetch_array($result)){  ?>
+						<option value="<?= $rs['staffid'] ?>"> <?= $rs['pname'] . $rs['fname'] ?></option>
+						<? } ?>
+					</select>
+				</div>
 			</div>
+
 			<div style="width:40%; float:left;margin-top:10px;">
 				<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="mpayment('Monthly_report/retotalsalement_list.php','d_list')" value="แสดงรายงาน" />
 				<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printmonthpayment('Monthly_report/re_totalsalement.php?')" value="พิมพ์รายงาน" />
 				<input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="" value="Excel" />
 			</div>
 		</div>
-
-
 	<?php
 	}
 

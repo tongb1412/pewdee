@@ -2088,6 +2088,9 @@ function repKU(URL, displayId) {
 		if (document.getElementById('edate').value != '') {
 			var data = 'sdate=' + document.getElementById('sdate').value;
 			data += '&edate=' + document.getElementById('edate').value;
+			if(document.getElementById('branchid') != null) {
+				data += '&branchid=' + document.getElementById('branchid').value;
+			}
 			loadmodule(displayId, URL, data);
 		}
 	}

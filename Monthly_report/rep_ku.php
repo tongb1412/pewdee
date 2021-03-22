@@ -1,5 +1,6 @@
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 
 $sdat = substr($_GET['sdate'],6,4).'-'.substr($_GET['sdate'],3,2).'-'.substr($_GET['sdate'],0,2);
 $edat  = date('Y-m-d',mktime(0, 0, 0, substr($_GET['edate'],3,2)  , substr($_GET['edate'],0,2)+1, substr($_GET['edate'],6,4)));
@@ -8,19 +9,39 @@ $endLine = 33;
 
 $txt1 = 'ตั้งแต่วันที่ '.showdateTH($sdat).'  ถึงวันที่  '.showdateTH($edate); 
 
-$where_branch_id = "";
-if($_SESSION['branch_id'] !="") {
-	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
 }
 
-$sql  = "select a.vn,b.pname,b.fname,b.lname,b.new,c.* from tb_vst a,tb_patient b,tb_payment c  where  (a.hn=b.hn) and (a.vn=c.vn) and (a.status IN('COM'))    ";
-$sql .= " and (c.total > 0) and  (c.ku > 0)  and (c.pdate between '$sdat' and '$edat') $where_branch_id  order by a.vn asc  ";
+$sqlC .="select clinicname from tb_clinicinformation where cn = '$branch_id'";
+$strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
+$rs = mysql_fetch_array($strc);
+$cname = $rs['clinicname'];
+
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+$sql  = "select a.vn,b.pname,b.fname,b.lname,b.new,c.*,d.cn, d.clinicname from tb_vst a,tb_patient b,tb_payment c, tb_clinicinformation d where (a.hn=b.hn) and (a.vn=c.vn) and (a.status IN('COM')) ";
+$sql .= " and (c.total > 0) and (c.ku > 0) and (c.pdate between '$sdat' and '$edat') and c.branchid = d.cn $where_branch_id  order by a.branchid ,a.vn asc  ";
 
 
 $str  = mysql_query($sql);
 $num = mysql_num_rows($str);
 
+$branch_name = "( สาขา ";
+if ($branch_id == "00") {
+	$branch_name .=  "ทั้งหมด";
+} else {
+	$branch_name .=  $cname;
+}
+$branch_name .= " )";
 
+// echo $sql;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,17 +66,28 @@ body {
 <body>
 <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr><td align="center" class="txt1">รายงานคูปอง</td></tr>
+	<tr><td align="center" class="txt1"><?php echo $branch_name; ?></td></tr>
 	<tr><td align="center" class="txt1"><?=$txt1;?></td></tr>
     <tr>
     <td align="center">
     <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" >
 		<? 			
 		$showLine = 1;
+		$flag_branch = "";
 		showHeader(); 		
         $n=0; $sd = ''; $m=1; 	
         while($rs  = mysql_fetch_array($str)){
 		    $showLine++;
-			if($showLine > $endLine ){ showHeader(); $showLine = 1; }			
+			if ($branch_id == "00") {
+				if($flag_branch != $rs['branchid']){
+					showHeaderBranch($rs['clinicname']);
+					$flag_branch = $rs['branchid'];
+				}
+			}
+			if($showLine > $endLine ){
+				showHeader(); 
+				$showLine = 1; 
+			}			
         	$dat = substr($rs['pdate'],8,2).'-'.substr($rs['pdate'],5,2).'-'.substr($rs['pdate'],0,4);
         	if($sd!=$dat){ $sd=$dat; $dd= $dat; } else { $dd='-';  }  			
 			$t1 = $m;
@@ -69,10 +101,8 @@ body {
 			if($rs['ktype']=='P') { $t7 = 'ไปรษณีย์'; } 
 			$t8 = $rs['ku'] ;
 			showDetail($t1,$t2,$t3,$t4,$t5,$t6,$t7,$t8);       
-         $n++; $m++;
-		 } 
-	
-		
+         	$n++; $m++;
+		} 
 		 ?>
     </table> 
     </td>
@@ -100,8 +130,7 @@ function showdateTH($txt){
 	} else {
 		return $d." ".$thmonth[$m]." ".$y;
 	}
-
-
+	
 }
 function showHeader(){
 ?>
@@ -116,6 +145,14 @@ function showHeader(){
         <td align="center" class="lineH" width="80">ประเภทคนไข้</td>               
     	</tr> 
 <?
+}
+
+function showHeaderBranch($branch_name){
+	?>
+		<tr valign="top" >
+			<td align="center" class="lineH" width="200"><?php echo $branch_name; ?></td>
+		</tr> 
+	<?
 }
 function showDetail($t1,$t2,$t3,$t4,$t5,$t6,$t7,$t8){
 ?>
