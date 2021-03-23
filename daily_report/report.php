@@ -3,7 +3,7 @@ include('../class/config.php');
 ?>
   
 <?php
-if(!empty($_SESSION['company_data'])){
+if(!empty($_SESSION['company_data'])) {
 	$company_data = $_SESSION['company_data'];
 	$style = "full";
 } else {
@@ -139,7 +139,5 @@ if(!empty($_SESSION['company_data'])){
 	</div>
 	<div id="reportpage" class="<?php echo $style ?>">
 		<? include('repayment.php'); ?>
-
-
    </div>
 </div>

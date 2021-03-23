@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px; overflow:auto; text-align:center; height:290px; ">
-<?
+
+  <?
 session_start();
 include('../class/config.php');
 include('../class/permission_user.php');
@@ -16,10 +16,11 @@ if(!empty($_POST['did'])){
 
 $cl = '';
 $dat = date('Y-m-d');
-$dat = "2010-10-26";
+// $dat = "2010-10-26";
 
 
 ?>
+<div style=" width: 98%; margin-top:5px; overflow:auto; text-align:center; height:290px; ">
   <div style="width:2500px; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?= $tabcolor ?>;">
     <div style="width:4%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
     <div style="width:4%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;Crad No.</div>
@@ -40,7 +41,7 @@ $dat = "2010-10-26";
   </div>
 
 
-<? 
+  <? 
 $cl = $color1;
 
 
@@ -48,7 +49,7 @@ $cl = $color1;
 if(!empty($_REQUEST['branchid'])){
 	$branchid = $_REQUEST['branchid'];
 } else {
-	$branchid = '';
+	$branchid = $_SESSION['branch_id'];
 }
 $as = "a";
 $data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
@@ -56,10 +57,7 @@ $where_branch_id = "";
 $where_branch_id .= $data['where_branch_id'];
 $where_branch_id .= $data['where_company_code'];
 
-
-
 // $where_branch_id = "";
-
 
 if(empty($did)){
   $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn) and (a.pdate like '%$dat%') and (c.status='COM') $where_branch_id ";
@@ -79,65 +77,56 @@ if($result){
 $n=1;
 $dp =0; $lp=0; $tp=0; $cp=0; $pp=0; $ds=0; $tt=0; $re=0; $aa=0;
 while($rs=mysql_fetch_array($result)){  
-if($cl != $color1){
-	$cl = $color1;
-} else {
-	$cl = $color2;
-}
+  if($cl != $color1){
+    $cl = $color1;
+  } else {
+    $cl = $color2;
+  }
 
- 
-$dp = $dp + $rs['dp'];
-$lp = $lp + $rs['lp'];
-$tp = $tp + $rs['tp'];
-$cp = $cp + $rs['cp'];
-$pp = $pp + $rs['pp'];
-$ds = $ds + $rs['discount'];
-$tt = $tt + $rs['total'];
+  
+  $dp = $dp + $rs['dp'];
+  $lp = $lp + $rs['lp'];
+  $tp = $tp + $rs['tp'];
+  $cp = $cp + $rs['cp'];
+  $pp = $pp + $rs['pp'];
+  $ds = $ds + $rs['discount'];
+  $tt = $tt + $rs['total'];
 
-if($rs['recive'] < $rs['total']){	
-	$recive = $rs['cash'] + $rs['credit'] + $rs['ku'];
-	$re = $re + $recive;
-	$aa = $aa + (($rs['total'] - $rs['discount']) - $recive);
-	$ar = ($rs['total'] - $rs['discount']) - $recive;
-} else {
-	$re = $re + ($rs['total'] -  $rs['discount']);
-	$recive = $rs['total'] - $rs['discount'];
-	$ar = 0;
-}
-
-
-
-
-
-?>
-
-  <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:2500px;;background:<?= $cl ?>; ">
-    <div style="width:4%; float:left;"><?= $n ?></div>
-    <div style="width:4%; float:left;">&nbsp;<?= $rs['cradno'] ?></div>
-    <div style="width:10%; float:left;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['dp'], '0', '.', ',') ?></div>
-    <div style="width:7%; float:left;"><?= number_format($rs['lp'], '0', '.', ',') ?></div>
-    <div style="width:7%; float:left;"><?= number_format($rs['tp'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['cp'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['pp'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['total'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['discount'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['total'] -  $rs['discount'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($recive, '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($ar, '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['cash'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['credit'], '0', '.', ',') ?></div>
-    <div style="width:7%; float:left;"><?= number_format($rs['ku'], '0', '.', ',') ?></div>
-
-
-
-  </div>
+  if($rs['recive'] < $rs['total']){	
+    $recive = $rs['cash'] + $rs['credit'] + $rs['ku'];
+    $re = $re + $recive;
+    $aa = $aa + (($rs['total'] - $rs['discount']) - $recive);
+    $ar = ($rs['total'] - $rs['discount']) - $recive;
+  } else {
+    $re = $re + ($rs['total'] -  $rs['discount']);
+    $recive = $rs['total'] - $rs['discount'];
+    $ar = 0;
+  }
 
 
 
 
 
+  ?>
 
+    <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:2500px;;background:<?= $cl ?>; ">
+      <div style="width:4%; float:left;"><?= $n ?></div>
+      <div style="width:4%; float:left;">&nbsp;<?= $rs['cradno'] ?></div>
+      <div style="width:10%; float:left;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['dp'], '0', '.', ',') ?></div>
+      <div style="width:7%; float:left;"><?= number_format($rs['lp'], '0', '.', ',') ?></div>
+      <div style="width:7%; float:left;"><?= number_format($rs['tp'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['cp'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['pp'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['total'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['discount'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['total'] -  $rs['discount'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($recive, '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($ar, '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['cash'], '0', '.', ',') ?></div>
+      <div style="width:6%; float:left;"><?= number_format($rs['credit'], '0', '.', ',') ?></div>
+      <div style="width:7%; float:left;"><?= number_format($rs['ku'], '0', '.', ',') ?></div>
+    </div>
   <? $n++; } ?>
 
 
@@ -145,47 +134,47 @@ if($rs['recive'] < $rs['total']){
 
 if(empty($did)){
 
-$cl = $color1;
-$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient  b where (a.hn = b.hn) and   (a.vn like 'AR%') and   (a.pdate like '%$dat%') ";
-$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$Num_Rows = mysql_num_rows($result); 
-$sql .=" order by a.billno asc";
-$result  = mysql_query($sql);
-
-while($rs=mysql_fetch_array($result)){  
-if($cl != $color1){
   $cl = $color1;
-} else {
-  $cl = $color2;
-}
+  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient  b where (a.hn = b.hn) and   (a.vn like 'AR%') and   (a.pdate like '%$dat%') ";
+  $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+  $Num_Rows = mysql_num_rows($result); 
+  $sql .=" order by a.billno asc";
+  $result  = mysql_query($sql);
 
-//$t1 = $t1 + $rs['cash'];
-//$t2 = $t2 + $rs['credit'];
-$recive = $rs['cash'] + $rs['credit'];
-$re = $re + $rs['total'];
-?>
+  while($rs=mysql_fetch_array($result)){  
+    if($cl != $color1){
+      $cl = $color1;
+    } else {
+      $cl = $color2;
+    }
 
-  <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:2500px;;background:<?= $cl ?>; ">
-    <div style="width:4%; float:left;"><?= $n ?></div>
-    <div style="width:4%; float:left;">&nbsp;<?= $rs['cradno'] ?></div>
-    <div style="width:10%; float:left;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
-    <div style="width:6%; float:left;">-</div>
-    <div style="width:7%; float:left;">-</div>
-    <div style="width:7%; float:left;">-</div>
-    <div style="width:6%; float:left;">-</div>
-    <div style="width:6%; float:left;">-</div>
-    <div style="width:6%; float:left;">-</div>
-    <div style="width:6%; float:left;">-</div>
-    <div style="width:6%; float:left;">-</div>
-    <div style="width:6%; float:left;"><?= number_format($recive, '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;">-</div>
-    <div style="width:6%; float:left;"><?= number_format($rs['cash'], '0', '.', ',') ?></div>
-    <div style="width:6%; float:left;"><?= number_format($rs['credit'], '0', '.', ',') ?></div>
-    <div style="width:7%; float:left;">-</div>
-  </div>
-  <?
-$n++;
-}
+    //$t1 = $t1 + $rs['cash'];
+    //$t2 = $t2 + $rs['credit'];
+    $recive = $rs['cash'] + $rs['credit'];
+    $re = $re + $rs['total'];
+    ?>
+
+      <div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="width:2500px;;background:<?= $cl ?>; ">
+        <div style="width:4%; float:left;"><?= $n ?></div>
+        <div style="width:4%; float:left;">&nbsp;<?= $rs['cradno'] ?></div>
+        <div style="width:10%; float:left;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
+        <div style="width:6%; float:left;">-</div>
+        <div style="width:7%; float:left;">-</div>
+        <div style="width:7%; float:left;">-</div>
+        <div style="width:6%; float:left;">-</div>
+        <div style="width:6%; float:left;">-</div>
+        <div style="width:6%; float:left;">-</div>
+        <div style="width:6%; float:left;">-</div>
+        <div style="width:6%; float:left;">-</div>
+        <div style="width:6%; float:left;"><?= number_format($recive, '0', '.', ',') ?></div>
+        <div style="width:6%; float:left;">-</div>
+        <div style="width:6%; float:left;"><?= number_format($rs['cash'], '0', '.', ',') ?></div>
+        <div style="width:6%; float:left;"><?= number_format($rs['credit'], '0', '.', ',') ?></div>
+        <div style="width:7%; float:left;">-</div>
+      </div>
+      <?
+    $n++;
+    }
 }
 ?>
 </div>
@@ -253,14 +242,13 @@ $n++;
   <!-- เพิ่มราคาทำ KOY -->
 
   <?
-  if(empty($did)){
-$sql1 = "select sum((b.totalprice/b.qty)*a.qty) one from tb_pctuse a,tb_pctrec b,tb_vst c where a.vn = b.vn and a.uvn = c.vn and a.pid = b.tid and (a.dat like '%$dat%')   and a.uvn <> b.vn and (c.status='COM') group by a.dat  ";
+if(empty($did)){
+$sql1 = "select sum((b.totalprice/b.qty)*a.qty) one from tb_pctuse a,tb_pctrec b,tb_vst c where a.vn = b.vn and a.uvn = c.vn and a.pid = b.tid and (a.dat like '%$dat%') and a.uvn <> b.vn and (c.status='COM') " . $where_branch_id . " group by a.dat ";
 } else {
-$sql1 = "select sum((b.totalprice/b.qty)*a.qty) one from tb_pctuse a,tb_pctrec b,tb_vst c where a.vn = b.vn and a.uvn = c.vn and a.pid = b.tid and (a.dat like '%$dat%') and a.uvn <> b.vn and (c.status='COM') t and (c.empid like '%$did%') group by a.dat  ";
+$sql1 = "select sum((b.totalprice/b.qty)*a.qty) one from tb_pctuse a,tb_pctrec b,tb_vst c where a.vn = b.vn and a.uvn = c.vn and a.pid = b.tid and (a.dat like '%$dat%') and a.uvn <> b.vn and (c.status='COM') and (c.empid like '%$did%') " . $where_branch_id . " group by a.dat ";
 }
 
-
-
+// echo $sql1;exit();
 $str = mysql_query($sql1) or die ("Error Query ".$sql1); 
 $row = mysql_fetch_array($str);
 $usetotal = $row['one'];

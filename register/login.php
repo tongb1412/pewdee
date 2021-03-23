@@ -8,7 +8,7 @@ $pass = $_POST['pass'];
 
 
 $sql1 = "select staffid,pname,fname,lname,user,pass,mode,branchid,company_code,company_data from tb_staff where user='$user' and pass='$pass' ";
-$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
+$result = mysql_query($sql1) or die ("Error Query ".$sql1);
 $n = mysql_num_rows($result);
 
 if(!empty($n)){
@@ -30,7 +30,16 @@ if(!empty($n)){
 	print_r($rs);
 	$sql = "insert into tb_login  values('$SYS_EID','$dat','$tim','$SYS_ENAME','$branch_id','$company_code')";
 //	echo $sql;exit();
-	mysql_query($sql);	 	
+	mysql_query($sql);
+	
+	$sql_clinic = "SELECT * FROM tb_clinicinformation WHERE company_code = '$company_code'";
+	$result = mysql_query($sql_clinic) or die ("Error Query ".$sql_clinic);
+	$n = mysql_num_rows($result);
+	if($n > 0){
+		while($rs = mysql_fetch_array($result)){
+			$_SESSION['clinic_info'][$rs['cn']] = $rs;
+		}
+	}
 	
 } else { $confirm ='N' ; $txt='Username หรือ Password ไม่ถูกต้อง'; }
 

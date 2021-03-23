@@ -1,13 +1,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
+
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $cl = '';
 $dat = date('Y-m-d');
-$did = $_POST['did'];
+$dat = "2011-03-22";
+// $did = $_POST['did'];
 
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+
+if(!empty($_REQUEST['did'])){
+	$did = $_REQUEST['did'];
+} else {
+	$did = "";
+}
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+if (!empty($_SESSION['company_data'])) {
+	$company_data = $_SESSION['company_data'];
+	$style = "list-full";
+} else {
+	$style = "list-small";
+}
 
 ?>
+<div class="monthly-list <?php echo $style ?>">
     <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
       <div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
       <div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
@@ -16,13 +42,8 @@ $did = $_POST['did'];
       <div style="width:25%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ชื่อลูกค้า</div>
       <div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ราคา</div>
     </div>
-	
-		
 <? 
-$where_branch_id = "";
-if($_SESSION['branch_id'] !="") {
-	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
-}
+
 $cl = $color1;
 if(empty($did)){
 $sql  = "select a.*,b.cradno,b.pname,b.fname,b.lname ";
@@ -35,7 +56,7 @@ $result = mysql_query($sql) or die ("Error Query [".$sql."]");
 $Num_Rows = mysql_num_rows($result); 
 
 
-
+// echo $sql;exit();
 $Per_Page = 14;   // Per Page
 
 $Page = $_GET["Page"];
@@ -76,8 +97,6 @@ $total = $total + $rs['totalprice'];
 	<div style="width:19%; float:left;"><?=$rs['empname']?></div>
 	<div style="width:25%; float:left;"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
 	<div style="width:11%; float:left;">&nbsp;<?=number_format($rs['totalprice'],'0','.',',')?></div>
-								
-	
 </div>
 
 
@@ -95,7 +114,7 @@ $total = $total + $rs['totalprice'];
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('get','daily_report/resalement_list.php','mode=<?=$mode?>&Page=<?=$Prev_Page?>','d_list')">	
+	<a href="javascript: ajaxLoad('get','daily_report/resalement_list.php','branchid=<?php echo $branch_id; ?>&did=<?php echo $did; ?>&mode=<?=$mode?>&Page=<?=$Prev_Page?>','d_list')">	
 	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
@@ -107,7 +126,7 @@ $total = $total + $rs['totalprice'];
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('get','daily_report/resalement_list.php','mode=<?=$mode?>&Page=<?=$Next_Page?>','d_list')">	
+	<a href="javascript: ajaxLoad('get','daily_report/resalement_list.php','branchid=<?php echo $branch_id; ?>&did=<?php echo $did; ?>&mode=<?=$mode?>&Page=<?=$Next_Page?>','d_list')">	
 	<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		
@@ -127,8 +146,6 @@ $total = $total + $rs['totalprice'];
 
 <div id="d_list2" style=" width: 99%; margin-top:10px;   text-align:center; height:30px; background-color:#FFCC99;  ">
 	
-
-
 	<div class="line" style="margin-top: 4px;">
 	  <div style="width:20%; float:left; text-align:right;">รวมทั้งหมด :&nbsp;</div>
       <div style="width:10%; float:left;">
@@ -136,7 +153,4 @@ $total = $total + $rs['totalprice'];
       </div>
     </div>	
 	
-	
-	
-	
-	</div>
+</div>

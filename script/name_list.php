@@ -41,7 +41,6 @@ include('../class/config.php');
             }
         }
         echo json_encode($data);
-        
     }
     
 ?>

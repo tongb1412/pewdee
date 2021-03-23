@@ -1,7 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px; overflow:auto; text-align:center; height:290px; ">
+
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 
 
 if(!empty($_POST['did'])){
@@ -13,9 +14,11 @@ $did = '';
 
 $cl = '';
 $dat = date('Y-m-d');
+// $dat = "2010-10-27";
 
 
 ?>
+<div style=" width: 98%; margin-top:5px; overflow:auto; text-align:center; height:290px; ">
     <div style="width:1500px; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
       <div style="width:4%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
       <div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;Crad No.</div>
@@ -33,10 +36,16 @@ $dat = date('Y-m-d');
 <? 
 $cl = $color1;
 
-$where_branch_id = "";
-if($_SESSION['branch_id'] !="") {
-	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = $_SESSION['branch_id'];
 }
+$as = "a";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
 if(empty($did)){
   $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and a.total = a.discount and a.total>0 and (c.status='COM') $where_branch_id ";
@@ -50,6 +59,7 @@ $Num_Rows = mysql_num_rows($result);
 
 
 $sql .=" order by a.billno asc ";
+// echo $sql;
 $result  = mysql_query($sql);
 if($result){
 $n=1;

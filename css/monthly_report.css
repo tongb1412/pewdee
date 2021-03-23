@@ -42,6 +42,10 @@ div#reportpage {
   font-size: 14px;
 }
 
+.line > .bold {
+  font-weight: bold;
+}
+
 .line > .line-item.sel {
   margin-left: 1%;
 }
@@ -96,6 +100,10 @@ div#reportpage {
 }
 .list-small {
   height: 345px;
+}
+
+.list-full-daily {
+  height: 405px;
 }
 
 .center {

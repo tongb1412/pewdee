@@ -1,22 +1,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $did = $_GET['did'];
 
 $dat = date('Y-m-d');
 
 // $dat = "2010-10-26";
 
-$where_branch_id_tb_clinicinformation = "";
-$where_branch_id = "";
-if($_SESSION['branch_id'] != "") {	
-	$where_branch_id_tb_clinicinformation = "where cn ='".$_SESSION['branch_id']."'  ";
-	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
-}
+// $where_branch_id_tb_clinicinformation = "";
+// $where_branch_id = "";
+// if($_SESSION['branch_id'] != "") {	
+// 	$where_branch_id_tb_clinicinformation = "where cn ='".$_SESSION['branch_id']."'  ";
+// 	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
+// }
 // $where_branch_id = "";
 
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
-$sqlC .="select clinicname from tb_clinicinformation " . $where_branch_id_tb_clinicinformation;
+
+$sqlC .="select clinicname from tb_clinicinformation where cn = '$branch_id'";
 $strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
 $rs=mysql_fetch_array($strc);
 
@@ -34,6 +46,7 @@ $sql = "select a.*,SUBSTR(a.pdate,12,5) AS Myti,b.cradno,b.pname,b.fname,b.lname
 
 $sql .="  order by c.empid,a.billno asc ";
 $result  = mysql_query($sql)or die ("Error Query [".$sql."]"); 
+// echo $sql;
 
 $n=1; $m=1; $s='y'; $x = 52; $h=1; $nn=0; $cnum = 0;  $ctotal = 0;
 
@@ -57,7 +70,14 @@ if($s=='y'){
 	</div>
 	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 		<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?=$cname?>
+		&nbsp;สาขา <?php
+		if($branch_id == "00"){
+			$cname = "ทั้งหมด";
+			echo $cname;
+		} else {
+			echo $cname;
+		}
+		?>
 		</div>
 		<div style="width:50%; float:left; text-align:right;">
 		หน้า : <?='1';?>&nbsp;
@@ -95,7 +115,14 @@ if($n == ((($m-1) * $x) + 1) && $m > 1){
 	<br><br>
 	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 		<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?=$cname?>
+		&nbsp;สาขา <?php
+		if($branch_id == "00"){
+			$cname = "ทั้งหมด";
+			echo $cname;
+		} else {
+			echo $cname;
+		}
+		?>
 		</div>
 		<div style="width:50%; float:left; text-align:right;">
 		หน้า : <?=$m;?>&nbsp;
@@ -153,14 +180,18 @@ if($n>1){
 <? 
  $h=1; $m=1; $n++; 
 $dp1 =0; $lp1=0; $tp1=0; $cp1=0; $pp1=0; $ds1=0; $tt1=0; $re1=0; $aa1=0; $total1 = 0;$cash1 = 0;$credit1 = 0; $ku1 = 0;
+$flag_branch = "";
 }
 ?>	
 <div  style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; ">			
-	&nbsp;<?=$dname?>
+	&nbsp;
+	<?php
+		echo $dname;
+		echo " (สาขา " . $_SESSION['clinic_info'][$rs['branchid']]['clinicname'] . ")";
+	?>
 </div>
 <? 
 }
-
 
 $dp = $dp + $rs['dp'];
 $lp = $lp + $rs['lp'];
@@ -174,7 +205,6 @@ $credit = $credit + $rs['credit'];
 $ku = $ku + $rs['ku'];
 $kno =  $rs['ku'];
 $total = $total + ($rs['total'] -  $rs['discount']);
-
 
 $dp1 = $dp1 + $rs['dp'];
 $lp1 = $lp1 + $rs['lp'];
@@ -220,7 +250,7 @@ if($rs['recive'] < $rs['total']){
 ?>	
 	
 	
-<div  style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; overflow:hidden; ">
+<div style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; overflow:hidden; ">
 	<div style="width:4%; float:left; text-align:center;"><?=$m?></div>
 	<div style="width:4%; float:left;">&nbsp;<?=$rs['cradno']?></div>
 	<div style="width:14%; float:left;"><?=$rs['fname'].'    '.$rs['lname'].'  '  ?></div>
@@ -238,10 +268,7 @@ if($rs['recive'] < $rs['total']){
 	<div style="width:5%; text-align:right; float:left;"><?=number_format($rs['cash'],'0','.',',')?>&nbsp;&nbsp;</div>
 	<div style="width:5%; text-align:right; float:left;"><?=number_format($rs['credit'],'0','.',',')?>&nbsp;&nbsp;</div>
 	<div style="width:5%; float:left; text-align:right"><?=number_format($rs['ku'],'0','.',',')?>&nbsp;&nbsp;</div>
-	
     <div style="width:12%; float:left; text-align:left; font-size:9px; line-height:9px;"><?=$rs['kno']?></div>
-								
-	
 </div>	
 
 
@@ -250,7 +277,7 @@ if($rs['recive'] < $rs['total']){
 
 $n++; $h++; $m++;   } 
 ?>	
-<div  style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
+<div style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
 	<div style="width:4%; float:left; text-align:center;">&nbsp;</div>
 	<div style="width:4%; float:left;">&nbsp;</div>
 	<div style="width:14%; float:left; text-align:center"><?=$h - 1 .'  รายการ';?>&nbsp;</div>
@@ -270,8 +297,6 @@ $n++; $h++; $m++;   }
 	<div style="width:5%; float:left; text-align:right"><?=number_format($ku1,'0','.',',')?>&nbsp;&nbsp;</div>
     <div style="width:12%; float:left; text-align:right">&nbsp;&nbsp;</div>
 </div>
-
-
 
 <?
 if(empty($did)){
@@ -346,8 +371,8 @@ if(empty($did)){
 	    <div style="width:12%; float:left; text-align:right">-</div>
 	</div>
 
-<?	
-}
+	<?	
+	}
 }
 ?>
 
@@ -399,23 +424,25 @@ $stotal = $total;
     <span style="font-weight:bold;">บัตรเครดิต&nbsp;&nbsp;</span><?=number_format($credit,'0','.',',');?> &nbsp;&nbsp;บาท<br />    
     <?
 	if($credit>0){
-		$sql = "select Distinct a.creditname from tb_payment a,tb_vst c  where (a.vn=c.vn)  and (a.pdate like '%$dat%') and (a.credit>0) and (c.status='COM')";
+		$sql = "select Distinct a.creditname from tb_payment a,tb_vst c where (a.vn=c.vn) and (a.pdate like '%$dat%') and (a.credit>0) and (c.status='COM')";
+		// echo $sql;exit();
 		$str  = mysql_query($sql)or die ("Error Query [".$sql."]"); 			
-		while($rs=mysql_fetch_array($str)){
-		$cname = $rs['creditname']; $crtotal = 0;
-		
-		$sqlCB ="select sum(credit) as total from tb_payment a,tb_vst c  where (a.vn=c.vn) and (a.creditname like '%$cname%')  and (a.pdate like '%$dat%') and (c.status='COM')";
-		$strCB  = mysql_query($sqlCB)or die ("Error Query [".$sqlCB."]"); 
-		$rsCB=mysql_fetch_array($strCB);		
-		$crtotal = $crtotal + $rsCB['total'];
-				
-		?>
-        &nbsp;&nbsp;&nbsp;<span style="font-weight:bold;"><?=$cname;?>&nbsp;&nbsp;</span><?=number_format($rsCB['total'],'0','.',',');?> &nbsp;&nbsp;บาท&nbsp;&nbsp; 
-        <?	
+		while($rs = mysql_fetch_array($str)){
+			$cname = $rs['creditname']; 
+			$crtotal = 0;
+			
+			$sqlCB ="select sum(credit) as total from tb_payment a,tb_vst c  where (a.vn=c.vn) and (a.creditname like '%$cname%') and (a.pdate like '%$dat%') and (c.status='COM')";
+			$strCB  = mysql_query($sqlCB)or die ("Error Query [".$sqlCB."]"); 
+			$rsCB=mysql_fetch_array($strCB);		
+			$crtotal = $crtotal + $rsCB['total'];
+					
+			?>
+			&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;"><?=$cname;?>&nbsp;&nbsp;</span><?=number_format($rsCB['total'],'0','.',',');?> &nbsp;&nbsp;บาท&nbsp;&nbsp; 
+			<?	
 		}
 	}
 	
-	$sql = "select sum(a.total) as total,count(a.vn) as qty  from tb_apayment a,tb_patient  b,tb_payment c where (a.hn = b.hn)  and (a.billno = c.billno) and (c.pdate like '%$dat%')  ";
+	$sql = "select sum(a.total) as total,count(a.vn) as qty  from tb_apayment a,tb_patient  b,tb_payment c where (a.hn = b.hn) and (a.billno = c.billno) and (c.pdate like '%$dat%')  ";
 	$str  = mysql_query($sql)or die ("Error Query [".$sql."]");
 	$rs=mysql_fetch_array($str);
 	?>
@@ -434,20 +461,17 @@ $stotal = $total;
     
     <span style="font-weight:bold;">รวมรับเงินทั้งหมด&nbsp;&nbsp;</span><?=number_format($stotal,'0','.',',');?> &nbsp;&nbsp;บาท<br />  
     <?
-	$sql = "select b.qty,a.hn,((a.totalprice / a.qty)* b.qty) as price    ";	
+	$sql = "select b.qty,a.hn,((a.totalprice / a.qty)* b.qty) as price ";	
 	$sql .= " from tb_pctrec a,tb_pctuse b, tb_patient c  where (b.dat like '%$dat%') and (a.vn = b.vn) and (b.uvn<>b.vn) and (a.tid = b.pid) ";	
-	$sql .=" and (a.hn=c.hn) order by b.id asc ";	
+	$sql .=" and (a.hn=c.hn) $where_branch_id order by b.id asc ";	
 	$result  = mysql_query($sql)or die ("Error Query [".$sql."]"); 
 	$ctotal = 0; $cnum = 0;
-	while($rs=mysql_fetch_array($result)){  
+	// echo $sql;
+	while($rs = mysql_fetch_array($result)){  
         $cnum = $cnum + $rs['qty'];   
 		$ctotal =  $ctotal + $rs['price']; 			
 	}
-
-	
 	?>
-    
-     
     <span style="font-weight:bold;">ทำคอร์สเก่า : </span> <?=number_format($cnum,'0','.',',');?> &nbsp;&nbsp;ครั้ง&nbsp;&nbsp;&nbsp;  
     <span style="font-weight:bold;">รายรับล่วงหน้าแล้วเป็นเงิน : </span> <?=number_format($ctotal,'2','.',',');?> &nbsp;&nbsp;บาท<br />  
     <span style="font-weight:bold;">เวลาปิดบิลสุดท้าย : </span> <?=$Myti?> &nbsp;&nbsp;นาที<br />  

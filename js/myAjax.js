@@ -1886,7 +1886,6 @@ function test() {
 
 }
 
-
 function moveuser(staffid, fname) {
 	document.getElementById('staffid').value = staffid;
 	document.getElementById('fname').value = fname;
@@ -1901,20 +1900,84 @@ function showpayment() {
 	loadmodule('d_list', 'daily_report/repayment_list.php', data);
 }
 
+function showRear() {
+	var data = "";
+	if(document.getElementById('branchid') != null) {
+		data += 'branchid=' + document.getElementById('branchid').value;
+	}
+	loadmodule('d_list', 'daily_report/rear_list.php', data);
+}
+
+function showReapayment() {
+	var data = "";
+	if(document.getElementById('branchid') != null) {
+		data += 'branchid=' + document.getElementById('branchid').value;
+	}
+	loadmodule('d_list', 'daily_report/reapayment_list.php', data);
+}
+
 function showdiscount() {
 	var data = 'did=' + document.getElementById('repempid').value;
-
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
 	loadmodule('d_list', 'daily_report/rediscount_list.php', data);
+}
+
+function showResalement() {
+	var data = 'did=' + document.getElementById('empid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
+	loadmodule('d_list', 'daily_report/resalement_list.php', data);
+}
+
+function showReSaleCourse() {
+	var data = 'did=' + document.getElementById('empid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
+	loadmodule('d_list', 'daily_report/resalecourse_list.php', data);
+}
+
+function showReSalePg() {
+	var data = 'did=' + document.getElementById('empid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
+	loadmodule('d_list', 'daily_report/resalepg_list.php', data);
+}
+
+function showReeUse() {
+	var data = 'did=' + document.getElementById('empid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
+	loadmodule('d_list', 'daily_report/reeuser_list.php', data);
+}
+
+function showPatient() {
+	var data = "";
+	if(document.getElementById('branchid') != null) {
+		data += 'branchid=' + document.getElementById('branchid').value;
+	}
+	loadmodule('d_list', 'daily_report/repatient_list.php?', data);
 }
 
 function printpaytotal() {
 	var data = 'did=' + document.getElementById('repempid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
 	var page = 'daily_report/rep_paymenttotal.php?' + data;
 	window.open(page, 'Patients', 'width=1003, height=500,resizable=yes, scrollbars=yes');
 }
 
 function printdiscount() {
 	var data = 'did=' + document.getElementById('repempid').value;
+	if(document.getElementById('branchid') != null) {
+		data += '&branchid=' + document.getElementById('branchid').value;
+	}
 	var page = 'daily_report/re_discount.php?' + data;
 	window.open(page, 'Patients', 'width=1003, height=500,resizable=yes, scrollbars=yes');
 }
@@ -2038,7 +2101,13 @@ function sale_list(data){
 				sel_str += "<option value=\"\">ทั้งหมด</option>";	
 				sel_str += "<option value=\"00\">ไม่ระบุแพทย์</option>";							
 		  	}
-		  	$('#repempid').empty().append(sel_str);
+			if(document.getElementById('repempid') != null){
+				$('#repempid').empty().append(sel_str);
+			} 
+			else if (document.getElementById('empid') != null){
+				$('#empid').empty().append(sel_str);
+			}
+		  	
 		  
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {

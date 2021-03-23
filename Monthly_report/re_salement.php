@@ -62,32 +62,32 @@ $nn++;
  
 if($s=='y'){ 	
 	?>
-		<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">
-		รายงานรายได้การขายทรีทเมนท์ 
-		</div>
-		<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
-		ประจำวันที่  <?=$_GET['sdate'];?> ถึง  <?=$_GET['edate'];?> 
-		</div>
-		<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
-			<div style="width:50%; float:left; text-align:left;">
-			&nbsp;สาขา <?=$cname?>
-			</div>
-			<div style="width:50%; float:left; text-align:right;">
-			หน้า : <?='1';?>&nbsp;
-			</div>
-		
-		</div>	
-		<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
-		<div class="report report-no">ลำดับ</div>
-		<div class="report ">วันที่</div>
-		<div class="report report-name">ชื่อลูกค้า</div>
-		<div class="report report-no" style="width: 10%;">รหัส</div>
-		<div class="report ">รายการ</div>      
-		<div class="report ">จำนวนเงิน</div>
-		<div class="report report-name">ผู้สนันสนุน</div>	 
-		<div class="report report-name">สาขา</div>	 
-		</div>			
-	<? 
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">
+	รายงานรายได้การขายทรีทเมนท์
+</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
+	ประจำวันที่ <?= $_GET['sdate']; ?> ถึง <?= $_GET['edate']; ?>
+</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+	<div style="width:50%; float:left; text-align:left;">
+		&nbsp;สาขา <?= $cname ?>
+	</div>
+	<div style="width:50%; float:left; text-align:right;">
+		หน้า : <?= '1'; ?>&nbsp;
+	</div>
+
+</div>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
+	<div class="report report-no">ลำดับ</div>
+	<div class="report ">วันที่</div>
+	<div class="report report-name">ชื่อลูกค้า</div>
+	<div class="report report-no" style="width: 10%;">รหัส</div>
+	<div class="report ">รายการ</div>
+	<div class="report ">จำนวนเงิน</div>
+	<div class="report report-name">ผู้สนันสนุน</div>
+	<div class="report report-name">สาขา</div>
+</div>
+<? 
 	$s='n';
 	}
 	if( $n > ($m * $x) ){ $m++; }  
@@ -95,26 +95,26 @@ if($s=='y'){
 	if($n == ((($m-1) * $x) + 1) && $m > 1){
 	
 		?>
-		<br><br>
-		<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
-			<div style="width:50%; float:left; text-align:left;">
-			&nbsp;สาขา <?=$cname?>
-			</div>
-			<div style="width:50%; float:left; text-align:right;">
-			หน้า : <?=$m;?>&nbsp;
-			</div>
-		</div>
-		<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
-		<div class="report report-no">ลำดับ</div>
-		<div class="report ">วันที่</div>
-		<div class="report report-name">ชื่อลูกค้า</div>
-		<div class="report report-no">รหัส</div>
-		<div class="report report-name">รายการ</div>      
-		<div class="report ">จำนวนเงิน</div>
-		<div class="report report-name">ผู้สนันสนุน</div>	 
-		<div class="report report-name">สาขา</div>	
-		</div>	
-	<?
+<br><br>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+	<div style="width:50%; float:left; text-align:left;">
+		&nbsp;สาขา <?= $cname ?>
+	</div>
+	<div style="width:50%; float:left; text-align:right;">
+		หน้า : <?= $m; ?>&nbsp;
+	</div>
+</div>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
+	<div class="report report-no">ลำดับ</div>
+	<div class="report ">วันที่</div>
+	<div class="report report-name">ชื่อลูกค้า</div>
+	<div class="report report-no">รหัส</div>
+	<div class="report report-name">รายการ</div>
+	<div class="report ">จำนวนเงิน</div>
+	<div class="report report-name">ผู้สนันสนุน</div>
+	<div class="report report-name">สาขา</div>
+</div>
+<?
 	} 
 	$ft = 'N';
 
@@ -124,25 +124,25 @@ if($s=='y'){
 	if($n>1){
 
 		?>
-		<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
-			<div style="width:8%; float:left;">&nbsp;</div>
-			<div style="width:12%; float:left;">&nbsp;</div>
-			<div style="width:12%; float:left;">&nbsp;</div>
-			<div style="width:8%; float:left;">&nbsp;</div>
-			<div style="width:12%; float:left; text-align:right">รวม</div>	
-			<div style="width:12%; float:left; text-align:right">&nbsp;<?=number_format($total1,'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-			<div style="width:20%; float:left;">-</div>	
-		</div>
-		<? 
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">
+	<div style="width:8%; float:left;">&nbsp;</div>
+	<div style="width:12%; float:left;">&nbsp;</div>
+	<div style="width:12%; float:left;">&nbsp;</div>
+	<div style="width:8%; float:left;">&nbsp;</div>
+	<div style="width:12%; float:left; text-align:right">รวม</div>
+	<div style="width:12%; float:left; text-align:right">&nbsp;<?= number_format($total1, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+	<div style="width:20%; float:left;">-</div>
+</div>
+<? 
 		$h=1; $m=1; $n++; 
 		$total1 = 0;
 		
 	}
-	?>	
-	<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; ">			
-		&nbsp;<?=$dname?>
-	</div>
-	<? 
+	?>
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; ">
+	&nbsp;<?= $dname ?>
+</div>
+<? 
 	}
 
 
@@ -153,33 +153,33 @@ if($s=='y'){
 
 
 
-	?>	
-		
-		
-	<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; overflow:hidden;  ">
-		<div class="report-data report-no center" style="margin-right: 3%;"><?=$m?></div>
-		<div class="report-data report-no left" style="width: 7%; margin-right:2%;"><?=$rs['dat']?></div>
-		<div class="report-data report-name left" style="margin-right:3%;"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
-		<div class="report-data report-num left" style="margin-right:5%;" ><?=$rs['tid']?></div>
-		<div class="report-data left" ><?=$rs['tname']?></div>
-		<div class="report-data report-num left"><?=number_format($rs['totalprice'],'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-		<div class="report-data report-name left" style="margin-left: 1%; margin-right:2%;" >&nbsp;&nbsp;&nbsp;&nbsp;<?=$rs['cname']?></div>
-		<div class="report-data report-name left">&nbsp;&nbsp;&nbsp;&nbsp;<?=$rs['clinicname']?></div>
-		
-		
-	</div>	
-	<? 
+	?>
+
+
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; overflow:hidden;  ">
+	<div class="report-data report-no center" style="margin-right: 3%;"><?= $m ?></div>
+	<div class="report-data report-no left" style="width: 7%; margin-right:2%;"><?= $rs['dat'] ?></div>
+	<div class="report-data report-name left" style="margin-right:3%;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
+	<div class="report-data report-num left" style="margin-right:5%;"><?= $rs['tid'] ?></div>
+	<div class="report-data left"><?= $rs['tname'] ?></div>
+	<div class="report-data report-num left"><?= number_format($rs['totalprice'], '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+	<div class="report-data report-name left" style="margin-left: 1%; margin-right:2%;">&nbsp;&nbsp;&nbsp;&nbsp;<?= $rs['cname'] ?></div>
+	<div class="report-data report-name left">&nbsp;&nbsp;&nbsp;&nbsp;<?= $rs['clinicname'] ?></div>
+
+
+</div>
+<? 
 
 $n++; $h++; $m++;   } 
-?>	
-<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
+?>
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">
 	<div style="width:8%; float:left;">&nbsp;</div>
 	<div style="width:12%; float:left;">&nbsp;</div>
 	<div style="width:12%; float:left;">&nbsp;</div>
 	<div style="width:8%; float:left;">&nbsp;</div>
-	<div style="width:12%; float:left; text-align:right">รวม</div>	
-	<div style="width:12%; float:left; text-align:right">&nbsp;<?=number_format($total1,'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-	<div style="width:20%; float:left;">-</div>	
+	<div style="width:12%; float:left; text-align:right">รวม</div>
+	<div style="width:12%; float:left; text-align:right">&nbsp;<?= number_format($total1, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+	<div style="width:20%; float:left;">-</div>
 </div>
 
 
@@ -188,12 +188,11 @@ $n++; $h++; $m++;   }
 <div style="width:100%; font-size:10px; text-align:left; float:left; font-weight:bold; margin:auto; margin-top:5px;  overflow:hidden;">
 
 	<div style="width:8%; float:left;">&nbsp;</div>
-    <div style="width:12%; float:left;">&nbsp;</div>
-    <div style="width:5%; float:left;">&nbsp;</div>
+	<div style="width:12%; float:left;">&nbsp;</div>
+	<div style="width:5%; float:left;">&nbsp;</div>
 	<div style="width:8%; float:left;">รวมทั้งหมด</div>
-	<div style="width:20%; float:left; text-align:right"><?=$nn.'  รายการ';?></div>	
-    <div style="width:12%; float:left; text-align:right">&nbsp;<?=number_format($total,'0','.',',')?>&nbsp;&nbsp;&nbsp;</div>	
-	<div style="width:20%; float:left; ">-</div>	
-</div>	
+	<div style="width:20%; float:left; text-align:right"><?= $nn . '  รายการ'; ?></div>
+	<div style="width:12%; float:left; text-align:right">&nbsp;<?= number_format($total, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;</div>
+	<div style="width:20%; float:left; ">-</div>
+</div>
 <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;">&nbsp;</div>
-

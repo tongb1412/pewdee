@@ -1128,25 +1128,25 @@ include('class/permission_user.php');
 
 	function loadmodule_druge(divname, url, hn, vn, bid) {
 		document.getElementById('loading').style.display = '';
-
 		var data = 'hn=' + hn;
 		ajaxLoad('post', url, data, divname);
 	}
 
 	function printpatient() {
-		var page = 'daily_report/re_patient.php';
+		var data = "";
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
+		var page = 'daily_report/re_patient.php?' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
-
-
-
 
 	function printtypepay() {
 		var page = 'daily_report/re_typepay.php';
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
 
-	function printcredit() {
+	function printcreditDaily() {
 		var data = 'did=' + document.getElementById('bk').value;
 		if(document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
@@ -1156,13 +1156,20 @@ include('class/permission_user.php');
 	}
 
 	function printapayment() {
-		var page = 'daily_report/re_apayment.php';
+		var data = "";
+		if(document.getElementById('branchid') != null) {
+			data += '?branchid=' + document.getElementById('branchid').value;
+		}
+		var page = 'daily_report/re_apayment.php'+ data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
 
 
 	function printsalement() {
 		var data = 'did=' + document.getElementById('empid').value;
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 		var page = 'daily_report/re_salement.php?' + data;
 		window.open(page, 'Patients', 'width=1003, height=500,resizable=yes, scrollbars=yes');
 	}
@@ -1175,18 +1182,28 @@ include('class/permission_user.php');
 
 	function printpg() {
 		var data = 'did=' + document.getElementById('empid').value;
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 		var page = 'daily_report/re_salepg.php?' + data;
 		window.open(page, 'Patients', 'width=1003, height=500,resizable=yes, scrollbars=yes');
 	}
 
 	function printeuser() {
 		var data = 'did=' + document.getElementById('empid').value;
+		if(document.getElementById('branchid') != null) {
+			data += '&branchid=' + document.getElementById('branchid').value;
+		}
 		var page = 'daily_report/re_euser.php?' + data;
 		window.open(page, 'Patients', 'width=1003, height=500,resizable=yes, scrollbars=yes');
 	}
 
 	function printar() {
-		var page = 'daily_report/re_ar.php';
+		var data = "";
+		if(document.getElementById('branchid') != null) {
+			data += '?branchid=' + document.getElementById('branchid').value;
+		}
+		var page = 'daily_report/re_ar.php' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
 
@@ -1242,15 +1259,11 @@ include('class/permission_user.php');
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
 
-
 	function repCbil(url) {
 		if (document.getElementById('sdate').value != '') {
 			if (document.getElementById('edate').value != '') {
 				var data = 'sdate=' + document.getElementById('sdate').value;
 				data += '&edate=' + document.getElementById('edate').value;
-
-
-
 				var page = url + data;
 				window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 			} else {
@@ -1260,7 +1273,6 @@ include('class/permission_user.php');
 			alert('');
 		}
 	}
-
 
 	function printmonth(url) {
 		var data = 'sdate=' + document.getElementById('sdate').value;
@@ -1292,7 +1304,6 @@ include('class/permission_user.php');
 		var page = 'Monthly_report/re_credit.php?' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
-
 
 	function printdrug(url) {
 		var data = 'did=' + document.getElementById('repempid').value;

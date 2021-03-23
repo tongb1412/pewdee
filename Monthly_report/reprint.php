@@ -29,7 +29,7 @@ include('../class/config.php');
 						<?
 		$sql = "select * from tb_staff where typ<>'D' order by fname  ";
 		$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-		while($rs=mysql_fetch_array($result)){
+		while($rs = mysql_fetch_array($result)){
 		?>
 						<option value="<?= $rs['staffid'] ?>"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></option>
 						<? } ?>

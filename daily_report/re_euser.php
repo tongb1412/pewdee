@@ -1,34 +1,47 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../css/monthly_report.css" rel="stylesheet" type="text/css" />
 <?
 include('../class/config.php');
-$did = $_GET['did'];
+include('../class/permission_user.php');
+// $did = $_GET['did'];
 
 $dat = date('Y-m-d');
+$dat = "2011-03-22";
 
-$sqlC .="select clinicname from tb_clinicinformation ";
+if(!empty($_REQUEST['did'])){
+	$did = $_REQUEST['did'];
+} else {
+	$did = "";
+}
+
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+$sqlC .="select clinicname from tb_clinicinformation where cn = '$branch_id'";
 $strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
 $rs=mysql_fetch_array($strc);
 
 $cname = $rs['clinicname'];
-
-$dname ='';
-
+$dname = '';
 $empid = '';
 
-$where_branch_id = "";
-if($_SESSION['branch_id'] !="") {
-	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
-}
 if(empty($did)){
-$sql = "select a.totalprice,b.tid,b.pid,b.ftyp,b.typ,b.tname,b.qty,b.empid,b.ename,c.cradno,c.pname,c.fname,c.lname,(a.totalprice / a.qty) priceunit,((a.totalprice / a.qty)*b.qty) price ";
-$sql .= " from tb_pctrec a,tb_pctuse b,tb_patient c  where (a.hn = c.hn) and  (b.dat like '%$dat%') and (a.vn = b.vn) and (a.tid = b.pid) ";
+	$sql = "select a.totalprice, a.branchid,b.tid,b.pid,b.ftyp,b.typ,b.tname,b.qty,b.empid,b.ename,c.cradno,c.pname,c.fname,c.lname,(a.totalprice / a.qty) priceunit,((a.totalprice / a.qty)*b.qty) price ";
+	$sql .= " from tb_pctrec a,tb_pctuse b,tb_patient c where (a.hn = c.hn) and  (b.dat like '%$dat%') and (a.vn = b.vn) and (a.tid = b.pid) ";
 } else {
-$sql = "select a.totalprice,b.tid,b.ftyp,b.typ,b.tname,b.qty,b.empid,b.ename,c.cradno,c.pname,c.fname,c.lname,(a.totalprice / a.qty) priceunit,((a.totalprice / a.qty)*b.qty) price ";
-$sql .= " from tb_pctrec a,tb_pctuse b,tb_patient c  where (a.hn = c.hn) and  (b.dat like '%$dat%') and (a.vn = b.vn) and (a.tid = b.pid) and (b.empid like '%$did%') ";
+	$sql = "select a.totalprice, a.branchid,b.tid,b.ftyp,b.typ,b.tname,b.qty,b.empid,b.ename,c.cradno,c.pname,c.fname,c.lname,(a.totalprice / a.qty) priceunit,((a.totalprice / a.qty)*b.qty) price ";
+	$sql .= " from tb_pctrec a,tb_pctuse b,tb_patient c where (a.hn = c.hn) and  (b.dat like '%$dat%') and (a.vn = b.vn) and (a.tid = b.pid) and (b.empid like '%$did%') ";
 }
 
 $sql .=" $where_branch_id order by b.empid asc ";
-
 
 $result  = mysql_query($sql)or die ("Error Query [".$sql."]"); 
 
@@ -54,7 +67,14 @@ if($s=='y'){
 	</div>
 	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 		<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?=$cname?>
+		&nbsp;สาขา <?php 
+		if($branch_id == "00"){
+			$cname = "ทั้งหมด";
+			echo $cname;
+		} else {
+			echo $cname;
+		}
+		?>
 		</div>
 		<div style="width:50%; float:left; text-align:right;">
 		หน้า : <?='1';?>&nbsp;
@@ -62,13 +82,23 @@ if($s=='y'){
 	
 	</div>	
     <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
-      <div style="width:8%;  float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+      <!-- <div style="width:8%;  float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
       <div style="width:10%; float:left; border-bottom:#999999 2px solid;">รหัส</div>
       <div style="width:22%; float:left; border-bottom:#999999 2px solid;">รายการ</div>
       <div style="width:10%; float:left; border-bottom:#999999 2px solid;">จำนวน</div>
       <div style="width:20%; float:left; border-bottom:#999999 2px solid;">ชื่อลูกค้า</div>
       <div style="width:10%; float:left; border-bottom:#999999 2px solid;">ราคา</div>
-	  <div style="width:20%; float:left; border-bottom:#999999 2px solid;">ประเภท</div>	  
+	  <div style="width:20%; float:left; border-bottom:#999999 2px solid;">ประเภท</div> -->
+
+	  	<div class="report report-no center">ลำดับ</div>
+		<div class="report report-num center">รหัส</div>
+		<div class="report report-name center">รายการ</div>
+		<div class="report report-no center">จำนวน</div>
+		<div class="report report-name center" style="width:18%">ชื่อลูกค้า</div>
+		<div class="report center">ราคา</div>
+		<div class="report report-name center">ประเภท</div>
+		<!-- <div class="report report-num center" >วันที่</div> -->
+		<div class="report report-name center" >สาขา</div>	  
 	</div>			
  <? 
  $s='n';
@@ -81,46 +111,63 @@ if($n == ((($m-1) * $x) + 1) && $m > 1){
 	<br><br>
 	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 		<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?=$cname?>
+		&nbsp;สาขา <?php 
+		if($branch_id == "00"){
+			$cname = "ทั้งหมด";
+			echo $cname;
+		} else {
+			echo $cname;
+		}
+		?>
 		</div>
 		<div style="width:50%; float:left; text-align:right;">
 		หน้า : <?=$m;?>&nbsp;
 		</div>
 	</div>
     <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left;">
-      <div style="width:8%;  float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+      <!-- <div style="width:8%;  float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
       <div style="width:10%; float:left; border-bottom:#999999 2px solid;">รหัส</div>
       <div style="width:22%; float:left; border-bottom:#999999 2px solid;">รายการ</div>
       <div style="width:10%; float:left; border-bottom:#999999 2px solid;">จำนวน</div>
       <div style="width:20%; float:left; border-bottom:#999999 2px solid;">ชื่อลูกค้า</div>
       <div style="width:10%; float:left; border-bottom:#999999 2px solid;">ราคา</div>
-	  <div style="width:20%; float:left; border-bottom:#999999 2px solid;">ประเภท</div>
+	  <div style="width:20%; float:left; border-bottom:#999999 2px solid;">ประเภท</div> -->
+
+	  <div class="report report-no center">ลำดับ</div>
+		<div class="report report-num center">รหัส</div>
+		<div class="report report-name center">รายการ</div>
+		<div class="report report-no center">จำนวน</div>
+		<div class="report report-name center" style="width:18%">ชื่อลูกค้า</div>
+		<div class="report center">ราคา</div>
+		<div class="report report-name center">ประเภท</div>
+		<!-- <div class="report report-num center" >วันที่</div> -->
+		<div class="report report-name center" >สาขา</div>
 	</div>	
 <?
 } 
 $ft = 'N'; 
 if($empid != $rs['empid'] ){
-$empid = $rs['empid'];  
-$dname = $rs['ename'];
+	$empid = $rs['empid'];  
+	$dname = $rs['ename'];
 
 
-if($n>1){
+	if($n>1){
 
-?>
-<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
-	<div style="width:5%; float:left; text-align:center;">&nbsp;</div>
-	<div style="width:47%; float:left;">&nbsp;</div>
-	<div style="width:20%; float:left; text-align:right">รวมทั้งหมด&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-	<div style="width:7%; text-align:right; float:left; text-align:right"><?=number_format($total,'0','.',',')?></div>
-</div>
-<? 
- $h=1; $m=1; $n++;  $total = 0;
-}
-?>	
-<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; ">			
-	&nbsp;<?=$dname?>
-</div>
-<? 
+	?>
+	<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; border-top:#CCCCCC 1px dotted; overflow:hidden;">	
+		<div style="width:5%; float:left; text-align:center;">&nbsp;</div>
+		<div style="width:47%; float:left;">&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right">รวมทั้งหมด&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+		<div style="width:7%; text-align:right; float:left; text-align:right"><?=number_format($total,'0','.',',')?></div>
+	</div>
+	<? 
+	$h=1; $m=1; $n++;  $total = 0;
+	}
+	?>	
+	<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; ">			
+		&nbsp;<?=$dname?>
+	</div>
+	<? 
 }
 
 switch($rs['ftyp']){
@@ -171,13 +218,22 @@ $total1 = $total1 + $price;
 	
 	
 <div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; overflow:hidden;  ">
-	<div style="width:8%; text-align: center; float:left;"><?=$m?></div>
+	<!-- <div style="width:8%; text-align: center; float:left;"><?=$m?></div>
 	<div style="width:10%; float:left;"><?=$rs['tid']?></div>
 	<div style="width:22%; float:left;"><?=$rs['tname']?></div>	
 	<div style="width:10%; text-align: center; float:left;">&nbsp;<?=number_format($rs['qty'],'0','.',',')?></div>
 	<div style="width:20%; float:left;"><?=$rs['pname'].$rs['fname'].'    '.$rs['lname']  ?></div>
 	<div style="width:10%; text-align:right; float:left;">&nbsp;<?=number_format($price,'0','.',',')?>&nbsp;&nbsp;&nbsp;&nbsp</div>
-	<div style="width:20%; float:left; text-align: center;"><?=$ftype?></div>	
+	<div style="width:20%; float:left; text-align: center;"><?=$ftype?></div> -->
+
+	<div class="report-data report-no center"><?= $m ?></div>
+	<div class="report-data report-num"><?= $rs['tid'] ?></div>
+	<div class="report-data report-name" style="margin-left: 3%;"><?= $rs['tname'] ?></div>
+	<div class="report-data report-no">&nbsp;<?= number_format($rs['qty'], '0', '.', ',') ?></div>
+	<div class="report-data report-name"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
+	<div class="report-data report-num" style="margin-left: 3%;">&nbsp;<?= number_format($price, '0', '.', ',') ?>&nbsp;&nbsp;&nbsp;&nbsp</div>
+	<div class="report-data report-num" style="margin-left: 9%;"><?= $ftype ?></div>
+	<div class="report-data report-name" style="margin-left: 7%;"><?= $_SESSION['clinic_info'][$rs['branchid']]['clinicname']; ?></div>	
 </div>	
 <? 
 

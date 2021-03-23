@@ -1,23 +1,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../css/monthly_report.css" rel="stylesheet" type="text/css" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $did = $_GET['did'];
 
 $dat = date('Y-m-d');
+// $dat = "2010-10-27";
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
 
-$sqlC .="select clinicname from tb_clinicinformation ";
+if(!empty($_REQUEST['did'])){
+	$did = $_REQUEST['did'];
+} else {
+	$did = "";
+}
+
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+$sqlC .="select clinicname from tb_clinicinformation where cn = '$branch_id'";
 $strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
-$rs=mysql_fetch_array($strc);
-
+$rs = mysql_fetch_array($strc);
 $cname = $rs['clinicname'];
 
-$dname ='';
-
-$empid = '';
-$where_branch_id = "";
-if($_SESSION['branch_id'] !="") {
-	$where_branch_id = " and a.branchid ='".$_SESSION['branch_id']."'  ";
-}
 if(empty($did)){
 	$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname,c.empid,c.empname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%')  and (c.status='COM') and a.total = a.discount and a.total>0 ";
 } else {
@@ -49,7 +61,14 @@ if($s=='y'){
 </div>
 <div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 	<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?= $cname ?>
+		&nbsp;สาขา <?php
+		if($branch_id == "00"){
+			$cname = "ทั้งหมด";
+			echo $cname;
+		} else {
+			echo $cname;
+		}
+		?>
 	</div>
 	<div style="width:50%; float:left; text-align:right;">
 		หน้า : <?= '1'; ?>&nbsp;
@@ -79,7 +98,14 @@ if($n == ((($m-1) * $x) + 1) && $m > 1){
 <br><br>
 <div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 	<div style="width:50%; float:left; text-align:left;">
-		&nbsp;สาขา <?= $cname ?>
+		&nbsp;สาขา <?php
+		if($branch_id == "00"){
+			$cname = "ทั้งหมด";
+			echo $cname;
+		} else {
+			echo $cname;
+		}
+		?>
 	</div>
 	<div style="width:50%; float:left; text-align:right;">
 		หน้า : <?= $m; ?>&nbsp;
@@ -124,7 +150,16 @@ $dp1 =0; $lp1=0; $tp1=0; $cp1=0; $pp1=0; $ds1=0; $tt1=0; $re1=0; $aa1=0; $total1
 }
 ?>
 <div style="width:100%; font-size:12px; text-align:left; float:left; margin:auto; font-weight:bold; ">
-	&nbsp;<?= $dname ?>
+	&nbsp;
+	<?php
+	if($branch_id == "00"){
+		echo $dname;
+		echo " (สาขา " . $_SESSION['clinic_info'][$rs['branchid']]['clinicname'] . ")";
+	} else {
+		echo $dname;
+	}
+		
+	?>
 </div>
 <? 
 }
