@@ -15,8 +15,8 @@ if($fn == "check_user") {
 	$result = mysql_query($sql1) or die ("Error Query ".$sql1);
 	$n = mysql_num_rows($result);
 	
-	if($n == 1){
-		$rs=mysql_fetch_array($result);
+	if ($n == 1) {
+		$rs = mysql_fetch_array($result);
 		$confirm ='Y'; 
 		$txt= $rs['mode']; 
 		$_SESSION["SYS_EID"]  = $rs['staffid']; 
@@ -43,11 +43,11 @@ if($fn == "check_user") {
 				$_SESSION['clinic_info'][$rs['cn']] = $rs;
 			}
 		}
-		$data = [];
+		$data = array();
 		$data[] = $_SESSION["mode"];
 		$data[] = "login_success";
 		echo json_encode($data);
-	} else if($n > 1){
+	} else if ($n > 1) {
 		// echo json_encode("โปรดติดต่อผู้ดูแลระบบ #1");
 		echo json_encode("โปรดติดต่อผู้ดูแลระบบ #1");
 	} else {
