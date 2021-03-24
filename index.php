@@ -14,6 +14,7 @@ include('class/permission_user.php');
 	<script type="text/javascript" src="js/myAjax.js"></script>
 	<script type="text/javascript" src="calendar/calendar.js"></script>
 	<script type="text/javascript" src="vender/zebra_datepicker/zebra_datepicker.min.js"></script>
+	<script type="text/javascript" src="vender/select2/js/select2.min.js"></script>
 	<!-- <script type="text/javascript" src="js/bootstrap.js"></script> -->
 
 
@@ -21,6 +22,7 @@ include('class/permission_user.php');
 	<link href="calendar/calendar.css" rel="stylesheet" type="text/css" />
 	<link href="css/monthly_report.css" rel="stylesheet" type="text/css" />
 	<link href="vender/zebra_datepicker/css/default/zebra_datepicker.css" rel="stylesheet" type="text/css" />
+	<link href="vender/select2/css/select2.css" rel="stylesheet" type="text/css" />
 	<!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css" /> -->
 	<title>Pewdee Clinic System</title>
 </head>
