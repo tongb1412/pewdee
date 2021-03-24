@@ -19,7 +19,7 @@ include('../class/config.php');
       <div style="width:30%; float:left; margin-top:10px;">&nbsp;<input type="text" id="sdate" size="10" maxlength="10" onkeyup="forDate(this)"   /></div>
 	  <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">ถึง : </div>
       <div style="width:30%; float:left; margin-top:10px;">&nbsp;<input type="text" id="edate" size="10" maxlength="10" onkeyup="forDate(this)"   /></div> -->
-
+<!-- 
 			<div style="width:30%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">ระหว่างวันที่ : </div>
 			<div style="width:25%; float:left; margin-top:10px;">&nbsp;<input type="text" id="sdate" size="9.5" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
 			<div style="width:3%; float:left; margin-top:10px;">
@@ -32,6 +32,18 @@ include('../class/config.php');
 			<div style="width:3%; float:left; margin-top:10px;">
 				<img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','edate','cl')" style="margin-top:5px; cursor:pointer;" />
 				<div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
+			</div> -->
+
+			<div style="width:30%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">ระหว่างวันที่ : </div>
+			<div style="width:25%; float:left; margin-top:10px;">&nbsp;<input class="datepicker" size="9.5" id="sdate" name="sdate" readonly></div>
+			<div style="width:3%; float:left; margin-top:10px;">
+				<img src="calendar/calendar.jpg" width="15" onclick="clickCalendar('sdate')" style="margin-top:5px; cursor:pointer;" />
+			</div>
+
+			<div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">ถึง : </div>
+			<div style="width:25%; float:left; margin-top:10px;">&nbsp;<input class="datepicker" size="9.5" id="edate" name="edate" readonly></div>
+			<div style="width:3%; float:left; margin-top:10px;">
+				<img src="calendar/calendar.jpg" width="15" onclick="clickCalendar('edate')" style="margin-top:5px; cursor:pointer;" />
 			</div>
 
 		</div>

@@ -23,16 +23,18 @@ if(!empty($_SESSION['branch_id'])){
       <div style="width:30%; float:left; margin-top:10px;">&nbsp;<input type="text" id="edate" size="10" maxlength="10" onkeyup="forDate(this)"   /></div> -->
 
         <div class="line-item title">ระหว่างวันที่ : </div>
-        <div class="line-item">&nbsp;<input type="text" id="sdate" size="9" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
+        <div class="line-item">&nbsp;<input type="text" class="datepicker" id="sdate" size="9" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
         <div class="line-item">
-          <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl','sdate','cl1')" style="margin-top:5px; cursor:pointer;" />
+          <!-- <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl','sdate','cl1')" style="margin-top:5px; cursor:pointer;" /> -->
+          <img src="calendar/calendar.jpg" width="15" onclick="clickCalendar('sdate')" style="margin-top:5px; cursor:pointer;" />
           <div id="cl" class="calendar" style="width:152px; height:auto; display:none;"></div>
         </div>
 
         <div class="line-item title">ถึง : </div>
-        <div class="line-item">&nbsp;<input type="text" id="edate" size="9" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
+        <div class="line-item">&nbsp;<input type="text" class="datepicker" id="edate" size="9" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
         <div class="line-item">
-          <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','edate','cl')" style="margin-top:5px; cursor:pointer;" />
+          <!-- <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','edate','cl')" style="margin-top:5px; cursor:pointer;" /> -->
+          <img src="calendar/calendar.jpg" width="15" onclick="clickCalendar('edate')" style="margin-top:5px; cursor:pointer;" />
           <div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
         </div>
         <div class="line-item title">เลือกสาขา : </div>
@@ -65,16 +67,18 @@ if(!empty($_SESSION['branch_id'])){
       <div style="width:30%; float:left; margin-top:10px;">&nbsp;<input type="text" id="edate" size="10" maxlength="10" onkeyup="forDate(this)"   /></div> -->
 
         <div style="width:30%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">ระหว่างวันที่ : </div>
-        <div style="width:25%; float:left; margin-top:10px;">&nbsp;<input type="text" id="sdate" size="9" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
+        <div style="width:25%; float:left; margin-top:10px;">&nbsp;<input type="text" class="datepicker" id="sdate" size="9" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
         <div style="width:3%; float:left; margin-top:10px;">
-          <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl','sdate','cl1')" style="margin-top:5px; cursor:pointer;" />
+          <!-- <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl','sdate','cl1')" style="margin-top:5px; cursor:pointer;" /> -->
+          <img src="calendar/calendar.jpg" width="15" onclick="clickCalendar('sdate')" style="margin-top:5px; cursor:pointer;" />
           <div id="cl" class="calendar" style="width:152px; height:auto; display:none;"></div>
         </div>
 
         <div style="width:10%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px;">ถึง : </div>
-        <div style="width:25%; float:left; margin-top:10px;">&nbsp;<input type="text" id="edate" size="9" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
+        <div style="width:25%; float:left; margin-top:10px;">&nbsp;<input type="text" class="datepicker" id="edate" size="9" maxlength="10" readonly="readonly" value="<?= $dat ?>" /></div>
         <div style="width:3%; float:left; margin-top:10px;">
-          <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','edate','cl')" style="margin-top:5px; cursor:pointer;" />
+          <!-- <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','edate','cl')" style="margin-top:5px; cursor:pointer;" /> -->
+          <img src="calendar/calendar.jpg" width="15" onclick="clickCalendar('edate')" style="margin-top:5px; cursor:pointer;" />
           <div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
         </div>
       </div>

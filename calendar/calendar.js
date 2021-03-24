@@ -46,19 +46,21 @@ function ajaxcallcalendar(contentType,responseText,displayId){
 
 
 function calendar(m,y,displayId,dat,dis){
-	document.getElementById(dis).innerHTML = 'hhh';
 
-if(cshow=='N'){
-	document.getElementById(displayId).style.display = '';
-	var data = 'month='+m+'&year='+y+'&dShow='+dat+'&dis1='+displayId;
+	clickCalendar(dat);
+// 	document.getElementById(dis).innerHTML = 'hhh';
+
+// if(cshow=='N'){
+// 	document.getElementById(displayId).style.display = '';
+// 	var data = 'month='+m+'&year='+y+'&dShow='+dat+'&dis1='+displayId;
 	
-	ajaxCarlendar('get','calendar/calendar.php',data,displayId);
-	cshow='Y';
+// 	ajaxCarlendar('get','calendar/calendar.php',data,displayId);
+// 	cshow='Y';
 	
-} else{  
-	document.getElementById(displayId).style.display = 'none';  
-	cshow='N';
-}
+// } else{  
+// 	document.getElementById(displayId).style.display = 'none';  
+// 	cshow='N';
+// }
 }
 
 function calendarYear(displayId,dat){	

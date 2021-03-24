@@ -1,4 +1,42 @@
 // JavaScript Document
+
+
+function startCalendarFunc(){
+
+	let today = new Date();
+	let dd = String(today.getDate()).padStart(2, '0');
+	let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	let yyyy = today.getFullYear();
+	today = yyyy + '-' + mm + '-' + dd;
+
+	$('#sdate').Zebra_DatePicker({
+		show_icon: false,
+		direction: false,
+		format: 'Y-m-d',
+		pair: $('#edate'),
+	});
+
+	$('#edate').Zebra_DatePicker({
+		show_icon: false,
+		direction: [true, today],
+		format: 'Y-m-d',
+	});
+	
+}
+
+// $( "#sdate" ).on( "click", function() {
+// 	startCalendarFunc();
+// });
+
+function clickCalendar(id){
+	$( "#" + id ).first().trigger("click");
+}
+
+function clearCalendar(id){
+	$( "#edate" ).val("")
+}
+
+
 function MM_openBrWindow(theURL, winName, features) {
 	window.open(theURL, winName, features);
 }
@@ -716,6 +754,7 @@ function ajaxcallback(contentType, displayId, responseText) {
 		el.innerHTML = responseText;
 
 	}
+	startCalendarFunc();
 }
 
 function loadpage(divname, n, m, url) {

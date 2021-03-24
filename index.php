@@ -13,12 +13,14 @@ include('class/permission_user.php');
 	<script type="text/javascript" src="js/interface.js"></script>
 	<script type="text/javascript" src="js/myAjax.js"></script>
 	<script type="text/javascript" src="calendar/calendar.js"></script>
+	<script type="text/javascript" src="vender/zebra_datepicker/zebra_datepicker.min.js"></script>
 	<!-- <script type="text/javascript" src="js/bootstrap.js"></script> -->
 
 
 	<link href="css/menu_style.css" rel="stylesheet" type="text/css" />
 	<link href="calendar/calendar.css" rel="stylesheet" type="text/css" />
 	<link href="css/monthly_report.css" rel="stylesheet" type="text/css" />
+	<link href="vender/zebra_datepicker/css/default/zebra_datepicker.css" rel="stylesheet" type="text/css" />
 	<!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css" /> -->
 	<title>Pewdee Clinic System</title>
 </head>
@@ -1838,9 +1840,11 @@ include('class/permission_user.php');
 				})
 				openWhenReady();
 				document.getElementById('username').focus();
+				
 			}
 		);
-
+		
+		$(".datepicker").Zebra_DatePicker();
 
 		function openWhenReady() {
 			var c = (gWH().width / 2) - 200;
@@ -1852,20 +1856,11 @@ include('class/permission_user.php');
 			// if($(window).height() >= 628){ var pH = $(window).height() - 99; } else { pH = 628 - 99;  }
 			// var pHl= pH - 20;
 		}
-
-
-
-
 		function showIMG() {
-
-
 			$("#dialog-box").load('webcam.php?hn=' + hn, function() {
-
-
-
 			});
-
 		}
+
 	</script>
 
 </body>
