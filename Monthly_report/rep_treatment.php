@@ -2,7 +2,8 @@
 include('../class/config.php');
 ?>
 
-	<div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;">
+	<!-- <div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;"> -->
+	<div id="t_main_monthly" class="tmain h-100">
 		<form action="Monthly_report/report2.php" method="post" target="_blank">
 			<div class="littleDD" style="font-size:14px; font-weight:bold;" >รายงานการใช้ทรีทเม้นท์</div>
 

@@ -2,7 +2,8 @@
 include('../class/config.php');
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;">
+<!-- <div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;"> -->
+<div id="t_main_monthly" class="tmain h-100">
 	<div class="littleDD" style="font-size:14px; font-weight:bold;">รายงานคนไข้ใหม่ประจำเดือน</div>
 	<?php
 		$css_height = "10";

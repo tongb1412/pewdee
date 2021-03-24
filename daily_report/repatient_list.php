@@ -23,7 +23,7 @@ if (!empty($_SESSION['company_data'])) {
 	$company_data = $_SESSION['company_data'];
 	$style = "list-full-daily";
 } else {
-	$style = "";
+	$style = "list-small";
 }
 
 ?>
@@ -94,14 +94,7 @@ if($cl != $color1){
 		<div style="width:35%; height:20px; text-align:left; line-height:20px;  float:left;">&nbsp;<?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
 		<div style="width:10%; height:20px; text-align:left; line-height:20px;  float:left; ">&nbsp;&nbsp;&nbsp;<?= $rs['cdate'] ?></div>
 		<div style="width:22%; height:20px; text-align:left; line-height:20px;  float:left;">&nbsp;<?= $rs['empname'] ?></div>
-
-
 	</div>
-
-
-
-
-
 
 	<? $n++; } ?>
 	<div style="width:83%; margin:auto; margin-top:10px; text-align:right; line-height:20px;">
@@ -113,7 +106,7 @@ if($cl != $color1){
 	if($Prev_Page)
 	{
 	?>
-		<a href="javascript: ajaxLoad('get','daily_report/repatient_list.php','branchid=<?php echo $branch_id; ?>&Page=<?= $Prev_Page ?>','staffedit')">
+		<a href="javascript: ajaxLoad('get','daily_report/repatient_list.php','branchid=<?php echo $branch_id; ?>&Page=<?= $Prev_Page ?>','d_list')">
 			<img src='images/icon/back.png' border='0' align="absmiddle" />
 		</a>
 		<?
@@ -125,7 +118,7 @@ if($cl != $color1){
 	{
 	?>
 
-		<a href="javascript: ajaxLoad('get','daily_report/repatient_list.php','branchid=<?php echo $branch_id; ?>&Page=<?= $Next_Page ?>','staffedit')">
+		<a href="javascript: ajaxLoad('get','daily_report/repatient_list.php','branchid=<?php echo $branch_id; ?>&Page=<?= $Next_Page ?>','d_list')">
 			<img src='images/icon/next.png' border='0' align="absmiddle" />
 		</a>
 		<?		
@@ -146,8 +139,10 @@ if($cl != $color1){
 
 	<?
 include('../class/config.php');
-$dat = date('d-m-Y',time());
+// $dat = date('d-m-Y',time());
+
 $sql = "select c.hn from tb_patient  b,tb_vst c where b.hn=c.hn and c.vdate like '%$dat%' ";
+$sql .= $where_branch_id;
 $s_result = mysql_query($sql) or die ("Error Query [".$sql."]");  
 //$row=mysql_fetch_array($s_result);
 
@@ -155,20 +150,20 @@ $total = mysql_num_rows($s_result);
 
 
 $sql = "select c.hn from tb_patient  b,tb_vst c where b.hn=c.hn and c.vdate like '%$dat%' and c.empid in ('00','-')";
+$sql .= $where_branch_id;
 $s_result = mysql_query($sql) or die ("Error Query [".$sql."]");  
 //$row=mysql_fetch_array($s_result);
 
 $sale = mysql_num_rows($s_result);
 
 $sql = "select c.hn from tb_patient  b,tb_vst c where b.hn=c.hn and c.vdate like '%$dat%' and c.empid not in ('00','-')";
+$sql .= $where_branch_id;
 $s_result = mysql_query($sql) or die ("Error Query [".$sql."]");  
 //$row=mysql_fetch_array($s_result);
 $doc = mysql_num_rows($s_result);
 
 ?>
-
 	<div class="line" style="margin-top: 4px;">
-
 		<div style="width:15%; float:left; text-align:right;">จำนวนคนไข้ :&nbsp;</div>
 		<div style="width:10%; float:left;">
 			<input style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12" ; value="<?= number_format($total, '0', '.', ',') ?> &nbsp;" />
@@ -182,8 +177,4 @@ $doc = mysql_num_rows($s_result);
 			<input style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12" ; value="<?= number_format($sale, '0', '.', ',') ?>&nbsp;" />
 		</div>
 	</div>
-
-
-
-
 </div>

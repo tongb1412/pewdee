@@ -36,7 +36,13 @@ if(empty($txtserch)){
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);
 
-$Per_Page = 16;   // Per Page
+// $Per_Page = 16;   // Per Page
+
+if($_SESSION['company_data'] == "1"){
+	$Per_Page = 18;   // Per Page
+} else {
+	$Per_Page = 15;   // Per Page
+}
 
 $Page = $_GET["Page"];
 if(!$_GET["Page"])	{	$Page=1;	}

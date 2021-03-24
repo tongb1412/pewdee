@@ -4,7 +4,8 @@ include('../class/config.php');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <input type="hidden" id="typ"  value="">
 <input type="hidden" id="id"  value="">
-<div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;">
+<!-- <div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;"> -->
+<div id="t_main_monthly" class="tmain h-100">
 	  <div class="littleDD" style="font-size:14px; font-weight:bold;" >รายงานยาใกล้หมดอายุ</div>
   <div style="width:95%; margin-top:10px; margin-left:20px; text-align:left; height:10%; background-color:#FFCC99; overflow:auto; border:<?=$tabcolor?> 1px solid;">
 	 <div class="line" style="margin-top:5px; width:45%;">

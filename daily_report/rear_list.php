@@ -22,7 +22,7 @@ if (!empty($_SESSION['company_data'])) {
 	$company_data = $_SESSION['company_data'];
 	$style = "list-full-daily";
 } else {
-	$style = "";
+	$style = "list-small";
 }
 
 ?>

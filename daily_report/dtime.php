@@ -65,7 +65,8 @@ if($_POST['mode']=='show'){
 
 
 ?>
-<div id="main" class="main" style="width:99%; margin:auto; height:500px; overflow:hidden;">
+<!-- <div id="main" class="main" style="width:99%; margin:auto; height:500px; overflow:hidden;"> -->
+<div id="t_main_monthly" class="tmain h-100">
 	<div class="littleDD" style="font-size:18px; font-weight:bold; height:50px; " align="center" ;>
 		<div style="width:30%; height:50px; line-height:50px; text-align:left; float:left;">ลงเวลาแพทย์ </div>
 	</div>

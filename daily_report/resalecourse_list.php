@@ -4,7 +4,8 @@
 include('../class/config.php');
 include('../class/permission_user.php');
 $cl = '';
-$dat = "2011-03-22";
+$dat = date('Y-m-d');
+// $dat = "2011-03-22";
 // $did = $_POST['did'];
 
 if(!empty($_REQUEST['branchid'])){

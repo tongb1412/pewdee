@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div style=" width: 98%; margin-top:5px;  text-align:center; height:345px; ">
+
 <?
 session_start();
 include('../class/config.php');
@@ -9,7 +9,15 @@ $dat = date('Y-m-d');
 $did = $_POST['did'];
 
 // $dat = "2020-03-01";
+if (!empty($_SESSION['company_data'])) {
+	$company_data = $_SESSION['company_data'];
+	$style = "list-full-daily";
+} else {
+	$style = "list-small";
+}
+
 ?>
+<div class="monthly-list <?php echo $style; ?>">
     <div style="width:98%; height:20px; padding-top:5px; color:#000000; margin:auto;  font-weight:bold; font-size:12px; background:<?=$tabcolor?>;">
       <div style="width:8%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ลำดับ</div>
       <div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
@@ -44,7 +52,11 @@ $Num_Rows = mysql_num_rows($result);
 
 
 
-$Per_Page = 14;   // Per Page
+if($_SESSION['company_data'] == "1"){
+	$Per_Page = 16;   // Per Page
+} else {
+	$Per_Page = 14;   // Per Page
+}
 
 $Page = $_GET["Page"];
 if(!$_GET["Page"])	{	$Page=1;	}

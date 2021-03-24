@@ -1,6 +1,7 @@
 <? include('../class/config.php'); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div id="t_main" class="tmain" style="width:100%; margin:auto; height:495px; overflow:hidden;  ">
+<!-- <div id="t_main" class="tmain" style="width:100%; margin:auto; height:495px; overflow:hidden;  "> -->
+<div id="t_main_monthly" class="tmain h-100">
 	
 
 	<?php 
@@ -32,7 +33,7 @@
 
 
 
-	<div style="width:47%; height:450px;  float:left; margin-left:10px; margin-top:10px; margin-right:10px;  border:<?= $tabcolor ?> 1px solid;">
+	<div style="width:47%; height:90%;  float:left; margin-left:10px; margin-top:10px; margin-right:10px;  border:<?= $tabcolor ?> 1px solid;">
 		<div class="littleDD" style="font-size:14px; font-weight:bold; background:<?= $tabcolor ?>;">คนไข้ในระบบ</div>
 		<div id="content" style=" width:100%; margin-top:5px; text-align:center; height:auto;">
 
@@ -52,12 +53,7 @@
 		</div>
 	</div>
 
-
-
-
-
-
-	<div style="width:47%; height:450px;  float:left; margin-left:5px; margin-top:10px;  margin-right:10px; border:<?= $tabcolor ?> 1px solid;">
+	<div style="width:47%; height:90%;  float:left; margin-left:5px; margin-top:10px;  margin-right:10px; border:<?= $tabcolor ?> 1px solid;">
 		<div class="littleDD" style="font-size:14px; font-weight:bold; background:<?= $tabcolor ?>;">คนไข้นอกระบบ</div>
 		<div id="content1" style=" width:100%; margin-top:5px; text-align:center; height:auto;">
 

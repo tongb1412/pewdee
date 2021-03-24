@@ -37,7 +37,13 @@ if(empty($txtserch)){
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);
 
-$Per_Page = 16;   // Per Page
+// $Per_Page = 16;   // Per Page
+
+if($_SESSION['company_data'] == "1"){
+	$Per_Page = 18;   // Per Page
+} else {
+	$Per_Page = 15;   // Per Page
+}
 
 $Page = $_GET["Page"];
 if(!$_GET["Page"])	{	$Page=1;	}
@@ -81,9 +87,7 @@ if($cl != $color1){
 	</div>
 	<div style="width:10%; float:left; text-align:right;">
 		&nbsp;<img src="images/icon/export16.png" align="คนไข้นอกระบบ" title="คนไข้นอกระบบ" style="cursor:pointer;" onClick="ajaxEdit('post','daily_report/offdruge.php','did=<?= $rs['did'] ?>&mode=off','reportpage');" />
-
 	</div>
-
 
 </div>
 <? } ?>

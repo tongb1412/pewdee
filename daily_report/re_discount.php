@@ -249,7 +249,6 @@ $n++; $h++; $m++;   }
 	<div style="width:8%; text-align:right;float:left;"><?= number_format($cp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 	<div style="width:8%; text-align:right; float:left;"><?= number_format($pp1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 	<div style="width:8%; text-align:right; float:left;"><?= number_format($tt1, '0', '.', ',') ?>&nbsp;&nbsp;</div>
-
 </div>
 
 
@@ -265,9 +264,5 @@ $n++; $h++; $m++;   }
 	<div style="width:8%; text-align:right;float:left;"><?= number_format($cp, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 	<div style="width:8%; text-align:right; float:left;"><?= number_format($pp, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 	<div style="width:8%; text-align:right; float:left;"><?= number_format($tt, '0', '.', ',') ?>&nbsp;&nbsp;</div>
-
-
-
-
 </div>
 <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;">&nbsp;</div>

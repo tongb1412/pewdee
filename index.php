@@ -173,10 +173,10 @@ include('class/permission_user.php');
 										data += '&bl=' + document.getElementById('bl').value;
 
 										sel_branch = document.getElementById('sel_branchid_p_new');
-										if(sel_branch != null){
+										if (sel_branch != null) {
 											data += "&bid=" + sel_branch.value;
 										}
-										
+
 										data += '&oc=' + document.getElementById('oc').value;
 										data += '&pno=' + document.getElementById('pno').value;
 										data += '&pass=' + document.getElementById('pass').value;
@@ -1134,7 +1134,7 @@ include('class/permission_user.php');
 
 	function printpatient() {
 		var data = "";
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = 'daily_report/re_patient.php?' + data;
@@ -1148,7 +1148,7 @@ include('class/permission_user.php');
 
 	function printcreditDaily() {
 		var data = 'did=' + document.getElementById('bk').value;
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = 'daily_report/re_credit.php?' + data;
@@ -1157,17 +1157,17 @@ include('class/permission_user.php');
 
 	function printapayment() {
 		var data = "";
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '?branchid=' + document.getElementById('branchid').value;
 		}
-		var page = 'daily_report/re_apayment.php'+ data;
+		var page = 'daily_report/re_apayment.php' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
 
 
 	function printsalement() {
 		var data = 'did=' + document.getElementById('empid').value;
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = 'daily_report/re_salement.php?' + data;
@@ -1182,7 +1182,7 @@ include('class/permission_user.php');
 
 	function printpg() {
 		var data = 'did=' + document.getElementById('empid').value;
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = 'daily_report/re_salepg.php?' + data;
@@ -1191,7 +1191,7 @@ include('class/permission_user.php');
 
 	function printeuser() {
 		var data = 'did=' + document.getElementById('empid').value;
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = 'daily_report/re_euser.php?' + data;
@@ -1200,7 +1200,7 @@ include('class/permission_user.php');
 
 	function printar() {
 		var data = "";
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '?branchid=' + document.getElementById('branchid').value;
 		}
 		var page = 'daily_report/re_ar.php' + data;
@@ -1209,7 +1209,7 @@ include('class/permission_user.php');
 
 	function repstock1() {
 		var data = "";
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += 'branchid=' + document.getElementById('branchid').value;
 		}
 		var page = 'Monthly_report/rep_stock1.php?' + data;
@@ -1220,27 +1220,27 @@ include('class/permission_user.php');
 	function printmonthpatient() {
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 
 		var page = 'Monthly_report/re_patient.php?' + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
-	
+
 	function reexpiredrug_excel() {
 		branchid = $("#branchid").val()
-		window.open('Monthly_report/reexpiredrug_excel.php?branchid='+branchid,'blank')
+		window.open('Monthly_report/reexpiredrug_excel.php?branchid=' + branchid, 'blank')
 	}
 
 	function printmonthpayment(url) {
 
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
-		if(document.getElementById('repempid') != null) {
+		if (document.getElementById('repempid') != null) {
 			data += '&did=' + document.getElementById('repempid').value;
 		}
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 
@@ -1277,7 +1277,7 @@ include('class/permission_user.php');
 	function printmonth(url) {
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = url + data;
@@ -1286,7 +1286,7 @@ include('class/permission_user.php');
 
 	function printmonthD(url) {
 		var data = "";
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = url + data;
@@ -1298,7 +1298,7 @@ include('class/permission_user.php');
 		var data = 'sdate=' + document.getElementById('sdate').value;
 		data += '&edate=' + document.getElementById('edate').value;
 		data += '&did=' + document.getElementById('bk').value;
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = 'Monthly_report/re_credit.php?' + data;
@@ -1307,14 +1307,12 @@ include('class/permission_user.php');
 
 	function printdrug(url) {
 		var data = 'did=' + document.getElementById('repempid').value;
-		if(document.getElementById('branchid') != null) {
+		if (document.getElementById('branchid') != null) {
 			data += '&branchid=' + document.getElementById('branchid').value;
 		}
 		var page = url + data;
 		window.open(page, 'Patients', 'width=700, height=500,resizable=yes, scrollbars=yes');
 	}
-
-
 
 	function caldisper(n, dis, total) {
 		var x = 0;
@@ -1344,9 +1342,6 @@ include('class/permission_user.php');
 			document.getElementById('sum').value = '0';
 			document.getElementById('cash').value = '0';
 		}
-
-
-
 	}
 
 	function caldisperDC(n, dis, total, m) {
@@ -1460,8 +1455,6 @@ include('class/permission_user.php');
 			document.getElementById('cash').value = '0.00';
 		}
 
-
-
 	}
 
 
@@ -1509,16 +1502,37 @@ include('class/permission_user.php');
 	function loadlogin() {
 		document.getElementById('bg').style.display = '';
 		document.getElementById('login_zone').style.display = '';
-		mdrug('Monthly_report/rebuydruge_list.php','d_list');
+		mdrug('Monthly_report/rebuydruge_list.php', 'd_list');
 	}
 
 	function login() {
 		if (document.getElementById('username').value != '') {
 			if (document.getElementById('password').value != '') {
-				var data = 'user=' + document.getElementById('username').value;
-				data += '&pass=' + document.getElementById('password').value;
-				ajaxLogin('post', 'register/login.php', data, 'dock');
-				ajaxLoad('post', 'Monthly_report/rebuydruge.php', '', 'home')
+				let user = document.getElementById('username').value;
+				let pass = document.getElementById('password').value;
+				$.ajax({
+					type: 'POST',
+					url: 'register/login.php',
+					dataType: 'json',
+					data: {
+						FN: "check_user",
+						user: user,
+						pass: pass
+					},
+					success: function(data) {
+						console.log(data);
+						if (data[1] == "login_success") {
+							// checkModeUser(data[0]);
+							location.reload();
+						} else if (data == "user_not_found") {
+							alert('Username หรือ Password ไม่ถูกต้อง');
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						console.log(errorThrown)
+					}
+				});
+				// ajaxLogin('post', 'register/login.php', data, 'dock');
 			} else {
 				alert('กรุณากรอก Password');
 			}
@@ -1527,6 +1541,41 @@ include('class/permission_user.php');
 		}
 	}
 
+	function checkUser() {
+		let sessionUser = "";
+		if (document.getElementById('session_user') != null) {
+			sessionUser = document.getElementById('session_user').value;
+		}
+		if (sessionUser == "") {
+			document.getElementById('bg').style.display = '';
+			document.getElementById('login_zone').style.display = '';
+		} else {
+			lll();
+		}
+	}
+
+	function logout() {
+		if(confirm("คุณจะออกจากระบบ ใช่ หรือ ไม่")){
+			$.ajax({
+			type: 'POST',
+			url: 'register/login.php',
+			dataType: 'json',
+			data: {
+				FN: "logout_user",
+			},
+				success: function(data) {
+					console.log(data);
+					if (data == "logout_success") {
+						alert('ออกจากระบบเรียบร้อย');
+						location.reload();
+					}
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(errorThrown)
+				}
+			});
+		}
+	}
 
 	function dtime() {
 		if (document.getElementById('empid').value != '00') {
@@ -1600,9 +1649,7 @@ include('class/permission_user.php');
 	}
 
 	function lll() {
-
 		ajaxLoad('post', 'Monthly_report/rebuydruge.php', '', 'home')
-
 	}
 
 
@@ -1674,16 +1721,13 @@ include('class/permission_user.php');
 
 	<div id="dialog-overlay"></div>
 	<div id="dialog-box"></div>
-
-
-
-
+	<input type="hidden" id="session_user" name="session_user" value="<?php echo $_SESSION["SYS_EID"]; ?>" />
+	<input type="hidden" id="mode_user" name="mode_user" value="<?php echo $_SESSION["mode"]; ?>" />
 	<div id="loading" style="position:fixed; right:0px; top:0px; z-index:1000; display:none;">
 		<img src="images/loading.gif" width="50" height="50" />
 	</div>
 	<div id="bg" style=" width:100%; height:100%; position:fixed; left:0px; bottom:0px; z-index:999; display:none; background:#CCCCCC; filter:alpha(opacity=50); opacity: 0.5;
 -moz-opacity:0.5; ">
-
 	</div>
 	<div id="sd" style="width:500px; height:200px; position:fixed; margin:auto;z-index:1000;display:none; margin-top:250px; background:#FFFFFF; border:#666666 3px solid;">
 
@@ -1706,9 +1750,6 @@ include('class/permission_user.php');
 				<div style="width:60%; float:left;"><input type="button" value="Login" onclick="login()" id="login_btn" /></div>
 
 			</div>
-
-
-
 		</div>
 	</div>
 
@@ -1724,42 +1765,52 @@ include('class/permission_user.php');
 
 		<div class="dock-container">
 
-
-
-			<div id="menu1" style="float:left; width:auto; cursor:pointer; display:; ">
+			<div id="menu1" style="float:left; width:auto; cursor:pointer; ">
 				<a class="dock-item" href="javascript: loadmodule('home','register/register.php','')">
 					<span></span><img src="images/register.png" alt="home" />
 				</a>
 			</div>
-			<div id="menu2" style="float:left; width:auto; cursor:pointer; display:;">
+
+			<div id="menu2" style="float:left; width:auto; cursor:pointer;">
 				<a class="dock-item" href="javascript: loadmodule('home','doctor/doctor.php','')"><span></span><img src="images/doctor.png" alt="doctor" /></a>
 			</div>
 
-			<div id="menu5" style="float:left; width:auto; cursor:pointer; display:;">
+			<div id="menu5" style="float:left; width:auto; cursor:pointer; ">
 				<a class="dock-item" href="javascript: loadmodule('home','daily_report/report.php','')"><span></span><img src="images/report.png" alt="daily_report" /></a>
 			</div>
 
-
-			<div id="menu7" style="float:left; width:auto; cursor:pointer; display:;">
+			<div id="menu7" style="float:left; width:auto; cursor:pointer;">
 				<a class="dock-item" href="javascript: loadmodule('home','promotion/promotion.php','') "><span></span><img src="images/promotion.png" alt="promotion" /></a>
 			</div>
 
-			<div id="menu8" style="float:left; width:auto; cursor:pointer; display:; ">
-				<a class="dock-item" href="javascript: loadmodule('home','stock/stock_show.php','') "><span></span><img src="images/addstock.png" alt="addstock" /></a>
-			</div>
-			<div id="menu6" style="float:left; width:auto; cursor:pointer; display:;">
-				<a class="dock-item" href="javascript: loadmodule('home','Monthly_report/report.php','')"><span></span><img src="images/Peport_M.png" alt="Monthly_report" /></a>
-			</div>
+			<?php 
+				if($_SESSION['mode'] == "S" || $_SESSION['mode'] == "A"){
+					?>
+					<div id="menu8" style="float:left; width:auto; cursor:pointer; ">
+						<a class="dock-item" href="javascript: loadmodule('home','stock/stock_show.php','') "><span></span><img src="images/addstock.png" alt="addstock" /></a>
+					</div>
+					<?
+				}
+				if($_SESSION['mode'] == "A"){
+					?>
+					<div id="menu6" style="float:left; width:auto; cursor:pointer;">
+						<a class="dock-item" href="javascript: loadmodule('home','Monthly_report/report.php','')"><span></span><img src="images/Peport_M.png" alt="Monthly_report" /></a>
+					</div>
 
-			<div id="menu3" style="float:left; width:auto; cursor:pointer;display:; ">
-				<a class="dock-item" href="javascript: loadmodule('home','stock/stock.php','') "><span></span><img src="images/stock1.png" alt="stock" /></a>
+					<div id="menu3" style="float:left; width:auto; cursor:pointer;">
+						<a class="dock-item" href="javascript: loadmodule('home','stock/stock.php','') "><span></span><img src="images/stock1.png" alt="stock" /></a>
+					</div>
+
+					<div id="menu4" style="float:left; width:auto; cursor:pointer; ">
+						<a class="dock-item" href="javascript: loadmodule('home','setting/setting.php','') "><span></span><img src="images/setting.png" alt="setting" /></a>
+					</div>
+					<?
+				}
+			?>
+
+			<div id="menu9" style="float:left; width:auto; cursor:pointer;">
+				<a class="dock-item" href="javascript: logout()"><span></span><img src="images/logout_icon.png" alt="logout" /></a>
 			</div>
-
-			<div id="menu4" style="float:left; width:auto; cursor:pointer; display:;">
-				<a class="dock-item" href="javascript: loadmodule('home','setting/setting.php','') "><span></span><img src="images/setting.png" alt="setting" /></a>
-			</div>
-
-
 
 		</div>
 
@@ -1768,10 +1819,6 @@ include('class/permission_user.php');
 		</div>
 
 	</div>
-
-
-
-
 
 	<div id="home" style="width:1003px; margin:auto;">
 
@@ -1785,7 +1832,7 @@ include('class/permission_user.php');
 					items: 'a',
 					itemsText: 'span',
 					container: '.dock-container',
-					itemWidth: 50,
+					itemWidth: 40,
 					proximity: 30,
 					halign: 'center'
 				})
@@ -1799,9 +1846,8 @@ include('class/permission_user.php');
 			var c = (gWH().width / 2) - 200;
 			document.getElementById('sd').style.marginLeft = c + 'px';
 			document.getElementById('login_zone').style.marginLeft = c + 'px';
-
-			loadlogin();
-
+			// loadlogin();
+			checkUser();
 			// var pH1 = $(window).height();
 			// if($(window).height() >= 628){ var pH = $(window).height() - 99; } else { pH = 628 - 99;  }
 			// var pHl= pH - 20;

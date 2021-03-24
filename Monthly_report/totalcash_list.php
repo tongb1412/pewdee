@@ -4,7 +4,7 @@
   session_start();
 	$body_height = "400";
     if ($_SESSION['company_data'] == "1") {
-        $body_height = "370";
+        $body_height = "415";
 	}
 ?>
 <div style=" width: 98%; margin-top:5px;  overflow:auto;  text-align:center; height:<?=$body_height?>px; ">
@@ -77,7 +77,13 @@ $Num_Rows = mysql_num_rows($result);
 
 
 
-$Per_Page = 14;   // Per Page
+// $Per_Page = 14;   // Per Page
+
+if($_SESSION['company_data'] == "1"){
+	$Per_Page = 18;   // Per Page
+} else {
+	$Per_Page = 16;   // Per Page
+}
 
 $Page = $_POST["Page"];
 if(!$_POST["Page"])	{	$Page=1;	}

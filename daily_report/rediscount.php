@@ -18,20 +18,6 @@ $branch_id = $_SESSION['branch_id'];
         <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
           <?= date('d/m/Y'); ?>
         </div>
-        <div style="width:15%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">เลือกแพทย์ : </div>
-        <?
-				  $sql = "select staffid,pname,fname from tb_staff where typ='D' and branchid = '$branch_id' ORDER BY fname";
-				  $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-				?>
-        <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
-          <select name="select" id="repempid" style="width:117px;">
-            <option value="">ทั้งหมด</option>
-            <option value="00">ไม่ระบุแพทย์</option>
-            <? while($rs=mysql_fetch_array($result)){  ?>
-            <option value="<?= $rs['staffid'] ?>"> <?= $rs['pname'] . $rs['fname'] ?></option>
-            <? } ?>
-          </select>
-        </div>
         <div style="width:15%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">เลือกสาขา : </div>
         <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
           <?php
@@ -52,6 +38,20 @@ $branch_id = $_SESSION['branch_id'];
               ?>
 
             <?php } ?>
+          </select>
+        </div>
+        <div style="width:15%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">เลือกแพทย์ : </div>
+        <?
+				  $sql = "select staffid,pname,fname from tb_staff where typ='D' and branchid = '$branch_id' ORDER BY fname";
+				  $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+				?>
+        <div style="width:20%; float:left; margin-top:1%; font-size:16px; font-weight:bold; ">&nbsp;&nbsp;
+          <select name="select" id="repempid" style="width:117px;">
+            <option value="">ทั้งหมด</option>
+            <option value="00">ไม่ระบุแพทย์</option>
+            <? while($rs=mysql_fetch_array($result)){  ?>
+            <option value="<?= $rs['staffid'] ?>"> <?= $rs['pname'] . $rs['fname'] ?></option>
+            <? } ?>
           </select>
         </div>
         <div style="width:30%; float:left; margin-top: 0.9%; margin-left:5%;">

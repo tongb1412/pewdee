@@ -627,6 +627,49 @@ function ajaxcallLogin(contentType, displayId, responseText) {
 	}
 }
 
+function checkModeUser(text) {
+	document.getElementById('loading').style.display = 'none';
+	let mode = text;
+	switch (mode) {
+		case 'A': document.getElementById('menu1').style.display = '';
+			document.getElementById('menu2').style.display = '';
+			document.getElementById('menu3').style.display = '';
+			document.getElementById('menu4').style.display = '';
+			document.getElementById('menu5').style.display = '';
+			document.getElementById('menu6').style.display = '';
+			document.getElementById('menu7').style.display = '';
+			document.getElementById('menu8').style.display = '';
+			document.getElementById('menu9').style.display = '';
+			break;
+		case 'E': document.getElementById('menu1').style.display = '';
+			document.getElementById('menu2').style.display = '';
+			document.getElementById('menu3').style.display = 'none';
+			document.getElementById('menu4').style.display = 'none';
+			document.getElementById('menu5').style.display = '';
+			document.getElementById('menu6').style.display = 'none';
+			document.getElementById('menu7').style.display = '';
+			document.getElementById('menu8').style.display = 'none';
+			document.getElementById('menu9').style.display = '';
+			break;
+		case 'S': document.getElementById('menu1').style.display = '';
+			document.getElementById('menu2').style.display = '';
+			document.getElementById('menu3').style.display = 'none';
+			document.getElementById('menu4').style.display = 'none';
+			document.getElementById('menu5').style.display = '';
+			document.getElementById('menu6').style.display = 'none';
+			document.getElementById('menu7').style.display = '';
+			document.getElementById('menu8').style.display = '';
+			document.getElementById('menu9').style.display = '';
+			break;
+	}
+	document.getElementById('bg').style.display = 'none';
+	document.getElementById('login_zone').style.display = 'none';
+	document.getElementById('username').value = '';
+	document.getElementById('password').value = '';
+	lll();
+
+}
+
 
 
 function ajaxLoad(method, URL, data, displayId) {

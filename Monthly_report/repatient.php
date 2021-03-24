@@ -2,7 +2,8 @@
 include('../class/config.php');
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;">
+<!-- <div id="t_main" class="tmain" style="width:100%; height:495px; overflow:hidden;"> -->
+<div id="t_main_monthly" class="tmain h-100">
   <div class="littleDD" style="font-size:14px; font-weight:bold;">รายงานคนไข้ประจำเดือน</div>
   <?php
     $css_height = "10";
@@ -62,7 +63,7 @@ include('../class/config.php');
 
 
 
-  <div id="pa_list" style="width:98%; height:395px; margin-top:5px; margin-left:10px; float:left;  border:<?= $tabcolor ?> 1px solid;">
+  <div id="pa_list" style="width:98%; height:80%; margin-top:5px; margin-left:10px; float:left;  border:<?= $tabcolor ?> 1px solid;">
     <?  require("repatient_list.php");	 ?>
 
 
