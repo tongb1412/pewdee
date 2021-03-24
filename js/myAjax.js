@@ -711,6 +711,7 @@ function checkModeUser(text) {
 
 
 function ajaxLoad(method, URL, data, displayId) {
+	URL = URL.trim();
 	document.getElementById('loading').style.display = '';
 	var ajax = null;
 	if (window.ActiveXObject) {
