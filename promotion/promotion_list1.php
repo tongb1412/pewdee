@@ -1,15 +1,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
-$txtserch = $_GET['txt'];
+// $txtserch = $_GET['txt'];
 $date = date('Y-m-d');
 
-$cl = $color1;
-if(empty($txtserch)){
-	$sql = "select * from promotion where datestop >=  '$date'  ";
+if(!empty($_REQUEST['txt'])){
+	$txtserch = $_REQUEST['txt'];
 } else {
-	$sql = "select * from promotion where datestop >= '$date' and proid like '%$txtserch%' or proname like '%$txtserch%'  ";
+	$txtserch = "";
 }
+
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+
+$where_branch_id = "";
+$company_code = $_SESSION['company_code'];
+$company_data = $_SESSION['company_data'];
+
+if($company_data == "1"){
+	if($branch_id =="00") {
+		$where_branch_id = " and company_code = '$company_code' ";
+	} else {
+		$where_branch_id = " and (branchid ='" . $branch_id . "' and company_code = '$company_code') ";
+	}
+} else {
+	$where_branch_id = " and (company_code = '$company_code' and branchid ='" . $branch_id . "' or branchid = '07') ";
+}
+
+$cl = $color1;
+
+if(empty($txtserch)){
+	$sql = "select * from promotion where datestop >=  '$date' $where_branch_id ";
+} else if($txtserch == ""){
+	$sql = "select * from promotion where datestop >= '$date' $where_branch_id ";
+} else {
+	$sql = "select * from promotion where datestop >= '$date' and proid like '%$txtserch%' or proname like '%$txtserch%' $where_branch_id ";
+}
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);
 
@@ -47,10 +77,20 @@ if($cl != $color1){
 
 
 ?>
-<div  class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="background:<?=$cl?>; " ondblclick="ajaxLoad('post','promotion/edit_promotion_admin.php','pid=<?=$rs['proid']?>','staffedit')" >
+<div  class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="background:<?=$cl?>; cursor:pointer;" ondblclick="ajaxLoad('post','promotion/edit_promotion_admin.php','pid=<?=$rs['proid']?>','staffedit')" >
 	<div style="width:30%; float:left;"><?=$rs['proid']?>&nbsp;</div>
 	<div style="width:50%; float:left;"><?=$rs['proname']?>&nbsp;</div>
-	<div style="width:15%; float:left;"> <img src="images/icon/pdetail.png" align="รายละเอียด" title="แก้ไข" style="cursor:pointer;" onclick="ajaxLoad('post','promotion/edit_promotion_admin.php','pid=<?=$rs['proid']?>','staffedit')" />&nbsp;<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('promotion/promotion_del.php','d_tall','id=<?=$rs['proid']?>')" /> </div>
+	<div style="width:15%; float:left;"> 
+	<img src="images/icon/pdetail.png" align="รายละเอียด" title="แก้ไข" style="cursor:pointer;" onclick="ajaxLoad('post','promotion/edit_promotion_admin.php','pid=<?=$rs['proid']?>','staffedit')" />
+	<?php 
+	if($rs['branchid'] == $_SESSION['branch_id'] || $_SESSION['company_code'] == "1"){
+		?>
+		<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('promotion/promotion_del.php','d_tall','id=<?=$rs['proid']?>')" /> 
+		<?php
+	}
+	?>
+	
+	</div>
 
 </div>
 <? } ?>

@@ -23,8 +23,8 @@ $tname = $_POST['tname'];
 <?
 
 
-$sql = "select * from tb_pctuse where vn='$vn' and pid ='$tid'  order by dat";
-
+$sql = "select * from tb_pctuse where vn='$vn' and pid ='$tid' order by dat";
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]");
 $n=1;
 while($rs=mysql_fetch_array($result)){  

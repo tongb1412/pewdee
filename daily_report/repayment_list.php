@@ -17,7 +17,7 @@ if(!empty($_POST['did'])){
 $cl = '';
 $dat = date('Y-m-d');
 // $dat = "2010-10-26";
-
+// echo $dat;
 
 ?>
 <div style=" width: 98%; margin-top:5px; overflow:auto; text-align:center; height:290px; ">

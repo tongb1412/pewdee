@@ -107,8 +107,8 @@ if(!empty($_SESSION['branch_id'])){
 			</div>
 			<div style="width:12%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:14px; ">แพทย์ : </div>
 			<?
-				$sql = "select staffid,pname,fname from tb_staff where typ='D' ";
-				$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
+				$sql = "select staffid,pname,fname from tb_staff where typ='D' and branchid = '$branch_id' ORDER BY fname";
+				$result = mysql_query($sql) or die ("Error Query [".$sql."]");
 				?>
 			<div style="width:25%; float:left; margin-top:10px; font-size:14px; ">&nbsp;&nbsp;
 				<select name="select" id="repempid" style="width:90px;">

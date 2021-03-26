@@ -17,7 +17,7 @@ $where_branch_id = "";
 $where_branch_id .= $data['where_branch_id'];
 $where_branch_id .= $data['where_company_code'];
 
-$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient  b where (a.hn = b.hn) and (a.vn like 'AR%') and (a.pdate like '%$dat%') $where_branch_id";
+$sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b where (a.hn = b.hn) and (a.vn like 'AR%') and (a.pdate like '%$dat%') $where_branch_id";
 
 //$sql = "select a.pdate,sum(a.cash) s_cash ,sum(a.credit) s_credit,sum(a.total) s_total,b.cradno,b.pname,b.fname,b.lname ";
 //$sql .= "from tb_payment a,tb_patient b, cbil c where (a.hn = b.hn) and (a.billno <> c.bno) and (a.pdate like '%$dat%') and (a.vn like 'AR%') group by 'a.pdate%' ";
@@ -59,7 +59,7 @@ while($rs=mysql_fetch_array($result)){
 	?>
 		<div style="width:5%; float:left;"><?= $n ?></div>
 		<div style="width:10%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $rs['cradno'] ?></div>
-		<div style="width:22%; float:left;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname']  ?></div>
+		<div style="width:22%; float:left;"><?= $rs['pname'] . $rs['fname'] . '    ' . $rs['lname'] ?></div>
 		<div style="width:14%; float:left;">&nbsp;<?= number_format($rs['cash'], '2', '.', ',') ?></div>
 		<div style="width:15%; float:left;">&nbsp;<?= number_format($rs['credit'], '2', '.', ',') ?></div>
 		<div style="width:15%; float:left;">&nbsp;<?= number_format($rs['total'], '2', '.', ',') ?></div>

@@ -73,7 +73,7 @@ $branch_id = $_SESSION['branch_id'];
         <div style="width:15%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">เลือกแพทย์ : </div>
 
         <?
-          $sql = "select staffid,pname,fname from tb_staff where typ='D' ";
+          $sql = "select staffid,pname,fname from tb_staff where typ='D' and branchid = '$branch_id' ORDER BY fname ";
           $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
           ?>
 

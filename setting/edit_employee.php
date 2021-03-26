@@ -4,7 +4,7 @@ include('../class/config.php');
 $SID = $_POST['sid'];
 $sql = "select * from tb_staff where staffid='$SID'";
 $patient_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$row=mysql_fetch_array($patient_result);
+$row = mysql_fetch_array($patient_result);
 if(! empty($row['birthday'])){
 
 $y = date('Y',time());
@@ -15,7 +15,7 @@ if($age < 0) {
 } else {
 	$age = '';
 }
-$branch = $row['branchid'];
+$branchid = $row['branchid'];
 
 ?>
 
@@ -24,22 +24,26 @@ $branch = $row['branchid'];
 	<div style="width:21%; float:left; text-align:right;">รหัสพนักงาน :&nbsp;</div>
 	<div style="width:25%; float:left;"><input type="text" id="staffid" size="15" value="<?= $SID ?>" /></div>
 
-	<?	
-				$sql = "select branchid,branchname from tb_branch where branchid = '$branchid' and company_code ='".$_SESSION['company_code']."' ";
-				$result = mysql_query($sql) or die ("Error Query [".$sql."]");
-				$roww=mysql_fetch_array($result);
-				?>
 	<div style="width:25%; float:left; text-align:right;">สาขา :&nbsp;</div>
 	<div style="width:25%; float:left;">
 		<select id="branch" style="width:117px;">
-			<option value="<?= $roww['branchid'] ?>"><?= $roww['branchname'] ?></option>
+			<!-- <option value="<?= $roww['branchid'] ?>"><?= $roww['branchname'] ?></option> -->
 			<? 
-				$sql = "select branchid,branchname from tb_branch where branchid <> '$branch' and company_code ='".$_SESSION['company_code']."' ";
+				$sql = "select branchid,branchname from tb_branch where company_code ='".$_SESSION['company_code']."' ";
 				$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 				
-				while($rs=mysql_fetch_array($result)){  
-				
-				?>
+				while($rs = mysql_fetch_array($result)){  
+				if($rs['branchid'] == $branchid){
+					?>
+			<option value="<?= $rs['branchid'] ?>" selected><?= $rs['branchname'] ?></option>
+
+					<?php
+				} else {
+					?>
 			<option value="<?= $rs['branchid'] ?>"><?= $rs['branchname'] ?></option>
+					<?php
+				}
+				?>
+				
 			<? } ?>
 		</select>
 	</div>

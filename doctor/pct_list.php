@@ -15,10 +15,11 @@ $where_user =  set_where_user_data('',$branch_id, $company_code, $company_data);
 if(! empty($txt)){
 
 	if($type == 'C'){
-		$sql = "select * from tb_course where cname like '%$txt%' " . $where_user['where_branch_id'] . $where_user['where_company_code'] . " order by cname asc limit 7";
+		$sql = "select * from tb_course where cname like '%$txt%' " . $where_user['where_company_code'] . " order by cname asc limit 7";
 	} else {
-		$sql = "select * from tb_package where name like '%$txt%' " . $where_user['where_branch_id'] . $where_user['where_company_code'] . " order by name asc limit 7";
+		$sql = "select * from tb_package where name like '%$txt%' " . $where_user['where_company_code'] . " order by name asc limit 7";
 	}
+	// echo $sql;
 	$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 	$n = mysql_num_rows($result);
 	if(! empty($n)){

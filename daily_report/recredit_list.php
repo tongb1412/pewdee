@@ -9,7 +9,7 @@ $did = '';
 }
 
 $cl = '';
-$dat = date('d-m-Y',time());
+$dat = date('Y-m-d',time());
 // $dat = "2011-03-22";
 
 if(!empty($_REQUEST['branchid'])){
@@ -45,6 +45,7 @@ if(empty($did)){
 }
 $sql .= " " .$where_branch_id ;
 
+// echo $sql;
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
 

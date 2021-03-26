@@ -40,7 +40,7 @@ $branch_id = $_SESSION['branch_id'];
 				</div>
 				<div class="line-item title">แพทย์ : </div>
 					<?
-						$sql = "select staffid,pname,fname from tb_staff where typ='D'";
+						$sql = "select staffid,pname,fname from tb_staff where typ='D' and branchid = '$branch_id' ORDER BY fname";
 						$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 						?>
 

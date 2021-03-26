@@ -71,7 +71,7 @@ $lno .= $t;
 			<div style="width:15%; float:left; margin-right: 3%"><input type="text" id="totalprice" size="10" onblur="divprice(this)" /></div>
 			<div style="width:20%; float:left;"><input type="text" id="price" size="10" /></div>
 			<div style="width:15%; float:left; margin-right: 3%"><input type="text" id="bdate" size="10" onkeyup="autoDate(this,'edate')" /></div>
-			<div style="width:15%; float:left;"><input type="text" id="edate" size="10" onkeyup="autoDate(this,'btnadd')" /></div>
+			<div style="width:15%; float:left;"><input type="text" id="edate" class="stock-datepicker" size="10" onkeyup="autoDate(this,'btnadd')" /></div>
 			<div style="width:11%; float:left; text-align:right;">
 				<input type="button" id="btnadd" value=" เพิ่ม " onclick="add_temp_instock('stock/add_temp_instock.php','dlist')">&nbsp;
 			</div>

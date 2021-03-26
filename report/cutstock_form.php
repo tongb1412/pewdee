@@ -4,24 +4,40 @@
 //session_start();
 
 include('../class/config.php');
+include('../class/permission_user.php');
 
 $lno = $_GET['lno'];
 
 
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
 
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
-$sql = "select * from tb_clinicinformation  ";
+$sql = "select * from tb_clinicinformation  where cn = '$branch_id'";
 $clinic_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $row=mysql_fetch_array($clinic_result); 
 
 
-$sql1 = "select a.*,b.pname,b.fname,b.lname from tb_cutstock a,tb_staff b  where a.empid=b.staffid and a.lno='$lno'  ";
+$sql1 = "select a.*,b.pname,b.fname,b.lname from tb_cutstock a,tb_staff b  where a.empid=b.staffid and a.lno='$lno' " . $where_branch_id;
 $str1 = mysql_query($sql1) or die ("Error Query [".$sql1."]"); 
-
 $rs1=mysql_fetch_array($str1); 
 
 
-$sql2 = "select * from tb_drugecutstock  where lno='$lno'  order by typ asc, dname asc ";
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
+$sql2 = "select * from tb_drugecutstock  where lno='$lno' " . $where_branch_id . " order by typ asc, dname asc ";
 $str2 = mysql_query($sql2) or die ("Error Query [".$sql2."]"); 
 
 

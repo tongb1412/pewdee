@@ -4,24 +4,39 @@
 //session_start();
 
 include('../class/config.php');
+include('../class/permission_user.php');
 
 $lno = $_GET['lno'];
 
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+}
+
+$as = "a";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
 
-
-$sql = "select * from tb_clinicinformation  ";
+$sql = "select * from tb_clinicinformation where cn = '$branch_id' ";
 $clinic_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$row=mysql_fetch_array($clinic_result); 
+$row = mysql_fetch_array($clinic_result); 
 
 
-$sql1 = "select a.*,b.pname,b.fname,b.lname from tb_instock a,tb_staff b  where a.empid=b.staffid and a.lno='$lno'  ";
+$sql1 = "select a.*,b.pname,b.fname,b.lname from tb_instock a,tb_staff b where a.empid = b.staffid and a.lno='$lno' " . $where_branch_id;
 $str1 = mysql_query($sql1) or die ("Error Query [".$sql1."]"); 
+$rs1 = mysql_fetch_array($str1); 
 
-$rs1=mysql_fetch_array($str1); 
+$as = "";
+$data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
 
-
-$sql2 = "select * from tb_drugeinstock  where lno='$lno'  ";
+$sql2 = "select * from tb_drugeinstock  where lno='$lno' " . $where_branch_id;
 $str2 = mysql_query($sql2) or die ("Error Query [".$sql2."]"); 
 
 
@@ -61,10 +76,10 @@ $str2 = mysql_query($sql2) or die ("Error Query [".$sql2."]");
         <div class="h_line">&nbsp;</div>
         <div class="h_line" style="text-align:center; background:#CCCCCC">
             <div style="width:4%; border:#999999 1px solid;  float:left;">ลำดับ</div>
-            <div style="width:10%;  border:#999999 1px solid;  border-left:none;float:left;">รหัสยา</div>
-            <div style="width:20%;  border:#999999 1px solid;   border-left:none;float:left;">ชื่อยา</div>
+            <div style="width:10%; border:#999999 1px solid;  border-left:none;float:left;">รหัสยา</div>
+            <div style="width:20%; border:#999999 1px solid;   border-left:none;float:left;">ชื่อยา</div>
             <div style="width:10%; border:#999999 1px solid;   border-left:none;float:left;">จำนวนรับ</div>
-            <div style="width:15%;  border:#999999 1px solid;   border-left:none;float:left;">ราคารวม</div>
+            <div style="width:15%; border:#999999 1px solid;   border-left:none;float:left;">ราคารวม</div>
             <div style="width:15%; border:#999999 1px solid;  border-left:none;float:left;">ราคา/หน่วย</div>
             <div style="width:12%; border:#999999 1px solid; border-left:none;float:left;">วันที่ผลิต</div>
             <div style="width:13%; border:#999999 1px solid;  border-left:none;float:left;">วันที่หมดอายุ</div>

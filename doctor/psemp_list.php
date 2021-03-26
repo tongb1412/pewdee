@@ -1,12 +1,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 
 $cl = $color1;
 $txt = $_GET['txt']; 
 
+$as = "";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
 if(! empty($txt)){
-$sql = "select * from tb_staff where (staffid like '%$txt%' or fname like '%$txt%' or nickname like '%$txt%') and (eshow='Y')   order by fname asc   limit 5";
+$sql = "select * from tb_staff where (staffid like '%$txt%' or fname like '%$txt%' or nickname like '%$txt%') and (eshow='Y') " . $where_branch_id . " order by fname asc limit 5";
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 
 $n = mysql_num_rows($result);

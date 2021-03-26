@@ -38,7 +38,7 @@ $pro .= $t;
 	<div id="main" class="main" style="width:35%; margin:auto; height:495px; overflow:hidden; float:left;">
 		<div id="main1" class="littleDD" style="font-size:14px; font-weight:bold;">โปรโมชั่น </div>
 		<div class="txt_serch" style="width:90%; margin-left:20px;">
-			<input class="input_serch" type="text" id="txts" size="30" value="ค้นหา" onclick="clickclear(this, 'ค้นหา')" onblur="clickrecall(this,'ค้นหา')" onkeyup="serchtxt('promotion/promotion_list.php','d_tall',this)" /><input type="button" class="btn_serch" onclick="ajaxLoad('get','setting/promotion_list.php','txt=','d_tall')" />
+			<input class="input_serch" type="text" id="txts" size="30" placeholder="ค้นหา" onkeyup="serchtxt('promotion/promotion_list1.php','d_tall',this)" /><input type="button" class="btn_serch" onclick="serchtxtPro('promotion/promotion_list1.php','d_tall',this)" />
 		</div>
 		<div style="width:99%; height:20px; margin-top:5px;  float:left; color:#000000; font-weight:bold; font-size:13px; background:<?= $tabcolor ?>; ">
 			<div style="width:30%;text-align:left; float:left;">&nbsp;&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
@@ -47,17 +47,10 @@ $pro .= $t;
 
 		<div id="d_tall" style="width:99%; height:auto;  float:left;  margin-left:5px; margin-top:5px ">
 			<?  require("promotion_list1.php");	 ?>
-
-
 		</div>
-
-
-
-
-
-
 	</div>
-	<div id="promotionpage" class="main" style="float:left; margin:auto; width:60%; height:495px;  margin-left:5px;">
+
+	<div id="promotionpage" class="main" style="float:left; margin:auto; width:60%; height:495px; margin-left:5px;">
 		<div class="littleDD" style="font-size:14px; font-weight:bold;">รายละเอียด</div>
 		<div id="staffedit" style="width:98%; height:470px;  margin-top:5px; margin-left:5px; float:left; background:#CCCCCC">
 
@@ -81,46 +74,73 @@ $pro .= $t;
 
 				<div style="width:25%; float:left; text-align:right;">วันที่เริ่ม :&nbsp;</div>
 				<div style="width:20%; float:left;">
-					<input type="text" id="dat" size="11" readonly="readonly" value="<?= $dat ?>" />
+					<input type="text" id="dat" size="11" class="datepicker" readonly="readonly" value="<?= $dat ?>" />
 				</div>
 				<div style="width:3%; float:left;">
-					<img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl','dat','cl1')" style="margin-top:5px; cursor:pointer;" />
-					<div id="cl" class="calendar" style="width:152px; height:auto; display:none;"></div>
+					<!-- <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl','dat','cl1')" style="margin-top:5px; cursor:pointer;" /> -->
+					<!-- <div id="cl" class="calendar" style="width:152px; height:auto; display:none;"></div> -->
 				</div>
 
-				<div style="width:17%; float:left; text-align:right;">วันที่หมด :&nbsp;</div>
+				<div style="width:17%; float:left; text-align:right; margin-left:3%">วันที่หมด :&nbsp;</div>
 				<div style="width:20%; float:left;">
-					<input type="text" id="dat1" size="11" readonly="readonly" value="<?= $dat1 ?>" />
+					<input type="text" id="dat1" size="11" class="datepicker-end" readonly="readonly" value="<?= $dat1 ?>" />
 				</div>
 				<div style="width:3%; float:left;">
-					<img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','dat1','cl')" style="margin-top:5px; cursor:pointer;" />
-					<div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div>
+					<!-- <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','dat1','cl')" style="margin-top:5px; cursor:pointer;" /> -->
+					<!-- <div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div> -->
 				</div>
 
 
 			</div>
-
 			<div class="line">
+				<?php
+				if ($_SESSION['company_data'] == "1") {
+				?>
+					<div style="width:25%; float:left; text-align:right;">เลือกสาขา :&nbsp;</div>
+					<div style="width:18%; float:left;">
+						<?php
+						include('../class/config.php');
+						$sql = "select * from tb_branch ";
+						$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+						?>
+						<select name="select" id="branchid" style="width:117px;" onchange="serchtxt('promotion/promotion_list1.php','d_tall','')">
+							<option value="00">ทั้งหมด</option>
+							<?php while ($rs = mysql_fetch_array($result)) {
+								if ($rs['branchid'] == $_SESSION['branch_id']) {
+							?>
+									<option value="<?= $rs['branchid'] ?>" selected> <?= $rs['branchname'] ?></option>
+								<?php
+								} else {
+								?>
+									<option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
+								<?php
+								}
+								?>
 
+							<?php } ?>
+						</select>
+					</div>
+				<?php
+				}
+				?>
 
 			</div>
 
 
-			<div class="line" style="height:270px;">
+			<div class="line" style="height:230px;">
 				<div style="width:25%; float:left; text-align:right;">รายละเอียด:&nbsp;</div>
 				<div style="width:20%; float:left;">
 					<textarea name="textarea" cols="42" rows="15" id="mem"></textarea>
 				</div>
 			</div>
 
-			<div class="line">
+			<div class="line" style="margin-top:1.5%">
 				<div style="width:25%; float:left; text-align:right;">เบอร์โทร :&nbsp;</div>
 				<div style="width:25%; float:left;"><input type="text" id="tel" size="15" /></div>
-
 			</div>
 
-			<div style="width:78%; text-align:right; float:left;">
-				<input name="button" type="button" style="height:25px; font-size:13px; line-height:25px;" onclick="addpromotion('promotion/promotion_add.php','home')" value="       บันทึก      " />
+			<div style="width:78%; text-align:right; float:left; margin-top:4%">
+				<input name="button" type="button" style="height:25px; font-size:13px; line-height:25px;" onclick="addpromotion('promotion/promotion_add.php','home')" value="      บันทึก      " />
 				<input name="button" type="button" style="height:25px; font-size:13px; line-height:25px;" onclick="ajaxLoad('post','promotion/promotion_admin.php','','settingpage')" value=" รายการใหม่ " />
 			</div>
 

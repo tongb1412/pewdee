@@ -1559,7 +1559,7 @@ include('class/permission_user.php');
 	}
 
 	function logout() {
-		if(confirm("คุณจะออกจากระบบ ใช่ หรือ ไม่")){
+		if(confirm("คุณต้องการออกจากระบบ ใช่ หรือ ไม่")){
 			$.ajax({
 			type: 'POST',
 			url: 'register/login.php',

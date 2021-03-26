@@ -73,7 +73,7 @@ $branch_id = $_SESSION['branch_id'];
         <div style="width:15%; float:left; margin-top:10px; text-align:right; line-height:20px; font-size:16px; font-weight:bold;">เลือกแพทย์ : </div>
 
         <?
-          $sql = "select staffid,pname,fname from tb_staff where typ='D' ";
+          $sql = "select staffid,pname,fname from tb_staff where typ='D' and branchid = '$branch_id' ";
           $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
           ?>
 
@@ -81,7 +81,7 @@ $branch_id = $_SESSION['branch_id'];
           <select name="select" id="repempid" style="width:117px;">
             <option value="">ทั้งหมด</option>
             <option value="00">ไม่ระบุแพทย์</option>
-            <? while($rs=mysql_fetch_array($result)){  ?>
+            <? while($rs = mysql_fetch_array($result)){  ?>
             <option value="<?= $rs['staffid'] ?>"> <?= $rs['pname'] . $rs['fname'] ?></option>
             <? } ?>
           </select>

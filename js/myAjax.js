@@ -9,6 +9,17 @@ function startCalendarFunc(){
 	let yyyy = today.getFullYear();
 	today = yyyy + '-' + mm + '-' + dd;
 
+	$('.datepicker').Zebra_DatePicker({
+		show_icon: false,
+		format: 'Y-m-d',
+		pair: $('.datepicker-end'),
+	});
+
+	$('.datepicker-end').Zebra_DatePicker({
+		show_icon: false,
+		format: 'Y-m-d',
+	});
+	
 	$('#sdate').Zebra_DatePicker({
 		show_icon: false,
 		direction: false,
@@ -16,11 +27,26 @@ function startCalendarFunc(){
 		pair: $('#edate'),
 	});
 
+	$('#bdate').Zebra_DatePicker({
+		show_icon: false,
+		direction: false,
+		format: 'Y-m-d',
+		pair: $('#edate.stock-datepicker'),
+	});
+
 	$('#edate').Zebra_DatePicker({
 		show_icon: false,
 		direction: [true, today],
 		format: 'Y-m-d',
 	});
+
+	$('#edate.stock-datepicker').Zebra_DatePicker({
+		show_icon: false,
+		direction: 1,
+		format: 'Y-m-d',
+	});
+
+
 	
 }
 
@@ -711,7 +737,9 @@ function checkModeUser(text) {
 
 
 function ajaxLoad(method, URL, data, displayId) {
-	URL = URL.trim();
+	if(URL != undefined && URL != null){
+		URL = URL.trim();
+	}
 	document.getElementById('loading').style.display = '';
 	var ajax = null;
 	if (window.ActiveXObject) {
@@ -823,9 +851,43 @@ function setbtnSetting(n, m) {
 }
 
 function serchtxt(URL, displayId, txt) {
-	var data = 'txt=' + txt.value;
+	var data = "";
+	var n = 0;
+	if(txt.value != null && txt.value != undefined){
+		data = 'txt=' + txt.value;
+		n++;
+	}
+	if(document.getElementById('branchid') != null){
+		let x = "";
+		if(n > 0){
+			x = "&";
+		}
+		data += x + 'branchid=' + document.getElementById('branchid').value;
+	}
 	ajaxLoad('get', URL, data, displayId);
 }
+
+function serchtxtPro(URL, displayId, txt) {
+	var data = "";
+	var n = 0;
+	if(document.getElementById('txts') != null){
+		data += x + 'txt=' + document.getElementById('txts').value;
+		n++;
+	}
+	// if(txt.value != null && txt.value != undefined){
+	// 	data = 'txt=' + txt.value;
+	// 	n++;
+	// }
+	if(document.getElementById('branchid') != null){
+		let x = "";
+		if(n > 0){
+			x = "&";
+		}
+		data += x + 'branchid=' + document.getElementById('branchid').value;
+	}
+	ajaxLoad('get', URL, data, displayId);
+}
+
 function serchtxtDoctor(URL, displayId, txt) {
 	var data = 'txt=' + $('#txts').val();
 	data += '&bid=' + txt.value
@@ -1292,6 +1354,9 @@ function addpromotion(URL, displayId) {
 		data += '&mem=' + document.getElementById('mem').value;
 		data += '&tel=' + document.getElementById('tel').value;
 		data += '&type=' + document.getElementById('typ').value;
+		if(document.getElementById('branchid') != null){
+			data += "&branchid" + document.getElementById('branchid').value;
+		}
 		ajaxEdit('post', URL, data, displayId);
 	}
 }
