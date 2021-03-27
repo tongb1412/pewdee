@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $PID = $_POST['pid'];
 $sql = "select * from promotion where proid='$PID'";
 $patient_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
@@ -12,12 +13,11 @@ $dat1 = $row['datestop'];
 // $dat = substr($row['datestart'],8,2).'-'.substr($row['datestart'],5,2).'-'.substr($row['datestart'],0,4);
 // $dat1 = substr($row['datestop'],8,2).'-'.substr($row['datestop'],5,2).'-'.substr($row['datestop'],0,4);
 
-
+$branch_name = get_branch_name($row['branchid'],$_SESSION['company_code']);
 ?>
 
 <div class="line">&nbsp;</div>
 <input type="hidden" id="typ" value="edit" />
-
 
 <div class="line">
 	<div style="width:25%; float:left; text-align:right;">รหัสโปรโมชั่น :&nbsp;</div>
@@ -26,9 +26,7 @@ $dat1 = $row['datestop'];
 	</div>
 </div>
 
-
-
-<div class="line" >
+<div class="line">
 	<div style="width:25%; float:left; text-align:right;">ชื่อโปรโมชั่น:&nbsp;</div>
 	<div style="width:25%; float:left;">
 		<input name="text2" type="text" id="proname" size="40" value="<?= $row['proname'] ?>" />
@@ -64,32 +62,11 @@ $dat1 = $row['datestop'];
 	?>
 		<div style="width:25%; float:left; text-align:right;">เลือกสาขา :&nbsp;</div>
 		<div style="width:18%; float:left;">
-			<?php
-			include('../class/config.php');
-			$sql = "select * from tb_branch ";
-			$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
-			?>
-			<select name="select" id="branchid" style="width:117px;" onchange="serchtxt('promotion/promotion_list1.php','d_tall','')">
-				<option value="00">ทั้งหมด</option>
-				<?php while ($rs = mysql_fetch_array($result)) {
-					if ($rs['branchid'] == $row['branchid']) {
-				?>
-						<option value="<?= $rs['branchid'] ?>" selected> <?= $rs['branchname'] ?></option>
-					<?php
-					} else {
-					?>
-						<option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
-					<?php
-					}
-					?>
-
-				<?php } ?>
-			</select>
+		<input type="text" id="dat1" size="15" readonly="readonly" value="<?= $branch_name ?>" />
 		</div>
 	<?php
 	}
 	?>
-
 </div>
 
 
@@ -106,11 +83,11 @@ $dat1 = $row['datestop'];
 </div>
 
 <div style="width:78%; text-align:right; float:left; margin-top:4%">
-<?php 
-	if($row['branchid'] == $_SESSION['branch_id'] || $_SESSION['company_data'] == "1"){
-		?>
+	<?php
+	if ($row['branchid'] == $_SESSION['branch_id'] || $_SESSION['company_data'] == "1") {
+	?>
 		<input name="button" type="button" style="height:25px; font-size:13px; line-height:25px;" onclick="addpromotion('promotion/promotion_add.php','home')" value="      บันทึก      " />
-		<?php
+	<?php
 	}
 	?>
 	<input name="button" type="button" style="height:25px; font-size:13px; line-height:25px;" onclick="ajaxLoad('post','promotion/promotion_admin.php','','settingpage')" value=" รายการใหม่ " />

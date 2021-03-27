@@ -80,11 +80,14 @@ if($cl != $color1){
 <div  class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" style="background:<?=$cl?>; cursor:pointer;" ondblclick="ajaxLoad('post','promotion/edit_promotion_admin.php','pid=<?=$rs['proid']?>','staffedit')" >
 	<div style="width:30%; float:left;"><?=$rs['proid']?>&nbsp;</div>
 	<div style="width:50%; float:left;"><?=$rs['proname']?>&nbsp;</div>
-	<div style="width:15%; float:left;"> 
-	<img src="images/icon/pdetail.png" align="รายละเอียด" title="แก้ไข" style="cursor:pointer;" onclick="ajaxLoad('post','promotion/edit_promotion_admin.php','pid=<?=$rs['proid']?>','staffedit')" />
+	<div style="width:15%; float:left;">
 	<?php 
-	if($rs['branchid'] == $_SESSION['branch_id'] || $_SESSION['company_code'] == "1"){
+	if($rs['branchid'] == $_SESSION['branch_id'] || $_SESSION['company_data'] == "1"){
 		?>
+		<img src="images/icon/pdetail.png" align="รายละเอียด" title="แก้ไข" style="cursor:pointer;" onclick="ajaxLoad('post','promotion/edit_promotion_admin.php','pid=<?=$rs['proid']?>','staffedit')" />
+	
+	
+		
 		<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer;" onClick="ConfDelete('promotion/promotion_del.php','d_tall','id=<?=$rs['proid']?>')" /> 
 		<?php
 	}
@@ -104,7 +107,7 @@ if($cl != $color1){
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('get','setting/staff_list.php','txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','d_tall')">	
+	<a href="javascript: ajaxLoad('get','setting/staff_list.php','branchid=<?php echo $branch_id ?>&txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','d_tall')">	
 	<img src='../setting/images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
@@ -117,7 +120,7 @@ if($cl != $color1){
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('get','setting/staff_list.php','txt=<?=$txtserch?>&Page=<?=$Next_Page?>','d_tall')">	
+	<a href="javascript: ajaxLoad('get','setting/staff_list.php','branchid=<?php echo $branch_id ?>&txt=<?=$txtserch?>&Page=<?=$Next_Page?>','d_tall')">	
 	<img src='../setting/images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		

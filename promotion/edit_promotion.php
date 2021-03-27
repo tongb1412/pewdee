@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 include('../class/config.php');
+include('../class/permission_user.php');
 $PID = $_POST['pid'];
 
 
@@ -12,7 +13,7 @@ $row = mysql_fetch_array($patient_result);
 $dat = substr($row['datestart'], 8, 2) . '-' . substr($row['datestart'], 5, 2) . '-' . substr($row['datestart'], 0, 4);
 $dat1 = substr($row['datestop'], 8, 2) . '-' . substr($row['datestop'], 5, 2) . '-' . substr($row['datestop'], 0, 4);
 
-
+$branch_name = get_branch_name($row['branchid'],$_SESSION['company_code']);
 ?>
 
 <div class="line">&nbsp;</div>
@@ -49,7 +50,6 @@ $dat1 = substr($row['datestop'], 8, 2) . '-' . substr($row['datestop'], 5, 2) . 
 		<!-- <img src="calendar/calendar.jpg" width="15" onclick="calendar('<?= date('m') ?>','<?= date('Y') ?>','cl1','dat1')" style="margin-top:5px; cursor:pointer;"  />        
         	<div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div> -->
 	</div>
-
 </div>
 
 <div class="line">
@@ -58,33 +58,12 @@ $dat1 = substr($row['datestop'], 8, 2) . '-' . substr($row['datestop'], 5, 2) . 
 	?>
 		<div style="width:25%; float:left; text-align:right;">เลือกสาขา :&nbsp;</div>
 		<div style="width:18%; float:left;">
-			<?php
-			include('../class/config.php');
-			$sql = "select * from tb_branch ";
-			$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
-			?>
-			<select name="select" id="branchid" style="width:117px;" onchange="serchtxt('promotion/promotion_list.php','d_tall','')">
-				<option value="00">ทั้งหมด</option>
-				<?php while ($rs = mysql_fetch_array($result)) {
-					if ($rs['branchid'] == $row['branchid']) {
-				?>
-						<option value="<?= $rs['branchid'] ?>" selected> <?= $rs['branchname'] ?></option>
-					<?php
-					} else {
-					?>
-						<option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
-					<?php
-					}
-					?>
-
-				<?php } ?>
-			</select>
+		<input type="text" id="dat1" size="15" readonly="readonly" value="<?= $branch_name ?>" />
 		</div>
 	<?php
 	}
 	?>
 </div>
-
 
 <div class="line" style="height:270px;">
 	<div style="width:25%; float:left; text-align:right;">รายละเอียด:&nbsp;</div>

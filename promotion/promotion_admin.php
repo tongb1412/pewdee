@@ -34,12 +34,48 @@ $pro .= $t;
  <div style="width:99%; margin:auto; margin-top:5px; height:30px;"> 
 <div style="width:300px; font-size:16px; font-weight:bold;"><img src="../daily_report/images/icon/d_report.png" align="absmiddle" />&nbsp;โปรโมชั่น</div>
 </div>-->
-<div style="width:99%; height:auto; margin:auto; margin-top:5px; text-align:center;">
+<div style="width:99%; height:auto; margin:auto; text-align:center;">
 	<div id="main" class="main" style="width:35%; margin:auto; height:495px; overflow:hidden; float:left;">
 		<div id="main1" class="littleDD" style="font-size:14px; font-weight:bold;">โปรโมชั่น </div>
-		<div class="txt_serch" style="width:90%; margin-left:20px;">
-			<input class="input_serch" type="text" id="txts" size="30" placeholder="ค้นหา" onkeyup="serchtxt('promotion/promotion_list1.php','d_tall',this)" /><input type="button" class="btn_serch" onclick="serchtxtPro('promotion/promotion_list1.php','d_tall',this)" />
+		<div class="line">
+			<div class="txt_serch" style="width:85%; margin:auto;">
+				<input class="input_serch" type="text" id="txts" size="10" placeholder="ค้นหา" onkeyup="serchtxt('promotion/promotion_list.php','d_tall',this)" />
+				<input type="button" class="btn_serch" onclick="serchtxt('promotion/promotion_list.php','d_tall',this)" />
+			</div>
 		</div>
+		<?php
+		if ($_SESSION['company_data'] == "1") {
+		?>
+			<div class="line" style="margin-top: 2%;">
+				<div style="width:25%; float:left; text-align:right; margin-left:13%;">เลือกสาขา :&nbsp;</div>
+				<div style="width:30%; float:left; margin:auto">
+					<?php
+					include('../class/config.php');
+					$sql = "select * from tb_branch ";
+					$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+					?>
+					<select name="select" id="branchid" style="width:120px;" onchange="serchtxt('promotion/promotion_list1.php','d_tall','')">
+						<option value="00">ทั้งหมด</option>
+						<?php while ($rs = mysql_fetch_array($result)) {
+							if ($rs['branchid'] == $_SESSION['branch_id']) {
+						?>
+								<option value="<?= $rs['branchid'] ?>" selected> <?= $rs['branchname'] ?></option>
+							<?php
+							} else {
+							?>
+								<option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
+							<?php
+							}
+							?>
+
+						<?php } ?>
+					</select>
+				</div>
+
+			</div>
+		<?php
+		}
+		?>
 		<div style="width:99%; height:20px; margin-top:5px;  float:left; color:#000000; font-weight:bold; font-size:13px; background:<?= $tabcolor ?>; ">
 			<div style="width:30%;text-align:left; float:left;">&nbsp;&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รหัส</div>
 			<div style="width:70%;text-align:left; float:left;">&nbsp;&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;โปรโมชั่น</div>
@@ -90,42 +126,20 @@ $pro .= $t;
 					<!-- <div id="cl1" class="calendar" style="width:152px; height:auto; display:none;"></div> -->
 				</div>
 
-
 			</div>
 			<div class="line">
-				<?php
+			<?php
 				if ($_SESSION['company_data'] == "1") {
 				?>
-					<div style="width:25%; float:left; text-align:right;">เลือกสาขา :&nbsp;</div>
+					<div style="width:25%; float:left; text-align:right;">สาขา :&nbsp;</div>
 					<div style="width:18%; float:left;">
-						<?php
-						include('../class/config.php');
-						$sql = "select * from tb_branch ";
-						$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
-						?>
-						<select name="select" id="branchid" style="width:117px;" onchange="serchtxt('promotion/promotion_list1.php','d_tall','')">
-							<option value="00">ทั้งหมด</option>
-							<?php while ($rs = mysql_fetch_array($result)) {
-								if ($rs['branchid'] == $_SESSION['branch_id']) {
-							?>
-									<option value="<?= $rs['branchid'] ?>" selected> <?= $rs['branchname'] ?></option>
-								<?php
-								} else {
-								?>
-									<option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
-								<?php
-								}
-								?>
-
-							<?php } ?>
-						</select>
+						<input type="text" id="branch_name" size="15" readonly="readonly" value="" />
 					</div>
 				<?php
 				}
 				?>
 
 			</div>
-
 
 			<div class="line" style="height:230px;">
 				<div style="width:25%; float:left; text-align:right;">รายละเอียด:&nbsp;</div>
