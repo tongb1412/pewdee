@@ -62,7 +62,6 @@ $hn = $row['hn'];
 		    <div id="p_list" style=" width:99%; margin-left:5px; float:left; height:320px; overflow:auto;">
 			<? include('dochis_spct.php'); ?>
 			
-		
 			</div>
 		</div>
 	</div>

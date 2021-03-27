@@ -1490,7 +1490,7 @@ include('class/permission_user.php');
 				alert(' 0  ');
 			}
 		} else {
-			alert('');
+			alert('โปรดระบุ ผู้ทำ');
 		}
 	}
 

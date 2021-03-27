@@ -37,7 +37,6 @@ if(empty($txtserch) && $selserch == "00"){
 	$sql = "select * from tb_patient where stayin <> 'OFF' and company_code = '$company_code' " . $where_branch_id;
 } else {
 	$sql = "select * from tb_patient where (cradno like '%$txtserch%' or hn like '%$txtserch%' or fname like '%$txtserch%' or lname like '%$txtserch%') and (stayin <> 'OFF') " . $where_branch_id . "and company_code = '$company_code' ";
-
 }
 
 // echo $sql;exit();

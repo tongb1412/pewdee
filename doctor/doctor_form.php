@@ -528,9 +528,7 @@ while($rs = mysql_fetch_array($result)){
                                 <input type="text" id="pctTqty" style="width:40px;" value="1" />
                                 &nbsp;<span id="tunit"></span>
                             </div>
-
                         </div>
-
 
                         <div style="margin-top:5px; width:100%; height:auto; float:left;">
                             <div style="width:20%; float:left; text-align:right;">ผู้สนับสนุน :&nbsp;</div>
@@ -539,12 +537,7 @@ while($rs = mysql_fetch_array($result)){
                                 <input type="text" id="pename2" style="width:150px;" onkeyup="serchtxt('doctor/pemp_list2.php','eul2',this)" />
                                 <div id="eul2" class="bl" style="width:100%;"></div>
                             </div>
-
-
                         </div>
-
-
-
 
                     </div>
 
@@ -557,7 +550,7 @@ while($rs = mysql_fetch_array($result)){
                 <div id="z_use" class="line" style="height:125px; overflow:auto; background:#FFFFFF;">
 
 
-                    <?
+            <?php
 		   	$sql = "delete from tb_pctlist  ";
 			mysql_query($sql) or die ("Error Query [".$sql."]");
 
@@ -600,75 +593,85 @@ while($rs = mysql_fetch_array($result)){
 					$sql = "select tb_package_detail.*,tb_treatment.unit,tb_treatment.typ from tb_package_detail,tb_treatment  where tb_package_detail.id=tb_treatment.tid and tb_package_detail.pid='$pid' and tb_package_detail.typ IN ('T','L')";
 					// echo $sql;exit();
                     $str = mysql_query($sql) or die ("Error Query [".$sql."]");
-					while($rs = mysql_fetch_array($str)){
-						$tid = $rs['id'];
-						$tname = $rs['name'];
-						$tqty = $qty * $rs['qty'];
-						$tunit = $rs['unit'];
-						$ttype = $rs['typ'];
-
-                        $sql = "select sum(qty) as total from tb_pctuse where hn='$hn' and vn='$pvn' and pid='$pid' and tid='$tid' and ftyp='PT' ";
-                        $tr = mysql_query($sql);
-                        $rr = mysql_fetch_array($tr);
-                        $uqty = $rr['total'];
-
-                        if( $tqty > $uqty){
-                            $sql = "select * from tb_pctlist where vn='$pvn' and hn='$hn' and tid='$tid'";
+                    $n = mysql_num_rows($str);
+                    if($n > 0){
+                        while($rs = mysql_fetch_array($str)){
+                            $tid = $rs['id'];
+                            $tname = $rs['name'];
+                            $tqty = $qty * $rs['qty'];
+                            $tunit = $rs['unit'];
+                            $ttype = $rs['typ'];
+    
+                            $sql = "select sum(qty) as total from tb_pctuse where hn='$hn' and vn='$pvn' and pid='$pid' and tid='$tid' and ftyp='PT' ";
                             $tr = mysql_query($sql);
-                            $n = mysql_num_rows($tr);
-                            if(empty($n)){
-                                $tqty = $tqty  -  $uqty;
-                                $sql = "insert into tb_pctlist values('$pvn','$hn','$tid','$tname','$tqty','$tunit','$ttype','$branch_id','$company_code')";
-                                mysql_query($sql);
-                            } else {
-                                $rr = mysql_fetch_array($tr);
-                                $tqty = $tqty +  $rr['qty'] - $uqty;
-                                $sql = "update tb_pctlist set qty='$tqty' where vn='$pvn' and hn='$hn' and tid='$tid'" . $where_branch . $where_company;
-                                mysql_query($sql);
+                            $rr = mysql_fetch_array($tr);
+                            $uqty = $rr['total'];
+    
+                            if( $tqty > $uqty){
+                                $sql = "select * from tb_pctlist where vn='$pvn' and hn='$hn' and tid='$tid'";
+                                $tr = mysql_query($sql);
+                                $n = mysql_num_rows($tr);
+                                if(empty($n)){
+                                    $tqty = $tqty  -  $uqty;
+                                    $sql = "insert into tb_pctlist values('$pvn','$hn','$tid','$tname','$tqty','$tunit','$ttype','$branch_id','$company_code')";
+                                    mysql_query($sql);
+                                } else {
+                                    $rr = mysql_fetch_array($tr);
+                                    $tqty = $tqty +  $rr['qty'] - $uqty;
+                                    $sql = "update tb_pctlist set qty='$tqty' where vn='$pvn' and hn='$hn' and tid='$tid'" . $where_branch . $where_company;
+                                    mysql_query($sql);
+                                }
                             }
                         }
-					}
-
+                    }
+					
 					$sql = "select id,qty from tb_package_detail  where pid='$pid' and typ = 'C' ";
 					$str = mysql_query($sql) or die ("Error Query [".$sql."]");
-					while($rs=mysql_fetch_array($str)){
-						$cid = $rs['id'];
-						$cqty = $rs['qty'];
-						$sqlc  = "select  tb_course_detail.*,tb_treatment.unit,tb_treatment.typ from tb_course_detail,tb_treatment  ";
-						$sqlc .= "where tb_course_detail.tid=tb_treatment.tid  and  tb_course_detail.cid='$cid'  ";
-						$strc = mysql_query($sqlc) or die ("Error Query [".$sqlc."]");
-						while($rc=mysql_fetch_array($strc)){
-							$tid = $rc['tid'];
-							$tname = $rc['tname'];
-							$tqty = $qty * ($rc['qty'] * $cqty );
-							$tunit = $rc['unit'];
-							$ttype = $rc['typ'];
+                    $n = mysql_num_rows($str);
+                    if($n > 0){
+                        // echo $sql;exit();
+                        while($rs = mysql_fetch_array($str)){
+                            // echo $sql;exit();
+                            $cid = $rs['id'];
+                            $cqty = $rs['qty'];
+                            $sqlc  = "select tb_course_detail.*,tb_treatment.unit,tb_treatment.typ from tb_course_detail,tb_treatment ";
+                            $sqlc .= "where tb_course_detail.tid=tb_treatment.tid and tb_course_detail.cid='$cid' and tb_course_detail.company_code = '$company_code' ";
+                            // echo $sqlc;exit();
+                            $strc = mysql_query($sqlc) or die ("Error Query [".$sqlc."]");
+                            while($rc=mysql_fetch_array($strc)){
+                                $tid = $rc['tid'];
+                                $tname = $rc['tname'];
+                                $tqty = $qty * ($rc['qty'] * $cqty ); //จำนวนใน ครั้งของ คอร์สใน tb_package_detail * จำนวนครั้งของ คอร์สใน tb_course_detail จะได้เป็น จำนวนคงเหลือในการ ใช้คอร์ส
+                                $tunit = $rc['unit'];
+                                $ttype = $rc['typ'];
 
-							$sql = "select sum(qty) as total from tb_pctuse where hn='$hn' and vn='$pvn' and pid='$pid' and cid='$cid' and tid='$tid' and ftyp='PC' ";
-							$tr = mysql_query($sql);
-							$rr = mysql_fetch_array($tr);
-							$uqty = $rr['total'];
-
-							if( $tqty > $uqty){
-
-								$sql = "select * from tb_pctlist where vn='$pvn' and hn='$hn' and tid='$tid'";
-								$tr = mysql_query($sql);
-								$n = mysql_num_rows($tr);
-								if(empty($n)){
-									$tqty = $tqty  -  $uqty;
-									$sql = "insert into tb_pctlist  values('$pvn','$hn','$tid','$tname','$tqty','$tunit','$ttype','$branch_id','$company_code')";
-									mysql_query($sql);
-								} else {
-									$rr = mysql_fetch_array($tr);
-									$tqty = $tqty +  $rr['qty'] - $uqty;
-									$sql = "update tb_pctlist set qty='$tqty' where vn='$pvn' and hn='$hn' and tid='$tid'" . $where_branch . $where_company;
-									mysql_query($sql);
-								}
-							}
-
-						}
-					}
+                                $sql = "select sum(qty) as total from tb_pctuse where hn='$hn' and vn='$pvn' and pid='$pid' and cid='$cid' and tid='$tid' and ftyp='PC' ";
+                                // echo $sql;exit();
+                                $tr = mysql_query($sql);
+                                $rr = mysql_fetch_array($tr);
+                                $uqty = $rr['total'];
+                                if( $tqty > $uqty){
+                                    $sql = "select * from tb_pctlist where vn='$pvn' and hn='$hn' and tid='$tid'";
+                                    // echo $sql;exit();
+                                    $tr = mysql_query($sql);
+                                    $n = mysql_num_rows($tr);
+                                    
+                                    if(empty($n)){
+                                        $tqty = $tqty  -  $uqty;
+                                        $sql = "insert into tb_pctlist  values('$pvn','$hn','$tid','$tname','$tqty','$tunit','$ttype','$branch_id','$company_code')";
+                                        mysql_query($sql);
+                                    } else {
+                                        $rr = mysql_fetch_array($tr);
+                                        $tqty = $tqty +  $rr['qty'] - $uqty;
+                                        $sql = "update tb_pctlist set qty='$tqty' where vn='$pvn' and hn='$hn' and tid='$tid'" . $where_branch . $where_company;
+                                        mysql_query($sql);
+                                    }
+                                }
+                            }
+                        }
+                    }
 				}
+
 				if($type=='C'){
 
                     $sqlc  = "select  tb_course_detail.*,tb_treatment.unit,tb_treatment.typ from tb_course_detail,tb_treatment  ";
@@ -705,10 +708,6 @@ while($rs = mysql_fetch_array($result)){
                     }
 				}
 		    }
-
-
-
-
 
 			$sql = "select * from tb_pctlist where hn='$hn' ";
 			$result = mysql_query($sql) or die ("Error Query [".$sql."]");

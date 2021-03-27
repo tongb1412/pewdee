@@ -26,8 +26,12 @@ $sqlC .="select clinicname from tb_clinicinformation where cn = '$branch_id'";
 $strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
 $rs=mysql_fetch_array($strc);
 
-$cname = $rs['clinicname'];
 
+if($branch_id == "00"){
+	$cname = "ทั้งหมด";
+} else {
+	$cname = $rs['clinicname'];
+}
 $dname ='';
 
 $empid = '';
@@ -40,7 +44,7 @@ if(empty($did)){
 
 $sql .="  order by c.empid,a.billno asc ";
 $result  = mysql_query($sql)or die ("Error Query [".$sql."]"); 
-
+// echo $sql;
 $n=1; $m=1; $s='y'; $x = 52; $h=1; $nn=0;
 
 $dp =0; $lp=0; $tp=0; $cp=0; $pp=0; $ds=0; $tt=0; $re=0; $aa=0; $total = 0;
@@ -68,7 +72,6 @@ if($s=='y'){
 	<div style="width:50%; float:left; text-align:right;">
 		หน้า : <?= '1'; ?>&nbsp;
 	</div>
-
 </div>
 <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
 	<div style="width:4%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
@@ -156,7 +159,14 @@ $dp1 =0; $lp1=0; $tp1=0; $cp1=0; $pp1=0; $ds1=0; $tt1=0; $re1=0; $aa1=0; $total1
 }
 ?>
 <div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; font-weight:bold; ">
-	&nbsp;<?= $dname ?>
+	&nbsp;
+	<?php
+		echo $dname;
+		if ($branch_id == "00") {
+			$branch_name = get_branch_name($rs['branchid'],$_SESSION['company_code']);
+			echo " ( สาขา " . $branch_name . " )";
+		} 
+	?>
 </div>
 <? 
 }
@@ -281,8 +291,5 @@ $n++; $h++; $m++;   }
 	<div style="width:6%; text-align:right; float:left;"><?= number_format($cash, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 	<div style="width:6%; text-align:right; float:left;"><?= number_format($credit, '0', '.', ',') ?>&nbsp;&nbsp;</div>
 	<div style="width:8%; float:left; text-align:right"><?= number_format($ku, '0', '.', ',') ?>&nbsp;&nbsp;</div>
-
-
-
 </div>
-<div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;">&nbsp;</div>
+<!-- <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;">&nbsp;</div> -->

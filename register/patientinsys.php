@@ -13,8 +13,7 @@
 					$Num_Rows = mysql_num_rows($result);
 				?>
 					<span>
-						สาขา
-						&nbsp;
+					เลือกสาขา&nbsp;:&nbsp;
 					</span>
 					<select name="sel_branchid_ptt_sys" id="sel_branchid_ptt_sys" onchange="serchsel('register/patientinsys_list.php','p_list',this)">
 						<?php

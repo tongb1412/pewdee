@@ -1,8 +1,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<?php
-	
-	
 	session_start();
 	$body_height = "345";
     if ($_SESSION['company_data'] == "1") {
@@ -48,8 +46,6 @@ if(empty($_POST['sdate'])){
 				<div style="width:35%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ชื่อ-สกุล</div>
 				<div style="width:22%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;แพทย์</div>
 			</div>
-	
-		
 <? 
 
 

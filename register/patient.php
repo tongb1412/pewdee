@@ -24,10 +24,9 @@ include('../class/config.php');
 
 				$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
 				$Num_Rows = mysql_num_rows($result);
-		?>
+			?>
 				<span>
-					สาขา
-					&nbsp;
+				เลือกสาขา&nbsp;:&nbsp;
 				</span>
 				<select name="sel_branchid_patient" id="sel_branchid_patient" onchange="serchsel('register/patient_list.php','p_list',this)">
 					<?php
@@ -50,7 +49,7 @@ include('../class/config.php');
 					}
 					?>
 				</select>
-		<?php
+			<?php
 				// mysql_close($dblink);
 				// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
 			}

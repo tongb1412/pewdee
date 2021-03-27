@@ -30,7 +30,7 @@ $row=mysql_fetch_array($patient_result);
 			<div class="line" style="height:25px; line-height:20px; margin-top:5px;">
 				<div style="width:10%; float:left; text-align:right; line-height:20px; font-weight:bold;">วันที่ :&nbsp;</div>
 				<div style="width:70%; float:left; text-align:left; line-height:20px;">
-				<select id="sdate" onchange="loadmodule('p_list','register/his_spct.php','hn=<?=$hn?>&dat='+this.value)">
+				<select id="sdate-history" onchange="loadmodule('p_list','register/his_spct.php','hn=<?=$hn?>&dat='+this.value)">
 				<?
 				$sql = "select DISTINCT(a.dat),a.dat from tb_pctrec a,tb_vst b where a.vn=b.vn and b.status='COM' and a.hn='$hn' order by a.dat asc";
 				$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 

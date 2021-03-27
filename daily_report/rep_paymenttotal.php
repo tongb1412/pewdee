@@ -187,7 +187,9 @@ $flag_branch = "";
 	&nbsp;
 	<?php
 		echo $dname;
-		echo " (สาขา " . $_SESSION['clinic_info'][$rs['branchid']]['clinicname'] . ")";
+		if($_SESSION['company_data'] == "1" && $branch_id == "00"){
+			echo " (สาขา " . $_SESSION['clinic_info'][$rs['branchid']]['clinicname'] . ")";
+		}	
 	?>
 </div>
 <? 

@@ -1,21 +1,22 @@
-
-
-<? include('../class/config.php'); ?>
-
 <?php
 
+include('../class/config.php'); 
+include('../class/permission_user.php');
+
 $branch_id = "";
+$company_code = $_SESSION['company_code'];
+$company_data = $_SESSION['company_data'];
 $where_branch_id = "";
 $bid = $_GET['bid'];
 if(empty($_GET['bid'])){
     if($_SESSION['branch_id'] != ""){
         $branch_id = $_SESSION['branch_id'];
-		$where_branch_id = "and (tb_patient.branchid = '$branch_id' or tb_patient.branchid is NULL or tb_patient.branchid = '')";
+		$where_branch_id = "and tb_patient.branchid = '$branch_id' and tb_patient.company_code = '$company_code' ";
     }
 }
 else if($bid != "00" && $bid != "all"){
     $branch_id = $_GET['bid'];
-	$where_branch_id = "and (tb_patient.branchid = '$branch_id' or tb_patient.branchid is NULL or tb_patient.branchid = '')";
+	$where_branch_id = "and tb_patient.branchid = '$branch_id' and tb_patient.company_code = '$company_code' ";
 }
 
 
@@ -82,7 +83,7 @@ if($cl != $color1){
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('get','register/patient_list.php','txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','p_list')">	
+	<a href="javascript: ajaxLoad('get','register/patientinsys.php','bid=<?php echo $branch_id ?>&txt=<?=$txtserch?>&Page=<?=$Prev_Page?>','p_list')">	
 	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
@@ -106,7 +107,7 @@ if($cl != $color1){
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('get','register/patientinsys.php','txt=<?=$txtserch?>&Page=<?=$Next_Page?>','p_list')">	
+	<a href="javascript: ajaxLoad('get','register/patientinsys.php','bid=<?php echo $branch_id ?>&txt=<?=$txtserch?>&Page=<?=$Next_Page?>','p_list')">	
 	<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>	
     <?		
