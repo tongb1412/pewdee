@@ -4,27 +4,37 @@ include('../class/config.php');
 $txt = $_POST['dat'];
 $cl = $color1;
 
-
+if($_SESSION['cross_branch_data'] == "1") {
+	$where_branch_id = "";
+} else {
+	include('../class/permission_user.php');
+	$branch_id = $_SESSION['branch_id'];
+	$company_data = $_SESSION['company_data'];
+	$company_code = $_SESSION['company_code'];
+	$where_data = set_where_user_data("a", $branch_id, $company_code, $company_code);
+	$where_branch_id .= $where_data['where_branch_id'];
+	$where_branch_id .= $where_data['where_company_code'];
+}
 
 if(empty($txt)){
-    if($dat=='-'){
-	$sql = "select a.*,b.status from tb_pctrec a,tb_vst b where a.hn='$hn' and a.dat = '-' and a.vn = b.vn and (b.status='COM')  ";
+    if($dat == '-') {
+	$sql = "select a.*,b.status from tb_pctrec a,tb_vst b where a.hn='$hn' and a.dat = '-' and a.vn = b.vn and (b.status='COM') $where_branch_id  ";
 	} else {
-		$sql = "select a.*,b.status from tb_pctrec  a,tb_vst b where a.hn='$hn' and a.vn = b.vn and (b.status='COM') ";
+		$sql = "select a.*,b.status from tb_pctrec  a,tb_vst b where a.hn='$hn' and a.vn = b.vn and (b.status='COM') $where_branch_id ";
 	}
 } else {
 	$hn = $_POST['hn'];
-	if($txt=='00'){
-		$sql = "select a.*,b.status from tb_pctrec a,tb_vst b where a.hn='$hn' and a.vn = b.vn and (b.status='COM') ";
+	if($txt=='00') {
+		$sql = "select a.*,b.status from tb_pctrec a,tb_vst b where a.hn='$hn' and a.vn = b.vn and (b.status='COM') $where_branch_id  ";
 	} else {
-		$sql = "select  a.*,b.status from tb_pctrec  a,tb_vst b where a.hn='$hn' and a.vn = b.vn and (b.status='COM') and a.dat like '%$txt%' ";
+		$sql = "select  a.*,b.status from tb_pctrec  a,tb_vst b where a.hn='$hn' and a.vn = b.vn and (b.status='COM') and a.dat like '%$txt%' $where_branch_id ";
 	}
 }
 
 
 
 $sql .=" order by a.dat asc ";
-
+// echo $sql;
 $result  = mysql_query($sql);
 
 $dat = '';

@@ -3,8 +3,15 @@
 include('../class/config.php');
 $txtserch = $_GET['txt'];
 $selserch = $_GET['bid'];
+$mode = $_GET['mode'];
 $company_data = $_SESSION["company_data"];
 $company_code = $_SESSION["company_code"];
+
+// echo $txtserch;
+// echo " ";
+// echo $selserch;
+// echo " ";
+// echo $mode;exit();
 
 if($txtserch == "ค้นหา"){
 	$txtserch = "";
@@ -35,6 +42,8 @@ if(empty($txtserch) && $selserch == "00"){
 	$sql = "select * from tb_patient where stayin <> 'OFF' and company_code = '$company_code' ";
 } else if(empty($txtserch) && $selserch != "") {
 	$sql = "select * from tb_patient where stayin <> 'OFF' and company_code = '$company_code' " . $where_branch_id;
+} else if($mode == "cross_branch" && !empty($txtserch)){
+		$sql = "select * from tb_patient where (selfphone like '%$txtserch%' or personalid like '%$txtserch%') and (stayin <> 'OFF') and company_code = '$company_code' ";
 } else {
 	$sql = "select * from tb_patient where (cradno like '%$txtserch%' or hn like '%$txtserch%' or fname like '%$txtserch%' or lname like '%$txtserch%') and (stayin <> 'OFF') " . $where_branch_id . "and company_code = '$company_code' ";
 }
@@ -93,7 +102,6 @@ while($rs = mysql_fetch_array($result)){
 		<div style="width:17%; float:left; cursor:pointer;" ondblclick="cleartabreg(5,4,,'register/patient_edit_from.php','content','bid=<?php echo $selserch ?>&hn=<?=$rs['hn']?>')"><? if(! empty($rs['selfphone'])){ echo $rs['selfphone']; } else { echo '-'; } ?>&nbsp;</div>
 		<div style="width:17%; float:left; text-align:right;">
 		<? if(!empty($pn)){ ?><img src="images/icon/ar.png" align="ค้างชำระ" title="ค้างชำระ" style="cursor:pointer;" onclick="loadmodule('home','register/apayment.php','bid=<?php echo $branch_id_p ?>&hn=<?=$rs['hn']?>')" />&nbsp;&nbsp;<? }?><img src="images/icon/xxxx.png" align="ส่งเข้าระบบ" title="ส่งเข้าระบบ" style="cursor:pointer;" onclick="sendpatient('bid=<?php echo $branch_id_p ?>&hn=<?=$rs['hn']?>','register/sendpatient.php','sd')" />&nbsp;&nbsp;<img src="images/icon/ShoppingCart.png" align="ขายยาหน้าร้าน" title="ขายยาหน้าร้าน" style="cursor:pointer; display:none;" onclick="loadmodule_druge('home','register/sale_druge.php','<?=$rs['hn']?>','<?=$rs['vn']?>',<?php echo $branch_id_p ?>)"/>&nbsp;&nbsp;<img src="images/icon/Folder.png" align="ประวัติการรักษา" title="ประวัติการรักษา" style="cursor:pointer;" onclick="loadmodule('home','register/history.php','bid=<?php echo $branch_id_p ?>&hn=<?=$rs['hn']?>')" />&nbsp;&nbsp;<img src="images/icon/treatment.png" align="ประวัติทรีทเมนทร์" title="ประวัติทรีทเม้นท์" style="cursor:pointer;" onclick="loadmodule('home','register/history_treatment.php','bid=<?php echo $branch_id_p ?>&hn=<?=$rs['hn']?>')" />&nbsp;&nbsp;<img src="images/icon/hnn.png" align="เพิ่มคอร์สเก่า" title="เพิ่มคอร์สเก่า" style="cursor:pointer; display:none;" onclick="loadmodule('home','register/doctor.php','bid=<?php echo $branch_id_p ?>&hn=<?=$rs['hn']?>')" />&nbsp;&nbsp;<img src="images/icon/pdelete.png" align="ลบข้อมูล" title="ลบข้อมูล" style="cursor:pointer; display:none;" onClick="ConfDelete('register/patient_del.php','p_list','bid=<?php echo $branch_id_p ?>&id=<?=$rs['hn']?>')"/>
-		
 		</div>
 	</div>
 <? } ?>

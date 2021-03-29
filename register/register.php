@@ -20,12 +20,11 @@ if(! empty($_POST['vn'])){
 		<input type="button" value="  รายชื่อทั้งหมด  " onclick="loadmodule('home','register/register.php','')" style="height:25px; font-size:13px; line-height:25px;" />
 		<input type="button" value="  เพิ่มคนไข้ใหม่  " onclick="cleartabreg(6,4,10,'register/patient_new_from.php','content','')" style="height:25px; font-size:13px; line-height:25px; " />
 		<input type="button" value="  ตารางนัด  " onclick="loadmodule('home','appointment/appointment.php','')" style="height:25px; font-size:13px; line-height:25px; " />
-
 	</div>
 </div>
 <div id="main" class="main" style="width:99%; margin:auto; margin-top:5px; height:500px; overflow:hidden;">
 	<div class="littleDD">
-		<div id="tab1" class="tab" style="width:150px; background-color:#FFFFFF; display:;">
+		<div id="tab1" class="tab" style="width:150px; background-color:#FFFFFF;">
 			<a href="javascript: loadpage('content',1,4,'register/patient.php')">รายชื่อทั้งหมด</a>
 		</div>
 		<div id="tab2" class="tab" style="width:100px; display:none;">
@@ -62,13 +61,10 @@ if(! empty($_POST['vn'])){
 
 		</div>
 
-
-
 	</div>
 
 	<div id="content" style=" width:100%; margin-top:5px; text-align:center; height:auto;">
 		<?  require("patient.php");	 ?>
 	</div>
-
 
 </div>

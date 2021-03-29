@@ -554,7 +554,19 @@ while($rs = mysql_fetch_array($result)){
 		   	$sql = "delete from tb_pctlist  ";
 			mysql_query($sql) or die ("Error Query [".$sql."]");
 
-		    $sql_pct = "select a.* from tb_pctrec a,tb_vst b  where a.hn = '$hn' and total > 0 and a.vn = b.vn and a.hn = b.hn and b.status <>'CANCEL' and a.company_code = '$company_code' ";
+            if($_SESSION['cross_branch_data'] == "1") {
+                $where_branch_id = "";
+            } else {
+                include('../class/permission_user.php');
+                $branch_id = $_SESSION['branch_id'];
+                $company_data = $_SESSION['company_data'];
+                $company_code = $_SESSION['company_code'];
+                $where_data = set_where_user_data("a", $branch_id, $company_code, $company_code);
+                $where_branch_id .= $where_data['where_branch_id'];
+                $where_branch_id .= $where_data['where_company_code'];
+            }
+
+		    $sql_pct = "select a.* from tb_pctrec a,tb_vst b  where a.hn = '$hn' and total > 0 and a.vn = b.vn and a.hn = b.hn and b.status <>'CANCEL' $where_branch_id";
             // echo $sql_pct;exit();
 			$str_pct = mysql_query($sql_pct) or die ("Error Query [".$sql_pct."]");
 			while($rs_pct = mysql_fetch_array($str_pct)){

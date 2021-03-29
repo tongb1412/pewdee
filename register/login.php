@@ -25,6 +25,7 @@ if($fn == "check_user") {
 		$_SESSION["branch_id"] = $rs['branchid']; 
 		$_SESSION["company_data"] = $rs['company_data']; 
 		$_SESSION["company_code"] = $rs['company_code']; 
+		$_SESSION["cross_branch_data"] = "0";// เลข 1 คือการเปิดให้เห็นข้อมูลข้ามสาขา
 		$SYS_EID = $_SESSION["SYS_EID"];
 		$SYS_ENAME = $_SESSION["SYS_ENAME"];
 		$branch_id = $_SESSION["branch_id"];

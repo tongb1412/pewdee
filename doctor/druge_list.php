@@ -1,4 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- <link href="css/menu_style.css" rel="stylesheet" type="text/css" /> -->
 <?php
 include('../class/config.php');
 include('../class/permission.php');
@@ -31,7 +32,7 @@ if(!empty($_REQUEST['txt'])){
 	}
 
 	?>
-	<div  style="width:99%; height:25px; line-height:25px; text-align:left; margin-left:1px; border-bottom:#CCCCCC 1px dotted;background:<?=$cl?>; cursor:pointer;" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" onclick="movedrugeD('<?=$rs['did']?>','<?=$rs['tname']?>','<?=$rs['sprice']?>','<?=$rs['unit']?>')"  >
+	<div  style="width:99%; height:25px; line-height:25px; text-align:left; margin-left:1px; border-bottom:#CCCCCC 1px dotted;background:<?=$cl?>; cursor:pointer;" class="cut-text" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" onclick="movedrugeD('<?=$rs['did']?>','<?=$rs['tname']?>','<?=$rs['sprice']?>','<?=$rs['unit']?>')"  >
 		<div style="width:97%; float:left; line-height:25px; padding-left:20px;"  >
 		<?=$rs['tname']?>&nbsp;
 		</div>

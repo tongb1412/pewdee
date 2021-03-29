@@ -14,7 +14,7 @@ include('../class/config.php');
 			<input class="input_serch" type="text" id="txts" size="41" value="" placeholder="ค้นหา" /><input type="button" class="btn_serch" onclick="serchtxtPatient('register/patient_list.php','p_list','')" />
 		</div>
 	</div>
-	<div style="width:49%; height:auto;  text-align:left; padding-left:5px;">
+	<div style="width:35%; height:auto;  text-align:left; padding-left:5px;">
 		<?php
 		if ($_SESSION['company_data'] == "1") {
 			if ($_SESSION['branch_id'] != "") {
@@ -24,9 +24,9 @@ include('../class/config.php');
 
 				$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
 				$Num_Rows = mysql_num_rows($result);
-			?>
+		?>
 				<span>
-				เลือกสาขา&nbsp;:&nbsp;
+					เลือกสาขา&nbsp;:&nbsp;
 				</span>
 				<select name="sel_branchid_patient" id="sel_branchid_patient" onchange="serchsel('register/patient_list.php','p_list',this)">
 					<?php
@@ -49,13 +49,27 @@ include('../class/config.php');
 					}
 					?>
 				</select>
-			<?php
+		<?php
 				// mysql_close($dblink);
 				// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
 			}
+			
 		}
 		?>
-	</div>
+		</div>
+		<?php
+		if($_SESSION['cross_branch_data'] == "1" || $_SESSION['company_data'] == "1") {
+			?>
+			<div style="width:15%; height:auto; text-align:left; padding-left:5px; margin: auto; ">
+				ค้นหาคนไข้ต่างสาขา&nbsp;:&nbsp;
+			</div>
+			<div class="txt_serch">
+				<input class="input_serch" type="text" id="txts2" size="33" value="" placeholder="เบอร์โทรศัทพ์ หรือ บัตร ปชช" /><input type="button" class="btn_serch" onclick="serchtxtCrossBranch('register/patient_list.php','p_list',this)" />
+			</div>
+			<?php
+		}
+		?>
+	
 
 
 

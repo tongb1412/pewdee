@@ -611,9 +611,6 @@ include('class/permission_user.php');
 		}
 	}
 
-
-
-
 	function addsdpayment(URL, displayId) {
 		var ptotal = parseFloat(document.getElementById('total').value.replace(",", ""));
 		var sum = parseFloat(document.getElementById('sum').value.replace(",", ""));
@@ -766,7 +763,7 @@ include('class/permission_user.php');
 		var data = 'hn=' + hn;
 		data += '&eid=' + document.getElementById('sempid').value;
 		data += '&bid=' + bid;
-		ajaxLoadsend('post', URL, data, displayId)
+		ajaxLoadsend('post', URL, data, displayId);
 
 	}
 
@@ -806,10 +803,9 @@ include('class/permission_user.php');
 			var data = 'hn=' + hn;
 			data += '&vn=' + vn;
 			data += '&mem=' + document.getElementById('cmem').value;
-
 			ajaxLoadsend('post', URL, data, displayId)
 		} else {
-			alert(' !');
+			alert('กรุณาระบุ หมายเหตุ');
 		}
 	}
 
@@ -987,7 +983,6 @@ include('class/permission_user.php');
 		var con = 'Y';
 		if (document.getElementById('tid').value != '') {
 			if (document.getElementById('tqty').value != '') {
-
 				if (document.getElementById('tid').value != 'xxxxx') {
 					if (document.getElementById('tuprice').value != '' && document.getElementById('tuprice').value != '0') {
 						con = 'Y';
@@ -1001,7 +996,6 @@ include('class/permission_user.php');
 						con = 'N';
 					}
 				}
-
 
 				if (con == 'Y') {
 					if (document.getElementById('eid').value != '') {

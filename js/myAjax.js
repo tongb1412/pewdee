@@ -910,6 +910,12 @@ function serchtxtPatient(URL, displayId, txt) {
 	ajaxLoad('get', URL, data, displayId);
 }
 
+function serchtxtCrossBranch(URL, displayId, txt){
+	var data = 'txt=' + $('#txts2').val();
+	data += '&mode=cross_branch';
+	ajaxLoad('get', URL, data, displayId);
+}
+
 function serchsel(URL, displayId, txt) {
 	var data = 'txt=' + $('#txts').val();
 	data += '&bid=' + txt.value
@@ -1084,7 +1090,7 @@ function regClick(mode, URL, displayId) {
 		document.getElementById('tab5').style.background = 'none';
 		document.getElementById('tab8').style.background = 'none';
 		document.getElementById('tab9').style.background = 'none';
-		document.getElementById('tab10').style.background = 'FFFFFF';
+		document.getElementById('tab10').style.background = '#FFFFFF';
 	}
 
 	ajaxLoad('post', URL, pHN, displayId);
@@ -1970,7 +1976,6 @@ function laserinstock_movetxt(lid, lname, lunit) {
 	document.getElementById('lunit').innerHTML = lunit;
 	document.getElementById('qty').value = '';
 	document.getElementById('sid').focus();
-
 }
 
 function cleartemplaser() {

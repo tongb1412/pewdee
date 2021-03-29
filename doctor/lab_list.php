@@ -1,4 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <?
 include('../class/config.php');
 $cl = $color1;
@@ -27,7 +28,7 @@ if($cl != $color1){
 }
 
 ?>
-<div  style="width:99%; height:25px; line-height:25px; text-align:left; margin-left:1px; border-bottom:#CCCCCC 1px dotted;background:<?=$cl?>; cursor:pointer;" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" onclick="movelab('<?=$rs['id']?>','<?=$rs['name']?>','<?=$rs['discount']?>')"  >
+<div  style="width:99%; height:25px; line-height:25px; text-align:left; margin-left:1px; border-bottom:#CCCCCC 1px dotted;background:<?=$cl?>; cursor:pointer;" class="cut-text" onmouseover="linkover(this)" onmouseout="linkout(this,'<?=$cl?>')" onclick="movelab('<?=$rs['id']?>','<?=$rs['name']?>','<?=$rs['discount']?>')"  >
     <div style="width:97%; float:left; line-height:25px; padding-left:20px;"  >
 	<?=$rs['name']?>&nbsp;
 	</div>

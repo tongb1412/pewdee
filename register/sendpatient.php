@@ -5,19 +5,19 @@ include('../class/config.php');
 include('../class/permission_user.php');
 $hn = $_POST['hn'];
 $bid = $_POST['bid'];
-
 $branch_id = "";
-if(empty($bid)){
-    if($_SESSION['branch_id'] != ""){
+if(empty($bid)) {
+    if($_SESSION['branch_id'] != "") {
         $branch_id = $_SESSION['branch_id'];
     }
 }
-else{
+else {
     $branch_id = $bid;
 }
+
 $company_code = $_SESSION['company_code'];
 $company_data = $_SESSION['company_data'];
-$where_user =  set_where_user_data('',$branch_id, $company_code, $company_data);
+$where_user =  set_where_user_data('',$_SESSION['branch_id'], $company_code, $company_data);
 
 $sd = 'Yes';
 $sql = "select * from tb_vst where hn='$hn' and status not IN('COM','CANCEL') " . $where_user['where_company_code'];
@@ -59,12 +59,13 @@ if($sd == 'Yes'){
 		<div style="width:75%; float:left; line-height:50px; height:50px; padding-top:15px;">
 		<select id="sempid" style="width:330px; font-size:16px;">
 		<option value="00">ไม่ระบุแพทย์</option>
-		<?
-		if($_SESSION['company_code'] == 1){
-			$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and (branchid is NULL or branchid = '' or branchid = '$branch_id')" . $where_user['where_company_code'] . " order by typ, fname ";
+		<?php
+		$branch_id_staff = $_SESSION['branch_id'];
+		if($_SESSION['company_code'] == 1) {
+			$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and (branchid is NULL or branchid = '' or branchid = '$branch_id_staff')" . $where_user['where_company_code'] . " order by typ, fname ";
 		}
-		else{
-			$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and branchid = '$branch_id' " . $where_user['where_company_code'] . " order by typ, fname ";
+		else {
+			$sql = "select * from tb_staff where typ = 'D' and eshow='Y' and branchid = '$branch_id_staff' " . $where_user['where_company_code'] . " order by typ, fname ";
 		}
 		// echo $sql;exit();
 		$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
@@ -77,9 +78,9 @@ if($sd == 'Yes'){
     </div>
 </div>
 <div style="width:100%; height:49px; text-align:right;">
-	<input type="button" value="  ส่งเข้าระบบ  " style="font-size:14px; font-weight:bold; height:35px;" onclick="sendadd('register/sendpatientadd.php','<?=$hn?>','<?php echo $bid ?>','')" />&nbsp;
+	<input type="button" value="  ส่งเข้าระบบ  " style="font-size:14px; font-weight:bold; height:35px;" onclick="sendadd('register/sendpatientadd.php','<?=$hn?>','<?php echo $_SESSION['branch_id']; ?>','')" />&nbsp;
 	<input type="button" value="  ยกเลิก  "  style="font-size:14px; font-weight:bold; height:35px;" onclick="cancelsend()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</div>
+		</div>
 <? } else { ?>
 <div style="width:100%; height:100px;">
 	<div class="line" style="margin-top:10px; height:50px; font-size:16px;">

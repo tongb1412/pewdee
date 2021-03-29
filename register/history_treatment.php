@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?
+<?php
 include('../class/config.php');
+include('../class/permission_user.php');
 $hn = $_POST['hn'];
 
 $sql = "select * from tb_patient where hn='$hn'";
@@ -31,34 +32,43 @@ $row=mysql_fetch_array($patient_result);
 				<div style="width:10%; float:left; text-align:right; line-height:20px; font-weight:bold;">วันที่ :&nbsp;</div>
 				<div style="width:70%; float:left; text-align:left; line-height:20px;">
 				<select id="sdate-history" onchange="loadmodule('p_list','register/his_spct.php','hn=<?=$hn?>&dat='+this.value)">
-				<?
-				$sql = "select DISTINCT(a.dat),a.dat from tb_pctrec a,tb_vst b where a.vn=b.vn and b.status='COM' and a.hn='$hn' order by a.dat asc";
+				<?php
+
+				if($_SESSION['cross_branch_data'] == "1") {
+					$where_branch_id = "";
+				} else {
+					$branch_id = $_SESSION['branch_id'];
+					$company_data = $_SESSION['company_data'];
+					$company_code = $_SESSION['company_code'];
+					$where_data = set_where_user_data("a", $branch_id, $company_code, $company_code);
+					$where_branch_id .= $where_data['where_branch_id'];
+					$where_branch_id .= $where_data['where_company_code'];
+				}
+				$sql = "select DISTINCT(a.dat),a.dat from tb_pctrec a,tb_vst b where a.vn=b.vn and b.status='COM' and a.hn='$hn' " . $where_branch_id . " order by a.dat asc";
 				$str = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 				$n = mysql_num_rows($str);
 				if($n){
-				$dat = '00';
-				?>
-				<option value="00">แสดงทั้งหมด</option>
-				<? while($rs=mysql_fetch_array($str)){ ?>
-				<option value="<?=$rs['dat']?>"><?=$rs['dat']?></option>
+					$dat = '00';
+					?>
+					<option value="00">แสดงทั้งหมด</option>
+					<? while($rs=mysql_fetch_array($str)){ ?>
+					<option value="<?=$rs['dat']?>"><?=$rs['dat']?></option>
 				<? } } else { 
-				$dat='-';
-				?>
-				<option value="-">ไม่พบประวัติการซื้อ</option>
+					$dat='-';
+					?>
+					<option value="-">ไม่พบประวัติการซื้อ</option>
 				<? } ?>
 				</select>
 				</div>
 			</div>
 			<div style="width:98%; height:20px;padding-top:5px;margin-left:5px; color:#000000; font-weight:bold; float:left; font-size:13px;background:<?=$tabcolor?>;">
 				<div style="width:25%;text-align:left; float:left;">&nbsp;&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;วันที่</div>
-				<div style="width:35%;  text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รายการ</div>
+				<div style="width:35%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;รายการ</div>
 				<div style="width:20%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จำนวน</div>
 				<div style="width:20%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ราคา</div>
 			</div>		
 		    <div id="p_list" style=" width:99%; margin-left:5px; float:left; height:350px; overflow:auto;">
 			<? include('his_spct.php'); ?>
-			
-		
 			</div>
 		</div>
 	</div>

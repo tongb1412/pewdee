@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 $hn = $_POST['hn'];
 $cl = $color1;
 $sql = "select * from tb_patient where hn='$hn'";
@@ -35,24 +36,37 @@ $row=mysql_fetch_array($patient_result);
 					<div style="width:25%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ประเภท</div>
 				</div>
 				<div id="p_list" style=" width:99%; margin-left:5px; float:left; height:350px; overflow:auto;">
-					<?
-			$sql = "select a.*,b.billno from tb_vst a,tb_payment b where a.vn=b.vn  and  a.hn='$hn' and a.status = 'COM' order by a.vdate asc ";
-			$str  = mysql_query($sql);
-			$n=1;
-			while($rs=mysql_fetch_array($str)){
-			if($cl != $color1){
-				$cl = $color1;
-			} else {
-				$cl = $color2;
-			}
-			if($rs['mode']=='00'){ $txt ='-'; } else { $txt='ซื้อยา'; }
-			?>
-					<div class="list_out" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:94%; cursor:pointer;" onClick="loadmodule('d_list','register/history_list.php','vn=<?= $rs['vn'] ?>')">
-						<div style="width:8%; float:left;"><?= $n ?>&nbsp;</div>
-						<div style="width:39%; float:left; "><?= $rs['vdate'] ?>&nbsp;</div>
-						<div style="width:30%; float:left;"><?= $rs['billno'] ?>&nbsp;</div>
-						<div style="width:20%; float:left; text-align:left;"><?= $txt; ?>&nbsp;</div>
-					</div>
+					<?php
+					
+					if($_SESSION['cross_branch_data'] == "1") {
+						$where_branch_id = "";
+					} else {
+						$branch_id = $_SESSION['branch_id'];
+						$company_data = $_SESSION['company_data'];
+						$company_code = $_SESSION['company_code'];
+						$where_data = set_where_user_data("a", $branch_id, $company_code, $company_code);
+						$where_branch_id .= $where_data['where_branch_id'];
+						$where_branch_id .= $where_data['where_company_code'];
+					}
+					
+					$sql = "select a.*,b.billno from tb_vst a,tb_payment b where a.vn=b.vn  and  a.hn='$hn' and a.status = 'COM' " . $where_branch_id . " order by a.vdate asc ";
+					// echo $sql;
+					$str = mysql_query($sql);
+					$n = 1;
+					while($rs=mysql_fetch_array($str)){
+						if($cl != $color1) {
+							$cl = $color1;
+						} else {
+							$cl = $color2;
+						}
+						if($rs['mode']=='00'){ $txt ='-'; } else { $txt='ซื้อยา'; }
+						?>
+						<div class="list_out cut-text" onmouseover="linkover(this)" onmouseout="linkout(this,'<?= $cl ?>')" style="background:<?= $cl ?>; width:94%; cursor:pointer;" onClick="loadmodule('d_list','register/history_list.php','vn=<?= $rs['vn'] ?>')">
+							<div style="width:8%; float:left;"><?= $n ?>&nbsp;</div>
+							<div style="width:39%; float:left; "><?= $rs['vdate'] ?>&nbsp;</div>
+							<div style="width:30%; float:left;"><?= $rs['billno'] ?>&nbsp;</div>
+							<div style="width:20%; float:left; text-align:left;"><?= $txt; ?>&nbsp;</div>
+						</div>
 					<? $n++; } ?>
 
 				</div>
