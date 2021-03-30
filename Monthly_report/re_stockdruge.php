@@ -1,8 +1,3 @@
-<?
-include('../class/config.php');
-
- 
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -201,10 +196,11 @@ function showDetail($Page_Start,$Per_Page){
 
 			$n = 1;
 			$sql = "select did,tname,total,unit,sprice,status,dgroup from tb_druge where status = 'IN' order by dgroup,typname,tname asc  LIMIT $Page_Start , $Per_Page";
+			// echo $sql;exit();
 			$str = mysql_query($sql);			
-			while($rs  = mysql_fetch_array($str)){
+			while($rs  = mysql_fetch_array($str)) {
 				$did = $rs['did'];
-				if($branch_id == '00'){
+				if($branch_id == '00') {
 					$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 and company_code = '$company_code' ";
 				} else {
 					$sql1 = "select sum(total) as total from tb_drugeinstock where did='$did' and total > 0 and branchid = '$branch_id' and company_code = '$company_code' ";

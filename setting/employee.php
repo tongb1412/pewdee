@@ -23,9 +23,6 @@ $sid .= $t;
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-
-
-
 <div id="t_main" class="tmain" style="width:100%; margin:auto; height:495px; overflow:hidden; ">
   <div class="littleDD" style="font-size:14px; font-weight:bold;">ข้อมูลพนักงาน - แพทย์</div>
 
@@ -92,10 +89,10 @@ $sid .= $t;
       <div style="width:25%; float:left;">
         <input name="text2" type="text" id="nname" size="15" />
       </div>
-      <?
-				$sql = "select * from tb_gernaral where typ='ST'";
-				$result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-				?>
+      <?php
+      $sql = "select * from tb_gernaral where typ='ST'";
+      $result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+      ?>
       <div style="width:25%; float:left; text-align:right;">สถานะภาพ :&nbsp;</div>
       <div style="width:25%; float:left;">
         <select name="select" id="st" style="width:117px;">
@@ -144,7 +141,7 @@ $sid .= $t;
     <div class="line">
       <div style="width:21%; float:left; text-align:right;">วัน-เดือน-ปี เกิด :&nbsp;</div>
       <div style="width:25%; float:left;">
-        <input type="text" id="dd" style="width:22px" size="2" maxlength="2" />-<input type="text" id="dm" style="width:22px" size="2" maxlength="2" />-<input type="text" id="dy" style="width:31px" size="4" maxlength="4" />
+        <input type="text" id="dd" style="width:22px" size="2" maxlength="2" />-<input type="text" id="dm" style="width:22px" size="2" maxlength="2" />-<input type="text" id="dy" style="width:31px" size="3" maxlength="4" />
       </div>
       <div style="width:25%; float:left; text-align:right;">บัตรประชาชน :&nbsp;</div>
       <div style="width:25%; float:left;">

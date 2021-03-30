@@ -1,17 +1,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?
+<?php
+
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1');
 include('../class/config.php');
+require_once('../class/permission_user.php');
+
 $txt = $_POST['dat'];
 $cl = $color1;
 
 if($_SESSION['cross_branch_data'] == "1") {
 	$where_branch_id = "";
 } else {
-	include('../class/permission_user.php');
+	
 	$branch_id = $_SESSION['branch_id'];
 	$company_data = $_SESSION['company_data'];
 	$company_code = $_SESSION['company_code'];
-	$where_data = set_where_user_data("a", $branch_id, $company_code, $company_code);
+	$where_data = set_where_user_data("a", $branch_id, $company_code, $company_data);
 	$where_branch_id .= $where_data['where_branch_id'];
 	$where_branch_id .= $where_data['where_company_code'];
 }

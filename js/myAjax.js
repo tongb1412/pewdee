@@ -649,6 +649,15 @@ function ajaxcallLogin(contentType, displayId, responseText) {
 		if (mode[1] == 'N') { alert(mode[2]); } else {
 			//alert(mode[2]);
 			switch (mode[2]) {
+				case 'O': document.getElementById('menu1').style.display = '';
+					document.getElementById('menu2').style.display = '';
+					document.getElementById('menu3').style.display = '';
+					document.getElementById('menu4').style.display = '';
+					document.getElementById('menu5').style.display = '';
+					document.getElementById('menu6').style.display = '';
+					document.getElementById('menu7').style.display = '';
+					document.getElementById('menu8').style.display = '';
+					break;
 				case 'A': document.getElementById('menu1').style.display = '';
 					document.getElementById('menu2').style.display = '';
 					document.getElementById('menu3').style.display = '';
@@ -675,8 +684,6 @@ function ajaxcallLogin(contentType, displayId, responseText) {
 					document.getElementById('menu6').style.display = 'none';
 					document.getElementById('menu7').style.display = '';
 					document.getElementById('menu8').style.display = '';
-
-
 					break;
 			}
 
@@ -695,6 +702,16 @@ function checkModeUser(text) {
 	document.getElementById('loading').style.display = 'none';
 	let mode = text;
 	switch (mode) {
+		case 'O': document.getElementById('menu1').style.display = '';
+			document.getElementById('menu2').style.display = '';
+			document.getElementById('menu3').style.display = '';
+			document.getElementById('menu4').style.display = '';
+			document.getElementById('menu5').style.display = '';
+			document.getElementById('menu6').style.display = '';
+			document.getElementById('menu7').style.display = '';
+			document.getElementById('menu8').style.display = '';
+			document.getElementById('menu9').style.display = '';
+			break;
 		case 'A': document.getElementById('menu1').style.display = '';
 			document.getElementById('menu2').style.display = '';
 			document.getElementById('menu3').style.display = '';
@@ -842,9 +859,13 @@ function setbtnSetting(n, m) {
 	var i = 1;
 	while (i < m + 1) {
 		if (i != n) {
-			document.getElementById('ST' + i).style.display = 'none';
+			if(document.getElementById('ST' + i) != null){
+				document.getElementById('ST' + i).style.display = 'none';
+			}
 		} else {
-			document.getElementById('ST' + i).style.display = '';
+			if(document.getElementById('ST' + i) != null){
+				document.getElementById('ST' + i).style.display = '';
+			}
 		}
 		i++;
 	}

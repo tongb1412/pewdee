@@ -1,6 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
+include('../class/permission_user.php');
 /*$sdate = $_GET['sdate'];
 $edate = $_GET['edate'];*/
 
@@ -9,8 +10,20 @@ $t1 = strtotime($_GET['edate']) + (1*24*3600);
 $sdate = date("Y-m-d", $t0);
 $edate = date("Y-m-d", $t1);
 
+if(!empty($_REQUEST['branchid'])){
+	$branchid = $_REQUEST['branchid'];
+} else {
+	$branchid = '';
+}
+$as = "a";
+$data = set_where_user_data($as ,$branchid, $_SESSION['company_code'], $_SESSION['company_data']);
+$where_branch_id = "";
+$where_branch_id .= $data['where_branch_id'];
+$where_branch_id .= $data['where_company_code'];
+
 $c =0; $d=0; $t=0;
-$sql = "select a.*,b.fname efname,b.lname elname ,c.fname cfname,c.lname clname,d.fname ckfname ,d.lname cklname from tb_totalcash a,tb_staff b,tb_staff c,tb_staff d where a.empname = b.staffid and a.cashier = c.staffid and a.cashier_check = d.staffid and (a.date between '$sdate%' and '$edate%') ";
+$sql = "select a.*,b.fname efname,b.lname elname ,c.fname cfname,c.lname clname,d.fname ckfname ,d.lname cklname from tb_totalcash a,tb_staff b,tb_staff c,tb_staff d where a.empname = b.staffid and a.cashier = c.staffid and a.cashier_check = d.staffid and (a.date between '$sdate%' and '$edate%') $where_branch_id";
+echo $sql;exit();
 $result = mysql_query($sql) or die ("Error Query [".$sql."]");
 $Num_Rows = mysql_num_rows($result);
 $n=1; $m=1; $s='y'; $x = 52;
@@ -28,37 +41,37 @@ while($rs=mysql_fetch_array($result)){
 if($s=='y'){
 ?>
 <!--<div style="width:100%; height:3508px;  font-family: 'Angsana New'; text-align:center; margin-left:0px;">    -->
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">รายงานสรุปบันทึกยอดสดประจำวัน</div>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
-	ระหว่างวันที่ <?=$_GET['sdate'].'  ถึง  '.$_GET['edate'];?>
-	</div>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">รายงานสรุปบันทึกยอดสดประจำวัน</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
+	ระหว่างวันที่ <?= $_GET['sdate'] . '  ถึง  ' . $_GET['edate']; ?>
+</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 
 	<div style="width:100%; float:left; text-align:right;">
-		หน้า : <?='1';?>&nbsp;
+		หน้า : <?= '1'; ?>&nbsp;
 	</div>
 
-	</div>
+</div>
 
 
-    <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
-      <div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-      <div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
-      <div style="width:6%; float:left; border-bottom:#999999 2px solid;">ยอดยกมา</div>
-      <div style="width:7%; float:left; border-bottom:#999999 2px solid;">ยอดขาย</div>
-      <div style="width:7%; float:left; border-bottom:#999999 2px solid;">ค่าใช้จ่าย</div>
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">แพทย์เบิก</div>
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">ฝากธนาคาร</div>
-	  <div style="width:21%; float:left; border-bottom:#999999 2px solid;">หมายเหตุ</div>
-      <div style="width:7%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
+	<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+	<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
+	<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ยอดยกมา</div>
+	<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ยอดขาย</div>
+	<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ค่าใช้จ่าย</div>
+	<div style="width:7%; float:left; border-bottom:#999999 2px solid;">แพทย์เบิก</div>
+	<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ฝากธนาคาร</div>
+	<div style="width:21%; float:left; border-bottom:#999999 2px solid;">หมายเหตุ</div>
+	<div style="width:7%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
 
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">ผู้บันทึก</div>
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
-	  <div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
-	</div>
+	<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ผู้บันทึก</div>
+	<div style="width:7%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
+	<div style="width:7%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
+	<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
+</div>
 
- <?
+<?
  $s='n';
  }
 if( $n > ($m * $x) ){ $m++; }
@@ -69,59 +82,62 @@ if($n == ((($m-1) * $x) + 1) && $m > 1){
 	<br><br>
 	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 		<div style="width:50%; float:left; text-align:left;">
-		<?=$dname?>&nbsp;
+			<?= $dname ?>&nbsp;
 		</div>
 		<div style="width:50%; float:left; text-align:right;">
-		หน้า : <?=$m;?>&nbsp;
+			หน้า : <?= $m; ?>&nbsp;
 		</div>
 	</div>
-    <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
-			<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-      <div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
-      <div style="width:6%; float:left; border-bottom:#999999 2px solid;">ยอดยกมา</div>
-      <div style="width:7%; float:left; border-bottom:#999999 2px solid;">ยอดขาย</div>
-      <div style="width:7%; float:left; border-bottom:#999999 2px solid;">ค่าใช้จ่าย</div>
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">แพทย์เบิก</div>
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">ฝากธนาคาร</div>
-	  <div style="width:21%; float:left; border-bottom:#999999 2px solid;">หมายเหตุ</div>
-      <div style="width:7%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
 
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">ผู้บันทึก</div>
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
-	  <div style="width:7%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
-	  <div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
+	<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
+		<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+		<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ยอดยกมา</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ยอดขาย</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ค่าใช้จ่าย</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">แพทย์เบิก</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ฝากธนาคาร</div>
+		<div style="width:21%; float:left; border-bottom:#999999 2px solid;">หมายเหตุ</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ผู้บันทึก</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
+		<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
 	</div>
 <?
  }
 ?>
+<?
+	
+	if($flag_branch != $rs['branchid']){
+		$flag_branch = $rs['branchid'];
+		?>
+		<div style="width:100%; height:30px; line-height:25px; text-align:left; font-size:10px; font-weight:bold;  float:left; ">
+			<div style="width:30%; float:left;">สาขา <?php echo $_SESSION['clinic_info'][$rs['branchid']]['clinicname'] ?></div>
+		</div>
+		<?php
+	}
+	?>
 
-
-	<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; ">
-		<div style="width:3%; text-align: center; float:left;"><?=$n?></div>
-        <div style="width:3%; float:left;"><?=$rs['date']?></div>
-		<div style="width:5%; text-align:right; float:left;">&nbsp;<?=number_format($rs['cash_yes'],'2','.',',')?></div>
-		<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['today_total'],'2','.',',')?></div>
-        <div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['coste'],'2','.',',')?></div>
-		<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['doctor_cos'],'2','.',',')?></div>
-        <div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['bank'],'2','.',',')?></div>
-        <div style="width:21%; float:left;">&nbsp;&nbsp;<? if($rs['mem']!==''){ echo $rs['mem'];  } else { echo '-';  }  ?></div>
-        <div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['total'],'2','.',',')?></div>
-
-        <div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['efname'].'    '.$rs['elname']  ?></div>
-        <div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['cfname'].'    '.$rs['clname']  ?></div>
-        <div style="width:7%; float:left;"><?=$rs['ckfname'].'    '.$rs['cklname']  ?></div>
-        <div style="width:10%; float:left;"><?=$rs['datenow']?></div>
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; ">
+	<div style="width:3%; text-align: center; float:left;"><?= $n ?></div>
+	<div style="width:3%; float:left;"><?= $rs['date'] ?></div>
+	<div style="width:5%; text-align:right; float:left;">&nbsp;<?= number_format($rs['cash_yes'], '2', '.', ',') ?></div>
+	<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['today_total'], '2', '.', ',') ?></div>
+	<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['coste'], '2', '.', ',') ?></div>
+	<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['doctor_cos'], '2', '.', ',') ?></div>
+	<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['bank'], '2', '.', ',') ?></div>
+	<div style="width:21%; float:left;">&nbsp;&nbsp;
+		<? if($rs['mem']!==''){ echo $rs['mem'];  } else { echo '-';  }  ?>
 	</div>
+	<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['total'], '2', '.', ',') ?></div>
 
-
-
-
-
+	<div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;<?= $rs['efname'] . '    ' . $rs['elname']  ?></div>
+	<div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;<?= $rs['cfname'] . '    ' . $rs['clname']  ?></div>
+	<div style="width:7%; float:left;"><?= $rs['ckfname'] . '    ' . $rs['cklname']  ?></div>
+	<div style="width:10%; float:left;"><?= $rs['datenow'] ?></div>
+</div>
 
 <? $n++; } ?>
 <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;  ">&nbsp;</div>
-
-
-
-
 <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;">&nbsp;</div>

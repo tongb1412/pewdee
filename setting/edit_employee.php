@@ -169,10 +169,10 @@ $branchid = $row['branchid'];
 
 <div class="line">
 	<div style="width:21%; float:left; text-align:right;">วัน-เดือน-ปี เกิด :&nbsp;</div>
-	<div style="width:25%; float:left;">
-		<input type="text" id="dd" size="2" style="width:22px" maxlength="2" value="<?= substr($row['birthday'], 0, 2) ?>" />-<input type="text" id="dm" size="2" style="width:22px" maxlength="2" value="<?= substr($row['birthday'], 3, 2) ?>" />-<input type="text" id="dy" size="4" style="width:35px" maxlength="4" value="<?= substr($row['birthday'], 6, 4) ?>" />
+	<div style="width:26%; float:left;">
+		<input type="text" id="dd" size="2" style="width:22px" maxlength="2" value="<?= substr($row['birthday'], 0, 2) ?>" />-<input type="text" id="dm" size="2" style="width:22px" maxlength="2" value="<?= substr($row['birthday'], 3, 2) ?>" />-<input type="text" id="dy" size="3" style="width:35px" maxlength="4" value="<?= substr($row['birthday'], 6, 4) ?>" />
 	</div>
-	<div style="width:25%; float:left; text-align:right;">บัตรประชาชน :&nbsp;</div>
+	<div style="width:24%; float:left; text-align:right;">บัตรประชาชน :&nbsp;</div>
 	<div style="width:25%; float:left;"><input type="text" id="idcard" size="12" value="<?= $row['idcard'] ?>" /></div>
 </div>
 <!--วัน เดือน ปี เกิด-->

@@ -3,7 +3,6 @@
 include('../class/config.php');
 require('../class/permission_user.php'); 
 
-
 $branch_id = "";
 if(empty($_REQUEST['bid'])){
 	if($_SESSION["branch_id"] != ""){
@@ -53,10 +52,11 @@ $mem = $_POST['mem'];
 $typ = $_POST['typ'];
 $how = $_POST['how'];
 $other = $_POST['other'];
-
+$id_staff = $_SESSION["SYS_EID"];
 $dat = date('Y-m-d H:i:s');
 
 if($_POST['mode']=='ADD'){
+
 	$sql1 = "select fname from tb_patient where fname='$fname' and lname='$lname' " . $where_user_data['where_company_code'];
 	$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
 	$n = mysql_num_rows($result);
@@ -66,10 +66,10 @@ if($_POST['mode']=='ADD'){
 		$result = mysql_query($sql1) or die ("Error Query ".$sql1); 
 		$n = mysql_num_rows($result);
 		if(empty($n)){
-
 			$sql  = "insert into tb_patient values('$hn','$cardno','$dat','$level','$pname','$fname','$lname','$sex','$pno'";
 			$sql .= ",'$dob','$bl','$oc','$st','$adderss','$tum','$aum','$province','$country','$post','$tel','$mtel','$email'";
-			$sql .= ",'$facebook','$pass','REG','-','-','-','$mem','$typ','$how','$other','$branch_id', '$company_code')";
+			$sql .= ",'$facebook','$pass','REG','-','-','-','$mem','$typ','$how','$other','$branch_id', '$company_code', '$id_staff','$dat',NULL)";
+			// echo $sql;exit();
 			mysql_query($sql) or die ("Error Query [".$sql."]");
 			
 			$sql  = "update tb_autonumber set last='$hn' where typ='HN'";
@@ -86,27 +86,24 @@ if($_POST['mode']=='ADD'){
 		$confirm = 'No';
 		$txt = 'ชื่อ - สกุล มีในระบบแล้วไม่สามารถบันทึกได้';
 	}
+
 } else {
 	if($company_data == "1"){
 		$sql  = "update tb_patient set cradno='$cardno',level='$level',pname='$pname',fname='$fname',lname='$lname',sex='$sex'";
 		$sql .= ",personalid='$pno',birthday='$dob',blood='$bl',occupation='$oc',state='$st',address='$adderss'";
 		$sql .= ",tum='$tum',aum='$aum',province='$province',country='$country',post='$post',telephone='$tel'";
-		$sql .= ",selfphone='$mtel',email='$email',facebook='$facebook',passport='$pass',mem='$mem',new='$typ',how='$how',other='$other', branchid = '$branch_id' where hn='$hn'" ;
+		$sql .= ",selfphone='$mtel',email='$email',facebook='$facebook',passport='$pass',mem='$mem',new='$typ',how='$how',other='$other', branchid = '$branch_id', edit_log_datetime = '$dat' where hn='$hn'";
 	} else {
 		$sql  = "update tb_patient set cradno='$cardno',level='$level',pname='$pname',fname='$fname',lname='$lname',sex='$sex'";
 		$sql .= ",personalid='$pno',birthday='$dob',blood='$bl',occupation='$oc',state='$st',address='$adderss'";
 		$sql .= ",tum='$tum',aum='$aum',province='$province',country='$country',post='$post',telephone='$tel'";
-		$sql .= ",selfphone='$mtel',email='$email',facebook='$facebook',passport='$pass',mem='$mem',new='$typ',how='$how',other='$other' where hn='$hn'" ;
+		$sql .= ",selfphone='$mtel',email='$email',facebook='$facebook',passport='$pass',mem='$mem',new='$typ',how='$how',other='$other', edit_log_datetime = '$dat' where hn='$hn'" ;
 	}
 	
-
 	mysql_query($sql) or die ("Error Query [".$sql."]");
 	$confirm = 'Yes';
 	$txt = 'แก้ไขข้อมูลเรียบร้อยแล้ว';	
 }
-
-
-
 
 echo '||'.$confirm.'||'.$txt.'||'.$hn;
 ?>

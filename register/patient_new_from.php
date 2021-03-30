@@ -44,7 +44,7 @@ $hn .= $t;
 				<input type="file" size="5" name="filUpload" id="filUpload" style="display: none;" value="" />&nbsp;&nbsp;
 				<input type="hidden" id="phn" name="phn" value="<?= $hn ?>" />
 				<button id="b_file" name="b_file" onclick="thisFileUpload();">เลือกรูป</button>
-				<br/><span id="file_upload_name">ไม่มีไฟล์</span><br/>
+				<br /><span id="file_upload_name">ไม่มีไฟล์</span><br />
 				<input type="submit" id="iSubmit" value=" Upload " style="cursor:pointer;" />
 			</form>
 		</div>
@@ -167,43 +167,44 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 
 	</div>
 	<div class="line">
-		<div style="width:20%; float:left; text-align:right;"><?php if($_SESSION['company_data'] == "1"){echo "สาขา :&nbsp;";} ?></div>
+		<div style="width:20%; float:left; text-align:right;"><?php if ($_SESSION['company_data'] == "1") {
+																	echo "สาขา :&nbsp;";
+																} ?></div>
 		<div style="width:30%; float:left;">
 			<?php
-				if($_SESSION['company_data'] == "1"){
-					if ($_SESSION['branch_id'] != "") {
-						$branch_id = $_SESSION['branch_id'];
-						$sql = "";
-						$sql = "select * from tb_branch order by branchid";
-						
-						$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
-						$Num_Rows = mysql_num_rows($result);
-					?>
-						<select name="sel_branchid_p_new" id="sel_branchid_p_new">
-							<?php
-							if ($Num_Rows > 0) {
-								$flag = 0;
-								while ($rs = mysql_fetch_array($result)) {
-									if($branch_id == $rs['branchid']){
-										?>
-										<option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname'];?></option>
-										<?php
-									}
-									else{
-										?>
-										<option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname'];?></option>
-									<?php
-									}
+			if ($_SESSION['company_data'] == "1") {
+				if ($_SESSION['branch_id'] != "") {
+					$branch_id = $_SESSION['branch_id'];
+					$sql = "";
+					$sql = "select * from tb_branch order by branchid";
+
+					$result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+					$Num_Rows = mysql_num_rows($result);
+			?>
+					<select name="sel_branchid_p_new" id="sel_branchid_p_new">
+						<?php
+						if ($Num_Rows > 0) {
+							$flag = 0;
+							while ($rs = mysql_fetch_array($result)) {
+								if ($branch_id == $rs['branchid']) {
+						?>
+									<option value="<?php echo $rs['branchid'] ?>" selected><?php echo $rs['branchname']; ?></option>
+								<?php
+								} else {
+								?>
+									<option value="<?php echo $rs['branchid'] ?>"><?php echo $rs['branchname']; ?></option>
+						<?php
 								}
 							}
-							?>
-						</select>
-					<?php
-						// mysql_close($dblink);
-						// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
-					} 
+						}
+						?>
+					</select>
+			<?php
+					// mysql_close($dblink);
+					// ajaxLoad('get','stock/druge_list.php','txt=','p_list');
 				}
-				?>
+			}
+			?>
 		</div>
 	</div>
 
@@ -270,22 +271,18 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 	<div class="line">
 		<div style="width:20%; float:left; text-align:right;">เบอร์โทร :&nbsp;</div>
 		<div style="width:30%; float:left;"><input type="text" id="tel" size="15" /></div>
-		<div style="width:20%; float:left; text-align:right;">เบอร์มือถือ :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>เบอร์มือถือ :&nbsp;</div>
 		<div style="width:30%; float:left;"><input type="text" id="mtel" size="15" /></div>
 	</div>
 	<div class="line">
-		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>E-mail :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;">E-mail :&nbsp;</div>
 		<div style="width:80%; float:left;"><input type="text" id="email" size="45" /></div>
-
 	</div>
+
 	<div class="line" style=" border-bottom:#CCCCCC 1px dotted;">
 		<div style="width:20%; float:left; text-align:right;">Facebook :&nbsp;</div>
 		<div style="width:80%; float:left;"><input type="text" id="facebook" size="45" /></div>
-
 	</div>
-
-
-
 </div>
 
 
@@ -362,12 +359,11 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 	<div class="line" style="height:95px;  overflow:hidden;  border-bottom:#CCCCCC 1px dotted;">
 		<div style="width:20%; float:left; text-align:right;">&nbsp;</div>
 		<div id="doz" style="width:80%; float:left; ">
-
 		</div>
 	</div>
 
 	<div class="line" style="border-bottom:#CCCCCC 1px dotted;">
-		<div style="width:20%; float:left; text-align:right;"><span style="color: red;">*</span>รู้จักผิวดีจาก :&nbsp;</div>
+		<div style="width:20%; float:left; text-align:right;">รู้จักผิวดีจาก :&nbsp;</div>
 		<div style="width:80%; float:left;">
 			<select id="how" style="width:117px;">
 				<option value="">--- เลือกหัวข้อ ---</option>
@@ -382,19 +378,12 @@ $result1 = mysql_query($sql) or die ("Error Query [".$sql."]");
 	</div>
 
 	<div class="line" style="margin-top:10px;text-align:right;">
-
-
-
-
-
 		<div style="width:70%; float:left; text-align:right; font-weight:bold">&nbsp;
 			คนไข้ :&nbsp;
-
 			<select id="typ" style="width:60px;">
 				<option value="O">เก่า</option>
 				<option value="N">ใหม่</option>
 			</select>
-
 		</div>
 		<div id="doz" style="width:30%; float:left; text-align:right;">
 			<input type="button" value="  บันทึกข้อมูล  " style="font-size:14px; font-weight:bold; height:35px;" onclick="addpatient('ADD')" />&nbsp;

@@ -163,58 +163,52 @@ include('class/permission_user.php');
 					if (document.getElementById('lname').value != '') {
 						if (document.getElementById('address').value != '') {
 							if (document.getElementById('province').value != '') {
-								if (document.getElementById('email').value != '') {
-									if (document.getElementById('how').value != '') {
+								if (document.getElementById('mtel').value != '') { 
+									var data = 'cardno=' + document.getElementById('cn').value;
+									data += '&hn=' + document.getElementById('hn').value;
+									data += '&pname=' + document.getElementById('pname').value;
+									data += '&sex=' + document.getElementById('sex').value;
+									data += '&fname=' + document.getElementById('fname').value;
+									data += '&lname=' + document.getElementById('lname').value;
+									data += '&level=' + document.getElementById('plevel').value;
+									data += '&st=' + document.getElementById('st').value;
+									data += '&bl=' + document.getElementById('bl').value;
 
-										var data = 'cardno=' + document.getElementById('cn').value;
-										data += '&hn=' + document.getElementById('hn').value;
-										data += '&pname=' + document.getElementById('pname').value;
-										data += '&sex=' + document.getElementById('sex').value;
-										data += '&fname=' + document.getElementById('fname').value;
-										data += '&lname=' + document.getElementById('lname').value;
-										data += '&level=' + document.getElementById('plevel').value;
-										data += '&st=' + document.getElementById('st').value;
-										data += '&bl=' + document.getElementById('bl').value;
-
-										sel_branch = document.getElementById('sel_branchid_p_new');
-										if (sel_branch != null) {
-											data += "&bid=" + sel_branch.value;
-										}
-
-										data += '&oc=' + document.getElementById('oc').value;
-										data += '&pno=' + document.getElementById('pno').value;
-										data += '&pass=' + document.getElementById('pass').value;
-										data += '&dd=' + document.getElementById('dd').value;
-										data += '&dm=' + document.getElementById('dm').value;
-										data += '&dy=' + document.getElementById('dy').value;
-										data += '&adderss=' + document.getElementById('address').value;
-										data += '&tum=' + document.getElementById('district').value;
-										data += '&aum=' + document.getElementById('amphur').value;
-										data += '&province=' + document.getElementById('province').value;
-										data += '&post=' + document.getElementById('zipcode').value;
-										data += '&country=' + document.getElementById('country').value;
-										data += '&tel=' + document.getElementById('tel').value;
-										data += '&mtel=' + document.getElementById('mtel').value;
-										data += '&email=' + document.getElementById('email').value;
-										data += '&facebook=' + document.getElementById('facebook').value;
-										data += '&mem=' + document.getElementById('mem').value;
-										data += '&typ=' + document.getElementById('typ').value;
-										data += '&how=' + document.getElementById('how').value;
-										data += '&other=' + document.getElementById('other').value;
-										data += '&mode=' + mode;
-
-										document.getElementById('loading').style.display = '';
-										ajaxAddpatient('post', 'register/patient_add.php', data)
-
-									} else {
-										alert('กรุณาระบบว่า รู้จักผิวดีจากที่ใด ');
+									sel_branch = document.getElementById('sel_branchid_p_new');
+									if (sel_branch != null) {
+										data += "&bid=" + sel_branch.value;
 									}
+
+									data += '&oc=' + document.getElementById('oc').value;
+									data += '&pno=' + document.getElementById('pno').value;
+									data += '&pass=' + document.getElementById('pass').value;
+									data += '&dd=' + document.getElementById('dd').value;
+									data += '&dm=' + document.getElementById('dm').value;
+									data += '&dy=' + document.getElementById('dy').value;
+									data += '&adderss=' + document.getElementById('address').value;
+									data += '&tum=' + document.getElementById('district').value;
+									data += '&aum=' + document.getElementById('amphur').value;
+									data += '&province=' + document.getElementById('province').value;
+									data += '&post=' + document.getElementById('zipcode').value;
+									data += '&country=' + document.getElementById('country').value;
+									data += '&tel=' + document.getElementById('tel').value;
+									data += '&mtel=' + document.getElementById('mtel').value;
+									data += '&email=' + document.getElementById('email').value;
+									data += '&facebook=' + document.getElementById('facebook').value;
+									data += '&mem=' + document.getElementById('mem').value;
+									data += '&typ=' + document.getElementById('typ').value;
+									data += '&how=' + document.getElementById('how').value;
+									data += '&other=' + document.getElementById('other').value;
+									data += '&mode=' + mode;
+
+								document.getElementById('loading').style.display = '';
+								ajaxAddpatient('post', 'register/patient_add.php', data);
 								} else {
-									alert('กรุณากรอก Email ');
+									alert('กรุณากรอก เบอร์มือถือ');
 								}
 							} else {
-								alert('กรุณาเลือก จังหวัด');
-							}
+								alert('กรุณากรอก จังหวัด');
+							}		
 						} else {
 							alert('กรุณากรอก ที่อยู่');
 						}
@@ -230,9 +224,7 @@ include('class/permission_user.php');
 		} else {
 			alert('Card No. ');
 		}
-
 	}
-
 
 	function addAppointment(URL, displayId) {
 		if (document.getElementById('hn').value != '') {
@@ -1782,14 +1774,14 @@ include('class/permission_user.php');
 			</div>
 
 			<?php 
-				if($_SESSION['mode'] == "S" || $_SESSION['mode'] == "A"){
+				if($_SESSION['mode'] == "S" || $_SESSION['mode'] == "A" || $_SESSION['mode'] == "O"){
 					?>
 					<div id="menu8" style="float:left; width:auto; cursor:pointer; ">
 						<a class="dock-item" href="javascript: loadmodule('home','stock/stock_show.php','') "><span></span><img src="images/addstock.png" alt="addstock" /></a>
 					</div>
 					<?
 				}
-				if($_SESSION['mode'] == "A"){
+				if($_SESSION['mode'] == "A" || $_SESSION['mode'] == "O"){
 					?>
 					<div id="menu6" style="float:left; width:auto; cursor:pointer;">
 						<a class="dock-item" href="javascript: loadmodule('home','Monthly_report/report.php','')"><span></span><img src="images/Peport_M.png" alt="Monthly_report" /></a>

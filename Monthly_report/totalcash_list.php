@@ -150,8 +150,8 @@ if($cl != $color1){
 	if($Prev_Page)
 	{
 	?>
-	<a href="javascript: ajaxLoad('post','Monthly_report/retypepay_list.php','Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">
-	<img src='images/icon/back.png'  border='0' align="absmiddle"/>
+	<a href="javascript: ajaxLoad('post','Monthly_report/totalcash_list.php','Page=<?=$Prev_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">
+		<img src='images/icon/back.png'  border='0' align="absmiddle"/>
 	</a>
 	<?
 	}
@@ -162,8 +162,8 @@ if($cl != $color1){
 	{
 	?>
 
-	<a href="javascript: ajaxLoad('post','Monthly_report/retypepay_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">
-	<img src='images/icon/next.png'  border='0' align="absmiddle" />
+	<a href="javascript: ajaxLoad('post','Monthly_report/totalcash_list.php','Page=<?=$Next_Page?>&sdate=<?=$sdate?>&edate=<?=$_POST['edate']?>','d_list')">
+		<img src='images/icon/next.png'  border='0' align="absmiddle" />
 	</a>
     <?
 	}
@@ -176,7 +176,6 @@ if($cl != $color1){
 <? } ?>
 
 </div>
-
 
 
 <!--รวม-->

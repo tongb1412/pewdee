@@ -48,23 +48,19 @@ $where_branch_id .= $data['where_branch_id'];
 $where_branch_id .= $data['where_company_code'];
 
 if(empty($did)){
-  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and a.total = a.discount and a.total>0 and (c.status='COM') $where_branch_id ";
+  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and a.total = a.discount and a.total > 0 and (c.status='COM') $where_branch_id ";
 } else {
-  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname  from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and (c.empid like '%$did%') and a.total = a.discount and a.total>0 and (c.status='COM') $where_branch_id ";
+  $sql = "select a.*,b.cradno,b.pname,b.fname,b.lname from tb_payment a,tb_patient b,tb_vst c  where (a.hn = b.hn) and (a.vn=c.vn)  and (a.pdate like '%$dat%') and (c.empid like '%$did%') and a.total = a.discount and a.total>0 and (c.status='COM') $where_branch_id ";
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 
-
-
-
-
 $sql .=" order by a.billno asc ";
 // echo $sql;
 $result  = mysql_query($sql);
 if($result){
 $n=1;
 $dp =0; $lp=0; $tp=0; $cp=0; $pp=0; $ds=0; $tt=0; $re=0; $aa=0;
-while($rs=mysql_fetch_array($result)){  
+while($rs = mysql_fetch_array($result)){  
 if($cl != $color1){
 	$cl = $color1;
 } else {
@@ -164,11 +160,6 @@ if($rs['recive'] < $rs['total']){
         <input style="font-weight:bold; text-align:right;" name="text2" type="text" id="" size="12"; value="<?=number_format($ds,'0','.',',')?>"/>
       </div>
     </div>	-->
-	
-	
-	
-	
-	
 <!--	<div class="line" style="font-weight:bold;">
       <div style="width:15%; float:left; text-align:right;">รวมเงินทั้งหมด :&nbsp;</div>
       <div style="width:10%; float:left;">

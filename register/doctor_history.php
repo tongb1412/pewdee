@@ -2,7 +2,6 @@
 <?
 include('../class/config.php');
 include('../class/permission_user.php');
-
 //$vn = $_GET['mode'];
 $hn = $_POST['hn'];
 
@@ -44,7 +43,7 @@ $hn = $row['hn'];
 					$branch_id = $_SESSION['branch_id'];
 					$company_data = $_SESSION['company_data'];
 					$company_code = $_SESSION['company_code'];
-					$where_data = set_where_user_data("a", $branch_id, $company_code, $company_code);
+					$where_data = set_where_user_data("a", $branch_id, $company_code, $company_data);
 					$where_branch_id .= $where_data['where_branch_id'];
 					$where_branch_id .= $where_data['where_company_code'];
 				}

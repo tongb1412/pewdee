@@ -24,30 +24,36 @@ include('../class/config.php');
         </select>
       </div>
 
-      <?php 
-        if($_SESSION['company_data'] == "1"){
-          ?>
-          <div class="line-item title">เลือกสาขา : </div>
-          <div class="line-item">
-            <?php
-            $sql = "select branchid,branchname from tb_branch ";
-            $result = mysql_query($sql) or die("Error Query [" . $sql . "]");
-            ?>
-            <select name="select" id="branchid" style="width:117px;">
-              <option value="00">ทั้งหมด</option>
-              <?php while ($rs = mysql_fetch_array($result)) {  ?>
-                <option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
-              <?php } ?>
-            </select>
-          </div>
+      <?php
+      if ($_SESSION['company_data'] == "1") {
+      ?>
+        <div class="line-item title">เลือกสาขา : </div>
+        <div class="line-item">
           <?php
-        }
+          $sql = "select branchid,branchname from tb_branch ";
+          $result = mysql_query($sql) or die("Error Query [" . $sql . "]");
+          ?>
+          <select name="select" id="branchid" style="width:117px;">
+            <option value="00">ทั้งหมด</option>
+            <?php while ($rs = mysql_fetch_array($result)) {  ?>
+              <option value="<?= $rs['branchid'] ?>"> <?= $rs['branchname'] ?></option>
+            <?php } ?>
+          </select>
+        </div>
+      <?php
+      }
       ?>
     </div>
     <div style="width:50%; float:left;margin-top:10px;">
       <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="mdrug('Monthly_report/restockdruge_list.php','d_list')" value="แสดงรายงาน" />
       <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printdrug('Monthly_report/re_stockdruge.php?')" value="พิมพ์รายงาน" />
-      <a href="Monthly_report/Rep_Druge_Total.csv" target="_blank">Export File To Excel</a>
+      <?php
+        if($_SESSION['company_data'] == "1"){
+          ?>
+          <a href="Monthly_report/Rep_Druge_Total.csv" target="_blank">Export File To Excel (ทุกสาขา)</a>
+          <?php
+        }
+      ?>
     </div>
   </div>
   <div style="width: auto; margin-top:5px; margin-left:20px; text-align:left; height:80%; border:<?= $tabcolor ?> 1px solid;">

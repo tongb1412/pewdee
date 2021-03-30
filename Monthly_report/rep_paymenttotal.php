@@ -14,7 +14,7 @@ $edate = date("Y-m-d", $t1);
 if(!empty($_REQUEST['branchid'])){
 	$branch_id = $_REQUEST['branchid'];
 } else {
-	$branch_id = $_SESSION['branchid'];
+	$branch_id = $_SESSION['branch_id'];
 }
 $as = "a";
 $data = set_where_user_data($as ,$branch_id, $_SESSION['company_code'], $_SESSION['company_data']);
@@ -23,7 +23,8 @@ $where_branch_id .= $data['where_branch_id'];
 $where_branch_id .= $data['where_company_code'];
 
 $sqlC .="select clinicname from tb_clinicinformation where cn = '$branch_id'";
-$strc  = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
+// echo $sqlC;exit();
+$strc = mysql_query($sqlC)or die ("Error Query [".$sqlC."]"); 
 $rs=mysql_fetch_array($strc);
 
 
@@ -248,7 +249,7 @@ if($rs['recive'] < $rs['total']){
 
 
 </div>
-<? 
+<?php
 
 $n++; $h++; $m++;   } 
 ?>

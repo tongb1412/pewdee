@@ -56,7 +56,7 @@ $branch_id = $_SESSION['branch_id'];
         </div>
         <div style="width:30%; float:left; margin-top: 0.9%; margin-left:5%;">
           <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="showdiscount();" value=" แสดงรายงาน " />
-          <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printdiscount();" value=" พิมพ์รายงาน "  />
+          <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printdiscount();" value=" พิมพ์รายงาน " />
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@ $branch_id = $_SESSION['branch_id'];
         <input type='hidden' value='branchid' id='' />
         <div style="width:30%; float:left; margin-top: 0.9%;">
           <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="showdiscount();" value=" แสดงรายงาน " />
-          <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printdiscount();" value=" พิมพ์รายงาน "  />
+          <input name="button" type="button" style="font-size:14px; font-weight:bold; height:28px;" onclick="printdiscount();" value=" พิมพ์รายงาน " />
         </div>
       </div>
     </div>

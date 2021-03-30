@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include('../class/config.php');
-include('../class/permission_user.php');
+require_once('../class/permission_user.php');
 $hn = $_POST['hn'];
 $cl = $color1;
 $sql = "select * from tb_patient where hn='$hn'";
@@ -44,7 +44,7 @@ $row=mysql_fetch_array($patient_result);
 						$branch_id = $_SESSION['branch_id'];
 						$company_data = $_SESSION['company_data'];
 						$company_code = $_SESSION['company_code'];
-						$where_data = set_where_user_data("a", $branch_id, $company_code, $company_code);
+						$where_data = set_where_user_data("a", $branch_id, $company_code, $company_data);
 						$where_branch_id .= $where_data['where_branch_id'];
 						$where_branch_id .= $where_data['where_company_code'];
 					}

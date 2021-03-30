@@ -45,17 +45,10 @@ include('../class/config.php');
 			<div style="width:10%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;จำนวน</div>
 			<div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ราคาต่อหน่วย</div>
 			<div style="width:15%;text-align:left; float:left;">&nbsp;<img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ราคารวม</div>
-
 		</div>
 
 		<div id="d_list" style=" width:98%; margin-top:5px; text-align:center; height:auto;">
 			<?  require("costs_list.php");	 ?>
 		</div>
-
-
-
 	</div>
-
-
-
 </div>

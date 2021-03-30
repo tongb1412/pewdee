@@ -15,7 +15,7 @@ $edate = date("Y-m-d", $t1);
 if(!empty($_REQUEST['branchid'])){
 	$branchid = $_REQUEST['branchid'];
 } else {
-	$branchid = '';
+	$branchid = $_SESSION['branch_id'];
 }
 $as = "a";
 // echo "x".$branchid."x";
@@ -53,6 +53,7 @@ left join tb_staff c on a.cashier = c.staffid
 left join tb_staff d on a.cashier_check = d.staffid
 left join tb_branch f ON a.branchid = f.branchid
 where (a.date between '$sdate%' and '$edate%') $where_branch_id";
+// echo $sql;exit();
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result);
 $n=1; $m=1; $s='y'; $x = 52; 
@@ -80,67 +81,69 @@ $k9 = $rs['branchname'];
 
 if($s=='y'){ 
 ?>
-<!--<div style="width:100%; height:3508px;  font-family: 'Angsana New'; text-align:center; margin-left:0px;">    --> 
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">รายงานสรุปบันทึกยอดรายวัน <?php if($branchname != "") { echo " (สาขา $branchname)"; } ?></div>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
-	ระหว่างวันที่ <?=$_GET['sdate'].'  ถึง  '.$_GET['edate'];?> 
-	</div>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+<!--<div style="width:100%; height:3508px;  font-family: 'Angsana New'; text-align:center; margin-left:0px;">    -->
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:14px; font-weight:bold; float:left;">รายงานสรุปบันทึกยอดรายวัน <?php if ($branchname != "") {
+																																						echo " (สาขา $branchname)";
+																																					} ?></div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:13px; font-weight:bold; float:left;">
+	ระหว่างวันที่ <?= $_GET['sdate'] . '  ถึง  ' . $_GET['edate']; ?>
+</div>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
 
 	<div style="width:100%; float:left; text-align:right;">
-		หน้า : <?='1';?>&nbsp;
+		หน้า : <?= '1'; ?>&nbsp;
 	</div>
-	
-	</div>	
+
+</div>
 
 
-    <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
-     
-	  	<?php 
-			if($branchid == "") { ?>
-			 	<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-				<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">เงินสด</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กรุงศรีฯ</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กสิกร</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ไทยพาณิชย์</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">Amax</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">OUB</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กรุงไทย</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ธนชาติ</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ผู้บันทึก</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
-				<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
-		<?php 
-			} else { 
-		?>
-				<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-				<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">เงินสด</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กรุงศรีฯ</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กสิกร</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ไทยพาณิชย์</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">Amax</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">OUB</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กรุงไทย</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ธนชาติ</div>
-				<div style="width:4%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;text-align: left;">ผู้บันทึก</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
-				<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
-				<div style="width:10%; float:left; border-bottom:#999999 2px solid;">สาขา</div>
-		<?php 		
-			}
-		?>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
+
+	<?php
+	if ($branchid == "") { ?>
+		<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+		<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">เงินสด</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กรุงศรีฯ</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กสิกร</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ไทยพาณิชย์</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">Amax</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">OUB</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กรุงไทย</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ธนชาติ</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ผู้บันทึก</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
+		<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
+	<?php
+	} else {
+	?>
+		<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+		<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">เงินสด</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กรุงศรีฯ</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กสิกร</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ไทยพาณิชย์</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">Amax</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">OUB</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กรุงไทย</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ธนชาติ</div>
+		<div style="width:4%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;text-align: left;">ผู้บันทึก</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
+		<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
+		<div style="width:10%; float:left; border-bottom:#999999 2px solid;">สาขา</div>
+	<?php
+	}
+	?>
 
 
 
-	</div>	
-    
- <? 
+</div>
+
+<? 
  $s='n';
  }
 if( $n > ($m * $x) ){ $m++; }  
@@ -148,140 +151,133 @@ if($m-1 > 1){  $x = 56; }
 if($n == ((($m-1) * $x) + 1) && $m > 1){
  
     ?>
-	<br><br>
-	<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
-		<div style="width:50%; float:left; text-align:left;">
-		<?=$dname?>&nbsp;
-		</div>
-		<div style="width:50%; float:left; text-align:right;">
-		หน้า : <?=$m;?>&nbsp;
-		</div>
+<br><br>
+<div style="width:100%; height:25px; line-height:25px; text-align:center; font-size:12px; font-weight:bold; float:left;">
+	<div style="width:50%; float:left; text-align:left;">
+		<?= $dname ?>&nbsp;
 	</div>
-    <div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
-  
-	  <?php 
-			if($branchid == "") { ?>
-			 	<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-				<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">เงินสด</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กรุงศรีฯ</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กสิกร</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ไทยพาณิชย์</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">Amax</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">OUB</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กรุงไทย</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ธนชาติ</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ผู้บันทึก</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
-				<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
-		<?php 
-			} else { 
-		?>
-				<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
-				<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
-				<div style="width:7%; float:left; border-bottom:#999999 2px solid;">เงินสด</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กรุงศรีฯ</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กสิกร</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ไทยพาณิชย์</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">Amax</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">OUB</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กรุงไทย</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ธนชาติ</div>
-				<div style="width:4%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;text-align: left;">ผู้บันทึก</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
-				<div style="width:6%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
-				<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
-				<div style="width:10%; float:left; border-bottom:#999999 2px solid;">สาขา</div>
-		<?php 		
-			}
-		?>
+	<div style="width:50%; float:left; text-align:right;">
+		หน้า : <?= $m; ?>&nbsp;
+	</div>
+</div>
+<div style="width:100%; height:30px; line-height:25px; text-align:center; font-size:10px; font-weight:bold;  float:left; ">
+
+	<?php
+	if ($branchid == "") { ?>
+		<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+		<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">เงินสด</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กรุงศรีฯ</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กสิกร</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ไทยพาณิชย์</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">Amax</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">OUB</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">กรุงไทย</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ธนชาติ</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">ผู้บันทึก</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
+		<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
+	<?php
+	} else {
+	?>
+		<div style="width:3%; float:left; border-bottom:#999999 2px solid;">ลำดับ</div>
+		<div style="width:4%; float:left; border-bottom:#999999 2px solid;">วันที่</div>
+		<div style="width:7%; float:left; border-bottom:#999999 2px solid;">เงินสด</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กรุงศรีฯ</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กสิกร</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ไทยพาณิชย์</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">Amax</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">OUB</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">กรุงไทย</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">ธนชาติ</div>
+		<div style="width:4%; float:left; border-bottom:#999999 2px solid;">คงเหลือ</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;text-align: left;">ผู้บันทึก</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">แคชเขียร์ประจำวัน</div>
+		<div style="width:6%; float:left; border-bottom:#999999 2px solid;">พนักงานตรวจ</div>
+		<div style="width:10%; float:left; border-bottom:#999999 2px solid;">เวลาบันทึก</div>
+		<div style="width:10%; float:left; border-bottom:#999999 2px solid;">สาขา</div>
+	<?php
+	}
+	?>
 
 
-	</div>	
+</div>
 <?
  } 
-?>		
-		
-
-	<div  style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; ">	
-		
-
-		<?php 
-			if($branchid == "") { ?>
-			 	<div style="width:3%; text-align: center; float:left;"><?=$n?></div>
-				<div style="width:3%; float:left;"><?=$rs['date']?></div>
-				<div style="width:5%; text-align:right; float:left;">&nbsp;<?=number_format($rs['cash'],'2','.',',')?></div>
-				<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_krungsri'],'2','.',',')?></div>
-				<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_kasikorn'],'2','.',',')?></div>
-				<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_thai'],'2','.',',')?></div>
-				<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_amax'],'2','.',',')?></div>
-				<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_uob'],'2','.',',')?></div>
-				<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_ktc'],'2','.',',')?></div>
-				<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_tana'],'2','.',',')?></div>
-				<div style="width:7%; text-align:right; float:left;">&nbsp;<?=number_format($rs['total'],'2','.',',')?></div>
-				<div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['efname'].'    '.$rs['elname']  ?></div>
-				<div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['cfname'].'    '.$rs['clname']  ?></div>
-				<div style="width:7%; float:left;"><?=$rs['ckfname'].'    '.$rs['cklname']  ?></div>
-				<div style="width:10%; float:left;"><?=$rs['datenow']?></div>
-		<?php 
-			} else { 
-		?>
-				<div style="width:3%; text-align: center; float:left;"><?=$n?></div>
-				<div style="width:3%; float:left;"><?=$rs['date']?></div>
-				<div style="width:5%; text-align:right; float:left;">&nbsp;<?=number_format($rs['cash'],'2','.',',')?></div>
-				<div style="width:6%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_krungsri'],'2','.',',')?></div>
-				<div style="width:6%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_kasikorn'],'2','.',',')?></div>
-				<div style="width:6%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_thai'],'2','.',',')?></div>
-				<div style="width:6%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_amax'],'2','.',',')?></div>
-				<div style="width:6%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_uob'],'2','.',',')?></div>
-				<div style="width:6%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_ktc'],'2','.',',')?></div>
-				<div style="width:6%; text-align:right; float:left;">&nbsp;<?=number_format($rs['k_tana'],'2','.',',')?></div>
-				<div style="width:6%; text-align:right; float:left;">&nbsp;<?=number_format($rs['total'],'2','.',',')?></div>
-				<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['efname'].'    '.$rs['elname']  ?></div>
-				<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;<?=$rs['cfname'].'    '.$rs['clname']  ?></div>
-				<div style="width:7%; float:left;">&nbsp;<?=$rs['ckfname'].'    '.$rs['cklname']  ?></div>
-				<div style="width:10%; float:left;">&nbsp;<?=$rs['datenow']?></div>
-				<div style="width:10%; float:left;">&nbsp;<?=$rs['branchname']?></div>
-		<?php 		
-			}
-		?>
+?>
 
 
+<div style="width:100%; font-size:10px; text-align:left; float:left; margin:auto; ">
 
-	</div>
-	
 
+	<?php
+	if ($branchid == "") { ?>
+		<div style="width:3%; text-align: center; float:left;"><?= $n ?></div>
+		<div style="width:3%; float:left;"><?= $rs['date'] ?></div>
+		<div style="width:5%; text-align:right; float:left;">&nbsp;<?= number_format($rs['cash'], '2', '.', ',') ?></div>
+		<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_krungsri'], '2', '.', ',') ?></div>
+		<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_kasikorn'], '2', '.', ',') ?></div>
+		<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_thai'], '2', '.', ',') ?></div>
+		<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_amax'], '2', '.', ',') ?></div>
+		<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_uob'], '2', '.', ',') ?></div>
+		<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_ktc'], '2', '.', ',') ?></div>
+		<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_tana'], '2', '.', ',') ?></div>
+		<div style="width:7%; text-align:right; float:left;">&nbsp;<?= number_format($rs['total'], '2', '.', ',') ?></div>
+		<div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;<?= $rs['efname'] . '    ' . $rs['elname']  ?></div>
+		<div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;<?= $rs['cfname'] . '    ' . $rs['clname']  ?></div>
+		<div style="width:7%; float:left;"><?= $rs['ckfname'] . '    ' . $rs['cklname']  ?></div>
+		<div style="width:10%; float:left;"><?= $rs['datenow'] ?></div>
+	<?php
+	} else {
+	?>
+		<div style="width:3%; text-align: center; float:left;"><?= $n ?></div>
+		<div style="width:3%; float:left;"><?= $rs['date'] ?></div>
+		<div style="width:5%; text-align:right; float:left;">&nbsp;<?= number_format($rs['cash'], '2', '.', ',') ?></div>
+		<div style="width:6%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_krungsri'], '2', '.', ',') ?></div>
+		<div style="width:6%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_kasikorn'], '2', '.', ',') ?></div>
+		<div style="width:6%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_thai'], '2', '.', ',') ?></div>
+		<div style="width:6%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_amax'], '2', '.', ',') ?></div>
+		<div style="width:6%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_uob'], '2', '.', ',') ?></div>
+		<div style="width:6%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_ktc'], '2', '.', ',') ?></div>
+		<div style="width:6%; text-align:right; float:left;">&nbsp;<?= number_format($rs['k_tana'], '2', '.', ',') ?></div>
+		<div style="width:6%; text-align:right; float:left;">&nbsp;<?= number_format($rs['total'], '2', '.', ',') ?></div>
+		<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;<?= $rs['efname'] . '    ' . $rs['elname']  ?></div>
+		<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;<?= $rs['cfname'] . '    ' . $rs['clname']  ?></div>
+		<div style="width:7%; float:left;">&nbsp;<?= $rs['ckfname'] . '    ' . $rs['cklname']  ?></div>
+		<div style="width:10%; float:left;">&nbsp;<?= $rs['datenow'] ?></div>
+		<div style="width:10%; float:left;">&nbsp;<?= $rs['branchname'] ?></div>
+	<?php
+	}
+	?>
+
+
+
+</div>
 
 
 
 
-<? $n++; } ?>	
+
+
+<? $n++; } ?>
 <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;  ">&nbsp;</div>
 
 
 
 <div style="width:100%; font-size:11px; text-align:left; float:left; font-weight:bold; margin:auto; margin-top:5px;  ">
 	<div style="width:1%; float:left; text-align:center;">&nbsp;</div>
-	
+
 	<div style="width:5%; float:left; text-align:right">รวม&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=number_format($c,'2','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=number_format($k1,'2','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=number_format($k2,'2','.',',')?>&nbsp;&nbsp;</div>
-    <div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=number_format($k3,'2','.',',')?>&nbsp;&nbsp;</div>
-    <div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=number_format($k4,'2','.',',')?>&nbsp;&nbsp;</div>
-    <div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=number_format($k5,'2','.',',')?>&nbsp;&nbsp;</div>
-    <div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=number_format($k6,'2','.',',')?>&nbsp;&nbsp;</div>
-    <div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=number_format($k7,'2','.',',')?>&nbsp;&nbsp;</div>
-	<div style="width:7%; float:left; text-align:center">&nbsp;&nbsp;<?='-'?></div>
-</div>	
+	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= number_format($c, '2', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= number_format($k1, '2', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= number_format($k2, '2', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= number_format($k3, '2', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:8%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= number_format($k4, '2', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= number_format($k5, '2', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= number_format($k6, '2', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:7%; float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= number_format($k7, '2', '.', ',') ?>&nbsp;&nbsp;</div>
+	<div style="width:7%; float:left; text-align:center">&nbsp;&nbsp;<?= '-' ?></div>
+</div>
 <div style="width:100%; height:10px; border-bottom:#999999 1px solid; float:left; margin:auto;">&nbsp;</div>
-
-
-
-	
-
-
-

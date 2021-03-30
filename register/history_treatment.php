@@ -1,20 +1,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
-include('../class/config.php');
-include('../class/permission_user.php');
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1');
+include_once('../class/config.php');
+require_once('../class/permission_user.php');
+
 $hn = $_POST['hn'];
 
 $sql = "select * from tb_patient where hn='$hn'";
 $patient_result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
-$row=mysql_fetch_array($patient_result);
+$row = mysql_fetch_array($patient_result);
 ?>
 <div style="width:99%; margin:auto;  height:25px; display:none;">
 	<div style="width:20%; font-size:16px; font-weight:bold; float:left; line-height:20px;">
-	<img src="images/icon/group.png" align="absmiddle" />&nbsp;ประวัติทรีทเม้นท์ 
+		<img src="images/icon/group.png" align="absmiddle" />&nbsp;ประวัติทรีทเม้นท์ 
 	</div>
 	<div style="width:80%; text-align:right; float:left; line-height:20px;">
-
-	<input type="button"  value="  รายชื่อทั้งหมด  " onclick="loadmodule('home','register/register.php','')"  style="height:25px; font-size:13px; line-height:25px;" />	
+		<input type="button"  value="  รายชื่อทั้งหมด  " onclick="loadmodule('home','register/register.php','')"  style="height:25px; font-size:13px; line-height:25px;" />	
 	</div>
 </div>
 <div id="main" class="main" style="width:99%; margin:auto; margin-top:5px; height:500px; overflow:hidden;">
@@ -33,14 +35,14 @@ $row=mysql_fetch_array($patient_result);
 				<div style="width:70%; float:left; text-align:left; line-height:20px;">
 				<select id="sdate-history" onchange="loadmodule('p_list','register/his_spct.php','hn=<?=$hn?>&dat='+this.value)">
 				<?php
-
+				
 				if($_SESSION['cross_branch_data'] == "1") {
 					$where_branch_id = "";
 				} else {
 					$branch_id = $_SESSION['branch_id'];
 					$company_data = $_SESSION['company_data'];
 					$company_code = $_SESSION['company_code'];
-					$where_data = set_where_user_data("a", $branch_id, $company_code, $company_code);
+					$where_data = set_where_user_data("a", $branch_id, $company_code, $company_data);
 					$where_branch_id .= $where_data['where_branch_id'];
 					$where_branch_id .= $where_data['where_company_code'];
 				}
@@ -68,7 +70,7 @@ $row=mysql_fetch_array($patient_result);
 				<div style="width:20%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;ราคา</div>
 			</div>		
 		    <div id="p_list" style=" width:99%; margin-left:5px; float:left; height:350px; overflow:auto;">
-			<? include('his_spct.php'); ?>
+			<?php include_once('his_spct.php'); ?>
 			</div>
 		</div>
 	</div>
@@ -84,23 +86,19 @@ $row=mysql_fetch_array($patient_result);
 				<div style="width:15%;text-align:left; float:left;"><img src="images/icon/bullet_arrow_down.png" align="absmiddle" />&nbsp;คงเหลือ</div>
 			</div>		
 		    <div id="d_list" style=" width:99%; margin-left:5px; float:left; height:350px; overflow:auto;">
-				       	<?
+			<?php
 		   	$sql = "delete from tb_temphispct where hn='$hn' ";
 			mysql_query($sql) or die ("Error Query [".$sql."]");
 		   
 		    $sql_pct = "select * from tb_pctrec  where hn='$hn' and total > 0  ";
 			$str_pct = mysql_query($sql_pct) or die ("Error Query [".$sql_pct."]");	
-			while($rs_pct=mysql_fetch_array($str_pct)){
+			while($rs_pct=mysql_fetch_array($str_pct)) {
 			    $pvn = $rs_pct['vn']; 
-				
-				
 			    $pid = $rs_pct['tid'];
 				$pname = $rs_pct['tname'];
 				$qty = $rs_pct['qty'];
 				$type = $rs_pct['typ'];
 				$unit = $rs_pct['unit'];
-				
-			  
 				
 		   		if($type=='L' || $type=='T'){
 				
@@ -112,7 +110,7 @@ $row=mysql_fetch_array($patient_result);
 						$sql = "select * from tb_temphispct where hn='$hn' and tid='$pid'";
 						$tr = mysql_query($sql);
 						$n = mysql_num_rows($tr);
-						if(empty($n)){
+						if(empty($n)) {
 							//$tqty = $qty  -  $uqty;
 							$sql = "insert into tb_temphispct  values('$hn','$pid','$pname','$qty','$uqty','$type')";
 							mysql_query($sql);	
@@ -123,11 +121,10 @@ $row=mysql_fetch_array($patient_result);
 							$sql = "update tb_temphispct set qty='$tqty',un='$uqty' where hn='$hn' and tid='$pid'";
 							mysql_query($sql);								
 						}	
-					}				
-									
+					}								
 				}
 		        if($type=='P'){
-					$sql = "select tb_package_detail.*,tb_treatment.unit,tb_treatment.typ from tb_package_detail,tb_treatment  where tb_package_detail.id=tb_treatment.tid and   tb_package_detail.pid='$pid' and tb_package_detail.typ IN ('T','L')";
+					$sql = "select tb_package_detail.*,tb_treatment.unit,tb_treatment.typ from tb_package_detail,tb_treatment  where tb_package_detail.id=tb_treatment.tid and b_package_detail.pid='$pid' and tb_package_detail.typ IN ('T','L')";
 					$str = mysql_query($sql) or die ("Error Query [".$sql."]");	
 					while($rs=mysql_fetch_array($str)){		
 						$tid = $rs['id'];
@@ -162,13 +159,13 @@ $row=mysql_fetch_array($patient_result);
 					
 					$sql = "select id,qty from tb_package_detail  where pid='$pid' and typ = 'C' ";
 					$str = mysql_query($sql) or die ("Error Query [".$sql."]");	
-					while($rs=mysql_fetch_array($str)){
+					while($rs = mysql_fetch_array($str)){
 						$cid = $rs['id'];
 						$cqty = $rs['qty'];
-						$sqlc  = "select  tb_course_detail.*,tb_treatment.unit,tb_treatment.typ from tb_course_detail,tb_treatment  ";
-						$sqlc .= "where tb_course_detail.tid=tb_treatment.tid  and  tb_course_detail.cid='$cid'  ";
+						$sqlc  = "select  tb_course_detail.*,tb_treatment.unit,tb_treatment.typ from tb_course_detail,tb_treatment ";
+						$sqlc .= "where tb_course_detail.tid=tb_treatment.tid  and  tb_course_detail.cid='$cid' ";
 						$strc = mysql_query($sqlc) or die ("Error Query [".$sqlc."]");	
-						while($rc=mysql_fetch_array($strc)){		
+						while($rc = mysql_fetch_array($strc)){		
 							$tid = $rc['tid'];
 							$tname = $rc['tname'];
 							$tqty = $qty * ($rc['qty'] * $cqty );
@@ -196,7 +193,6 @@ $row=mysql_fetch_array($patient_result);
 									mysql_query($sql);								
 								}		
 							}
-							
 						}		
 					}
 				}	
@@ -281,7 +277,4 @@ $row=mysql_fetch_array($patient_result);
 		</div>
 	</div>
 </div>
-
-
-
 </div>

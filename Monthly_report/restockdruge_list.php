@@ -5,24 +5,32 @@ include('../class/config.php');
 include('../class/permission_user.php');
 $cl = '';
 $did = $_POST['did'];
+$selserch = "";
+if(!empty($_REQUEST['branchid'])){
+	$branch_id = $_REQUEST['branchid'];
+	$selserch = $_REQUEST['branchid'];
+} else {
+	$branch_id = $_SESSION['branch_id'];
+	
+}
 
 $filName = "Rep_Druge_Total.csv";
 $objWrite = fopen("Rep_Druge_Total.csv", "w");
 
-
 fwrite($objWrite,"\"code\",\"name\",\"Druge Group\",\"total\",\"Unit\"");
 fwrite($objWrite,"\n");
 
-if(empty($did)){
-mysql_query("SET NAMES tis620");
-$sql  = "select * from tb_druge where status='IN'   order by dgroup,tname asc";
+if(empty($did)) {
+	mysql_query("SET NAMES tis620");
+	$sql  = "select * from tb_druge where status='IN' order by dgroup,tname asc";
 } else {
-mysql_query("SET NAMES tis620");
-$sql  = "select * from tb_druge where status='IN' and (did like '%$did%') order by dgroup,tname asc";
+	mysql_query("SET NAMES tis620");
+	$sql  = "select * from tb_druge where status='IN' and (did like '%$did%') order by dgroup,tname asc";
 }
 
 $str  = mysql_query($sql);
-while($rs  = mysql_fetch_array($str)){
+while($rs = mysql_fetch_array($str)) {
+
     $code = $rs['did'];
 	$tname = $rs['tname'];
 	$unit = $rs['unit'];
@@ -39,15 +47,6 @@ while($rs  = mysql_fetch_array($str)){
 }
 
 fclose($objWrite);
-
-$selserch = "";
-if(!empty($_REQUEST['branchid'])){
-	$branch_id = $_REQUEST['branchid'];
-	$selserch = $_REQUEST['branchid'];
-} else {
-	$branch_id = $_SESSION['branch_id'];
-	
-}
 
 $company_code = $_SESSION['company_code'];
 $company_data = $_SESSION['company_data'];
@@ -80,9 +79,9 @@ if ($_SESSION['company_data'] == "1") {
 $cl = $color1;
 mysql_query("SET NAMES utf8");
 if(empty($did)){
-$sql  = "select * from tb_druge where status='IN' ";
+	$sql  = "select * from tb_druge where status='IN' ";
 } else {
-$sql  = "select * from tb_druge where status='IN' and (did like '%$did%') ";
+	$sql  = "select * from tb_druge where status='IN' and (did like '%$did%') ";
 }
 $result = mysql_query($sql) or die ("Error Query [".$sql."]"); 
 $Num_Rows = mysql_num_rows($result); 

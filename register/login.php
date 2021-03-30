@@ -31,9 +31,11 @@ if($fn == "check_user") {
 		$branch_id = $_SESSION["branch_id"];
 		$company_code = $_SESSION["company_code"];
 		$dat = date('Y-m-d');
-		$tim = date('H:i:s');
-		// print_r($rs);
-		$sql = "insert into tb_login  values('$SYS_EID','$dat','$tim','$SYS_ENAME','$branch_id','$company_code')";
+		// $tim = date('H:i:s');
+		$tim = '0000-00-00';
+		$datetime = date('Y-m-d H:i:s');
+		// print_r($tim);
+		$sql = "insert into tb_login values('$SYS_EID','$dat','$tim','$SYS_ENAME','$branch_id','$company_code','$datetime')";
 		// echo $sql;exit();
 		mysql_query($sql);
 		$sql_clinic = "SELECT * FROM tb_clinicinformation WHERE company_code = '$company_code'";

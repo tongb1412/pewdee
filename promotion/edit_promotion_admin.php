@@ -60,7 +60,7 @@ $branch_name = get_branch_name($row['branchid'],$_SESSION['company_code']);
 	<?php
 	if ($_SESSION['company_data'] == "1") {
 	?>
-		<div style="width:25%; float:left; text-align:right;">เลือกสาขา :&nbsp;</div>
+		<div style="width:25%; float:left; text-align:right;">สาขา :&nbsp;</div>
 		<div style="width:18%; float:left;">
 		<input type="text" id="dat1" size="15" readonly="readonly" value="<?= $branch_name ?>" />
 		</div>

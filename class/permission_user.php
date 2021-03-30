@@ -3,7 +3,7 @@
 <?php 
 
 function set_where_user_data($as ,$branch_id, $company_code, $company_data){
-
+    require_once('../class/config.php');
     $data = array();
     // $data_array = array();
     $where_branch_id = "";
@@ -42,6 +42,7 @@ function set_where_user_data($as ,$branch_id, $company_code, $company_data){
     else{
         if($_SESSION['branch_id'] != "") {	
             $branch_id = $_SESSION['branch_id'];
+            $where_branch_id = " and ( " . $table_as . "branchid ='".$branch_id."') ";
         }
     }
 
